@@ -40,7 +40,7 @@ namespace TagLib.Xmp
 			Initialize ();
 		}
 
-#region Parsing speedup
+		#region Parsing speedup
 		private Dictionary<string, Dictionary<string, XmpNode>> nodes;
 
 		/// <summary>
@@ -230,9 +230,9 @@ namespace TagLib.Xmp
 			NamespacePrefixes.Add (ns, prefix);
 		}
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Construct a new empty <see cref="XmpTag"/>.
@@ -278,9 +278,9 @@ namespace TagLib.Xmp
 			AcceptVisitors ();
 		}
 
-#endregion
+		#endregion
 
-#region Private Methods
+		#region Private Methods
 
 		// 7.2.9 RDF
 		//		start-element ( URI == rdf:RDF, attributes == set() )
@@ -606,15 +606,15 @@ namespace TagLib.Xmp
 			//Console.WriteLine (node.OuterXml);
 		}
 
-#endregion
+		#endregion
 
-#region Public Properties
+		#region Public Properties
 
 		/// <summary>
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="TagTypes.XMP" />.
+		///    Always <see cref="TagLib.TagTypes.XMP" />.
 		/// </value>
 		public override TagTypes TagTypes {
 			get {return TagTypes.XMP;}
@@ -628,9 +628,9 @@ namespace TagLib.Xmp
 			get; private set;
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///	   Replace the current tag with the given one.
@@ -1038,7 +1038,7 @@ namespace TagLib.Xmp
 			return doc.CreateAttribute (NamespacePrefixes [ns], name, ns);
 		}
 
-#endregion
+		#endregion
 
 		private class NodeIndexVisitor : XmpNodeVisitor
 		{
@@ -1068,7 +1068,7 @@ namespace TagLib.Xmp
 			}
 		}
 
-#region Metadata fields
+		#region Metadata fields
 
 		/// <summary>
 		///    Gets or sets the comment for the image described
@@ -1383,6 +1383,6 @@ namespace TagLib.Xmp
 			set { SetLangAltNode (DC_NS, "rights", value); }
 		}
 
-#endregion
+		#endregion
 	}
 }

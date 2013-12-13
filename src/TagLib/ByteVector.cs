@@ -76,12 +76,12 @@ namespace TagLib {
 	/// </summary>
 	public class ByteVector : IList<byte>, IComparable<ByteVector>
 	{
-#region Private Static Fields
+		#region Private Static Fields
 		
 		/// <summary>
 		///    Contains values to use in CRC calculation.
 		/// </summary>
-		private static uint [] crc_table = new uint[256] {
+		private static uint [] crc_table = {
 			0x00000000, 0x04c11db7, 0x09823b6e, 0x0d4326d9,
 			0x130476dc, 0x17c56b6b, 0x1a864db2, 0x1e475005,
 			0x2608edb8, 0x22c9f00f, 0x2f8ad6d6, 0x2b4bcb61,
@@ -178,22 +178,20 @@ namespace TagLib {
 		private static System.Text.Encoding last_utf16_encoding =
 			System.Text.Encoding.Unicode;
 		
-#endregion
-		
-		
-		
-#region Private Fields
+		#endregion
+
+
+		#region Private Fields
 		
 		/// <summary>
 		///    Contains the internal byte list.
 		/// </summary>
 		private List<byte> data = new List<byte>();
 		
-#endregion
-		
-		
-		
-#region Constructors
+		#endregion
+
+
+		#region Constructors
 		
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -325,9 +323,8 @@ namespace TagLib {
 		}
 		
 		#endregion
-		
-		
-		
+
+
 		#region Public Properties
 		
 		/// <summary>
@@ -372,10 +369,9 @@ namespace TagLib {
 		}
 		
 #endregion
-		
-		
-		
-#region Public Static Properties
+
+
+		#region Public Static Properties
 		
 		/// <summary>
 		///    Gets and sets whether or not to use a broken behavior for
@@ -404,11 +400,10 @@ namespace TagLib {
 			set {use_broken_latin1 = value;}
 		}
 		
-#endregion
-		
-		
-		
-#region Public Methods
+		#endregion
+
+
+		#region Public Methods
 		
 		/// <summary>
 		///    Creates a new instance of <see cref="ByteVector" />
@@ -462,7 +457,7 @@ namespace TagLib {
 		///    to start copying elements from the current instance.
 		/// </param>
 		/// <exception cref="ArgumentOutOfRangeException">
-		///    <paramref name="ndex" /> is less than zero or greater
+		///    <paramref name="index" /> is less than zero or greater
 		///    than or equal to <see cref="Count" />.
 		/// </exception>
 		public ByteVector Mid (int index)
@@ -1099,10 +1094,9 @@ namespace TagLib {
 		}
 		
 #endregion
-		
-		
-		
-#region Conversions
+
+
+		#region Conversions
 		
 		/// <summary>
 		///    Converts an first four bytes of the current instance to
@@ -1525,11 +1519,10 @@ namespace TagLib {
 			return list.ToArray ();
 		}
 		
-#endregion
-		
-		
-		
-#region Operators
+		#endregion
+
+
+		#region Operators
 		
 		/// <summary>
 		///    Determines whether two specified <see cref="ByteVector"
@@ -1546,8 +1539,7 @@ namespace TagLib {
 		///    /> and <paramref name="second" /> contain the same
 		///    data; otherwise, <see langword="false" />.</para>
 		/// </returns>
-		public static bool operator== (ByteVector first,
-		                               ByteVector second)
+		public static bool operator== (ByteVector first, ByteVector second)
 		{
 			bool fnull = (object) first == null;
 			bool snull = (object) second == null;
@@ -1574,8 +1566,7 @@ namespace TagLib {
 		///    /> and <paramref name="second" /> contain different
 		///    data; otherwise, <see langword="false" />.</para>
 		/// </returns>
-		public static bool operator!= (ByteVector first,
-		                               ByteVector second)
+		public static bool operator!= (ByteVector first, ByteVector second)
 		{
 			return !(first == second);
 		}
@@ -1599,8 +1590,7 @@ namespace TagLib {
 		///    <paramref name="first" /> or <paramref name="second" />
 		///    is <see langword="null" />.
 		/// </exception>
-		public static bool operator< (ByteVector first,
-		                              ByteVector second)
+		public static bool operator< (ByteVector first, ByteVector second)
 		{
 			if (first == null)
 				throw new ArgumentNullException ("first");
@@ -1630,8 +1620,7 @@ namespace TagLib {
 		///    <paramref name="first" /> or <paramref name="second" />
 		///    is <see langword="null" />.
 		/// </exception>
-		public static bool operator<= (ByteVector first,
-		                               ByteVector second)
+		public static bool operator<= (ByteVector first, ByteVector second)
 		{
 			if (first == null)
 				throw new ArgumentNullException ("first");
@@ -1661,8 +1650,7 @@ namespace TagLib {
 		///    <paramref name="first" /> or <paramref name="second" />
 		///    is <see langword="null" />.
 		/// </exception>
-		public static bool operator> (ByteVector first,
-		                              ByteVector second)
+		public static bool operator> (ByteVector first, ByteVector second)
 		{
 			if (first == null)
 				throw new ArgumentNullException ("first");
@@ -1692,8 +1680,7 @@ namespace TagLib {
 		///    <paramref name="first" /> or <paramref name="second" />
 		///    is <see langword="null" />.
 		/// </exception>
-		public static bool operator>= (ByteVector first,
-		                               ByteVector second)
+		public static bool operator>= (ByteVector first, ByteVector second)
 		{
 			if (first == null)
 				throw new ArgumentNullException ("first");
@@ -1719,8 +1706,7 @@ namespace TagLib {
 		///    contents of <paramref name="first" /> followed by the
 		///    contents of <paramref name="second" />.
 		/// </returns>
-		public static ByteVector operator+ (ByteVector first,
-		                                    ByteVector second)
+		public static ByteVector operator+ (ByteVector first, ByteVector second)
 		{
 			ByteVector sum = new ByteVector(first);
 			sum.Add(second);
@@ -1775,11 +1761,10 @@ namespace TagLib {
 			return ByteVector.FromString (value, StringType.UTF8);
 		}
         
-#endregion
-		
-		
-		
-#region Static Conversions
+		#endregion
+
+
+		#region Static Conversions
 		
 		/// <summary>
 		///    Converts a value into a data representation.
@@ -1797,8 +1782,7 @@ namespace TagLib {
 		///    A <see cref="ByteVector"/> object containing the encoded
 		///    representation of <paramref name="value" />.
 		/// </returns>
-		public static ByteVector FromInt (int value,
-		                                   bool mostSignificantByteFirst)
+		public static ByteVector FromInt (int value, bool mostSignificantByteFirst)
 		{
 			ByteVector vector = new ByteVector();
 			for(int i = 0; i < 4; i++) {
@@ -1840,8 +1824,7 @@ namespace TagLib {
 		///    A <see cref="ByteVector"/> object containing the encoded
 		///    representation of <paramref name="value" />.
 		/// </returns>
-		public static ByteVector FromUInt (uint value,
-		                                   bool mostSignificantByteFirst)
+		public static ByteVector FromUInt (uint value, bool mostSignificantByteFirst)
 		{
 			ByteVector vector = new ByteVector();
 			for(int i = 0; i < 4; i++) {
@@ -1884,8 +1867,7 @@ namespace TagLib {
 		///    A <see cref="ByteVector"/> object containing the encoded
 		///    representation of <paramref name="value" />.
 		/// </returns>
-		public static ByteVector FromUShort (ushort value,
-		                                     bool mostSignificantByteFirst)
+		public static ByteVector FromUShort (ushort value, bool mostSignificantByteFirst)
 		{
 			ByteVector vector = new ByteVector();
 			for(int i = 0; i < 2; i++) {
@@ -1928,8 +1910,7 @@ namespace TagLib {
 		///    A <see cref="ByteVector"/> object containing the encoded
 		///    representation of <paramref name="value" />.
 		/// </returns>
-		public static ByteVector FromULong (ulong value,
-		                                    bool mostSignificantByteFirst)
+		public static ByteVector FromULong (ulong value, bool mostSignificantByteFirst)
 		{
 			ByteVector vector = new ByteVector();
 			for(int i = 0; i < 8; i++) {
@@ -1974,9 +1955,7 @@ namespace TagLib {
 		///    A <see cref="ByteVector"/> object containing the encoded
 		///    representation of <paramref name="text" />.
 		/// </returns>
-		public static ByteVector FromString (string text,
-		                                     StringType type,
-		                                     int length)
+		public static ByteVector FromString (string text, StringType type, int length)
 		{
 			ByteVector data = new ByteVector ();
 			
@@ -2010,8 +1989,7 @@ namespace TagLib {
 		///    A <see cref="ByteVector"/> object containing the encoded
 		///    representation of <paramref name="text" />.
 		/// </returns>
-		public static ByteVector FromString(string text,
-		                                    StringType type)
+		public static ByteVector FromString(string text, StringType type)
 		{
 			return FromString(text, type, Int32.MaxValue);
 		}
@@ -2098,9 +2076,7 @@ namespace TagLib {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		internal static ByteVector FromPath (string path,
-		                                     out byte [] firstChunk,
-		                                     bool copyFirstChunk)
+		internal static ByteVector FromPath (string path, out byte [] firstChunk, bool copyFirstChunk)
 		{
 			if (path == null)
 				throw new ArgumentNullException ("path");
@@ -2125,8 +2101,7 @@ namespace TagLib {
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public static ByteVector FromFile (File.IFileAbstraction
-		                                   abstraction)
+		public static ByteVector FromFile (File.IFileAbstraction abstraction)
 		{
 			byte [] tmp_out;
 			return FromFile (abstraction, out tmp_out, false);
@@ -2217,9 +2192,7 @@ namespace TagLib {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="stream" /> is <see langword="null" />.
 		/// </exception>
-		internal static ByteVector FromStream (System.IO.Stream stream,
-		                                       out byte [] firstChunk,
-		                                       bool copyFirstChunk)
+		internal static ByteVector FromStream (System.IO.Stream stream, out byte [] firstChunk, bool copyFirstChunk)
 		{
 			ByteVector vector = new ByteVector();
 			byte [] bytes = new byte[4096];
@@ -2260,11 +2233,10 @@ namespace TagLib {
 			return vector;
 		}
 		
-#endregion
-		
-		
-		
-#region Utilities
+		#endregion
+
+
+		#region Utilities
 		
 		/// <summary>
 		///    Gets the text delimiter for nil separated string lists of
@@ -2307,8 +2279,7 @@ namespace TagLib {
 		///    encoding is big or little endian. If it does not contain
 		///    BOM data, the previously used endian format is used.
 		/// </remarks>
-		private static Encoding StringTypeToEncoding (StringType type,
-		                                              ByteVector bom)
+		private static Encoding StringTypeToEncoding (StringType type, ByteVector bom)
 		{
 			switch(type) {
 			case StringType.UTF16:
@@ -2351,11 +2322,10 @@ namespace TagLib {
 			}
 		}
 		
-#endregion
-		
-		
-		
-#region System.Object
+		#endregion
+
+
+		#region System.Object
 		
 		/// <summary>
 		///    Determines whether another object is equal to the current
@@ -2409,11 +2379,10 @@ namespace TagLib {
 			unchecked {return (int) Checksum;}
 		}
 		
-#endregion
-		
-		
-		
-#region IComparable<T>
+		#endregion
+
+
+		#region IComparable<T>
 		
 		/// <summary>
 		///    Compares the current instance to another to determine if
@@ -2443,18 +2412,17 @@ namespace TagLib {
 			return diff;
 		}
 		
-#endregion
-		
-		
-		
-#region IEnumerable<T>
+		#endregion
+
+
+		#region IEnumerable<T>
 
 		/// <summary>
 		///    Gets an enumerator for enumerating through the the bytes
 		///    in the current instance.
 		/// </summary>
 		/// <returns>
-		///    A <see cref="T:System.Collections.IEnumerator`1" /> for
+		///    A <see cref="T:System.Collections.Generic.IEnumerator`1" /> for
 		///    enumerating through the contents of the current instance.
 		/// </returns>
 		public IEnumerator<byte> GetEnumerator()
@@ -2467,11 +2435,10 @@ namespace TagLib {
 			return this.data.GetEnumerator();
 		}
 		
-#endregion
-		
-		
-		
-#region ICollection<T>
+		#endregion
+
+
+		#region ICollection<T>
 		
 		/// <summary>
 		///    Clears the current instance.
@@ -2595,11 +2562,10 @@ namespace TagLib {
 			get {return this;}
 		}
 		
-#endregion
-		
-		
-		
-#region IList<T>
+		#endregion
+
+
+		#region IList<T>
 		
 		/// <summary>
 		///    Removes the byte at the specified index.
@@ -2699,6 +2665,6 @@ namespace TagLib {
 			}
 		}
 		
-#endregion
+		#endregion
 	}
 }

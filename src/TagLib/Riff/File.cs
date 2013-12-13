@@ -22,8 +22,6 @@
 //
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace TagLib.Riff
 {
@@ -46,7 +44,7 @@ namespace TagLib.Riff
 	[SupportedMimeType("audio/x-wav")]
 	public class File : TagLib.File
 	{
-#region Private Fields
+		#region Private Fields
 		
 		/// <summary>
 		///  Contains all the tags of the file.
@@ -78,11 +76,11 @@ namespace TagLib.Riff
 		/// </summary>
 		private Properties properties = null;
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Public Static Fields
+		#region Public Static Fields
 		
 		/// <summary>
 		///    The identifier used to recognize a RIFF files.
@@ -92,11 +90,11 @@ namespace TagLib.Riff
 		/// </value>
 		public static readonly ReadOnlyByteVector FileIdentifier = "RIFF";
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Public Constructors
+		#region Public Constructors
 		
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -143,7 +141,7 @@ namespace TagLib.Riff
 		///    specified read style.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <param name="propertiesStyle">
@@ -183,7 +181,7 @@ namespace TagLib.Riff
 		///    average read style.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
@@ -194,11 +192,11 @@ namespace TagLib.Riff
 			: this (abstraction, ReadStyle.Average)
 		{}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Public Properties
+		#region Public Properties
 		
 		/// <summary>
 		///    Gets a abstract representation of all tags stored in the
@@ -225,11 +223,11 @@ namespace TagLib.Riff
 			get {return properties;}
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Public Methods
+		#region Public Methods
 		
 		/// <summary>
 		///    Saves the changes made in the current instance to the
@@ -415,11 +413,11 @@ namespace TagLib.Riff
 			return tag;
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Private Methods
+		#region Private Methods
 		
 		/// <summary>
 		///    Reads the contents of the current instance determining
@@ -639,6 +637,6 @@ namespace TagLib.Riff
 				tag.SetTags (id32_tag, info_tag, mid_tag, divx_tag);
 		}
 		
-#endregion
+		#endregion
 	}
 }

@@ -23,8 +23,6 @@
 // USA
 //
 
-using System;
-
 using TagLib.Image;
 
 namespace TagLib.Gif
@@ -34,7 +32,7 @@ namespace TagLib.Gif
 	/// </summary>
 	public class GifCommentTag : ImageTag
 	{
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructor.
@@ -54,9 +52,9 @@ namespace TagLib.Gif
 			Value = null;
 		}
 
-#endregion
+		#endregion
 
-#region Public Properties
+		#region Public Properties
 
 		/// <summary>
 		///    The value of the comment represented by the current instance.
@@ -76,15 +74,15 @@ namespace TagLib.Gif
 			set { Value = value; }
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="TagTypes.GifComment" />.
+		///    Always <see cref="TagLib.TagTypes.GifComment" />.
 		/// </value>
 		public override TagTypes TagTypes {
 			get { return TagTypes.GifComment; }
@@ -98,6 +96,6 @@ namespace TagLib.Gif
 			Value = null;
 		}
 
-#endregion
+		#endregion
 	}
 }

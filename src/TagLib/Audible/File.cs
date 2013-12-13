@@ -36,7 +36,6 @@ namespace TagLib.Audible
 	[SupportedMimeType("taglib/aax", "aax")]
 	public class File : TagLib.File
 	{
-		
 		#region Private Fields
 		
 		/// <summary>
@@ -49,7 +48,7 @@ namespace TagLib.Audible
 		/// </summary>
 		private Properties properties = new Properties();
 		
-		#endregion	
+		#endregion
 		
 		#region Public Static Fields
 		
@@ -112,7 +111,7 @@ namespace TagLib.Audible
 		///    specified read style.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <param name="propertiesStyle">
@@ -129,8 +128,7 @@ namespace TagLib.Audible
 		/// </exception>
 		public File (File.IFileAbstraction abstraction,
 		             ReadStyle propertiesStyle) : base (abstraction)
-		{			
-			
+		{
 			Mode = AccessMode.Read;
 			
 			try {
@@ -151,7 +149,6 @@ namespace TagLib.Audible
 			
 			// ??
 			TagTypesOnDisk = TagTypes;
-			
 		}
 		
 		/// <summary>
@@ -160,7 +157,7 @@ namespace TagLib.Audible
 		///    average read style.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <exception cref="ArgumentNullException">

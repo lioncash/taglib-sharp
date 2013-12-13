@@ -39,7 +39,7 @@ namespace TagLib.Ogg
 	/// </summary>
 	public class XiphComment : TagLib.Tag, IEnumerable<string>
 	{
-#region Private Fields
+		#region Private Fields
 		
 		/// <summary>
 		///    Contains the comment fields.
@@ -58,11 +58,11 @@ namespace TagLib.Ogg
 		/// </summary>
 		private string comment_field = "DESCRIPTION";
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Constructors
+		#region Constructors
 		
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -92,11 +92,11 @@ namespace TagLib.Ogg
 			Parse (data);
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Public Methods
+		#region Public Methods
 		
 		/// <summary>
 		///    Gets the field data for a given field identifier.
@@ -292,11 +292,11 @@ namespace TagLib.Ogg
 			return data;
 		}
 
-#endregion
+		#endregion
 		
 		
 		
-#region Public Properties
+		#region Public Properties
 		
 		/// <summary>
 		///    Gets the number of fields contained in the current
@@ -327,11 +327,11 @@ namespace TagLib.Ogg
 			get {return vendor_id;}
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Protected Methods
+		#region Protected Methods
 		
 		/// <summary>
 		///    Populates and initializes a new instance of <see
@@ -405,18 +405,18 @@ namespace TagLib.Ogg
 			}
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region IEnumerable
+		#region IEnumerable
 		
 		/// <summary>
 		///    Gets an enumerator for enumerating through the the field
 		///    identifiers.
 		/// </summary>
 		/// <returns>
-		///    A <see cref="T:System.Collections.IEnumerator`1" /> for
+		///    A <see cref="T:System.Collections.Generic.IEnumerator`1" /> for
 		///    enumerating through the field identifiers.
 		/// </returns>
 		public IEnumerator<string> GetEnumerator ()
@@ -429,17 +429,17 @@ namespace TagLib.Ogg
 			return field_list.Keys.GetEnumerator();
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region TagLib.Tag
+		#region TagLib.Tag
 		
 		/// <summary>
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="TagTypes.Xiph" />.
+		///    Always <see cref="TagLib.TagTypes.Xiph" />.
 		/// </value>
 		public override TagTypes TagTypes {
 			get {return TagTypes.Xiph;}
@@ -1349,6 +1349,6 @@ namespace TagLib.Ogg
 			field_list.Clear ();
 		}
 		
-#endregion
+		#endregion
 	}
 }

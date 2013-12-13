@@ -40,7 +40,7 @@ namespace TagLib.Image
 	{
 		private CombinedImageTag image_tag;
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -63,7 +63,7 @@ namespace TagLib.Image
 		///    cref="File" /> for a specified file abstraction.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
@@ -74,9 +74,9 @@ namespace TagLib.Image
 		{
 		}
 
-#endregion
+		#endregion
 
-#region Public Properties
+		#region Public Properties
 
 		/// <summary>
 		///    Gets a abstract representation of all tags stored in the
@@ -101,9 +101,9 @@ namespace TagLib.Image
 			protected set { image_tag = value; }
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    The method creates all tags which are allowed for the current
@@ -223,7 +223,6 @@ namespace TagLib.Image
 			}
 		}
 
-#endregion
-
+		#endregion
 	}
 }

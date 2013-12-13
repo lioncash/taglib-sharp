@@ -77,8 +77,6 @@ namespace TagLib.Mpeg4 {
 		///    cref="AppleAdditionalInfoBox" /> using specified header, version and flags
 		/// </summary>
 		/// <param name="header"></param>
-		/// <param name="version"></param>
-		/// <param name="flags"></param>
 		public AppleAdditionalInfoBox (ByteVector header) : base (header)
 		{
 		}

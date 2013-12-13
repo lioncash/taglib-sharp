@@ -25,7 +25,6 @@
 // USA
 //
 
-using System.Collections;
 using System;
 
 namespace TagLib.Flac
@@ -36,7 +35,7 @@ namespace TagLib.Flac
 	/// </summary>
 	public struct StreamHeader : IAudioCodec, ILosslessAudioCodec
 	{
-#region Private Properties
+		#region Private Properties
 		
 		/// <summary>
 		///    Contains the flags.
@@ -53,11 +52,11 @@ namespace TagLib.Flac
 		/// </summary>
 		private long stream_length;
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Constructors
+		#region Constructors
 		
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -92,11 +91,11 @@ namespace TagLib.Flac
 			low_length = data.Mid (14, 4).ToUInt (true);
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Public Properties
+		#region Public Properties
 		
 		/// <summary>
 		///    Gets the duration of the media represented by the current
@@ -163,7 +162,7 @@ namespace TagLib.Flac
 		///    instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="MediaTypes.Audio" />.
+		///    Always <see cref="TagLib.MediaTypes.Audio" />.
 		/// </value>
 		public MediaTypes MediaTypes {
 			get {return MediaTypes.Audio;}
@@ -207,11 +206,11 @@ namespace TagLib.Flac
 			get {return "Flac Audio";}
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Private Properties
+		#region Private Properties
 		
 		/// <summary>
 		///    Gets a high portion of the length of the audio
@@ -232,6 +231,6 @@ namespace TagLib.Flac
 			}
 		}
 		
-#endregion
+		#endregion
 	}
 }

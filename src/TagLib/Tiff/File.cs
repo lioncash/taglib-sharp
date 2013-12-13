@@ -42,16 +42,16 @@ namespace TagLib.Tiff
 	[SupportedMimeType("image/tiff")]
 	public class File : BaseTiffFile
 	{
-#region Private Fields
+		#region Private Fields
 
 		/// <summary>
 		///    Contains the media properties.
 		/// </summary>
 		private Properties properties;
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -98,7 +98,7 @@ namespace TagLib.Tiff
 		///    specified read style.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <param name="propertiesStyle">
@@ -129,7 +129,7 @@ namespace TagLib.Tiff
 		///    cref="File" /> for a specified file abstraction.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
@@ -140,9 +140,9 @@ namespace TagLib.Tiff
 		{
 		}
 
-#endregion
+		#endregion
 
-#region Public Properties
+		#region Public Properties
 
 		/// <summary>
 		///    Gets the media properties of the file represented by the
@@ -157,9 +157,9 @@ namespace TagLib.Tiff
 			get { return properties; }
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Saves the changes made in the current instance to the
@@ -177,9 +177,9 @@ namespace TagLib.Tiff
 			}
 		}
 
-#endregion
+		#endregion
 
-#region Private Methods
+		#region Private Methods
 
 		/// <summary>
 		///    Render the whole file and write it back.
@@ -287,6 +287,6 @@ namespace TagLib.Tiff
 			return new Codec (width, height);
 		}
 
-#endregion
+		#endregion
 	}
 }

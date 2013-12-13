@@ -22,12 +22,6 @@
 //
 
 using System;
-using System.Collections.Generic;
-
-using TagLib;
-using TagLib.Image;
-using TagLib.IFD;
-using TagLib.IFD.Tags;
 
 namespace TagLib.Tiff.Pef
 {
@@ -42,7 +36,7 @@ namespace TagLib.Tiff.Pef
 	public class File : TagLib.Tiff.File
 	{
 
-#region public Properties
+		#region Public Properties
 
 		/// <summary>
 		///    Indicates if tags can be written back to the current file or not
@@ -56,9 +50,9 @@ namespace TagLib.Tiff.Pef
 		}
 
 
-#endregion
+		#endregion
 
-#region constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -105,7 +99,7 @@ namespace TagLib.Tiff.Pef
 		///    specified read style.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <param name="propertiesStyle">
@@ -127,7 +121,7 @@ namespace TagLib.Tiff.Pef
 		///    cref="File" /> for a specified file abstraction.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
@@ -139,9 +133,9 @@ namespace TagLib.Tiff.Pef
 		{
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Saves the changes made in the current instance to the
@@ -152,7 +146,7 @@ namespace TagLib.Tiff.Pef
 			throw new NotSupportedException ();
 		}
 
-#endregion
+		#endregion
 
 		/// <summary>
 		///    Create a codec that describes the photo properties.
@@ -164,6 +158,5 @@ namespace TagLib.Tiff.Pef
 		{
 			return new Codec (width, height, "Pentax Raw File");
 		}
-
 	}
 }

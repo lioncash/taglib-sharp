@@ -30,7 +30,7 @@ namespace TagLib.Riff
 	/// </summary>
 	public class InfoTag : ListTag
 	{
-#region Constructors
+		#region Constructors
 		
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -85,10 +85,10 @@ namespace TagLib.Riff
 		}
 		
 #endregion
-		
-		
-		
-#region Public Methods
+
+
+
+		#region Public Methods
 		
 		/// <summary>
 		///    Renders the current instance enclosed in a "INFO" item.
@@ -102,22 +102,22 @@ namespace TagLib.Riff
 		return RenderEnclosed ("INFO");
 		}
 		
-#endregion
-		
-		
-		
-#region TagLib.Tag
-		
+		#endregion
+
+
+
+		#region TagLib.Tag
+
 		/// <summary>
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="TagTypes.RiffInfo" />.
+		///    Always <see cref="TagLib.TagTypes.RiffInfo" />.
 		/// </value>
 		public override TagTypes TagTypes {
 			get {return TagTypes.RiffInfo;}
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the title for the media described by the
 		///    current instance.
@@ -308,6 +308,6 @@ namespace TagLib.Riff
 			}
 			set {SetValue ("ICOP", value);}
 		}
-#endregion
+		#endregion
 	}
 }

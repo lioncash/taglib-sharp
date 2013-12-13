@@ -30,8 +30,8 @@ namespace TagLib.Riff {
 	/// </summary>
 	public class MovieIdTag : ListTag
 	{
-#region Constructors
-		
+		#region Constructors
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="MovieIdTag" /> with no contents.
@@ -39,7 +39,7 @@ namespace TagLib.Riff {
 		public MovieIdTag () : base ()
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="MovieIdTag" /> by reading the contents of a raw
@@ -52,7 +52,7 @@ namespace TagLib.Riff {
 		public MovieIdTag (ByteVector data) : base (data)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="MovieIdTag" /> by reading the contents of a raw
@@ -83,13 +83,13 @@ namespace TagLib.Riff {
 			: base (file, position, length)
 		{
 		}
-		
-#endregion
-		
-		
-		
-#region Public Methods
-		
+
+		#endregion
+
+
+
+		#region Public Methods
+
 		/// <summary>
 		///    Renders the current instance enclosed in a "MID " item.
 		/// </summary>
@@ -101,18 +101,18 @@ namespace TagLib.Riff {
 		{
 			return RenderEnclosed ("MID ");
 		}
-		
-#endregion
-		
-		
-		
-#region TagLib.Tag
+
+		#endregion
+
+
+
+		#region TagLib.Tag
 		
 		/// <summary>
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="TagTypes.MovieId" />.
+		///    Always <see cref="TagLib.TagTypes.MovieId" />.
 		/// </value>
 		public override TagTypes TagTypes {
 			get {return TagTypes.MovieId;}
@@ -232,6 +232,6 @@ namespace TagLib.Riff {
 			get {return GetValueAsUInt ("PRT2");}
 			set {SetValue ("PRT2", value);}
 		}
-#endregion
+		#endregion
 	}
 }

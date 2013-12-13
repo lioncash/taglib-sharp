@@ -579,7 +579,7 @@ namespace TagLib.Mpeg4 {
 		///    boxes.
 		/// </summary>
 		/// <returns>
-		///    A <see cref="T:System.Collections.IEnumerator`1" /> for
+		///    A <see cref="T:System.Collections.Generic.IEnumerator`1" /> for
 		///    enumerating through the tag's data boxes.
 		/// </returns>
 		public IEnumerator<Box> GetEnumerator()
@@ -602,7 +602,7 @@ namespace TagLib.Mpeg4 {
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="TagTypes.Apple" />.
+		///    Always <see cref="TagLib.TagTypes.Apple" />.
 		/// </value>
 		public override TagTypes TagTypes {
 			get {return TagTypes.Apple;}

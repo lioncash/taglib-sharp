@@ -272,7 +272,7 @@ namespace TagLib.Asf {
 		
 		
 		
-#region IEnumerable
+		#region IEnumerable
 		
 		/// <summary>
 		///    Gets an enumerator for enumerating through the
@@ -293,6 +293,6 @@ namespace TagLib.Asf {
 			return records.GetEnumerator ();
 		}
 		
-#endregion
+		#endregion
 	}
 }

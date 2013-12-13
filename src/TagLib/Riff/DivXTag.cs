@@ -24,9 +24,7 @@
 // USA
 //
 
-using System.Collections;
 using System;
-using System.Text;
 using System.Globalization;
 
 namespace TagLib.Riff {
@@ -36,7 +34,7 @@ namespace TagLib.Riff {
 	/// </summary>
 	public class DivXTag : TagLib.Tag
 	{
-#region Private Fields
+		#region Private Fields
 		
 		/// <summary>
 		///    Contains the title.
@@ -68,12 +66,11 @@ namespace TagLib.Riff {
 		/// </summary>
 		private ByteVector extra_data;
 		
-#endregion
+		#endregion
 
 
 
-
-#region Public Static Fields
+		#region Public Static Fields
 		
 		/// <summary>
 		///    The size of a DivX tag.
@@ -88,11 +85,11 @@ namespace TagLib.Riff {
 		/// </value>
 		public static readonly ReadOnlyByteVector FileIdentifier = "DIVXTAG";
 
-#endregion
+		#endregion
 
 
 
-#region Constructors
+		#region Constructors
 		
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -186,11 +183,11 @@ namespace TagLib.Riff {
 			Parse (data);
 		}
 		
-#endregion
-		
-		
-		
-#region Public Methods
+		#endregion
+
+
+
+		#region Public Methods
 		
 		/// <summary>
 		///    Renders the current instance as a raw DivX tag.
@@ -212,11 +209,11 @@ namespace TagLib.Riff {
 			return data;
 		}
 		
-#endregion
-		
-		
-		
-#region Private Methods
+		#endregion
+
+
+
+		#region Private Methods
 		
 		/// <summary>
 		///    Populates the current instance by parsing the contents of
@@ -235,17 +232,17 @@ namespace TagLib.Riff {
 			genre      = data.ToString (StringType.Latin1,112,  3).Trim ();
 			extra_data = data.Mid (115,  6);
 		}
-#endregion
-		
-		
-		
-#region TagLib.Tag
+		#endregion
+
+
+
+		#region TagLib.Tag
 		
 		/// <summary>
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="TagTypes.Id3v1" />.
+		///    Always <see cref="TagLib.TagTypes.Id3v1" />.
 		/// </value>
 		public override TagTypes TagTypes {
 			get {return TagTypes.DivX;}
@@ -401,6 +398,6 @@ namespace TagLib.Riff {
 			extra_data = new ByteVector (6);
 		}
 		
-#endregion
+		#endregion
 	}
 }

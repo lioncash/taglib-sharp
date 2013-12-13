@@ -32,35 +32,33 @@ namespace TagLib.Ogg.Codecs
 	/// </summary>
 	public class Vorbis : Codec, IAudioCodec
 	{
-#region Private Static Fields
-		
+		#region Private Static Fields
+
 		/// <summary>
 		///    Contains the file identifier.
 		/// </summary>
-		private static ByteVector id = "vorbis";
-		
-#endregion
-		
-		
-		
-#region Private Fields
-		
+		private static readonly ByteVector id = "vorbis";
+
+		#endregion
+
+
+		#region Private Fields
+
 		/// <summary>
 		///    Contains the header packet.
 		/// </summary>
 		private HeaderPacket header;
-		
+
 		/// <summary>
 		///    Contains the comment data.
 		/// </summary>
 		private ByteVector comment_data;
-		
-#endregion
-		
-		
-		
-#region Constructors
-		
+
+		#endregion
+
+
+		#region Constructors
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Vorbis" />.
@@ -68,13 +66,12 @@ namespace TagLib.Ogg.Codecs
 		private Vorbis ()
 		{
 		}
-		
-#endregion
-		
-		
-		
-#region Public Methods
-		
+
+		#endregion
+
+
+		#region Public Methods
+
 		/// <summary>
 		///    Reads a Ogg packet that has been encountered in the
 		///    stream.
@@ -189,12 +186,11 @@ namespace TagLib.Ogg.Codecs
 			else
 				packets.Insert (1, data);
 		}
-		
-#endregion
-		
-		
-		
-#region Public Properties
+
+		#endregion
+
+
+		#region Public Properties
 		
 		/// <summary>
 		///    Gets the bitrate of the audio represented by the current
@@ -241,7 +237,7 @@ namespace TagLib.Ogg.Codecs
 		///    instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="MediaTypes.Audio" />.
+		///    Always <see cref="F:TagLib.MediaTypes.Audio" />.
 		/// </value>
 		public override MediaTypes MediaTypes {
 			get {return MediaTypes.Audio;}
@@ -273,13 +269,12 @@ namespace TagLib.Ogg.Codecs
 					header.vorbis_version);
 			}
 		}
-		
-#endregion
-		
-		
-		
-#region Public Static Methods
-		
+
+		#endregion
+
+
+		#region Public Static Methods
+
 		/// <summary>
 		///    Implements the <see cref="CodecProvider" /> delegate to
 		///    provide support for recognizing a Vorbis stream from the
@@ -298,13 +293,12 @@ namespace TagLib.Ogg.Codecs
 		{
 			return (PacketType (packet) == 1) ? new Vorbis () : null;
 		}
-		
-#endregion
-		
-		
-		
-#region Private Static Methods
-		
+
+		#endregion
+
+
+		#region Private Static Methods
+
 		/// <summary>
 		///    Gets the packet type for a specified Vorbis packet.
 		/// </summary>
@@ -327,9 +321,9 @@ namespace TagLib.Ogg.Codecs
 			
 			return packet [0];
 		}
-		
-#endregion
-		
+
+		#endregion
+
 		/// <summary>
 		///    This structure represents a Vorbis header packet.
 		/// </summary>

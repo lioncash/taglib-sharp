@@ -28,7 +28,6 @@ using System.Collections.Generic;
 
 namespace TagLib.Audible
 {
-	
 	/// <summary>
 	///    This class extends <see cref="Tag" /> to provide support for
 	///    reading tags stored in the Audible Metadata format.
@@ -211,7 +210,7 @@ namespace TagLib.Audible
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="TagTypes.AudibleMetadata" />.
+		///    Always <see cref="TagLib.TagTypes.AudibleMetadata" />.
 		/// </value>
 		public override TagTypes TagTypes {
 			get {return TagTypes.AudibleMetadata;}

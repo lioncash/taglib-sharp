@@ -32,68 +32,68 @@ namespace TagLib.Riff
 	/// </summary>
 	public struct BitmapInfoHeader : IVideoCodec
 	{
-#region Private Fields
-		
+		#region Private Fields
+
 		/// <summary>
 		///    Contains the size of the header.
 		/// </summary>
-		uint size; 
-		
+		private uint size;
+
 		/// <summary>
 		///    Contains the video width.
 		/// </summary>
-		uint width; 
-		
+		private uint width;
+
 		/// <summary>
 		///    Contains the video height.
 		/// </summary>
-		uint height; 
-		
+		private uint height;
+
 		/// <summary>
 		///    Contains the number of planes.
 		/// </summary>
-		ushort planes; 
-		
+		private ushort planes;
+
 		/// <summary>
 		///    Contains the bit count.
 		/// </summary>
-		ushort bit_count; 
-		
+		private ushort bit_count;
+
 		/// <summary>
 		///    Contains the compression (codec) ID.
 		/// </summary>
-		ByteVector compression_id; 
-		
+		private ByteVector compression_id;
+
 		/// <summary>
 		///    Contains the size of the image.
 		/// </summary>
-		uint size_of_image; 
-		
+		private uint size_of_image;
+
 		/// <summary>
 		///    Contains the number of X pixels per meter.
 		/// </summary>
-		uint x_pixels_per_meter; 
-		
+		private uint x_pixels_per_meter;
+
 		/// <summary>
 		///    Contains the number of Y pixels per meter.
 		/// </summary>
-		uint y_pixels_per_meter; 
-		
+		private uint y_pixels_per_meter;
+
 		/// <summary>
 		///    Contains the number of colors used.
 		/// </summary>
-		uint colors_used; 
-		
+		private uint colors_used;
+
 		/// <summary>
 		///    Contains the number of important colors.
 		/// </summary>
-		uint colors_important;
+		private uint colors_important;
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Constructors
+		#region Constructors
 		
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -165,11 +165,11 @@ namespace TagLib.Riff
 			colors_important   = data.Mid (offset + 36, 4).ToUInt (false);
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Public Properties
+		#region Public Properties
 		
 		/// <summary>
 		///    Gets the size of the structure in bytes.
@@ -275,11 +275,11 @@ namespace TagLib.Riff
 			get {return colors_important;}
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region IVideoCodec
+		#region IVideoCodec
 		
 		/// <summary>
 		///    Gets the width of the video represented by the current
@@ -310,7 +310,7 @@ namespace TagLib.Riff
 		///    instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="MediaTypes.Video" />.
+		///    Always <see cref="TagLib.MediaTypes.Video" />.
 		/// </value>
 		public MediaTypes MediaTypes {
 			get {return MediaTypes.Video;}
@@ -736,11 +736,11 @@ namespace TagLib.Riff
 			}
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region IEquatable
+		#region IEquatable
 		
 		/// <summary>
 		///    Generates a hash code for the current instance.
@@ -848,6 +848,6 @@ namespace TagLib.Riff
 		{
 			return !first.Equals (second);
 		}
-#endregion
+		#endregion
 	}
 }

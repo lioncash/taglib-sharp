@@ -28,7 +28,6 @@ using System.Collections.Generic;
 
 namespace TagLib.Image
 {
-
 	/// <summary>
 	///    Some image file formats are organized as a sequence of mostly
 	///    independent data blocks whose order can be changed. Metadata is
@@ -41,12 +40,11 @@ namespace TagLib.Image
 	/// </summary>
 	public abstract class ImageBlockFile : TagLib.Image.File
 	{
-
 		/// <summary>
 		///    This class represents a metadata block to overwrite.
 		/// </summary>
-		private class MetadataBlock {
-
+		private class MetadataBlock
+		{
 			/// <summary>
 			///    The start index
 			/// </summary>
@@ -278,7 +276,7 @@ namespace TagLib.Image
 		}
 
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructs and initializes a new instance for a specified
@@ -300,7 +298,7 @@ namespace TagLib.Image
 		///    file abstraction.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
@@ -311,7 +309,6 @@ namespace TagLib.Image
 		{
 		}
 
-#endregion
-
+		#endregion
 	}
 }

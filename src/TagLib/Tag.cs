@@ -433,8 +433,8 @@ namespace TagLib {
 		///    <para>This field represents genres that apply to the song
 		///    or album. This is often used for filtering media.</para>
 		///    <para>A list of common audio genres as popularized by
-		///    ID3v1, are stored in <see cref="Genres.Audio" />.
-		///    Additionally, <see cref="Genres.Video" /> contains video
+		///    ID3v1, are stored in <see cref="TagLib.Genres.Audio" />.
+		///    Additionally, <see cref="TagLib.Genres.Video" /> contains video
 		///    genres as used by DivX.</para>
 		/// </remarks>
 		public virtual string [] Genres {

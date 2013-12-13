@@ -22,12 +22,9 @@
 //
 
 using System;
-using System.Collections.Generic;
 
-using TagLib;
 using TagLib.Image;
 using TagLib.IFD;
-using TagLib.IFD.Tags;
 
 namespace TagLib.Tiff.Rw2
 {
@@ -44,16 +41,16 @@ namespace TagLib.Tiff.Rw2
 	[SupportedMimeType("image/x-panasonic-raw")]
 	public class File : TagLib.Tiff.BaseTiffFile
 	{
-#region private fields
+		#region Private fields
 
 		/// <summary>
 		///    The Properties of the image
 		/// </summary>
 		private Properties properties;
 
-#endregion
+		#endregion
 
-#region public Properties
+		#region Public Properties
 
 		/// <summary>
 		///    Gets the media properties of the file represented by the
@@ -87,9 +84,9 @@ namespace TagLib.Tiff.Rw2
 			internal set;
 		}
 
-#endregion
+		#endregion
 
-#region constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -136,7 +133,7 @@ namespace TagLib.Tiff.Rw2
 		///    specified read style.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <param name="propertiesStyle">
@@ -160,7 +157,7 @@ namespace TagLib.Tiff.Rw2
 		///    cref="File" /> for a specified file abstraction.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
@@ -172,9 +169,9 @@ namespace TagLib.Tiff.Rw2
 		{
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Saves the changes made in the current instance to the
@@ -222,9 +219,9 @@ namespace TagLib.Tiff.Rw2
 			return new_tag;
 		}
 
-#endregion
+		#endregion
 
-#region private methods
+		#region Private methods
 
 		/// <summary>
 		///    Reads the information from file with a specified read style.
@@ -348,7 +345,6 @@ namespace TagLib.Tiff.Rw2
 			return new IFDReader (file, is_bigendian, structure, base_offset, ifd_offset, max_offset);
 		}
 
-#endregion
-
+		#endregion
 	}
 }

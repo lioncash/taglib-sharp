@@ -37,13 +37,12 @@ namespace TagLib.Ogg
 	/// </summary>
 	public class Paginator
 	{
-#region Private Fields
+		#region Private Fields
 		
 		/// <summary>
 		///    Contains the packets to paginate.
 		/// </summary>
-		private ByteVectorCollection packets =
-			new ByteVectorCollection ();
+		private ByteVectorCollection packets = new ByteVectorCollection ();
 		
 		/// <summary>
 		///    Contains the first page header.
@@ -59,11 +58,11 @@ namespace TagLib.Ogg
 		///    contains the number of pages read.
 		/// </summary>
 		private int pages_read = 0;
-#endregion
-		
-		
-		
-#region Constructors
+		#endregion
+
+
+
+		#region Constructors
 		
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -79,11 +78,11 @@ namespace TagLib.Ogg
 			this.codec = codec;
 		}
 		
-#endregion
-		
-		
-		
-#region Public Methods
+		#endregion
+
+
+
+		#region Public Methods
 		
 		/// <summary>
 		///    Adds the next page to the current instance.
@@ -240,11 +239,11 @@ namespace TagLib.Ogg
 			return pages.ToArray ();
 		}
 		
-#endregion
-		
-		
-		
-#region Private Methods
+		#endregion
+
+
+
+		#region Private Methods
 		
 		/// <summary>
 		///    Gets the number of lacing value bytes that would be
@@ -262,14 +261,13 @@ namespace TagLib.Ogg
 		///    A <see cref="int" /> value containing the number of bytes
 		///    needed to store the length.
 		/// </returns>
-		private static int GetLacingValueLength (ByteVectorCollection packets,
-		                                         int index)
+		private static int GetLacingValueLength (ByteVectorCollection packets, int index)
 		{
 			int size = packets [index].Count;
 			return size / 0xff + ((index + 1 < packets.Count ||
 				size % 0xff > 0) ? 1 : 0);
 		}
 		
-#endregion
+		#endregion
 	}
 }

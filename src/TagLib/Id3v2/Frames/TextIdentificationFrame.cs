@@ -706,11 +706,11 @@ namespace TagLib.Id3v2 {
 		///    use <see cref="Get(Tag,ByteVector,bool)" />.
 		/// </remarks>
 		/// <exception cref="ArgumentNullException">
-		///    <paramref name="tag" /> or <paramref name="type" /> is
+		///    <paramref name="tag" /> or <paramref name="encoding" /> is
 		///    <see langword="null" />.
 		/// </exception>
 		/// <exception cref="ArgumentException">
-		///    <paramref name="type" /> is not exactly four bytes long.
+		///    <paramref name="encoding" /> is not exactly four bytes long.
 		/// </exception>
 		public static TextInformationFrame Get (Tag tag,
 		                                        ByteVector ident,
@@ -796,11 +796,11 @@ namespace TagLib.Id3v2 {
 		///    langword="null" /> if no value was found.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		///    <paramref name="tag" /> or <paramref name="type" /> is
+		///    <paramref name="tag" /> or <paramref name="ident" /> is
 		///    <see langword="null" />.
 		/// </exception>
 		/// <exception cref="ArgumentException">
-		///    <paramref name="type" /> is not exactly four bytes long.
+		///    <paramref name="ident" /> is not exactly four bytes long.
 		/// </exception>
 		[Obsolete("Use TextInformationFrame.Get(Tag,ByteVector,bool)")]
 		public static TextInformationFrame Get (Tag tag,
@@ -1003,7 +1003,7 @@ namespace TagLib.Id3v2 {
 		
 		
 		
-#region ICloneable
+		#region ICloneable
 		
 		/// <summary>
 		///    Creates a deep copy of the current instance.
@@ -1025,7 +1025,7 @@ namespace TagLib.Id3v2 {
 			return frame;
 		}
 		
-#endregion
+		#endregion
 	}
 	
 	
@@ -1036,7 +1036,7 @@ namespace TagLib.Id3v2 {
 	/// </summary>
 	public class UserTextInformationFrame : TextInformationFrame
 	{
-#region Constructors
+		#region Constructors
 		
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -1132,11 +1132,10 @@ namespace TagLib.Id3v2 {
 		{
 		}
 		
-#endregion
-		
-		
-		
-#region Public Properties
+		#endregion
+
+
+		#region Public Properties
 		
 		/// <summary>
 		///    Gets and sets the description stored in the current
@@ -1205,11 +1204,10 @@ namespace TagLib.Id3v2 {
 			}
 		}
 		
-#endregion
-		
-		
-		
-#region Public Methods
+		#endregion
+
+
+		#region Public Methods
 		
 		/// <summary>
 		///    Gets a string representation of the current instance.
@@ -1225,11 +1223,10 @@ namespace TagLib.Id3v2 {
 				.Append (base.ToString ()).ToString ();
 		}
 		
-#endregion
-		
-		
-		
-#region Public Static Methods
+		#endregion
+
+
+		#region Public Static Methods
 		
 		/// <summary>
 		///    Gets a specified user text frame from the specified tag,
@@ -1382,6 +1379,6 @@ namespace TagLib.Id3v2 {
 			return Get (tag, description, false);
 		}
 		
-#endregion
+		#endregion
 	}
 }

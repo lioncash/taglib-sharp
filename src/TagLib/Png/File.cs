@@ -24,7 +24,6 @@
 using System;
 using System.Collections.Generic;
 
-using TagLib;
 using TagLib.Image;
 using TagLib.Xmp;
 
@@ -42,43 +41,42 @@ namespace TagLib.Png
 	[SupportedMimeType("image/png")]
 	public class File : TagLib.Image.ImageBlockFile
 	{
-
-#region GIF specific constants
+		#region GIF specific constants
 
 		/// <summary>
 		///    The PNG Header every png file starts with.
 		/// </summary>
-		private readonly byte [] HEADER = new byte [] {137, 80, 78, 71, 13, 10, 26, 10};
+		private readonly byte [] HEADER = {137, 80, 78, 71, 13, 10, 26, 10};
 
 		/// <summary>
 		///    byte sequence to indicate a IHDR Chunk
 		/// </summary>
-		private readonly byte [] IHDR_CHUNK_TYPE = new byte [] {73, 72, 68, 82};
+		private readonly byte [] IHDR_CHUNK_TYPE = {73, 72, 68, 82};
 
 		/// <summary>
 		///    byte sequence to indicate a IEND Chunk
 		/// </summary>
-		private readonly byte [] IEND_CHUNK_TYPE = new byte [] {73, 69, 78, 68};
+		private readonly byte [] IEND_CHUNK_TYPE = {73, 69, 78, 68};
 
 		/// <summary>
 		///    byte sequence to indicate a iTXt Chunk
 		/// </summary>
-		private readonly byte [] iTXt_CHUNK_TYPE = new byte [] {105, 84, 88, 116};
+		private readonly byte [] iTXt_CHUNK_TYPE = {105, 84, 88, 116};
 
 		/// <summary>
 		///    byte sequence to indicate a tEXt Chunk
 		/// </summary>
-		private readonly byte [] tEXt_CHUNK_TYPE = new byte [] {116, 69, 88, 116};
+		private readonly byte [] tEXt_CHUNK_TYPE = {116, 69, 88, 116};
 
 		/// <summary>
 		///    byte sequence to indicate a zTXt Chunk
 		/// </summary>
-		private readonly byte [] zTXt_CHUNK_TYPE = new byte [] {122, 84, 88, 116};
+		private readonly byte [] zTXt_CHUNK_TYPE =  {122, 84, 88, 116};
 
 		/// <summary>
 		///    header of a iTXt which contains XMP data.
 		/// </summary>
-		private readonly byte [] XMP_CHUNK_HEADER = new byte [] {
+		private readonly byte [] XMP_CHUNK_HEADER = {
 			// Keyword ("XML:com.adobe.xmp")
 			0x58, 0x4D, 0x4C, 0x3A, 0x63, 0x6F, 0x6D, 0x2E, 0x61, 0x64, 0x6F, 0x62, 0x65, 0x2E, 0x78, 0x6D, 0x70,
 
@@ -98,9 +96,9 @@ namespace TagLib.Png
 			0x00
 		};
 
-#endregion
+		#endregion
 
-#region private fields
+		#region Private fields
 
 		/// <summary>
 		///    The height of the image
@@ -117,9 +115,9 @@ namespace TagLib.Png
 		/// </summary>
 		private Properties properties;
 
-#endregion
+		#endregion
 
-#region public Properties
+		#region Public Properties
 
 		/// <summary>
 		///    Gets the media properties of the file represented by the
@@ -134,9 +132,9 @@ namespace TagLib.Png
 			get { return properties; }
 		}
 
-#endregion
+		#endregion
 
-#region constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -183,7 +181,7 @@ namespace TagLib.Png
 		///    specified read style.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <param name="propertiesStyle">
@@ -206,7 +204,7 @@ namespace TagLib.Png
 		///    cref="File" /> for a specified file abstraction.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
@@ -218,9 +216,9 @@ namespace TagLib.Png
 		{
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Saves the changes made in the current instance to the
@@ -238,9 +236,9 @@ namespace TagLib.Png
 			}
 		}
 
-#endregion
+		#endregion
 
-#region private methods
+		#region Private methods
 
 		/// <summary>
 		///    Reads the information from file with a specified read style.
@@ -784,9 +782,9 @@ namespace TagLib.Png
 			return null;
 		}
 
-#endregion
+		#endregion
 
-#region Utility Stuff
+		#region Utility Stuff
 
 
 		/// <summary>
@@ -906,7 +904,6 @@ namespace TagLib.Png
 			}
 		}
 
-#endregion
-
+		#endregion
 	}
 }

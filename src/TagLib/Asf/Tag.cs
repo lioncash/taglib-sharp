@@ -489,7 +489,7 @@ namespace TagLib.Asf {
 		///    descriptors.
 		/// </summary>
 		/// <returns>
-		///    A <see cref="T:System.Collections.IEnumerator`1" /> for
+		///    A <see cref="T:System.Collections.Generic.IEnumerator`1" /> for
 		///    enumerating through the content descriptors.
 		/// </returns>
 		public IEnumerator<ContentDescriptor> GetEnumerator ()

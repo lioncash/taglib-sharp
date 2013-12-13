@@ -45,27 +45,27 @@ namespace TagLib.Mpeg {
 		
 		
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the video width.
 		/// </summary>
-		int width;
-		
+		private int width;
+
 		/// <summary>
 		///    Contains the video height.
 		/// </summary>
-		int height;
-		
+		private int height;
+
 		/// <summary>
 		///    Contains the index in <see cref="frame_rates" /> of the
 		///    video frame rate.
 		/// </summary>
-		int frame_rate_index;
-		
+		private int frame_rate_index;
+
 		/// <summary>
 		///    Contains the video bitrate.
 		/// </summary>
-		int bitrate;
+		private int bitrate;
 		
 		#endregion
 		
@@ -132,7 +132,7 @@ namespace TagLib.Mpeg {
 		///    instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="MediaTypes.Video" />.
+		///    Always <see cref="F:TagLib.MediaTypes.Video" />.
 		/// </value>
 		public MediaTypes MediaTypes {
 			get {return MediaTypes.Video;}

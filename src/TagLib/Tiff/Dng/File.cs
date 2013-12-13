@@ -22,17 +22,13 @@
 //
 
 using System;
-using System.Collections.Generic;
 
-using TagLib;
-using TagLib.Image;
 using TagLib.IFD;
 using TagLib.IFD.Tags;
 using TagLib.IFD.Entries;
 
 namespace TagLib.Tiff.Dng
 {
-
 	/// <summary>
 	///    This class extends <see cref="TagLib.Tiff.File" /> to provide tagging
 	///    for DNG image files.
@@ -43,7 +39,7 @@ namespace TagLib.Tiff.Dng
 	public class File : TagLib.Tiff.File
 	{
 
-#region public Properties
+		#region Public Properties
 
 		/// <summary>
 		///    Indicates if tags can be written back to the current file or not
@@ -57,9 +53,9 @@ namespace TagLib.Tiff.Dng
 		}
 
 
-#endregion
+		#endregion
 
-#region constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -106,7 +102,7 @@ namespace TagLib.Tiff.Dng
 		///    specified read style.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <param name="propertiesStyle">
@@ -128,7 +124,7 @@ namespace TagLib.Tiff.Dng
 		///    cref="File" /> for a specified file abstraction.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
@@ -140,9 +136,9 @@ namespace TagLib.Tiff.Dng
 		{
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Saves the changes made in the current instance to the
@@ -153,7 +149,7 @@ namespace TagLib.Tiff.Dng
 			throw new NotSupportedException ();
 		}
 
-#endregion
+		#endregion
 
 		/// <summary>
 		///    Attempts to extract the media properties of the main

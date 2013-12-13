@@ -54,7 +54,7 @@ namespace TagLib.Matroska
         ///    Gets the tag types contained in the current instance.
         /// </summary>
         /// <value>
-        ///    Always <see cref="TagTypes.Id3v2" />.
+        ///    Always <see cref="TagLib.TagTypes.Id3v2" />.
         /// </value>
         public override TagTypes TagTypes
         {

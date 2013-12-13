@@ -39,14 +39,13 @@ namespace TagLib.Ape {
 	/// </summary>
 	public class Tag : TagLib.Tag, IEnumerable<string>
 	{
-		
-#region Private Static Fields
+		#region Private Static Fields
 		
 		/// <summary>
 		///    Contains names of picture fields, indexed to correspond
 		///    to their picture item names.
 		/// </summary>
-		private static string [] picture_item_names = new string [] {
+		private static readonly string[] picture_item_names = {
 			"Cover Art (other)",
 			"Cover Art (icon)",
 			"Cover Art (other icon)",
@@ -69,12 +68,12 @@ namespace TagLib.Ape {
 			"Cover Art (band logo)",
 			"Cover Art (publisher logo)"
 		};
+
+		#endregion
 		
-#endregion
 		
 		
-		
-#region Private Fields
+		#region Private Fields
 		
 		/// <summary>
 		///    Contains the tag footer.
@@ -299,7 +298,7 @@ namespace TagLib.Ape {
 		///    />/<paramref name="count" />".
 		/// </remarks>
 		/// <exception cref="ArgumentNullException">
-		///    <paramref name="ident" /> is <see langword="null" />.
+		///    <paramref name="key" /> is <see langword="null" />.
 		/// </exception>
 		public void SetValue (string key, uint number, uint count)
 		{
@@ -806,7 +805,7 @@ namespace TagLib.Ape {
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="TagTypes.Ape" />.
+		///    Always <see cref="TagLib.TagTypes.Ape" />.
 		/// </value>
 		public override TagTypes TagTypes {
 			get {return TagTypes.Ape;}

@@ -50,7 +50,7 @@ namespace TagLib.Ogg
 	[SupportedMimeType("video/x-theora")]
 	public class File : TagLib.File
 	{
-#region Private Fields
+		#region Private Fields
 		
 		/// <summary>
 		///   Contains the tags for the file.
@@ -62,11 +62,11 @@ namespace TagLib.Ogg
 		/// </summary>
 		private Properties properties;
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Constructors
+		#region Constructors
 		
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -113,7 +113,7 @@ namespace TagLib.Ogg
 		///    specified read style.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <param name="propertiesStyle">
@@ -144,7 +144,7 @@ namespace TagLib.Ogg
 		///    average read style.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
@@ -156,11 +156,11 @@ namespace TagLib.Ogg
 		{
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Public Methods
+		#region Public Methods
 		
 		/// <summary>
 		///    Saves the changes made in the current instance to the
@@ -276,11 +276,11 @@ namespace TagLib.Ogg
 			return null;
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Public Properties
+		#region Public Properties
 		
 		/// <summary>
 		///    Gets a abstract representation of all tags stored in the
@@ -307,11 +307,11 @@ namespace TagLib.Ogg
 			get {return properties;}
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Private Methods
+		#region Private Methods
 		
 		/// <summary>
 		///    Reads the file with a specified read style.
@@ -407,11 +407,11 @@ namespace TagLib.Ogg
 			return streams;
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Private Properties
+		#region Private Properties
 		
 		/// <summary>
 		///    Gets the last page header in the file.
@@ -438,6 +438,6 @@ namespace TagLib.Ogg
 			}
 		}
 		
-#endregion
+		#endregion
 	}
 }

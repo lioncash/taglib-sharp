@@ -26,12 +26,10 @@
 //
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 using TagLib.Image;
 using TagLib.IFD;
-using TagLib.IFD.Entries;
 using TagLib.Xmp;
 
 namespace TagLib.Jpeg
@@ -77,7 +75,7 @@ namespace TagLib.Jpeg
 		};
 
 
-#region Private Fields
+		#region Private Fields
 
 		/// <summary>
 		///    Contains the media properties.
@@ -105,9 +103,9 @@ namespace TagLib.Jpeg
 		/// </summary>
 		int quality;
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -154,7 +152,7 @@ namespace TagLib.Jpeg
 		///    specified read style.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <param name="propertiesStyle">
@@ -177,7 +175,7 @@ namespace TagLib.Jpeg
 		///    cref="File" /> for a specified file abstraction.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
@@ -189,9 +187,9 @@ namespace TagLib.Jpeg
 		{
 		}
 
-#endregion
+		#endregion
 
-#region Public Properties
+		#region Public Properties
 
 		/// <summary>
 		///    Gets the media properties of the file represented by the
@@ -206,9 +204,9 @@ namespace TagLib.Jpeg
 			get { return properties; }
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///  Gets a tag of a specified type from the current instance, optionally creating a
@@ -250,9 +248,9 @@ namespace TagLib.Jpeg
 			}
 		}
 
-#endregion
+		#endregion
 
-#region Private Methods
+		#region Private Methods
 
 		/// <summary>
 		///    Reads the information from file with a specified read style.
@@ -810,6 +808,6 @@ namespace TagLib.Jpeg
 			}
 		}
 
-#endregion
+		#endregion
 	}
 }

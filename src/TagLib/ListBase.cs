@@ -32,7 +32,7 @@ using System.Collections.Generic;
 
 namespace TagLib {
 	/// <summary>
-	///    This class implements <see cref="T:System.Collections.Generic`1"/>
+	///    This class implements <see cref="T:System.Collections.Generic.IList`1"/>
 	///    for objects that implement <see cref="T:System.IComparable`1"/>,
 	///    providing extra features used in lists in TagLib#.
 	/// </summary>
@@ -208,7 +208,7 @@ namespace TagLib {
 
 		#endregion
 
-#region IList<T>
+		#region IList<T>
 		
 		/// <summary>
 		///    Gets whether or not the current instance is read-only.
@@ -374,11 +374,9 @@ namespace TagLib {
 			return ToString(", ");
 		}
 
-#endregion
-		
-		
-		
-#region ICollection<T>
+		#endregion
+
+		#region ICollection<T>
 		
 		/// <summary>
 		///    Gets the number of elements in the current instance.
@@ -429,19 +427,16 @@ namespace TagLib {
 			data.CopyTo (array, arrayIndex);
 		}
 		
-#endregion
-		
-		
-		
-		
-#region IEnumerable<T>
+		#endregion
+
+		#region IEnumerable<T>
 		
 		/// <summary>
 		///    Gets an enumerator for enumerating through the elements
 		///    in the current instance.
 		/// </summary>
 		/// <returns>
-		///    A <see cref="T:System.Collections.IEnumerator`1" /> for
+		///    A <see cref="T:System.Collections.Generic.IEnumerator`1" /> for
 		///    enumerating through the tag's data boxes.
 		/// </returns>
 		public IEnumerator<T> GetEnumerator()
@@ -454,6 +449,6 @@ namespace TagLib {
 			return data.GetEnumerator();
 		}
 
-#endregion
+		#endregion
 	}
 }

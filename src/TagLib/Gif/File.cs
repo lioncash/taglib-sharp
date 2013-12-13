@@ -24,7 +24,6 @@
 using System;
 using System.IO;
 
-using TagLib;
 using TagLib.Image;
 using TagLib.Xmp;
 
@@ -41,32 +40,32 @@ namespace TagLib.Gif
 	public class File : TagLib.Image.ImageBlockFile
 	{
 
-#region GIF specific constants
+		#region GIF specific constants
 
 		/// <summary>
 		///    Gif file signature which occurs at the begin of the file
 		/// </summary>
-		protected static readonly string SIGNATURE = "GIF";
+		protected const string SIGNATURE = "GIF";
 
 		/// <summary>
 		///    String which is used to indicate version the gif file format version 87a
 		/// </summary>
-		protected static readonly string VERSION_87A = "87a";
+		protected const string VERSION_87A = "87a";
 
 		/// <summary>
 		///    String which is used to indicate version the gif file format version 89a
 		/// </summary>
-		protected static readonly string VERSION_89A = "89a";
+		protected const string VERSION_89A = "89a";
 
 		/// <summary>
 		///    Application Extension Identifier for an XMP Block
 		/// </summary>
-		private static readonly string XMP_IDENTIFIER = "XMP Data";
+		private const string XMP_IDENTIFIER = "XMP Data";
 
 		/// <summary>
 		///    Application Authentication Extension Code for an XMP Block
 		/// </summary>
-		private static readonly string XMP_AUTH_CODE = "XMP";
+		private const string XMP_AUTH_CODE = "XMP";
 
 		/// <summary>
 		///    The Magic Trailer for XMP Data
@@ -83,7 +82,7 @@ namespace TagLib.Gif
 		///    to the last one. Therefoe, independent of the byte, the reader reads as sub-block length, it is
 		///    redirected to the last byte of the trailer and therfore to the end of the XMP data.
 		/// </remarks>
-		private static readonly byte [] XMP_MAGIC_TRAILER = new byte [] {
+		private static readonly byte [] XMP_MAGIC_TRAILER = {
 			0x01, 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1,
 			0xF0, 0xEF, 0xEE, 0xED, 0xEC, 0xEB, 0xEA, 0xE9, 0xE8, 0xE7, 0xE6, 0xE5, 0xE4, 0xE3, 0xE2, 0xE1,
 			0xE0, 0xDF, 0xDE, 0xDD, 0xDC, 0xDB, 0xDA, 0xD9, 0xD8, 0xD7, 0xD6, 0xD5, 0xD4, 0xD3, 0xD2, 0xD1,
@@ -105,7 +104,7 @@ namespace TagLib.Gif
 
 #endregion
 
-#region private fields
+		#region Private fields
 
 		/// <summary>
 		///    The width of the image
@@ -132,9 +131,9 @@ namespace TagLib.Gif
 		/// </summary>
 		private long start_of_blocks = -1;
 
-#endregion
+		#endregion
 
-#region public Properties
+		#region Public Properties
 
 		/// <summary>
 		///    Gets the media properties of the file represented by the
@@ -149,9 +148,9 @@ namespace TagLib.Gif
 			get { return properties; }
 		}
 
-#endregion
+		#endregion
 
-#region constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -198,7 +197,7 @@ namespace TagLib.Gif
 		///    specified read style.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <param name="propertiesStyle">
@@ -221,7 +220,7 @@ namespace TagLib.Gif
 		///    cref="File" /> for a specified file abstraction.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
@@ -233,10 +232,10 @@ namespace TagLib.Gif
 		{
 		}
 
-#endregion
+		#endregion
 
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Saves the changes made in the current instance to the
@@ -254,10 +253,10 @@ namespace TagLib.Gif
 			}
 		}
 
-#endregion
+		#endregion
 
 
-#region Private Methods
+		#region Private Methods
 
 		/// <summary>
 		///    Reads the information from file with a specified read style.
@@ -775,7 +774,6 @@ namespace TagLib.Gif
 
 		}
 
-#endregion
-
+		#endregion
 	}
 }

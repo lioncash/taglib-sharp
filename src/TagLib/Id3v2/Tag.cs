@@ -1186,7 +1186,7 @@ namespace TagLib.Id3v2 {
 		///    Gets an enumerator for enumerating through the frames.
 		/// </summary>
 		/// <returns>
-		///    A <see cref="T:System.Collections.IEnumerator`1" /> for
+		///    A <see cref="T:System.Collections.Generic.IEnumerator`1" /> for
 		///    enumerating through the frames.
 		/// </returns>
 		public IEnumerator<Frame> GetEnumerator ()
@@ -1209,7 +1209,7 @@ namespace TagLib.Id3v2 {
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="TagTypes.Id3v2" />.
+		///    Always <see cref="TagLib.TagTypes.Id3v2" />.
 		/// </value>
 		public override TagTypes TagTypes {
 			get {return TagTypes.Id3v2;}

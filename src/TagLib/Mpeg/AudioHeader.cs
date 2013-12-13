@@ -431,11 +431,11 @@ namespace TagLib.Mpeg {
 		/// </value>
 		/// <remarks>
 		///    If <see cref="XingHeader" /> is equal to <see
-		///    cref="XingHeader.Unknown" /> and <see
+		///    cref="TagLib.Mpeg.XingHeader.Unknown" /> and <see
 		///    cref="SetStreamLength" /> has not been called, this value
 		///    will not be correct.
 		///    If <see cref="VBRIHeader" /> is equal to <see
-		///    cref="VBRIHeader.Unknown" /> and <see
+		///    cref="TagLib.Mpeg.VBRIHeader.Unknown" /> and <see
 		///    cref="SetStreamLength" /> has not been called, this value
 		///    will not be correct.
 		/// </remarks>
@@ -528,7 +528,7 @@ namespace TagLib.Mpeg {
 		///    instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="MediaTypes.Audio" />.
+		///    Always <see cref="TagLib.MediaTypes.Audio" />.
 		/// </value>
 		public MediaTypes MediaTypes {
 			get {return MediaTypes.Audio;}
@@ -602,7 +602,7 @@ namespace TagLib.Mpeg {
 		/// <value>
 		///    A <see cref="XingHeader" /> object containing the Xing
 		///    header found in the audio represented by the current
-		///    instance, or <see cref="XingHeader.Unknown" /> if no
+		///    instance, or <see cref="TagLib.Mpeg.XingHeader.Unknown" /> if no
 		///    header was found.
 		/// </value>
 		public XingHeader XingHeader {
@@ -616,7 +616,7 @@ namespace TagLib.Mpeg {
 		/// <value>
 		///    A <see cref="VBRIHeader" /> object containing the VBRI
 		///    header found in the audio represented by the current
-		///    instance, or <see cref="VBRIHeader.Unknown" /> if no
+		///    instance, or <see cref="TagLib.Mpeg.VBRIHeader.Unknown" /> if no
 		///    header was found.
 		/// </value>
 		public VBRIHeader VBRIHeader {

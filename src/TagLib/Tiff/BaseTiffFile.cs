@@ -23,7 +23,6 @@
 
 using System;
 
-using TagLib.Image;
 using TagLib.IFD;
 
 
@@ -36,8 +35,7 @@ namespace TagLib.Tiff
 	/// </summary>
 	public abstract class BaseTiffFile : TagLib.Image.File
 	{
-
-#region Public Properties
+		#region Public Properties
 
 		/// <summary>
 		///    Indicates if the current file is in big endian or little endian format.
@@ -50,9 +48,9 @@ namespace TagLib.Tiff
 			get; private set;
 		}
 
-#endregion
+		#endregion
 
-#region Protected Properties
+		#region Protected Properties
 
 		/// <summary>
 		///    The identifier used to recognize the file. This is 42 for most TIFF files.
@@ -61,9 +59,9 @@ namespace TagLib.Tiff
 			get; set;
 		}
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -87,7 +85,7 @@ namespace TagLib.Tiff
 		///    cref="File" /> for a specified file abstraction.
 		/// </summary>
 		/// <param name="abstraction">
-		///    A <see cref="IFileAbstraction" /> object to use when
+		///    A <see cref="File.IFileAbstraction" /> object to use when
 		///    reading from and writing to the file.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
@@ -99,9 +97,9 @@ namespace TagLib.Tiff
 			Magic = 42;
 		}
 
-#endregion
+		#endregion
 
-#region Protected Methods
+		#region Protected Methods
 
 		/// <summary>
 		///    Reads and validates the TIFF header at the current position.
@@ -243,7 +241,6 @@ namespace TagLib.Tiff
 			return data;
 		}
 
-#endregion
-
+		#endregion
 	}
 }

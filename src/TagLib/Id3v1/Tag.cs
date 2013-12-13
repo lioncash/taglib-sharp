@@ -25,7 +25,6 @@
 // USA
 //
 
-using System.Collections;
 using System;
 using System.Globalization;
 
@@ -37,15 +36,14 @@ namespace TagLib.Id3v1
 	/// </summary>
 	public class Tag : TagLib.Tag
 	{
-#region Private Static Fields
+		#region Private Static Fields
 		
 		private static StringHandler string_handler = new StringHandler ();
 		
-#endregion
+		#endregion
 
 
-
-#region Private Fields
+		#region Private Fields
 		
 		/// <summary>
 		///    Contains the title.
@@ -82,12 +80,10 @@ namespace TagLib.Id3v1
 		/// </summary>
 		private byte genre;
 		
-#endregion
+		#endregion
 
 
-
-
-#region Public Static Fields
+		#region Public Static Fields
 		
 		/// <summary>
 		///    The size of a ID3v1 tag.
@@ -102,11 +98,10 @@ namespace TagLib.Id3v1
 		/// </value>
 		public static readonly ReadOnlyByteVector FileIdentifier = "TAG";
 
-#endregion
+		#endregion
 
 
-
-#region Constructors
+		#region Constructors
 		
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -199,11 +194,10 @@ namespace TagLib.Id3v1
 			Parse (data);
 		}
 		
-#endregion
+		#endregion
 		
 		
-		
-#region Public Methods
+		#region Public Methods
 		
 		/// <summary>
 		///    Renders the current instance as a raw ID3v1 tag.
@@ -229,11 +223,10 @@ namespace TagLib.Id3v1
 			return data;
 		}
 		
-#endregion
+		#endregion
 		
 		
-		
-#region Public Static Properties
+		#region Public Static Properties
 		
 		/// <summary>
 		///    Gets and sets the <see cref="StringHandler" /> object
@@ -248,10 +241,10 @@ namespace TagLib.Id3v1
 			set {string_handler = value;}
 		}
 		
-#endregion
+		#endregion
 		
 		
-#region Private Methods
+		#region Private Methods
 		
 		/// <summary>
 		///    Populates the current instance by parsing the contents of
@@ -286,17 +279,16 @@ namespace TagLib.Id3v1
 			genre = data [127];
 		}
 		
-#endregion
+		#endregion
 		
 		
-		
-#region TagLib.Tag
+		#region TagLib.Tag
 		
 		/// <summary>
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="TagTypes.Id3v1" />.
+		///    Always <see cref="TagLib.TagTypes.Id3v1" />.
 		/// </value>
 		public override TagTypes TagTypes {
 			get {return TagTypes.Id3v1;}
@@ -495,6 +487,6 @@ namespace TagLib.Id3v1
 			genre = 255;
 		}
 
-#endregion
+		#endregion
 	}
 }
