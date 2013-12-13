@@ -161,10 +161,9 @@ namespace TagLib.Image
 		///    matching tag was found and none was created, <see
 		///    langword="null" /> is returned.
 		/// </returns>
-		public override TagLib.Tag GetTag (TagLib.TagTypes type,
-		                                   bool create)
+		public override TagLib.Tag GetTag (TagLib.TagTypes type, bool create)
 		{
-			foreach (Tag tag in ImageTag.AllTags) {
+			foreach (ImageTag tag in ImageTag.AllTags) {
 				if ((tag.TagTypes & type) == type)
 					return tag;
 			}

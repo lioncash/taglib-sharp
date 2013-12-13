@@ -52,7 +52,7 @@ namespace TagLib.Matroska
         public EBMLElement (Matroska.File _file, ulong position)
         {
             if (_file == null)
-                throw new ArgumentNullException ("file");
+                throw new ArgumentNullException ("_file");
 
             if (position > (ulong) (_file.Length - 4))
                 throw new ArgumentOutOfRangeException ("position");

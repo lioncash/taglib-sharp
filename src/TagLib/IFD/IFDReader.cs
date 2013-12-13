@@ -37,19 +37,19 @@ namespace TagLib.IFD
 	/// </summary>
 	public class IFDReader {
 
-#region Private Constants
+		#region Private Constants
 
-		private static readonly string PANASONIC_HEADER = "Panasonic\0\0\0";
-		private static readonly string PENTAX_HEADER = "AOC\0";
-		private static readonly string NIKON_HEADER = "Nikon\0";
-		private static readonly string OLYMPUS1_HEADER = "OLYMP\0";
-		private static readonly string OLYMPUS2_HEADER = "OLYMPUS\0";
-		private static readonly string SONY_HEADER = "SONY DSC \0\0\0";
-		private static readonly string LEICA_HEADER = "LEICA\0\0\0";
+		private const string PANASONIC_HEADER = "Panasonic\0\0\0";
+		private const string PENTAX_HEADER = "AOC\0";
+		private const string NIKON_HEADER = "Nikon\0";
+		private const string OLYMPUS1_HEADER = "OLYMP\0";
+		private const string OLYMPUS2_HEADER = "OLYMPUS\0";
+		private const string SONY_HEADER = "SONY DSC \0\0\0";
+		private const string LEICA_HEADER = "LEICA\0\0\0";
 
-#endregion
+		#endregion
 
-#region Protected Fields
+		#region Protected Fields
 
 		/// <summary>
 		///    The <see cref="File" /> where this IFD is found in.
@@ -91,7 +91,7 @@ namespace TagLib.IFD
 		/// </summary>
 		protected bool parse_makernote = true;
 
-#endregion
+		#endregion
 
 		/// <summary>
 		///    Whether or not the makernote should be parsed.
@@ -101,7 +101,7 @@ namespace TagLib.IFD
 			set { parse_makernote = value; }
 		}
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructor. Reads an IFD from given file, using the given endianness.
@@ -140,9 +140,9 @@ namespace TagLib.IFD
 			this.max_offset = max_offset;
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Read all IFD segments from the file.
@@ -187,9 +187,9 @@ namespace TagLib.IFD
 			}
 		}
 
-#endregion
+		#endregion
 
-#region Private Methods
+		#region Private Methods
 
 		/// <summary>
 		///    Add to the reference count for the IFD loop detection.
@@ -898,9 +898,9 @@ namespace TagLib.IFD
 			}
 		}
 
-#endregion
+		#endregion
 
-#region Protected Methods
+		#region Protected Methods
 
 		/// <summary>
 		///    Try to parse the given IFD entry, used to discover format-specific entries.
@@ -1013,7 +1013,6 @@ namespace TagLib.IFD
 			return new IFDReader (file, is_bigendian, structure, base_offset, offset, max_offset);
 		}
 
-#endregion
-
+		#endregion
 	}
 }

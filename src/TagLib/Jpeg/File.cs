@@ -215,16 +215,16 @@ namespace TagLib.Jpeg
 		public override TagLib.Tag GetTag (TagLib.TagTypes type, bool create)
 		{
 			if (type == TagTypes.XMP) {
-				foreach (Tag tag in ImageTag.AllTags) {
+				foreach (ImageTag tag in ImageTag.AllTags) {
 					if ((tag.TagTypes & type) == type || (tag.TagTypes & TagTypes.IPTCIIM) != 0)
 						return tag;
 				}
 			}
 			if (type == TagTypes.IPTCIIM && create)
-			  {
-			    // FIXME: don't know how to create IPTCIIM tags
-			    return base.GetTag (type, false);
-			  }
+			{
+				// FIXME: don't know how to create IPTCIIM tags
+				return base.GetTag (type, false);
+			}
 
 			return base.GetTag (type, create);
 		}

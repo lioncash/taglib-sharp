@@ -200,8 +200,7 @@ namespace TagLib.Tiff.Rw2
 		///    matching tag was found and none was created, <see
 		///    langword="null" /> is returned.
 		/// </returns>
-		public override TagLib.Tag GetTag (TagLib.TagTypes type,
-		                                   bool create)
+		public override TagLib.Tag GetTag (TagLib.TagTypes type, bool create)
 		{
 			TagLib.Tag tag = base.GetTag (type, false);
 			if (tag != null) {

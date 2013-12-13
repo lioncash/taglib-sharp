@@ -38,19 +38,18 @@ namespace TagLib.IFD
 	/// </summary>
 	public class IFDStructure
 	{
+		#region Private Fields
 
-#region Private Fields
-
-		private static readonly string DATETIME_FORMAT = "yyyy:MM:dd HH:mm:ss";
+		private const string DATETIME_FORMAT = "yyyy:MM:dd HH:mm:ss";
 
 		/// <summary>
 		///    Contains the IFD directories in this tag.
 		/// </summary>
 		internal readonly List<IFDDirectory> directories = new List<IFDDirectory> ();
 
-#endregion
+		#endregion
 
-#region Public Properties
+		#region Public Properties
 
 		/// <summary>
 		///    Gets the IFD directories contained in the current instance.
@@ -62,9 +61,9 @@ namespace TagLib.IFD
 			get { return directories.ToArray (); }
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Checks, if a value for the given tag is contained in the IFD.
@@ -218,7 +217,7 @@ namespace TagLib.IFD
 		{
 			var entry = GetEntry (directory, entry_tag);
 
-			if (entry != null && entry is StringIFDEntry)
+			if (entry is StringIFDEntry)
 				return (entry as StringIFDEntry).Value;
 
 			return null;
@@ -246,7 +245,7 @@ namespace TagLib.IFD
 		{
 			var entry = GetEntry (directory, entry_tag);
 
-			if (entry != null && entry is ByteIFDEntry)
+			if (entry is ByteIFDEntry)
 				return (entry as ByteIFDEntry).Value;
 
 			return null;
@@ -461,8 +460,6 @@ namespace TagLib.IFD
 			SetStringValue (directory, entry_tag, date_string);
 		}
 
-#endregion
-
+		#endregion
 	}
-
 }
