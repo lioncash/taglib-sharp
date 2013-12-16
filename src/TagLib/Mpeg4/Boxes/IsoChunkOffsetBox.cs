@@ -24,7 +24,8 @@
 
 using System;
 
-namespace TagLib.Mpeg4 {
+namespace TagLib.Mpeg4
+{
 	/// <summary>
 	///    This class extends <see cref="FullBox" /> to provide an
 	///    implementation of a ISO/IEC 14496-12 ChunkOffsetBox.
@@ -43,14 +44,14 @@ namespace TagLib.Mpeg4 {
 		/// <summary>
 		///    Contains the chunk offsets.
 		/// </summary>
-		private uint [] offsets;
+		private uint[] offsets;
 		
 		#endregion
 		
 		
 		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="IsoChunkOffsetBox" /> with a provided header and
@@ -68,26 +69,23 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="IsoHandlerBox" /> object containing the
 		///    handler that applies to the new instance.
 		/// </param>
-		public IsoChunkOffsetBox (BoxHeader header, TagLib.File file,
-		                          IsoHandlerBox handler)
-			: base (header, file, handler)
+		public IsoChunkOffsetBox(BoxHeader header, TagLib.File file, IsoHandlerBox handler)
+			: base(header, file, handler)
 		{
-			ByteVector box_data = file.ReadBlock (DataSize);
-			
-			offsets = new uint [(int)
-				box_data.Mid (0, 4).ToUInt ()];
-			
+			ByteVector box_data = file.ReadBlock(DataSize);
+
+			offsets = new uint[(int) box_data.Mid(0, 4).ToUInt()];
+
 			for (int i = 0; i < offsets.Length; i ++)
-				offsets [i] = box_data.Mid (4 + i * 4,
-					4).ToUInt ();
+				offsets[i] = box_data.Mid(4 + i*4, 4).ToUInt();
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets and sets the data contained in the current instance.
 		/// </summary>
@@ -95,18 +93,19 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="ByteVector" /> object containing the data
 		///    contained in the current instance.
 		/// </value>
-		public override ByteVector Data {
-			get {
-				ByteVector output = ByteVector.FromUInt ((uint)
-					offsets.Length);
-				for (int i = 0; i < offsets.Length; i ++)
-					output.Add (ByteVector.FromUInt (
-						offsets [i]));
-				
+		public override ByteVector Data
+		{
+			get
+			{
+				ByteVector output = ByteVector.FromUInt((uint) offsets.Length);
+
+				foreach (uint offset in offsets)
+					output.Add(ByteVector.FromUInt(offset));
+
 				return output;
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the offset table contained in the current instance.
 		/// </summary>
@@ -114,16 +113,17 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="uint[]" /> containing the offset table
 		///    contained in the current instance.
 		/// </value>
-		public uint [] Offsets {
-			get {return offsets;}
+		public uint[] Offsets
+		{
+			get { return offsets; }
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Overwrites the existing box in the file after updating
 		///    the table for a size change.
@@ -145,16 +145,14 @@ namespace TagLib.Mpeg4 {
 		/// <exception cref="ArgumentNullException">
 		///    <param name="file" /> is <see langword="null" />.
 		/// </exception>
-		public void Overwrite (File file, long sizeDifference,
-		                       long after)
+		public void Overwrite(File file, long sizeDifference, long after)
 		{
 			if (file == null)
-				throw new ArgumentNullException ("file");
-			
-			file.Insert (Render (sizeDifference, after),
-				Header.Position, Size);
+				throw new ArgumentNullException("file");
+
+			file.Insert(Render(sizeDifference, after), Header.Position, Size);
 		}
-		
+
 		/// <summary>
 		///    Renders the current instance after updating the table for
 		///    a size change.
@@ -172,16 +170,17 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered version of the file.
 		/// </returns>
-		public ByteVector Render (long sizeDifference, long after)
+		public ByteVector Render(long sizeDifference, long after)
 		{
 			for (int i = 0; i < offsets.Length; i ++)
-				if (offsets [i] >= (uint) after)
-					offsets [i] = (uint)
-						(offsets [i] + sizeDifference);
-			
-			return Render ();
+			{
+				if (offsets[i] >= (uint) after)
+					offsets[i] = (uint) (offsets[i] + sizeDifference);
+			}
+
+			return Render();
 		}
-		
+
 		#endregion
 	}
 }

@@ -24,7 +24,8 @@
 
 using System;
 
-namespace TagLib.Mpeg4 {
+namespace TagLib.Mpeg4
+{
 	/// <summary>
 	///    This class extends <see cref="FullBox" /> to provide an
 	///    implementation of a ISO/IEC 14496-12 ChunkLargeOffsetBox.
@@ -43,7 +44,7 @@ namespace TagLib.Mpeg4 {
 		/// <summary>
 		///    Contains the chunk offsets.
 		/// </summary>
-		private ulong [] offsets;
+		private ulong[] offsets;
 		
 		#endregion
 		
@@ -69,10 +70,8 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="IsoHandlerBox" /> object containing the
 		///    handler that applies to the new instance.
 		/// </param>
-		public IsoChunkLargeOffsetBox (BoxHeader header,
-		                               TagLib.File file,
-		                               IsoHandlerBox handler)
-			: base (header, file, handler)
+		public IsoChunkLargeOffsetBox(BoxHeader header, TagLib.File file, IsoHandlerBox handler)
+			: base(header, file, handler)
 		{
 			ByteVector box_data = file.ReadBlock (DataSize);
 			
@@ -80,8 +79,7 @@ namespace TagLib.Mpeg4 {
 				box_data.Mid (0, 4).ToUInt ()];
 			
 			for (int i = 0; i < offsets.Length; i ++)
-				offsets [i] = box_data.Mid (4 + i * 8,
-					8).ToULong ();
+				offsets [i] = box_data.Mid (4 + i * 8, 8).ToULong ();
 		}
 		
 		#endregion
@@ -89,7 +87,7 @@ namespace TagLib.Mpeg4 {
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets and sets the data contained in the current instance.
 		/// </summary>
@@ -97,18 +95,19 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="ByteVector" /> object containing the data
 		///    contained in the current instance.
 		/// </value>
-		public override ByteVector Data {
-			get {
-				ByteVector output = ByteVector.FromUInt ((uint)
-					offsets.Length);
-				for (int i = 0; i < offsets.Length; i ++)
-					output.Add (ByteVector.FromULong (
-						offsets [i]));
-				
+		public override ByteVector Data
+		{
+			get
+			{
+				ByteVector output = ByteVector.FromUInt((uint) offsets.Length);
+
+				foreach (ulong offset in offsets)
+					output.Add(ByteVector.FromULong(offset));
+
 				return output;
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the offset table contained in the current instance.
 		/// </summary>
@@ -116,16 +115,17 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="ulong[]" /> containing the offset table
 		///    contained in the current instance.
 		/// </value>
-		public ulong [] Offsets {
-			get {return offsets;}
+		public ulong[] Offsets
+		{
+			get { return offsets; }
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Overwrites the existing box in the file after updating
 		///    the table for a size change.
@@ -147,16 +147,14 @@ namespace TagLib.Mpeg4 {
 		/// <exception cref="ArgumentNullException">
 		///    <param name="file" /> is <see langword="null" />.
 		/// </exception>
-		public void Overwrite (File file, long sizeDifference,
-		                       long after)
+		public void Overwrite(File file, long sizeDifference, long after)
 		{
 			if (file == null)
-				throw new ArgumentNullException ("file");
-			
-			file.Insert (Render (sizeDifference, after),
-				Header.Position, Size);
+				throw new ArgumentNullException("file");
+
+			file.Insert(Render(sizeDifference, after), Header.Position, Size);
 		}
-      
+
 		/// <summary>
 		///    Renders the current instance after updating the table for
 		///    a size change.
@@ -174,15 +172,15 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered version of the file.
 		/// </returns>
-		public ByteVector Render (long sizeDifference, long after)
+		public ByteVector Render(long sizeDifference, long after)
 		{
 			for (int i = 0; i < offsets.Length; i ++)
-				if (offsets [i] >= (ulong) after)
-					offsets [i] = (ulong)
-						((long) offsets [i] +
-							sizeDifference);
-			
-			return Render ();
+			{
+				if (offsets[i] >= (ulong) after)
+					offsets[i] = (ulong) ((long) offsets[i] + sizeDifference);
+			}
+
+			return Render();
 		}
 		
 		#endregion

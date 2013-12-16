@@ -40,7 +40,7 @@ namespace TagLib.Gif
 		/// <param name="value">
 		///    The value of the comment.
 		/// </param>
-		public GifCommentTag (string value)
+		public GifCommentTag(string value)
 		{
 			Value = value;
 		}
@@ -48,7 +48,8 @@ namespace TagLib.Gif
 		/// <summary>
 		///    Constructor. Creates a new empty comment.
 		/// </summary>
-		public GifCommentTag () {
+		public GifCommentTag()
+		{
 			Value = null;
 		}
 
@@ -69,7 +70,8 @@ namespace TagLib.Gif
 		///    A <see cref="string" /> containing the comment of the
 		///    current instace.
 		/// </value>
-		public override string Comment {
+		public override string Comment
+		{
 			get { return Value; }
 			set { Value = value; }
 		}
@@ -84,14 +86,15 @@ namespace TagLib.Gif
 		/// <value>
 		///    Always <see cref="TagLib.TagTypes.GifComment" />.
 		/// </value>
-		public override TagTypes TagTypes {
+		public override TagTypes TagTypes
+		{
 			get { return TagTypes.GifComment; }
 		}
 
 		/// <summary>
 		///    Clears the values stored in the current instance.
 		/// </summary>
-		public override void Clear ()
+		public override void Clear()
 		{
 			Value = null;
 		}

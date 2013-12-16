@@ -26,10 +26,10 @@
 // USA
 //
 
-using System.Collections;
 using System;
 
-namespace TagLib.Mpeg {
+namespace TagLib.Mpeg
+{
 	/// <summary>
 	///    This structure provides information about a variable bitrate MPEG
 	///    audio stream.
@@ -54,11 +54,11 @@ namespace TagLib.Mpeg {
 		private bool present;
 		
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Fields
-		
+
 		/// <summary>
 		///    Contains te Xing identifier.
 		/// </summary>
@@ -66,16 +66,16 @@ namespace TagLib.Mpeg {
 		///    "Xing"
 		/// </value>
 		public static readonly ReadOnlyByteVector FileIdentifier = "Xing";
-		
+
 		/// <summary>
 		///    An empty and unset Xing header.
 		/// </summary>
-		public static readonly XingHeader Unknown = new XingHeader (0, 0);
+		public static readonly XingHeader Unknown = new XingHeader(0, 0);
 		
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 		
 		/// <summary>
@@ -91,7 +91,7 @@ namespace TagLib.Mpeg {
 		///    A <see cref="uint" /> value specifying the stream size of
 		///    the audio represented by the new instance.
 		/// </param>
-		private XingHeader (uint frame, uint size)
+		private XingHeader(uint frame, uint size)
 		{
 			this.frames = frame;
 			this.size = size;
@@ -113,37 +113,44 @@ namespace TagLib.Mpeg {
 		///    <paramref name="data" /> does not start with <see
 		///    cref="FileIdentifier" />.
 		/// </exception>
-		public XingHeader (ByteVector data)
+		public XingHeader(ByteVector data)
 		{
 			if (data == null)
-				throw new ArgumentNullException ("data");
+				throw new ArgumentNullException("data");
 			
 			// Check to see if a valid Xing header is available.
-			if (!data.StartsWith (FileIdentifier))
-				throw new CorruptFileException (
-					"Not a valid Xing header");
+			if (!data.StartsWith(FileIdentifier))
+				throw new CorruptFileException("Not a valid Xing header");
 			
 			int position = 8;
-			
-			if ((data [7] & 0x01) != 0) {
-				frames = data.Mid (position, 4).ToUInt ();
+
+			if ((data[7] & 0x01) != 0)
+			{
+				frames = data.Mid(position, 4).ToUInt();
 				position += 4;
-			} else
+			}
+			else
+			{
 				frames = 0;
-			
-			if ((data [7] & 0x02) != 0) {
-				size = data.Mid (position, 4).ToUInt ();
+			}
+
+			if ((data[7] & 0x02) != 0)
+			{
+				size = data.Mid(position, 4).ToUInt();
 				position += 4;
-			} else
+			}
+			else
+			{
 				size = 0;
+			}
 			
 			present = true;
 		}
 		
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 		
 		/// <summary>
@@ -154,8 +161,9 @@ namespace TagLib.Mpeg {
 		///    A <see cref="uint" /> value containing the number of
 		///    frames in the file, or <c>0</c> if not specified.
 		/// </value>
-		public uint TotalFrames {
-			get {return frames;}
+		public uint TotalFrames
+		{
+			get { return frames; }
 		}
 		
 		/// <summary>
@@ -166,8 +174,9 @@ namespace TagLib.Mpeg {
 		///    A <see cref="uint" /> value containing the total size of
 		///    the file, or <c>0</c> if not specified.
 		/// </value>
-		public uint TotalSize {
-			get {return size;}
+		public uint TotalSize
+		{
+			get { return size; }
 		}
 		
 		/// <summary>
@@ -178,14 +187,15 @@ namespace TagLib.Mpeg {
 		///    A <see cref="bool" /> value indicating whether or not the
 		///    current instance represents a physical Xing header.
 		/// </value>
-		public bool Present {
-			get {return present;}
+		public bool Present
+		{
+			get { return present; }
 		}
 		
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Static Methods
 		
 		/// <summary>
@@ -204,12 +214,10 @@ namespace TagLib.Mpeg {
 		///    A <see cref="int" /> value indicating the offset in an
 		///    MPEG audio packet at which the Xing header would appear.
 		/// </returns>
-		public static int XingHeaderOffset (Version version,
-		                                    ChannelMode channelMode)
+		public static int XingHeaderOffset(Version version, ChannelMode channelMode)
 		{
-			bool single_channel =
-				channelMode == ChannelMode.SingleChannel;
-			
+			bool single_channel = (channelMode == ChannelMode.SingleChannel);
+
 			if (version == Version.Version1)
 				return single_channel ? 0x15 : 0x24;
 			else

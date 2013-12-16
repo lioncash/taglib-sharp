@@ -21,7 +21,6 @@
 // USA
 //
 
-using System.Collections.Generic;
 using System;
 
 namespace TagLib.Flac
@@ -109,20 +108,19 @@ namespace TagLib.Flac
 		/// <exception cref="CorruptFileException">
 		///    <paramref name="data" /> contains less than 4 bytes.
 		/// </exception>
-		public BlockHeader (ByteVector data)
+		public BlockHeader(ByteVector data)
 		{
 			if (data == null)
-				throw new ArgumentNullException ("data");
+				throw new ArgumentNullException("data");
 
 			if (data.Count < Size)
-				throw new CorruptFileException (
-					"Not enough data in Flac header.");
-			
+				throw new CorruptFileException("Not enough data in Flac header.");
+
 			block_type = (BlockType) (data[0] & 0x7f);
 			is_last_block = (data[0] & 0x80) != 0;
-			block_size = data.Mid (1,3).ToUInt ();
+			block_size = data.Mid(1, 3).ToUInt();
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="BlockHeader" /> for a specified block type and size.
@@ -135,13 +133,13 @@ namespace TagLib.Flac
 		///    A <see cref="uint" /> value containing the block data
 		///    size minus the size of the header.
 		/// </param>
-		public BlockHeader (BlockType type, uint blockSize)
+		public BlockHeader(BlockType type, uint blockSize)
 		{
-			block_type    = type;
+			block_type = type;
 			is_last_block = false;
-			block_size    = blockSize;
+			block_size = blockSize;
 		}
-		
+
 		/// <summary>
 		///    Renderes the current instance as a raw Flac block header.
 		/// </summary>
@@ -153,13 +151,13 @@ namespace TagLib.Flac
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered header.
 		/// </returns>
-		public ByteVector Render (bool isLastBlock)
+		public ByteVector Render(bool isLastBlock)
 		{
-			ByteVector data = ByteVector.FromUInt (block_size);
-			data [0] = (byte)(block_type + (isLastBlock ? 0x80 : 0));
+			ByteVector data = ByteVector.FromUInt(block_size);
+			data[0] = (byte) (block_type + (isLastBlock ? 0x80 : 0));
 			return data;
 		}
-		
+
 		/// <summary>
 		///    Gets the type of block described by the current instance.
 		/// </summary>
@@ -167,10 +165,11 @@ namespace TagLib.Flac
 		///    A <see cref="BlockType" /> value describing the block
 		///    type.
 		/// </value>
-		public BlockType BlockType {
-			get {return block_type;}
+		public BlockType BlockType
+		{
+			get { return block_type; }
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not the block is the last in the file.
 		/// </summary>
@@ -178,10 +177,11 @@ namespace TagLib.Flac
 		///    <see langword="true" /> if the block is the last in the
 		///    file; otherwise <see langword="false" />.
 		/// </value>
-		public bool IsLastBlock {
-			get {return is_last_block;}
+		public bool IsLastBlock
+		{
+			get { return is_last_block; }
 		}
-		
+
 		/// <summary>
 		///    Gets the size of the block described by the current
 		///    instance, minus the block header.
@@ -190,8 +190,9 @@ namespace TagLib.Flac
 		///    A <see cref="uint" /> value containing the size of the
 		///    block, minus the header.
 		/// </value>
-		public uint BlockSize {
-			get {return block_size;}
+		public uint BlockSize
+		{
+			get { return block_size; }
 		}
 	}
 }

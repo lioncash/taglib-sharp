@@ -36,7 +36,7 @@ namespace TagLib.Riff
 		///    Constructs and initializes a new instance of <see
 		///    cref="InfoTag" /> with no contents.
 		/// </summary>
-		public InfoTag () : base ()
+		public InfoTag()
 		{
 		}
 		
@@ -49,10 +49,10 @@ namespace TagLib.Riff
 		///    A <see cref="ByteVector"/> containing a raw RIFF list to
 		///    read into the new instance.
 		/// </param>
-		public InfoTag (ByteVector data) : base (data)
+		public InfoTag(ByteVector data) : base(data)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="InfoTag" /> by reading the contents of a raw RIFF
@@ -79,12 +79,12 @@ namespace TagLib.Riff
 		///    <paramref name="position" /> is less than zero or greater
 		///    than the size of the file.
 		/// </exception>
-		public InfoTag (TagLib.File file, long position, int length)
-			: base (file, position, length)
+		public InfoTag(TagLib.File file, long position, int length)
+			: base(file, position, length)
 		{
 		}
-		
-#endregion
+
+		#endregion
 
 
 
@@ -99,7 +99,7 @@ namespace TagLib.Riff
 		/// </returns>
 		public override ByteVector RenderEnclosed ()
 		{
-		return RenderEnclosed ("INFO");
+			return RenderEnclosed ("INFO");
 		}
 		
 		#endregion
@@ -114,8 +114,9 @@ namespace TagLib.Riff
 		/// <value>
 		///    Always <see cref="TagLib.TagTypes.RiffInfo" />.
 		/// </value>
-		public override TagTypes TagTypes {
-			get {return TagTypes.RiffInfo;}
+		public override TagTypes TagTypes
+		{
+			get { return TagTypes.RiffInfo; }
 		}
 
 		/// <summary>
@@ -130,17 +131,22 @@ namespace TagLib.Riff
 		/// <remarks>
 		///    This property is implemented using the "INAM" item.
 		/// </remarks>
-		public override string Title {
-			get {
-				foreach (string s in GetValuesAsStrings ("INAM"))
-					if (!string.IsNullOrEmpty (s))
+		public override string Title
+		{
+			get
+			{
+				foreach (string s in GetValuesAsStrings("INAM"))
+				{
+					if (!string.IsNullOrEmpty(s))
 						return s;
-				
+				}
+
 				return null;
 			}
-			set {SetValue ("INAM", value);}
+
+			set { SetValue("INAM", value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the performers or artists who performed in
 		///    the media described by the current instance.
@@ -154,9 +160,10 @@ namespace TagLib.Riff
 		/// <remarks>
 		///    This property is implemented using the "ISTR" item.
 		/// </remarks>
-		public override string [] Performers {
-			get {return GetValuesAsStrings ("ISTR");}
-			set {SetValue ("ISTR", value);}
+		public override string[] Performers
+		{
+			get { return GetValuesAsStrings("ISTR"); }
+			set { SetValue("ISTR", value); }
 		}
 
 		/// <summary>
@@ -173,9 +180,10 @@ namespace TagLib.Riff
 		/// <remarks>
 		///    This property is implemented using the "IART" item.
 		/// </remarks>
-		public override string [] AlbumArtists {
-			get {return GetValuesAsStrings ("IART");}
-			set {SetValue ("IART", value);}
+		public override string[] AlbumArtists
+		{
+			get { return GetValuesAsStrings("IART"); }
+			set { SetValue("IART", value); }
 		}
 
 		/// <summary>
@@ -190,9 +198,10 @@ namespace TagLib.Riff
 		/// <remarks>
 		///    This property is implemented using the "IWRI" item.
 		/// </remarks>
-		public override string [] Composers {
-			get {return GetValuesAsStrings ("IWRI");}
-			set {SetValue ("IWRI", value);}
+		public override string[] Composers
+		{
+			get { return GetValuesAsStrings("IWRI"); }
+			set { SetValue("IWRI", value); }
 		}
 
 		/// <summary>
@@ -207,15 +216,19 @@ namespace TagLib.Riff
 		/// <remarks>
 		///    This property is implemented using the "ICMT" item.
 		/// </remarks>
-		public override string Comment {
-			get {
-				foreach (string s in GetValuesAsStrings ("ICMT"))
-					if (!string.IsNullOrEmpty (s))
+		public override string Comment
+		{
+			get
+			{
+				foreach (string s in GetValuesAsStrings("ICMT"))
+				{
+					if (!string.IsNullOrEmpty(s))
 						return s;
-				
+				}
+
 				return null;
 			}
-			set {SetValue ("ICMT", value);}
+			set { SetValue("ICMT", value); }
 		}
 
 		/// <summary>
@@ -230,9 +243,10 @@ namespace TagLib.Riff
 		/// <remarks>
 		///    This property is implemented using the "IGNR" item.
 		/// </remarks>
-		public override string [] Genres {
-			get {return GetValuesAsStrings ("IGNR");}
-			set {SetValue ("IGNR", value);}
+		public override string[] Genres
+		{
+			get { return GetValuesAsStrings("IGNR"); }
+			set { SetValue("IGNR", value); }
 		}
 
 		/// <summary>
@@ -247,9 +261,10 @@ namespace TagLib.Riff
 		/// <remarks>
 		///    This property is implemented using the "ICRD" item.
 		/// </remarks>
-		public override uint Year {
-			get {return GetValueAsUInt ("ICRD");}
-			set {SetValue ("ICRD", value);}
+		public override uint Year
+		{
+			get { return GetValueAsUInt("ICRD"); }
+			set { SetValue("ICRD", value); }
 		}
 
 		/// <summary>
@@ -264,9 +279,10 @@ namespace TagLib.Riff
 		/// <remarks>
 		///    This property is implemented using the "IPRT" item.
 		/// </remarks>
-		public override uint Track {
-			get {return GetValueAsUInt ("IPRT");}
-			set {SetValue ("IPRT", value);}
+		public override uint Track
+		{
+			get { return GetValueAsUInt("IPRT"); }
+			set { SetValue("IPRT", value); }
 		}
 
 		/// <summary>
@@ -281,9 +297,10 @@ namespace TagLib.Riff
 		/// <remarks>
 		///    This property is implemented using the "IFRM" item.
 		/// </remarks>
-		public override uint TrackCount {
-			get {return GetValueAsUInt ("IFRM");}
-			set {SetValue ("IFRM", value);}
+		public override uint TrackCount
+		{
+			get { return GetValueAsUInt("IFRM"); }
+			set { SetValue("IFRM", value); }
 		}
 
 		/// <summary>
@@ -298,16 +315,21 @@ namespace TagLib.Riff
 		/// <remarks>
 		///    This property is implemented using the "ICOP" item.
 		/// </remarks>
-		public override string Copyright {
-			get {
-				foreach (string s in GetValuesAsStrings ("ICOP"))
-					if (!string.IsNullOrEmpty (s))
+		public override string Copyright
+		{
+			get
+			{
+				foreach (string s in GetValuesAsStrings("ICOP"))
+				{
+					if (!string.IsNullOrEmpty(s))
 						return s;
-				
+				}
+
 				return null;
 			}
-			set {SetValue ("ICOP", value);}
+			set { SetValue("ICOP", value); }
 		}
+
 		#endregion
 	}
 }

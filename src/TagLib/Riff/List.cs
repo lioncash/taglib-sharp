@@ -37,13 +37,13 @@ namespace TagLib.Riff {
 	[ComVisible(false)]
 	public class List : Dictionary <ByteVector,ByteVectorCollection>
 	{
-#region Constructors
+		#region Constructors
 		
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="List" /> with no contents.
 		/// </summary>
-		public List ()
+		public List()
 		{
 		}
 		
@@ -56,14 +56,14 @@ namespace TagLib.Riff {
 		///    A <see cref="ByteVector"/> containing a raw RIFF list to
 		///    read into the new instance.
 		/// </param>
-		public List (ByteVector data)
+		public List(ByteVector data)
 		{
 			if (data == null)
 				throw new ArgumentNullException ("data");
 			
 			Parse (data);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="List" /> by reading the contents of a raw RIFF list
@@ -89,23 +89,21 @@ namespace TagLib.Riff {
 		///    <paramref name="position" /> is less than zero or greater
 		///    than the size of the file.
 		/// </exception>
-		public List (TagLib.File file, long position, int length)
+		public List(TagLib.File file, long position, int length)
 		{
 			if (file == null)
-				throw new ArgumentNullException ("file");
-			
+				throw new ArgumentNullException("file");
+
 			if (length < 0)
-				throw new ArgumentOutOfRangeException (
-					"length");
-			
+				throw new ArgumentOutOfRangeException("length");
+
 			if (position < 0 || position > file.Length - length)
-				throw new ArgumentOutOfRangeException (
-					"position");
-			
-			file.Seek (position);
-			Parse (file.ReadBlock (length));
+				throw new ArgumentOutOfRangeException("position");
+
+			file.Seek(position);
+			Parse(file.ReadBlock(length));
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="List" /> from a specified serialization info and
@@ -124,17 +122,16 @@ namespace TagLib.Riff {
 		///    cref="List" /> implements the <see cref="ISerializable"
 		///    /> interface.
 		/// </remarks>
-		protected List (SerializationInfo info,
-		                StreamingContext context)
-			: base (info, context)
+		protected List(SerializationInfo info, StreamingContext context) : base(info, context)
 		{
 		}
-#endregion
+
+		#endregion
 		
 		
 		
-#region Public Methods
-		
+		#region Public Methods
+
 		/// <summary>
 		///    Renders the current instance as a raw RIFF list.
 		/// </summary>
@@ -142,27 +139,30 @@ namespace TagLib.Riff {
 		///    A <see cref="ByteVector"/> object containing the rendered
 		///    version of the current instance.
 		/// </returns>
-		public ByteVector Render ()
+		public ByteVector Render()
 		{
-			ByteVector data = new ByteVector ();
-			
+			ByteVector data = new ByteVector();
+
 			foreach (ByteVector id in Keys)
-				foreach (ByteVector value in this [id]) {
+			{
+				foreach (ByteVector value in this[id])
+				{
 					if (value.Count == 0)
 						continue;
-					
-					data.Add (id);
-					data.Add (ByteVector.FromUInt (
+
+					data.Add(id);
+					data.Add(ByteVector.FromUInt(
 						(uint) value.Count, false));
-					data.Add (value);
-					
-					if (value.Count % 2 == 1)
-						data.Add (0);
+					data.Add(value);
+
+					if (value.Count%2 == 1)
+						data.Add(0);
 				}
-			
+			}
+
 			return data;
 		}
-		
+
 		/// <summary>
 		///    Renders the current instance enclosed in an item with a
 		///    specified ID.
@@ -181,28 +181,26 @@ namespace TagLib.Riff {
 		/// <exception cref="ArgumentException">
 		///    <paramref name="id" /> isn't exactly four bytes long.
 		/// </exception>
-		public ByteVector RenderEnclosed (ByteVector id)
+		public ByteVector RenderEnclosed(ByteVector id)
 		{
 			if (id == null)
-				throw new ArgumentNullException ("id");
-			
+				throw new ArgumentNullException("id");
+
 			if (id.Count != 4)
-				throw new ArgumentException (
-					"ID must be 4 bytes long.", "id");
-			
-			ByteVector data = Render ();
-			
+				throw new ArgumentException("ID must be 4 bytes long.", "id");
+
+			ByteVector data = Render();
+
 			if (data.Count <= 8)
-				return new ByteVector ();
-			
-			ByteVector header = new ByteVector ("LIST");
-			header.Add (ByteVector.FromUInt (
-				(uint) (data.Count + 4), false));
-			header.Add (id);
-			data.Insert (0, header);
+				return new ByteVector();
+
+			ByteVector header = new ByteVector("LIST");
+			header.Add(ByteVector.FromUInt((uint) (data.Count + 4), false));
+			header.Add(id);
+			data.Insert(0, header);
 			return data;
 		}
-		
+
 		/// <summary>
 		///    Gets the values for a specified item in the current
 		///    instance as a <see cref="ByteVectorCollection" />.
@@ -221,21 +219,21 @@ namespace TagLib.Riff {
 		/// <exception cref="ArgumentException">
 		///    <paramref name="id" /> isn't exactly four bytes long.
 		/// </exception>
-		public ByteVectorCollection GetValues (ByteVector id)
+		public ByteVectorCollection GetValues(ByteVector id)
 		{
 			if (id == null)
-				throw new ArgumentNullException ("id");
-			
+				throw new ArgumentNullException("id");
+
 			if (id.Count != 4)
-				throw new ArgumentException (
-					"ID must be 4 bytes long.", "id");
-			
+				throw new ArgumentException("ID must be 4 bytes long.", "id");
+
 			ByteVectorCollection value;
-			
-			return TryGetValue (id, out value) ?
-				value : new ByteVectorCollection ();
+
+			return TryGetValue(id, out value)
+				? value
+				: new ByteVectorCollection();
 		}
-		
+
 		/// <summary>
 		///    Gets the values for a specified item in the current
 		///    instance as a <see cref="string[]" />.
@@ -254,38 +252,38 @@ namespace TagLib.Riff {
 		/// <exception cref="ArgumentException">
 		///    <paramref name="id" /> isn't exactly four bytes long.
 		/// </exception>
-		public string [] GetValuesAsStrings (ByteVector id)
+		public string[] GetValuesAsStrings(ByteVector id)
 		{
 			if (id == null)
-				throw new ArgumentNullException ("id");
-			
+				throw new ArgumentNullException("id");
+
 			if (id.Count != 4)
-				throw new ArgumentException (
-					"ID must be 4 bytes long.", "id");
-			
-			ByteVectorCollection values = GetValues (id);
-			
-			string [] result = new string [values.Count];
-			
-			for (int i = 0; i < result.Length; i ++) {
-				ByteVector data = values [i];
-				
-				if (data == null) {
-					result [i] = string.Empty;
+				throw new ArgumentException("ID must be 4 bytes long.", "id");
+
+			ByteVectorCollection values = GetValues(id);
+
+			string[] result = new string[values.Count];
+
+			for (int i = 0; i < result.Length; i ++)
+			{
+				ByteVector data = values[i];
+
+				if (data == null)
+				{
+					result[i] = string.Empty;
 					continue;
 				}
-				
+
 				int length = data.Count;
-				while (length > 0 && data [length - 1] == 0)
+				while (length > 0 && data[length - 1] == 0)
 					length --;
-				
-				result [i] = data
-					.ToString (StringType.UTF8, 0, length);
+
+				result[i] = data.ToString(StringType.UTF8, 0, length);
 			}
-			
+
 			return result;
 		}
-		
+
 		/// <summary>
 		///    Gets the values for a specified item in the current
 		///    instance as a <see cref="StringCollection" />.
@@ -305,18 +303,17 @@ namespace TagLib.Riff {
 		///    <paramref name="id" /> isn't exactly four bytes long.
 		/// </exception>
 		[Obsolete("Use GetValuesAsStrings(ByteVector)")]
-		public StringCollection GetValuesAsStringCollection (ByteVector id)
+		public StringCollection GetValuesAsStringCollection(ByteVector id)
 		{
 			if (id == null)
-				throw new ArgumentNullException ("id");
-			
+				throw new ArgumentNullException("id");
+
 			if (id.Count != 4)
-				throw new ArgumentException (
-					"ID must be 4 bytes long.", "id");
-			
-			return new StringCollection (GetValuesAsStrings (id));
+				throw new ArgumentException("ID must be 4 bytes long.", "id");
+
+			return new StringCollection(GetValuesAsStrings(id));
 		}
-		
+
 		/// <summary>
 		///    Gets the value for a specified item in the current
 		///    instance as a <see cref="uint"/>.
@@ -336,24 +333,24 @@ namespace TagLib.Riff {
 		/// <exception cref="ArgumentException">
 		///    <paramref name="id" /> isn't exactly four bytes long.
 		/// </exception>
-		public uint GetValueAsUInt (ByteVector id)
+		public uint GetValueAsUInt(ByteVector id)
 		{
 			if (id == null)
-				throw new ArgumentNullException ("id");
-			
+				throw new ArgumentNullException("id");
+
 			if (id.Count != 4)
-				throw new ArgumentException (
-					"ID must be 4 bytes long.", "id");
-			
-			foreach (string text in GetValuesAsStrings (id)) {
+				throw new ArgumentException("ID must be 4 bytes long.", "id");
+
+			foreach (string text in GetValuesAsStrings(id))
+			{
 				uint value;
-				if (uint.TryParse (text, out value))
+				if (uint.TryParse(text, out value))
 					return value;
 			}
-			
+
 			return 0;
 		}
-		
+
 		/// <summary>
 		///    Sets the value for a specified item in the current
 		///    instance to the contents of a <see
@@ -374,24 +371,22 @@ namespace TagLib.Riff {
 		/// <exception cref="ArgumentException">
 		///    <paramref name="id" /> isn't exactly four bytes long.
 		/// </exception>
-		public void SetValue (ByteVector id,
-		                      IEnumerable<ByteVector> values)
+		public void SetValue(ByteVector id, IEnumerable<ByteVector> values)
 		{
 			if (id == null)
-				throw new ArgumentNullException ("id");
-			
+				throw new ArgumentNullException("id");
+
 			if (id.Count != 4)
-				throw new ArgumentException (
-					"ID must be 4 bytes long.", "id");
-			
+				throw new ArgumentException("ID must be 4 bytes long.", "id");
+
 			if (values == null)
-				RemoveValue (id);
-			else if (ContainsKey (id))
-				this [id] = new ByteVectorCollection (values);
+				RemoveValue(id);
+			else if (ContainsKey(id))
+				this[id] = new ByteVectorCollection(values);
 			else
-				Add (id, new ByteVectorCollection (values));
+				Add(id, new ByteVectorCollection(values));
 		}
-		
+
 		/// <summary>
 		///    Sets the value for a specified item in the current
 		///    instance to the contents of a <see cref="ByteVector[]"
@@ -411,21 +406,20 @@ namespace TagLib.Riff {
 		/// <exception cref="ArgumentException">
 		///    <paramref name="id" /> isn't exactly four bytes long.
 		/// </exception>
-		public void SetValue (ByteVector id, params ByteVector [] values)
+		public void SetValue(ByteVector id, params ByteVector[] values)
 		{
 			if (id == null)
-				throw new ArgumentNullException ("id");
-			
+				throw new ArgumentNullException("id");
+
 			if (id.Count != 4)
-				throw new ArgumentException (
-					"ID must be 4 bytes long.", "id");
-			
+				throw new ArgumentException("ID must be 4 bytes long.", "id");
+
 			if (values == null || values.Length == 0)
-				RemoveValue (id);
+				RemoveValue(id);
 			else
-				SetValue (id, values as IEnumerable<ByteVector>);
+				SetValue(id, values as IEnumerable<ByteVector>);
 		}
-		
+
 		/// <summary>
 		///    Sets the value for a specified item in the current
 		///    instance to the value of a <see cref="uint"/>.
@@ -444,22 +438,21 @@ namespace TagLib.Riff {
 		/// <exception cref="ArgumentException">
 		///    <paramref name="id" /> isn't exactly four bytes long.
 		/// </exception>
-		public void SetValue (ByteVector id, uint value)
+		public void SetValue(ByteVector id, uint value)
 		{
 			if (id == null)
-				throw new ArgumentNullException ("id");
-			
+				throw new ArgumentNullException("id");
+
 			if (id.Count != 4)
-				throw new ArgumentException (
-					"ID must be 4 bytes long.", "id");
-			
+				throw new ArgumentException("ID must be 4 bytes long.", "id");
+
 			if (value == 0)
-				RemoveValue (id);
+				RemoveValue(id);
 			else
-				SetValue (id, value.ToString (
+				SetValue(id, value.ToString(
 					CultureInfo.InvariantCulture));
 		}
-		
+
 		/// <summary>
 		///    Sets the value for a specified item in the current
 		///    instance to the contents of a <see
@@ -480,37 +473,37 @@ namespace TagLib.Riff {
 		/// <exception cref="ArgumentException">
 		///    <paramref name="id" /> isn't exactly four bytes long.
 		/// </exception>
-		public void SetValue (ByteVector id, IEnumerable<string> values)
+		public void SetValue(ByteVector id, IEnumerable<string> values)
 		{
 			if (id == null)
-				throw new ArgumentNullException ("id");
-			
+				throw new ArgumentNullException("id");
+
 			if (id.Count != 4)
-				throw new ArgumentException (
-					"ID must be 4 bytes long.", "id");
-			
-			if (values == null) {
-				RemoveValue (id);
+				throw new ArgumentException("ID must be 4 bytes long.", "id");
+
+			if (values == null)
+			{
+				RemoveValue(id);
 				return;
 			}
-			
-			ByteVectorCollection l = new ByteVectorCollection ();
-			foreach (string value in values) {
-				if (string.IsNullOrEmpty (value))
+
+			ByteVectorCollection l = new ByteVectorCollection();
+			foreach (string value in values)
+			{
+				if (string.IsNullOrEmpty(value))
 					continue;
-				
-				ByteVector data = ByteVector.FromString (value,
-					StringType.UTF8);
-				data.Add (0);
-				l.Add (data);
+
+				ByteVector data = ByteVector.FromString(value, StringType.UTF8);
+				data.Add(0);
+				l.Add(data);
 			}
-			
+
 			if (l.Count == 0)
-				RemoveValue (id);
+				RemoveValue(id);
 			else
-				SetValue (id, l);
+				SetValue(id, l);
 		}
-		
+
 		/// <summary>
 		///    Sets the value for a specified item in the current
 		///    instance to the contents of a <see cref="string[]" />.
@@ -529,21 +522,20 @@ namespace TagLib.Riff {
 		/// <exception cref="ArgumentException">
 		///    <paramref name="id" /> isn't exactly four bytes long.
 		/// </exception>
-		public void SetValue (ByteVector id, params string [] values)
+		public void SetValue(ByteVector id, params string[] values)
 		{
 			if (id == null)
-				throw new ArgumentNullException ("id");
-			
+				throw new ArgumentNullException("id");
+
 			if (id.Count != 4)
-				throw new ArgumentException (
-					"ID must be 4 bytes long.", "id");
-			
+				throw new ArgumentException("ID must be 4 bytes long.", "id");
+
 			if (values == null || values.Length == 0)
-				RemoveValue (id);
+				RemoveValue(id);
 			else
-				SetValue (id, values as IEnumerable<string>);
+				SetValue(id, values as IEnumerable<string>);
 		}
-		
+
 		/// <summary>
 		///    Removes the item with the specified ID from the current
 		///    instance.
@@ -558,25 +550,24 @@ namespace TagLib.Riff {
 		/// <exception cref="ArgumentException">
 		///    <paramref name="id" /> isn't exactly four bytes long.
 		/// </exception>
-		public void RemoveValue (ByteVector id)
+		public void RemoveValue(ByteVector id)
 		{
 			if (id == null)
-				throw new ArgumentNullException ("id");
-			
+				throw new ArgumentNullException("id");
+
 			if (id.Count != 4)
-				throw new ArgumentException (
-					"ID must be 4 bytes long.", "id");
-			
-			if (ContainsKey (id))
-				Remove (id);
+				throw new ArgumentException("ID must be 4 bytes long.", "id");
+
+			if (ContainsKey(id))
+				Remove(id);
 		}
+
+		#endregion
 		
-#endregion
 		
 		
-		
-#region Private Methods
-		
+		#region Private Methods
+
 		/// <summary>
 		///    Populates the current instance by reading in the contents
 		///    of a raw RIFF list stored in a <see cref="ByteVector" />
@@ -586,25 +577,26 @@ namespace TagLib.Riff {
 		///    A <see cref="ByteVector"/> containing a raw RIFF list to
 		///    read into the current instance.
 		/// </param>
-		private void Parse (ByteVector data)
+		private void Parse(ByteVector data)
 		{
 			int offset = 0;
-			while (offset + 8 < data.Count) {
-				ByteVector id = data.Mid (offset, 4);
-				int length = (int) data.Mid (offset + 4, 4)
-					.ToUInt (false);
-				
-				if (!ContainsKey (id))
-					Add (id, new ByteVectorCollection ());
-				
-				this [id].Add (data.Mid (offset + 8, length));
-				
-				if (length % 2 == 1)
+			while (offset + 8 < data.Count)
+			{
+				ByteVector id = data.Mid(offset, 4);
+				int length = (int) data.Mid(offset + 4, 4).ToUInt(false);
+
+				if (!ContainsKey(id))
+					Add(id, new ByteVectorCollection());
+
+				this[id].Add(data.Mid(offset + 8, length));
+
+				if (length%2 == 1)
 					length ++;
-				
+
 				offset += 8 + length;
 			}
 		}
-#endregion
+
+		#endregion
 	}
 }

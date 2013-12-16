@@ -23,7 +23,8 @@
 
 using System;
 
-namespace TagLib.Mpeg4 {
+namespace TagLib.Mpeg4
+{
 	/// <summary>
 	///    This class extends <see cref="Box" /> to provide an
 	///    implementation of a ISO/IEC 14496-12 FullBox.
@@ -47,7 +48,7 @@ namespace TagLib.Mpeg4 {
 		
 		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="FullBox" /> with a provided header and handler by
@@ -68,19 +69,17 @@ namespace TagLib.Mpeg4 {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="file" /> is <see langword="null" />.
 		/// </exception>
-		protected FullBox (BoxHeader header, TagLib.File file,
-		                   IsoHandlerBox handler)
-			: base (header, handler)
+		protected FullBox(BoxHeader header, TagLib.File file, IsoHandlerBox handler) : base(header, handler)
 		{
 			if (file == null)
-				throw new ArgumentNullException ("file");
-			
-			file.Seek (base.DataPosition);
-			ByteVector header_data = file.ReadBlock (4);
-			version = header_data [0];
-			flags = header_data.Mid (1, 3).ToUInt ();
+				throw new ArgumentNullException("file");
+
+			file.Seek(base.DataPosition);
+			ByteVector header_data = file.ReadBlock(4);
+			version = header_data[0];
+			flags = header_data.Mid(1, 3).ToUInt();
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="FullBox" /> with a provided header, version, and
@@ -98,13 +97,12 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="byte" /> value containing the flags for the
 		///    new instance.
 		/// </param>
-		protected FullBox (BoxHeader header, byte version, uint flags)
-			: base (header)
+		protected FullBox(BoxHeader header, byte version, uint flags) : base(header)
 		{
 			this.version = version;
 			this.flags = flags;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="FullBox" /> with a provided header, version, and
@@ -129,17 +127,16 @@ namespace TagLib.Mpeg4 {
 		/// <exception cref="ArgumentException">
 		///    <paramref name="type" /> isn't exactly 4 bytes long.
 		/// </exception>
-		protected FullBox (ByteVector type, byte version, uint flags)
-			: this (new BoxHeader (type), version, flags)
+		protected FullBox(ByteVector type, byte version, uint flags) : this(new BoxHeader(type), version, flags)
 		{
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the position of the data contained in the current
 		///    instance, after any box specific headers.
@@ -148,10 +145,11 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="long" /> value containing the position of
 		///    the data contained in the current instance.
 		/// </value>
-		protected override long DataPosition {
-			get {return base.DataPosition + 4;}
+		protected override long DataPosition
+		{
+			get { return base.DataPosition + 4; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the version number of the current instance.
 		/// </summary>
@@ -159,11 +157,12 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="byte" /> value containing the version
 		///    number of the current instance.
 		/// </value>
-		public uint Version {
-			get {return version;}
-			set {version = (byte) value;}
+		public uint Version
+		{
+			get { return version; }
+			set { version = (byte) value; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the flags that apply to the current
 		///    instance.
@@ -172,17 +171,18 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="uint" /> value containing the flags that
 		///    apply to the current instance.
 		/// </value>
-		public uint Flags {
-			get {return flags;}
-			set {flags = value;}
+		public uint Flags
+		{
+			get { return flags; }
+			set { flags = value; }
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Protected Methods
-		
+
 		/// <summary>
 		///    Renders the current instance, including its children, to
 		///    a new <see cref="ByteVector" /> object, preceeding the
@@ -196,15 +196,15 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered version of the current instance.
 		/// </returns>
-		protected override ByteVector Render (ByteVector topData)
+		protected override ByteVector Render(ByteVector topData)
 		{
-			ByteVector output = new ByteVector ((byte) version);
-			output.Add (ByteVector.FromUInt (flags).Mid (1,3));
-			output.Add (topData);
-			
-			return base.Render (output);
+			ByteVector output = new ByteVector(version);
+			output.Add(ByteVector.FromUInt(flags).Mid(1, 3));
+			output.Add(topData);
+
+			return base.Render(output);
 		}
-		
+
 		#endregion
 	}
 }

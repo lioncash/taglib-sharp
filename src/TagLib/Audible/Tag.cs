@@ -50,7 +50,7 @@ namespace TagLib.Audible
 		{
 			Clear ();
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Tag" /> by reading the contents from a specified
@@ -75,11 +75,11 @@ namespace TagLib.Audible
 		///    The file does not contain <see cref="FileIdentifier" />
 		///    at the given position.
 		/// </exception>
-		public Tag (File file, long position)
+		public Tag(File file, long position)
 		{
 			// TODO: can we read from file
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Tag" /> by reading the contents from a specified
@@ -95,16 +95,15 @@ namespace TagLib.Audible
 		///    <paramref name="data" /> is less than 128 bytes or does
 		///    not start with <see cref="FileIdentifier" />.
 		/// </exception>
-		public Tag (ByteVector data)
+		public Tag(ByteVector data)
 		{
-			
 			if (data == null)
-				throw new ArgumentNullException ("data");
-			
-			Clear ();
-			Parse (data);
+				throw new ArgumentNullException("data");
+
+			Clear();
+			Parse(data);
 		}
-		
+
 		#endregion
 		
 		#region Private Methods
@@ -123,53 +122,57 @@ namespace TagLib.Audible
 		/// </exception>
 		private void Parse (ByteVector data)
 		{
-			String currentKey, currentValue;
+			string currentKey, currentValue;
 			int keyLen, valueLen;
-			
+
 			try
 			{
 				do
 				{
 					keyLen = (int) data.ToUInt(true);
-					data.RemoveRange (0, 4);
+					data.RemoveRange(0, 4);
 					valueLen = (int) data.ToUInt(true);
-					data.RemoveRange (0, 4);
-					currentKey = data.ToString ( TagLib.StringType.UTF8, 0, keyLen );
-					data.RemoveRange (0, keyLen);
-					currentValue = data.ToString ( TagLib.StringType.UTF8, 0, valueLen );
-					data.RemoveRange (0, valueLen);
-					
-					tags.Add( new KeyValuePair<string, string>(currentKey, currentValue) );
-					
+					data.RemoveRange(0, 4);
+					currentKey = data.ToString(TagLib.StringType.UTF8, 0, keyLen);
+					data.RemoveRange(0, keyLen);
+					currentValue = data.ToString(TagLib.StringType.UTF8, 0, valueLen);
+					data.RemoveRange(0, valueLen);
+
+					tags.Add(new KeyValuePair<string, string>(currentKey, currentValue));
+
 					//StringHandle (currentKey, currentValue);
-					
+
 					// if it is not the last item remove the end byte (null terminated)
 					if (data.Count != 0)
-						data.RemoveRange(0,1);
-				}
-				while (data.Count >= 4);
+						data.RemoveRange(0, 1);
+				} while (data.Count >= 4);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				//
 			}
-			
+
 			if (data.Count != 0)
 				throw new CorruptFileException();
 		}
 
-		void setTag (string tagName, string value) {
-			for (int i = 0; i < tags.Count; i ++) {
-				if(tags[i].Key == tagName)
-					tags [i] = new KeyValuePair<string, string> (tags [i].Key, value);
+		private void setTag(string tagName, string value)
+		{
+			for (int i = 0; i < tags.Count; i ++)
+			{
+				if (tags[i].Key == tagName)
+					tags[i] = new KeyValuePair<string, string>(tags[i].Key, value);
 			}
 		}
 
-		private string getTag(string tagName){
-			foreach( KeyValuePair<string, string> tag in tags) {
-				if(tag.Key == tagName)
+		private string getTag(string tagName)
+		{
+			foreach (KeyValuePair<string, string> tag in tags)
+			{
+				if (tag.Key == tagName)
 					return tag.Value;
 			}
+
 			return null;
 		}
 
@@ -202,43 +205,40 @@ namespace TagLib.Audible
 		}
 		*/
 		
-		#endregion	
+		#endregion
 		
 		#region TagLib.Tag
-		
+
 		/// <summary>
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
 		/// <value>
 		///    Always <see cref="TagLib.TagTypes.AudibleMetadata" />.
 		/// </value>
-		public override TagTypes TagTypes {
-			get {return TagTypes.AudibleMetadata;}
+		public override TagTypes TagTypes
+		{
+			get { return TagTypes.AudibleMetadata; }
 		}
 
-		public string Author {
-			get {
-				return getTag ("author");
-			}
+		public string Author
+		{
+			get { return getTag("author"); }
 		}
 
-		public override string Copyright {
-			get {
-				return getTag ("copyright");
-			}
-			set {
-				setTag ("copyright", value);
-			}
+		public override string Copyright
+		{
+			get { return getTag("copyright"); }
+			set { setTag("copyright", value); }
 		}
 
-		public string Description {
-			get { return getTag ("description"); }
+		public string Description
+		{
+			get { return getTag("description"); }
 		}
 
-		public string Narrator {
-			get {
-				return getTag ("narrator");
-			}
+		public string Narrator
+		{
+			get { return getTag ("narrator"); }
 		}
 		
 		/// <summary>
@@ -250,10 +250,9 @@ namespace TagLib.Audible
 		///    the media described by the current instance or <see
 		///    langword="null" /> if no value is present.
 		/// </value>
-		public override string Title {
-			get {
-				return getTag("title");
-			}
+		public override string Title
+		{
+			get { return getTag("title"); }
 		}
 
 		/// <summary>
@@ -265,14 +264,16 @@ namespace TagLib.Audible
 		///    the media described by the current instance or <see
 		///    langword="null" /> if no value is present.
 		/// </value>
-		public override string Album {
-			get {
+		public override string Album
+		{
+			get
+			{
 				return getTag("provider");
 				//return string.IsNullOrEmpty (album) ?
 				//	null : album;
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the album artist for the media described by the
 		///    current instance.
@@ -282,15 +283,18 @@ namespace TagLib.Audible
 		/// 	artist described by the current instance or <see
 		///    langword="null" /> if no value is present.
 		/// </value>
-		public override string[] AlbumArtists {
-			get {
-				String artist = getTag("provider");
-				
-				return string.IsNullOrEmpty (artist) ?
-					null : new string[] {artist};
+		public override string[] AlbumArtists
+		{
+			get
+			{
+				string artist = getTag("provider");
+
+				return string.IsNullOrEmpty(artist)
+					? null
+					: new string[] {artist};
 			}
 		}
-		
+
 		/// <summary>
 		///    Clears the values stored in the current instance.
 		/// </summary>

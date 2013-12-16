@@ -65,7 +65,7 @@ namespace TagLib.Audible
 		#endregion
 		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified path in the local file
@@ -83,9 +83,8 @@ namespace TagLib.Audible
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path, ReadStyle propertiesStyle)
-			: this (new File.LocalFileAbstraction (path),
-				propertiesStyle)
+		public File(string path, ReadStyle propertiesStyle)
+			: this(new File.LocalFileAbstraction(path), propertiesStyle)
 		{
 		}
 
@@ -101,10 +100,10 @@ namespace TagLib.Audible
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path) : this (path, ReadStyle.Average)
+		public File(string path) : this(path, ReadStyle.Average)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified file abstraction and
@@ -126,31 +125,33 @@ namespace TagLib.Audible
 		/// <exception cref="CorruptFileException">
 		///    The file is not the write length.
 		/// </exception>
-		public File (File.IFileAbstraction abstraction,
-		             ReadStyle propertiesStyle) : base (abstraction)
+		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
 		{
 			Mode = AccessMode.Read;
-			
-			try {
+
+			try
+			{
 				// get the pointer to the end of the tag block
 				// and calculate the tag block length
-				Seek (OffsetToEndTagPointer);
-				int tagLen = ( (int) ReadBlock(4).ToUInt(true) ) - TagBlockOffset;
-				
+				Seek(OffsetToEndTagPointer);
+				int tagLen = ((int) ReadBlock(4).ToUInt(true)) - TagBlockOffset;
+
 				// read the whole tag and send to Tag class
-				Seek (TagBlockOffset);
+				Seek(TagBlockOffset);
 				ByteVector bv = ReadBlock(tagLen);
-				
-				tag = new  TagLib.Audible.Tag( bv );
-				
-			} finally {
+
+				tag = new TagLib.Audible.Tag(bv);
+
+			}
+			finally
+			{
 				Mode = AccessMode.Closed;
 			}
-			
+
 			// ??
 			TagTypesOnDisk = TagTypes;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified file abstraction with an
@@ -164,27 +165,27 @@ namespace TagLib.Audible
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File (File.IFileAbstraction abstraction)
-			: this (abstraction, ReadStyle.Average)
+		public File(File.IFileAbstraction abstraction)
+			: this(abstraction, ReadStyle.Average)
 		{
 		}
-		
+
 		#endregion
 		
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Saves the changes made in the current instance to the
 		///    file it represents.
 		/// </summary>
 		/// <remarks>
-		/// 	Currently this does not work as there is not enough
-		/// 	information about the file format
+		///    Currently this does not work as there is not enough
+		///    information about the file format
 		/// </remarks>
-		public override void Save ()
+		public override void Save()
 		{
 		}
-		
+
 		/// <summary>
 		///    Removes a set of tag types from the current instance.
 		/// </summary>
@@ -197,13 +198,13 @@ namespace TagLib.Audible
 		///    cref="TagTypes.AllTags" /> as <paramref name="types" />.
 		/// </remarks>
 		/// <remarks>
-		/// 	Currently this does not work as there is not enough
-		/// 	information about the file format
+		///    Currently this does not work as there is not enough
+		///    information about the file format
 		/// </remarks>
 		public override void RemoveTags (TagLib.TagTypes types)
 		{
 		}
-		
+
 		/// <summary>
 		///    Gets a tag of a specified type from the current instance,
 		///    optionally creating a new tag if possible.
@@ -222,20 +223,20 @@ namespace TagLib.Audible
 		///    matching tag was found and none was created, <see
 		///    langword="null" /> is returned.
 		/// </returns>
-		public override TagLib.Tag GetTag (TagTypes type, bool create)
+		public override TagLib.Tag GetTag(TagTypes type, bool create)
 		{
 			if (type == TagTypes.AudibleMetadata)
 				return tag;
-			
-			return null;
 
+			return null;
 		}
-#endregion
+
+		#endregion
 		
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets a abstract representation of all tags stored in the
 		///    current instance.
@@ -244,10 +245,11 @@ namespace TagLib.Audible
 		///    A <see cref="TagLib.Tag" /> object representing all tags
 		///    stored in the current instance.
 		/// </value>
-		public override TagLib.Tag Tag {
-			get {return tag;}
+		public override TagLib.Tag Tag
+		{
+			get { return tag; }
 		}
-		
+
 		/// <summary>
 		///    Gets the media properties of the file represented by the
 		///    current instance.
@@ -257,10 +259,11 @@ namespace TagLib.Audible
 		///    media properties of the file represented by the current
 		///    instance.
 		/// </value>
-		public override TagLib.Properties Properties {
-			get {return properties;}
+		public override TagLib.Properties Properties
+		{
+			get { return properties; }
 		}
-		
+
 		#endregion
 		
 	}

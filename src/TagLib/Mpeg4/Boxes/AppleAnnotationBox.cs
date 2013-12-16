@@ -24,7 +24,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace TagLib.Mpeg4 {
+namespace TagLib.Mpeg4
+{
 	/// <summary>
 	///    This class extends <see cref="Box" /> to provide an
 	///    implementation of an Apple AnnotationBox.
@@ -43,7 +44,7 @@ namespace TagLib.Mpeg4 {
 		
 		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="AppleAnnotationBox" /> with a provided header and
@@ -64,16 +65,14 @@ namespace TagLib.Mpeg4 {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="file" /> is <see langword="null" />.
 		/// </exception>
-		public AppleAnnotationBox (BoxHeader header, TagLib.File file,
-		                           IsoHandlerBox handler)
-		: base (header, handler)
+		public AppleAnnotationBox(BoxHeader header, TagLib.File file, IsoHandlerBox handler) : base(header, handler)
 		{
 			if (file == null)
-				throw new ArgumentNullException ("file");
-			
-			children = LoadChildren (file);
+				throw new ArgumentNullException("file");
+
+			children = LoadChildren(file);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="AppleAnnotationBox" /> of specified type with no
@@ -83,17 +82,17 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="ByteVector" /> object containing a 4-byte
 		///    box type.
 		/// </param>
-		public AppleAnnotationBox (ByteVector type) : base (type)
+		public AppleAnnotationBox(ByteVector type) : base(type)
 		{
-			children = new List<Box> ();
+			children = new List<Box>();
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the children of the current instance.
 		/// </summary>
@@ -101,10 +100,11 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="T:System.Collections.Generic.IEnumerable`1" /> object enumerating the
 		///    children of the current instance.
 		/// </value>
-		public override IEnumerable<Box> Children {
-			get {return children;}
+		public override IEnumerable<Box> Children
+		{
+			get { return children; }
 		}
-		
+
 		#endregion
 	}
 }

@@ -43,17 +43,17 @@ namespace TagLib.Aiff
 		/// <summary>
 		///    Contains the address of the AIFF header block.
 		/// </summary>
-		private ByteVector header_block = null;
+		private ByteVector header_block;
 
 		/// <summary>
 		///  Contains the Id3v2 tag.
 		/// </summary>
-		private Id3v2.Tag tag = null;
+		private Id3v2.Tag tag;
 
 		/// <summary>
 		///  Contains the media properties.
 		/// </summary>
-		private Properties properties = null;
+		private Properties properties;
 
 		#endregion
 
@@ -112,9 +112,7 @@ namespace TagLib.Aiff
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File(string path, ReadStyle propertiesStyle)
-			: this(new File.LocalFileAbstraction(path),
-			       propertiesStyle)
+		public File(string path, ReadStyle propertiesStyle) : this(new File.LocalFileAbstraction(path), propertiesStyle)
 		{
 		}
 
@@ -130,8 +128,7 @@ namespace TagLib.Aiff
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File(string path)
-			: this(path, ReadStyle.Average)
+		public File(string path) : this(path, ReadStyle.Average)
 		{
 		}
 
@@ -153,9 +150,7 @@ namespace TagLib.Aiff
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction,
-		            ReadStyle propertiesStyle)
-			: base(abstraction)
+		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
 		{
 			Mode = AccessMode.Read;
 			try
@@ -188,8 +183,7 @@ namespace TagLib.Aiff
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction)
-			: this(abstraction, ReadStyle.Average)
+		public File(File.IFileAbstraction abstraction) : this(abstraction, ReadStyle.Average)
 		{
 		}
 

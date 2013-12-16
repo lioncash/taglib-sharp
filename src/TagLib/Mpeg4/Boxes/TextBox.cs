@@ -26,19 +26,19 @@ namespace TagLib
 {
 	public class TextBox : Box
 	{
-#region Private Fields
+		#region Private Fields
 		
 		/// <summary>
 		///    Contains the box's data.
 		/// </summary>
 		private ByteVector data;
 		
-#endregion
+		#endregion
 		
 		
 		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="UnknownBox" /> with a provided header and handler
@@ -59,22 +59,21 @@ namespace TagLib
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="file" /> is <see langword="null" />.
 		/// </exception>
-		public TextBox (BoxHeader header, TagLib.File file,
-		                   IsoHandlerBox handler)
-			: base (header, handler)
+		public TextBox(BoxHeader header, TagLib.File file, IsoHandlerBox handler)
+			: base(header, handler)
 		{
 			if (file == null)
-				throw new ArgumentNullException ("file");
-			
-			this.data = LoadData (file);
+				throw new ArgumentNullException("file");
+
+			this.data = LoadData(file);
 		}
-		
-#endregion
+
+		#endregion
 		
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets and sets the box data contained in the current
 		///    instance.
@@ -83,12 +82,13 @@ namespace TagLib
 		///    A <see cref="ByteVector" /> object containing the box
 		///    data contained in the current instance.
 		/// </value>
-		public override ByteVector Data {
-			get {return data;}
-			set {data = value;}
+		public override ByteVector Data
+		{
+			get { return data; }
+			set { data = value; }
 		}
-		
-#endregion
+
+		#endregion
 	}
 }
 

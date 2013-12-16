@@ -36,7 +36,7 @@ namespace TagLib.Riff {
 		///    Constructs and initializes a new instance of <see
 		///    cref="MovieIdTag" /> with no contents.
 		/// </summary>
-		public MovieIdTag () : base ()
+		public MovieIdTag()
 		{
 		}
 
@@ -49,7 +49,7 @@ namespace TagLib.Riff {
 		///    A <see cref="ByteVector"/> containing a raw RIFF list to
 		///    read into the new instance.
 		/// </param>
-		public MovieIdTag (ByteVector data) : base (data)
+		public MovieIdTag(ByteVector data) : base(data)
 		{
 		}
 
@@ -79,8 +79,7 @@ namespace TagLib.Riff {
 		///    <paramref name="position" /> is less than zero or greater
 		///    than the size of the file.
 		/// </exception>
-		public MovieIdTag (TagLib.File file, long position, int length)
-			: base (file, position, length)
+		public MovieIdTag(TagLib.File file, long position, int length) : base(file, position, length)
 		{
 		}
 
@@ -97,9 +96,9 @@ namespace TagLib.Riff {
 		///    A <see cref="ByteVector"/> object containing the rendered
 		///    version of the current instance.
 		/// </returns>
-		public override ByteVector RenderEnclosed ()
+		public override ByteVector RenderEnclosed()
 		{
-			return RenderEnclosed ("MID ");
+			return RenderEnclosed("MID ");
 		}
 
 		#endregion
@@ -117,7 +116,7 @@ namespace TagLib.Riff {
 		public override TagTypes TagTypes {
 			get {return TagTypes.MovieId;}
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the title for the media described by the
 		///    current instance.
@@ -130,17 +129,22 @@ namespace TagLib.Riff {
 		/// <remarks>
 		///    This property is implemented using the "TITL" item.
 		/// </remarks>
-		public override string Title {
-			get {
-				foreach (string s in GetValuesAsStrings ("TITL"))
-					if (!string.IsNullOrEmpty (s))
+		public override string Title
+		{
+			get
+			{
+				foreach (string s in GetValuesAsStrings("TITL"))
+				{
+					if (!string.IsNullOrEmpty(s))
 						return s;
-				
+				}
+
 				return null;
 			}
-			set {SetValue ("TITL", value);}
+
+			set { SetValue("TITL", value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the performers or artists who performed in
 		///    the media described by the current instance.
@@ -154,11 +158,12 @@ namespace TagLib.Riff {
 		/// <remarks>
 		///    This property is implemented using the "IART" item.
 		/// </remarks>
-		public override string [] Performers {
-			get {return GetValuesAsStrings ("IART");}
-			set {SetValue ("IART", value);}
+		public override string[] Performers
+		{
+			get { return GetValuesAsStrings("IART"); }
+			set { SetValue("IART", value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets a user comment on the media represented by
 		///    the current instance.
@@ -171,17 +176,22 @@ namespace TagLib.Riff {
 		/// <remarks>
 		///    This property is implemented using the "COMM" item.
 		/// </remarks>
-		public override string Comment {
-			get {
-				foreach (string s in GetValuesAsStrings ("COMM"))
-					if (!string.IsNullOrEmpty (s))
+		public override string Comment
+		{
+			get
+			{
+				foreach (string s in GetValuesAsStrings("COMM"))
+				{
+					if (!string.IsNullOrEmpty(s))
 						return s;
-				
+				}
+
 				return null;
 			}
-			set {SetValue ("COMM", value);}
+
+			set { SetValue("COMM", value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the genres of the media represented by the
 		///    current instance.
@@ -194,11 +204,12 @@ namespace TagLib.Riff {
 		/// <remarks>
 		///    This property is implemented using the "GENR" item.
 		/// </remarks>
-		public override string [] Genres {
-			get {return GetValuesAsStrings ("GENR");}
-			set {SetValue ("GENR", value);}
+		public override string[] Genres
+		{
+			get { return GetValuesAsStrings("GENR"); }
+			set { SetValue("GENR", value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the position of the media represented by
 		///    the current instance in its containing album.
@@ -211,11 +222,12 @@ namespace TagLib.Riff {
 		/// <remarks>
 		///    This property is implemented using the "PRT1" item.
 		/// </remarks>
-		public override uint Track {
-			get {return GetValueAsUInt ("PRT1");}
-			set {SetValue ("PRT1", value);}
+		public override uint Track
+		{
+			get { return GetValueAsUInt("PRT1"); }
+			set { SetValue("PRT1", value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the number of tracks in the album
 		///    containing the media represented by the current instance.
@@ -228,10 +240,12 @@ namespace TagLib.Riff {
 		/// <remarks>
 		///    This property is implemented using the "PRT2" item.
 		/// </remarks>
-		public override uint TrackCount {
-			get {return GetValueAsUInt ("PRT2");}
-			set {SetValue ("PRT2", value);}
+		public override uint TrackCount
+		{
+			get { return GetValueAsUInt("PRT2"); }
+			set { SetValue("PRT2", value); }
 		}
+
 		#endregion
 	}
 }

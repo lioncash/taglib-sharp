@@ -23,7 +23,8 @@
 
 using System;
 
-namespace TagLib.Mpeg4 {
+namespace TagLib.Mpeg4
+{
 	/// <summary>
 	///    This class extends <see cref="FullBox" /> to provide an
 	///    implementation of an Apple DataBox.
@@ -35,7 +36,8 @@ namespace TagLib.Mpeg4 {
 		/// <summary>
 		///    Specifies the type of data contained in a box.
 		/// </summary>
-		public enum FlagType {
+		public enum FlagType
+		{
 			/// <summary>
 			///    The box contains UTF-8 text.
 			/// </summary>
@@ -78,7 +80,7 @@ namespace TagLib.Mpeg4 {
 		
 		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="AppleDataBox" /> with a provided header and handler
@@ -99,13 +101,11 @@ namespace TagLib.Mpeg4 {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="file" /> is <see langword="null" />.
 		/// </exception>
-		public AppleDataBox (BoxHeader header, TagLib.File file,
-		                     IsoHandlerBox handler)
-			: base (header, file, handler)
+		public AppleDataBox(BoxHeader header, TagLib.File file, IsoHandlerBox handler) : base(header, file, handler)
 		{
-			Data = LoadData (file);
+			Data = LoadData(file);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="AppleDataBox" /> with specified data and flags.
@@ -118,18 +118,17 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="uint" /> value containing flags to use for
 		///    the new instance.
 		/// </param>
-		public AppleDataBox (ByteVector data, uint flags)
-			: base ("data", 0, flags)
+		public AppleDataBox(ByteVector data, uint flags) : base("data", 0, flags)
 		{
 			Data = data;
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the position of the data contained in the current
 		///    instance, after any box specific headers.
@@ -138,10 +137,11 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="long" /> value containing the position of
 		///    the data contained in the current instance.
 		/// </value>
-		protected override long DataPosition {
-			get {return base.DataPosition + 4;}
+		protected override long DataPosition
+		{
+			get { return base.DataPosition + 4; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the data contained in the current instance.
 		/// </summary>
@@ -149,11 +149,12 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="ByteVector" /> object containing the data
 		///    contained in the current instance.
 		/// </value>
-		public override ByteVector Data {
-			get {return data;}
-			set {data = value != null ? value : new ByteVector ();}
+		public override ByteVector Data
+		{
+			get { return data; }
+			set { data = (value != null) ? value : new ByteVector(); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the text contained in the current instance.
 		/// </summary>
@@ -163,25 +164,29 @@ namespace TagLib.Mpeg4 {
 		///    langword="null" /> if the box is not flagged as
 		///    containing text.
 		/// </value>
-		public string Text {
-			get {
+		public string Text
+		{
+			get
+			{
 				return ((Flags & (int)
-					FlagType.ContainsText) != 0) ?
-					Data.ToString (StringType.UTF8) : null;
+					FlagType.ContainsText) != 0)
+					? Data.ToString(StringType.UTF8)
+					: null;
 			}
-			set {
+
+			set
+			{
 				Flags = (int) FlagType.ContainsText;
-				Data = ByteVector.FromString (value,
-					StringType.UTF8);
+				Data = ByteVector.FromString (value, StringType.UTF8);
 			}
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Protected Methods
-		
+
 		/// <summary>
 		///    Renders the current instance, including its children, to
 		///    a new <see cref="ByteVector" /> object, preceeding the
@@ -195,13 +200,13 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered version of the current instance.
 		/// </returns>
-		protected override ByteVector Render (ByteVector topData)
+		protected override ByteVector Render(ByteVector topData)
 		{
-			ByteVector output = new ByteVector (4);
-			output.Add (topData);
-			return base.Render (output);
+			ByteVector output = new ByteVector(4);
+			output.Add(topData);
+			return base.Render(output);
 		}
-		
+
 		#endregion
 	}
 }

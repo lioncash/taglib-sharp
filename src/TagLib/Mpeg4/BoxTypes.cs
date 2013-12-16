@@ -21,7 +21,8 @@
 // USA
 //
 
-namespace TagLib.Mpeg4 {
+namespace TagLib.Mpeg4
+{
 	/// <summary>
 	///    <see cref="BoxType" /> provides references to different box types
 	///    used by the library.

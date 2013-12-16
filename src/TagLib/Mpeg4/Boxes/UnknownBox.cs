@@ -23,7 +23,8 @@
 
 using System;
 
-namespace TagLib.Mpeg4 {
+namespace TagLib.Mpeg4
+{
 	/// <summary>
 	///    This class extends <see cref="Box" /> to provide a simple
 	///    implementation of a box of unknown type.
@@ -42,7 +43,7 @@ namespace TagLib.Mpeg4 {
 		
 		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="UnknownBox" /> with a provided header and handler
@@ -63,22 +64,21 @@ namespace TagLib.Mpeg4 {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="file" /> is <see langword="null" />.
 		/// </exception>
-		public UnknownBox (BoxHeader header, TagLib.File file,
-		                   IsoHandlerBox handler)
-			: base (header, handler)
+		public UnknownBox(BoxHeader header, TagLib.File file, IsoHandlerBox handler)
+			: base(header, handler)
 		{
 			if (file == null)
-				throw new ArgumentNullException ("file");
-			
-			this.data = LoadData (file);
+				throw new ArgumentNullException("file");
+
+			this.data = LoadData(file);
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets and sets the box data contained in the current
 		///    instance.
@@ -87,11 +87,12 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="ByteVector" /> object containing the box
 		///    data contained in the current instance.
 		/// </value>
-		public override ByteVector Data {
-			get {return data;}
-			set {data = value;}
+		public override ByteVector Data
+		{
+			get { return data; }
+			set { data = value; }
 		}
-		
+
 		#endregion
 	}
 }

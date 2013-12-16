@@ -29,7 +29,8 @@
 
 using System;
 
-namespace TagLib.NonContainer {
+namespace TagLib.NonContainer
+{
 	/// <summary>
 	///    This class extends <see cref="CombinedTag" />, providing support
 	///    for accessing and modifying a collection of tags appearing at the
@@ -54,9 +55,8 @@ namespace TagLib.NonContainer {
 		///    Contains the number of bytes that must be read to
 		///    hold all applicable indicators.
 		/// </summary>
-		private static int read_size = (int) Math.Max (Math.Max (
-			TagLib.Ape.Footer.Size, TagLib.Id3v2.Footer.Size),
-			TagLib.Id3v1.Tag.Size);
+		private static int read_size =
+		    (int) Math.Max(Math.Max(Ape.Footer.Size, Id3v2.Footer.Size), Id3v1.Tag.Size);
 		
 		#endregion
 		
@@ -78,7 +78,7 @@ namespace TagLib.NonContainer {
 		///    the contents from the disk. <see cref="Read" /> must be
 		///    called to read the tags.
 		/// </remarks>
-		public EndTag (TagLib.File file) : base ()
+		public EndTag(TagLib.File file)
 		{
 			this.file = file;
 		}
@@ -88,28 +88,30 @@ namespace TagLib.NonContainer {
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the total size of the tags located at the end of the
 		///    file by reading from the file.
 		/// </summary>
-		public long TotalSize {
-			get {
+		public long TotalSize
+		{
+			get
+			{
 				long start = file.Length;
-				
-				while (ReadTagInfo (ref start) != TagTypes.None)
+
+				while (ReadTagInfo(ref start) != TagTypes.None)
 					;
-				
+
 				return file.Length - start;
 			}
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Reads the tags stored at the end of the file into the
 		///    current instance.
@@ -119,18 +121,18 @@ namespace TagLib.NonContainer {
 		///    in the file at which the read tags begin. This also
 		///    marks the seek position at which the media ends.
 		/// </returns>
-		public long Read ()
+		public long Read()
 		{
 			TagLib.Tag tag;
-			ClearTags ();
+			ClearTags();
 			long start = file.Length;
-			
-			while ((tag = ReadTag (ref start)) != null)
-				InsertTag (0, tag);
-			
+
+			while ((tag = ReadTag(ref start)) != null)
+				InsertTag(0, tag);
+
 			return start;
 		}
-		
+
 		/// <summary>
 		///    Renders the tags contained in the current instance.
 		/// </summary>
@@ -143,21 +145,22 @@ namespace TagLib.NonContainer {
 		///    The tags are rendered in the order that they are stored
 		///    in the current instance.
 		/// </remarks>
-		public ByteVector Render ()
+		public ByteVector Render()
 		{
-			ByteVector data = new ByteVector ();
-			foreach (TagLib.Tag t in Tags) {
+			ByteVector data = new ByteVector();
+			foreach (TagLib.Tag t in Tags)
+			{
 				if (t is TagLib.Ape.Tag)
-					data.Add ((t as TagLib.Ape.Tag).Render ());
+					data.Add((t as TagLib.Ape.Tag).Render());
 				else if (t is TagLib.Id3v2.Tag)
-					data.Add ((t as TagLib.Id3v2.Tag).Render ());
+					data.Add((t as TagLib.Id3v2.Tag).Render());
 				else if (t is TagLib.Id3v1.Tag)
-					data.Add ((t as TagLib.Id3v1.Tag).Render ());
+					data.Add((t as TagLib.Id3v1.Tag).Render());
 			}
-			
+
 			return data;
 		}
-		
+
 		/// <summary>
 		///    Writes the tags contained in the current instance to the
 		///    end of the file that created it, overwriting the existing
@@ -168,14 +171,14 @@ namespace TagLib.NonContainer {
 		///    in the file at which the written tags begin. This also
 		///    marks the seek position at which the media ends.
 		/// </returns>
-		public long Write ()
+		public long Write()
 		{
 			long total_size = TotalSize;
-			ByteVector data = Render ();
-			file.Insert (data, file.Length - total_size, total_size);
+			ByteVector data = Render();
+			file.Insert(data, file.Length - total_size, total_size);
 			return file.Length - data.Count;
 		}
-		
+
 		/// <summary>
 		///    Removes a set of tag types from the current instance.
 		/// </summary>
@@ -187,16 +190,18 @@ namespace TagLib.NonContainer {
 		///    In order to remove all tags from a file, pass <see
 		///    cref="TagTypes.AllTags" /> as <paramref name="types" />.
 		/// </remarks>
-		public void RemoveTags (TagTypes types)
+		public void RemoveTags(TagTypes types)
 		{
-			for (int i = Tags.Length - 1; i >= 0; i--) {
+			for (int i = Tags.Length - 1; i >= 0; i--)
+			{
 				var tag = Tags[i];
-				if (types == TagTypes.AllTags || (tag.TagTypes & types) == tag.TagTypes) {
-					RemoveTag (tag);
+				if (types == TagTypes.AllTags || (tag.TagTypes & types) == tag.TagTypes)
+				{
+					RemoveTag(tag);
 				}
 			}
 		}
-		
+
 		/// <summary>
 		///    Adds a tag of a specified type to the current instance,
 		///    optionally copying values from an existing type.
@@ -222,40 +227,46 @@ namespace TagLib.NonContainer {
 		///    ID3v2 tags are added at the end of the current instance,
 		///    while other tags are added to the beginning.
 		/// </remarks>
-		public TagLib.Tag AddTag (TagTypes type, TagLib.Tag copy)
+		public TagLib.Tag AddTag(TagTypes type, TagLib.Tag copy)
 		{
 			TagLib.Tag tag = null;
-			
-			if (type == TagTypes.Id3v1) {
-				tag = new TagLib.Id3v1.Tag ();
-			} else if (type == TagTypes.Id3v2) {
-				Id3v2.Tag tag32 = new Id3v2.Tag ();
+
+			if (type == TagTypes.Id3v1)
+			{
+				tag = new TagLib.Id3v1.Tag();
+			}
+			else if (type == TagTypes.Id3v2)
+			{
+				Id3v2.Tag tag32 = new Id3v2.Tag();
 				tag32.Version = 4;
 				tag32.Flags |= Id3v2.HeaderFlags.FooterPresent;
 				tag = tag32;
-			} else if (type == TagTypes.Ape) {
-				tag = new TagLib.Ape.Tag ();
 			}
-			
-			if (tag != null) {
+			else if (type == TagTypes.Ape)
+			{
+				tag = new TagLib.Ape.Tag();
+			}
+
+			if (tag != null)
+			{
 				if (copy != null)
-					copy.CopyTo (tag, true);
-				
+					copy.CopyTo(tag, true);
+
 				if (type == TagTypes.Id3v1)
-					AddTag (tag);
+					AddTag(tag);
 				else
-					InsertTag (0, tag);
+					InsertTag(0, tag);
 			}
-			
+
 			return tag;
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Private Methods
-		
+
 		/// <summary>
 		///    Reads a tag ending at a specified position and moves the
 		///    cursor to its start position.
@@ -271,33 +282,38 @@ namespace TagLib.NonContainer {
 		///    found at the specified position, or <see langword="null"
 		///    /> if no tag was found.
 		/// </returns>
-		private TagLib.Tag ReadTag (ref long end)
+		private TagLib.Tag ReadTag(ref long end)
 		{
 			long start = end;
-			TagTypes type = ReadTagInfo (ref start);
+			TagTypes type = ReadTagInfo(ref start);
 			TagLib.Tag tag = null;
-			
-			try {
+
+			try
+			{
 				switch (type)
 				{
-				case TagTypes.Ape:
-					tag = new TagLib.Ape.Tag (file, end - TagLib.Ape.Footer.Size);
-					break;
-				case TagTypes.Id3v2:
-					tag = new TagLib.Id3v2.Tag (file, start);
-					break;
-				case TagTypes.Id3v1:
-					tag = new TagLib.Id3v1.Tag (file, start);
-					break;
+					case TagTypes.Ape:
+						tag = new TagLib.Ape.Tag(file, end - TagLib.Ape.Footer.Size);
+						break;
+
+					case TagTypes.Id3v2:
+						tag = new TagLib.Id3v2.Tag(file, start);
+						break;
+
+					case TagTypes.Id3v1:
+						tag = new TagLib.Id3v1.Tag(file, start);
+						break;
 				}
-				
+
 				end = start;
-			} catch (CorruptFileException) {
 			}
-			
+			catch (CorruptFileException)
+			{
+			}
+
 			return tag;
 		}
-		
+
 		/// <summary>
 		///    Looks for a tag ending at a specified position and moves
 		///    the cursor to its start position.
@@ -313,56 +329,53 @@ namespace TagLib.NonContainer {
 		///    type of tag found at the specified position, or <see
 		///    cref="TagTypes.None" /> if no tag was found.
 		/// </returns>
-		private TagTypes ReadTagInfo (ref long position)
+		private TagTypes ReadTagInfo(ref long position)
 		{
 			if (position - read_size < 0)
 				return TagTypes.None;
-			
-			file.Seek (position - read_size);
-			ByteVector data = file.ReadBlock (read_size);
-			
-			try {
+
+			file.Seek(position - read_size);
+			ByteVector data = file.ReadBlock(read_size);
+
+			try
+			{
 				int offset = (int) (data.Count - TagLib.Ape.Footer.Size);
-				if (data.ContainsAt (TagLib.Ape.Footer.FileIdentifier,
-					offset)) {
-					TagLib.Ape.Footer footer =
-						new TagLib.Ape.Footer (
-							data.Mid (offset));
-					
+				if (data.ContainsAt(TagLib.Ape.Footer.FileIdentifier, offset))
+				{
+					TagLib.Ape.Footer footer = new TagLib.Ape.Footer(data.Mid(offset));
+
 					// If the complete tag size is zero or
 					// the tag is a header, this indicates
 					// some sort of corruption.
-					if (footer.CompleteTagSize == 0 ||
-						(footer.Flags &
-						TagLib.Ape.FooterFlags.IsHeader) != 0)
+					if (footer.CompleteTagSize == 0 || (footer.Flags & TagLib.Ape.FooterFlags.IsHeader) != 0)
 						return TagTypes.None;
-					
+
 					position -= footer.CompleteTagSize;
 					return TagTypes.Ape;
 				}
-				
+
 				offset = (int) (data.Count - TagLib.Id3v2.Footer.Size);
-				if (data.ContainsAt (TagLib.Id3v2.Footer.FileIdentifier,
-					offset)) {
-					TagLib.Id3v2.Footer footer =
-						new TagLib.Id3v2.Footer (
-							data.Mid (offset));
-					
+				if (data.ContainsAt(TagLib.Id3v2.Footer.FileIdentifier, offset))
+				{
+					TagLib.Id3v2.Footer footer = new TagLib.Id3v2.Footer(data.Mid(offset));
+
 					position -= footer.CompleteTagSize;
 					return TagTypes.Id3v2;
 				}
-				
-				if (data.StartsWith (
-					TagLib.Id3v1.Tag.FileIdentifier)) {
+
+				if (data.StartsWith(TagLib.Id3v1.Tag.FileIdentifier))
+				{
 					position -= TagLib.Id3v1.Tag.Size;
 					return TagTypes.Id3v1;
 				}
-			} catch (CorruptFileException) {
 			}
-			
+			catch (CorruptFileException)
+			{
+			}
+
 			return TagTypes.None;
 		}
-		
+
 		#endregion
 	}
 }

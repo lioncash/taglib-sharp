@@ -22,8 +22,8 @@
 // USA
 //
 
-using System;
-namespace TagLib.Mpeg4 {
+namespace TagLib.Mpeg4
+{
 	/// <summary>
 	///    This class extends <see cref="Box" /> to provide an
 	///    implementation of a ISO/IEC 14496-12 FreeSpaceBox.
@@ -42,7 +42,7 @@ namespace TagLib.Mpeg4 {
 		
 		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="IsoMetaBox" /> with a provided header and
@@ -60,13 +60,12 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="IsoHandlerBox" /> object containing the
 		///    handler that applies to the new instance.
 		/// </param>
-		public IsoFreeSpaceBox (BoxHeader header, TagLib.File file,
-		                        IsoHandlerBox handler)
-			: base (header, handler)
+		public IsoFreeSpaceBox(BoxHeader header, TagLib.File file, IsoHandlerBox handler)
+			: base(header, handler)
 		{
 			padding = DataSize;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="IsoFreeSpaceBox" /> to occupy a specified number of
@@ -76,17 +75,17 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="long" /> value specifying the number of
 		///    bytes the new instance should occupy when rendered.
 		/// </param>
-		public IsoFreeSpaceBox (long padding) : base ("free")
+		public IsoFreeSpaceBox(long padding) : base("free")
 		{
 			PaddingSize = padding;
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets and sets the data contained in the current instance.
 		/// </summary>
@@ -94,11 +93,12 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="ByteVector" /> object containing the data
 		///    contained in the current instance.
 		/// </value>
-		public override ByteVector Data {
-			get {return new ByteVector ((int) padding);}
-			set {padding = (value != null) ? value.Count : 0;}
+		public override ByteVector Data
+		{
+			get { return new ByteVector((int) padding); }
+			set { padding = (value != null) ? value.Count : 0; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the size the current instance will occupy
 		///    when rendered.
@@ -107,11 +107,12 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="long" /> value containing the size the
 		///    current instance will occupy when rendered.
 		/// </value>
-		public long PaddingSize {
-			get {return padding + 8;}
-			set {padding = value - 8;}
+		public long PaddingSize
+		{
+			get { return padding + 8; }
+			set { padding = value - 8; }
 		}
-		
+
 		#endregion
 	}
 }

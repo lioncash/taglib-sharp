@@ -23,46 +23,45 @@
 
 using System;
 
-namespace TagLib.Riff {
+namespace TagLib.Riff
+{
 	/// <summary>
 	///    This structure provides a representation of a Microsoft
 	///    WaveFormatEx structure.
 	/// </summary>
 	public struct WaveFormatEx : IAudioCodec, ILosslessAudioCodec
 	{
-#region Private Fields
-		
+		#region Private Fields
+
 		/// <summary>
 		///    Contains the format tag of the audio.
 		/// </summary>
-		ushort format_tag;
-		
+		private ushort format_tag;
+
 		/// <summary>
 		///    Contains the number of audio channels.
 		/// </summary>
-		ushort channels;
-		
+		private ushort channels;
+
 		/// <summary>
 		///    Contains the number of samples per second.
 		/// </summary>
-		uint samples_per_second;
-		
+		private uint samples_per_second;
+
 		/// <summary>
 		///    Contains the average number of bytes per second.
 		/// </summary>
-		uint   average_bytes_per_second;
-		
+		private uint average_bytes_per_second;
+
 		/// <summary>
 		///    Contains the number of bits per sample.
 		/// </summary>
-		ushort bits_per_sample;
+		private ushort bits_per_sample;
 		
-#endregion
-		
-		
-		
-#region Constructors
-		
+		#endregion
+
+		#region Constructors
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="WaveFormatEx" /> by reading the raw structure from
@@ -79,10 +78,10 @@ namespace TagLib.Riff {
 		///    <paramref name="data" /> contains less than 16 bytes.
 		/// </exception>
 		[Obsolete("Use WaveFormatEx(ByteVector,int)")]
-		public WaveFormatEx (ByteVector data) : this (data, 0)
+		public WaveFormatEx(ByteVector data) : this(data, 0)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="WaveFormatEx" /> by reading the raw structure from
@@ -107,35 +106,31 @@ namespace TagLib.Riff {
 		///    <paramref name="data" /> contains less than 16 bytes at
 		///    <paramref name="offset" />.
 		/// </exception>
-		public WaveFormatEx (ByteVector data, int offset)
+		public WaveFormatEx(ByteVector data, int offset)
 		{
 			if (data == null)
-				throw new ArgumentNullException ("data");
-			
+				throw new ArgumentNullException("data");
+
 			if (offset < 0)
-				throw new ArgumentOutOfRangeException (
-					"offset");
-			
+				throw new ArgumentOutOfRangeException("offset");
+
 			if (offset + 16 > data.Count)
-				throw new CorruptFileException (
-					"Expected 16 bytes.");
-			
-			format_tag = data.Mid (offset, 2).ToUShort (false);
-			channels = data.Mid (offset + 2, 2).ToUShort (false);
-			samples_per_second = data.Mid (offset + 4, 4)
-				.ToUInt (false);
-			average_bytes_per_second = data.Mid (offset + 8, 4)
-				.ToUInt (false);
-			bits_per_sample = data.Mid (offset + 14, 2)
-				.ToUShort (false);
+				throw new CorruptFileException("Expected 16 bytes.");
+
+			format_tag = data.Mid(offset, 2).ToUShort(false);
+			channels = data.Mid(offset + 2, 2).ToUShort(false);
+			samples_per_second = data.Mid(offset + 4, 4)
+				.ToUInt(false);
+			average_bytes_per_second = data.Mid(offset + 8, 4)
+				.ToUInt(false);
+			bits_per_sample = data.Mid(offset + 14, 2)
+				.ToUShort(false);
 		}
-		
-#endregion
-		
-		
-		
-#region Public Properties
-		
+
+		#endregion
+
+		#region Public Properties
+
 		/// <summary>
 		///    Gets the format tag of the audio described by the
 		///    current instance.
@@ -150,10 +145,11 @@ namespace TagLib.Riff {
 		///    a description of the format, use <see cref="Description"
 		///    />.
 		/// </remarks>
-		public ushort FormatTag {
-			get {return format_tag;}
+		public ushort FormatTag
+		{
+			get { return format_tag; }
 		}
-		
+
 		/// <summary>
 		///    Gets the average bytes per second of the audio described
 		///    by the current instance.
@@ -162,10 +158,11 @@ namespace TagLib.Riff {
 		///    A <see cref="ushort" /> value containing the average
 		///    bytes per second of the audio.
 		/// </returns>
-		public uint AverageBytesPerSecond {
-			get {return average_bytes_per_second;}
+		public uint AverageBytesPerSecond
+		{
+			get { return average_bytes_per_second; }
 		}
-		
+
 		/// <summary>
 		///    Gets the bits per sample of the audio described by the
 		///    current instance.
@@ -174,22 +171,24 @@ namespace TagLib.Riff {
 		///    A <see cref="ushort" /> value containing the bits per
 		///    sample of the audio.
 		/// </returns>
-		public ushort BitsPerSample {
-			get {return bits_per_sample;}
+		public ushort BitsPerSample
+		{
+			get { return bits_per_sample; }
 		}
-		
-#endregion
 
-#region ILosslessAudioCodec
-		
-		int ILosslessAudioCodec.BitsPerSample {
-			get {return bits_per_sample;}
+		#endregion
+
+		#region ILosslessAudioCodec
+
+		int ILosslessAudioCodec.BitsPerSample
+		{
+			get { return bits_per_sample; }
 		}
-		
-#endregion
-		
-#region IAudioCodec
-		
+
+		#endregion
+
+		#region IAudioCodec
+
 		/// <summary>
 		///    Gets the bitrate of the audio represented by the current
 		///    instance.
@@ -198,13 +197,11 @@ namespace TagLib.Riff {
 		///    A <see cref="int" /> value containing a bitrate of the
 		///    audio represented by the current instance.
 		/// </value>
-		public int AudioBitrate {
-			get {
-				return (int) Math.Round (
-					average_bytes_per_second * 8d / 1000d);
-			}
+		public int AudioBitrate
+		{
+			get { return (int) Math.Round(average_bytes_per_second*8d/1000d);}
 		}
-		
+
 		/// <summary>
 		///    Gets the sample rate of the audio represented by the
 		///    current instance.
@@ -213,10 +210,11 @@ namespace TagLib.Riff {
 		///    A <see cref="int" /> value containing the sample rate of
 		///    the audio represented by the current instance.
 		/// </value>
-		public int AudioSampleRate {
-			get {return (int) samples_per_second;}
+		public int AudioSampleRate
+		{
+			get { return (int) samples_per_second; }
 		}
-		
+
 		/// <summary>
 		///    Gets the number of channels in the audio represented by
 		///    the current instance.
@@ -226,10 +224,11 @@ namespace TagLib.Riff {
 		///    channels in the audio represented by the current
 		///    instance.
 		/// </value>
-		public int AudioChannels {
-			get {return channels;}
+		public int AudioChannels
+		{
+			get { return channels; }
 		}
-		
+
 		/// <summary>
 		///    Gets the types of media represented by the current
 		///    instance.
@@ -237,10 +236,11 @@ namespace TagLib.Riff {
 		/// <value>
 		///    Always <see cref="TagLib.MediaTypes.Audio" />.
 		/// </value>
-		public MediaTypes MediaTypes {
-			get {return MediaTypes.Audio;}
+		public MediaTypes MediaTypes
+		{
+			get { return MediaTypes.Audio; }
 		}
-		
+
 		/// <summary>
 		///    Gets the duration of the media represented by the current
 		///    instance.
@@ -248,10 +248,11 @@ namespace TagLib.Riff {
 		/// <value>
 		///    Always <see cref="TimeSpan.Zero" />.
 		/// </value>
-		public TimeSpan Duration {
-			get {return TimeSpan.Zero;}
+		public TimeSpan Duration
+		{
+			get { return TimeSpan.Zero; }
 		}
-		
+
 		/// <summary>
 		///    Gets a text description of the media represented by the
 		///    current instance.
@@ -260,8 +261,10 @@ namespace TagLib.Riff {
 		///    A <see cref="string" /> object containing a description
 		///    of the media represented by the current instance.
 		/// </value>
-		public string Description {
-			get {
+		public string Description
+		{
+			get
+			{
 				switch (FormatTag)
 				{
 				case 0x0000:
@@ -663,12 +666,10 @@ namespace TagLib.Riff {
 			}
 		}
 		
-#endregion
-		
-		
-		
-#region IEquatable
-		
+		#endregion
+
+		#region IEquatable
+
 		/// <summary>
 		///    Generates a hash code for the current instance.
 		/// </summary>
@@ -676,16 +677,17 @@ namespace TagLib.Riff {
 		///    A <see cref="int" /> value containing the hash code for
 		///    the current instance.
 		/// </returns>
-		public override int GetHashCode ()
+		public override int GetHashCode()
 		{
-			unchecked {
+			unchecked
+			{
 				return (int) (format_tag ^ channels ^
-					samples_per_second ^
-					average_bytes_per_second ^
-					bits_per_sample);
+				              samples_per_second ^
+				              average_bytes_per_second ^
+				              bits_per_sample);
 			}
 		}
-		
+
 		/// <summary>
 		///    Checks whether or not the current instance is equal to
 		///    another object.
@@ -699,14 +701,14 @@ namespace TagLib.Riff {
 		///    current instance is equal to <paramref name="other" />.
 		/// </returns>
 		/// <seealso cref="M:System.IEquatable`1.Equals" />
-		public override bool Equals (object other)
+		public override bool Equals(object other)
 		{
 			if (!(other is WaveFormatEx))
 				return false;
-			
-			return Equals ((WaveFormatEx) other);
+
+			return Equals((WaveFormatEx) other);
 		}
-		
+
 		/// <summary>
 		///    Checks whether or not the current instance is equal to
 		///    another instance of <see cref="WaveFormatEx" />.
@@ -720,15 +722,15 @@ namespace TagLib.Riff {
 		///    current instance is equal to <paramref name="other" />.
 		/// </returns>
 		/// <seealso cref="M:System.IEquatable`1.Equals" />
-		public bool Equals (WaveFormatEx other)
+		public bool Equals(WaveFormatEx other)
 		{
 			return format_tag == other.format_tag &&
-				channels == other.channels &&
-				samples_per_second == other.samples_per_second &&
-				average_bytes_per_second == other.average_bytes_per_second &&
-				bits_per_sample == other.bits_per_sample;
+			       channels == other.channels &&
+			       samples_per_second == other.samples_per_second &&
+			       average_bytes_per_second == other.average_bytes_per_second &&
+			       bits_per_sample == other.bits_per_sample;
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not two instances of <see
 		///    cref="WaveFormatEx" /> are equal to eachother.
@@ -744,12 +746,11 @@ namespace TagLib.Riff {
 		///    equal to <paramref name="second" />. Otherwise, <see
 		///    langword="false" />.
 		/// </returns>
-		public static bool operator == (WaveFormatEx first,
-		                                WaveFormatEx second)
+		public static bool operator ==(WaveFormatEx first, WaveFormatEx second)
 		{
-			return first.Equals (second);
+			return first.Equals(second);
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not two instances of <see
 		///    cref="WaveFormatEx" /> differ.
@@ -765,11 +766,11 @@ namespace TagLib.Riff {
 		///    unequal to <paramref name="second" />. Otherwise, <see
 		///    langword="false" />.
 		/// </returns>
-		public static bool operator != (WaveFormatEx first,
-		                                WaveFormatEx second)
+		public static bool operator !=(WaveFormatEx first, WaveFormatEx second)
 		{
-			return !first.Equals (second);
+			return !first.Equals(second);
 		}
-#endregion
+
+		#endregion
 	}
 }

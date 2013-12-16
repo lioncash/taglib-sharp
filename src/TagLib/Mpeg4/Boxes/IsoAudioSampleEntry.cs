@@ -26,7 +26,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace TagLib.Mpeg4 {
+namespace TagLib.Mpeg4
+{
 	/// <summary>
 	///    This class extends <see cref="IsoSampleEntry" /> and implements
 	///    <see cref="IAudioCodec" /> to provide an implementation of a
@@ -62,7 +63,7 @@ namespace TagLib.Mpeg4 {
 		
 		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="IsoVisualSampleEntry" /> with a provided header and
@@ -83,27 +84,25 @@ namespace TagLib.Mpeg4 {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="file" /> is <see langword="null" />.
 		/// </exception>
-		public IsoAudioSampleEntry (BoxHeader header, TagLib.File file,
-		                            IsoHandlerBox handler)
-			: base (header, file, handler)
+		public IsoAudioSampleEntry(BoxHeader header, TagLib.File file, IsoHandlerBox handler) : base(header, file, handler)
 		{
 			if (file == null)
-				throw new ArgumentNullException ("file");
-			
-			file.Seek (base.DataPosition + 8);
-			channel_count = file.ReadBlock (2).ToUShort ();
-			sample_size = file.ReadBlock (2).ToUShort ();
-			file.Seek (base.DataPosition + 16);
-			sample_rate = file.ReadBlock (4).ToUInt ();
-			children = LoadChildren (file);
+				throw new ArgumentNullException("file");
+
+			file.Seek(base.DataPosition + 8);
+			channel_count = file.ReadBlock(2).ToUShort();
+			sample_size = file.ReadBlock(2).ToUShort();
+			file.Seek(base.DataPosition + 16);
+			sample_rate = file.ReadBlock(4).ToUInt();
+			children = LoadChildren(file);
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the position of the data contained in the current
 		///    instance, after any box specific headers.
@@ -112,10 +111,11 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="long" /> value containing the position of
 		///    the data contained in the current instance.
 		/// </value>
-		protected override long DataPosition {
-			get {return base.DataPosition + 20;}
+		protected override long DataPosition
+		{
+			get { return base.DataPosition + 20; }
 		}
-		
+
 		/// <summary>
 		///    Gets the children of the current instance.
 		/// </summary>
@@ -123,16 +123,17 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="T:System.Collections.Generic.IEnumerable`1" /> object enumerating the
 		///    children of the current instance.
 		/// </value>
-		public override IEnumerable<Box> Children {
-			get {return children;}
+		public override IEnumerable<Box> Children
+		{
+			get { return children; }
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region IAudioCodec Properties
-		
+
 		/// <summary>
 		///    Gets the duration of the media represented by the current
 		///    instance.
@@ -140,10 +141,11 @@ namespace TagLib.Mpeg4 {
 		/// <value>
 		///    Always <see cref="TimeSpan.Zero" />.
 		/// </value>
-		public TimeSpan Duration {
-			get {return TimeSpan.Zero;}
+		public TimeSpan Duration
+		{
+			get { return TimeSpan.Zero; }
 		}
-		
+
 		/// <summary>
 		///    Gets the types of media represented by the current
 		///    instance.
@@ -151,10 +153,11 @@ namespace TagLib.Mpeg4 {
 		/// <value>
 		///    Always <see cref="TagLib.MediaTypes.Video" />.
 		/// </value>
-		public MediaTypes MediaTypes {
-			get {return MediaTypes.Audio;}
+		public MediaTypes MediaTypes
+		{
+			get { return MediaTypes.Audio; }
 		}
-		
+
 		/// <summary>
 		///    Gets a text description of the media represented by the
 		///    current instance.
@@ -163,14 +166,14 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="string" /> object containing a description
 		///    of the media represented by the current instance.
 		/// </value>
-		public string Description {
-			get {
-				return string.Format (
-					CultureInfo.InvariantCulture,
-					"MPEG-4 Audio ({0})", BoxType);
+		public string Description
+		{
+			get
+			{
+				return string.Format(CultureInfo.InvariantCulture, "MPEG-4 Audio ({0})", BoxType);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the bitrate of the audio represented by the current
 		///    instance.
@@ -179,22 +182,22 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="int" /> value containing a bitrate of the
 		///    audio represented by the current instance.
 		/// </value>
-		public int AudioBitrate {
-			get {
-				AppleElementaryStreamDescriptor esds =
-					GetChildRecursively ("esds") as
-						AppleElementaryStreamDescriptor;
-				
+		public int AudioBitrate
+		{
+			get
+			{
+				var esds = GetChildRecursively("esds") as AppleElementaryStreamDescriptor;
+
 				// If we don't have an stream descriptor, we
 				// don't know what's what.
 				if (esds == null)
 					return 0;
-				
+
 				// Return from the elementary stream descriptor.
 				return (int) esds.AverageBitrate;
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the sample rate of the audio represented by the
 		///    current instance.
@@ -203,10 +206,11 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="int" /> value containing the sample rate of
 		///    the audio represented by the current instance.
 		/// </value>
-		public int AudioSampleRate {
-			get {return (int)(sample_rate >> 16);}
+		public int AudioSampleRate
+		{
+			get { return (int) (sample_rate >> 16); }
 		}
-		
+
 		/// <summary>
 		///    Gets the number of channels in the audio represented by
 		///    the current instance.
@@ -216,10 +220,11 @@ namespace TagLib.Mpeg4 {
 		///    channels in the audio represented by the current
 		///    instance.
 		/// </value>
-		public int AudioChannels {
-			get {return channel_count;}
+		public int AudioChannels
+		{
+			get { return channel_count; }
 		}
-		
+
 		/// <summary>
 		///    Gets the sample size of the audio represented by the
 		///    current instance.
@@ -228,10 +233,11 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="int" /> value containing the sample size of
 		///    the audio represented by the current instance.
 		/// </value>
-		public int AudioSampleSize {
-			get {return sample_size;}
+		public int AudioSampleSize
+		{
+			get { return sample_size; }
 		}
-		
+
 		#endregion
 	}
 }

@@ -63,7 +63,7 @@ namespace TagLib.Ogg
 	/// </summary>
 	public struct PageHeader
 	{
-#region Private Propertis
+		#region Private Propertis
 		
 		/// <summary>
 		///    Contains the sizes of the packets contained in the
@@ -106,12 +106,12 @@ namespace TagLib.Ogg
 		/// </summary>
 		private uint data_size;
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Constructors
-		
+		#region Constructors
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="PageHeader" /> with a given serial number, page
@@ -130,8 +130,7 @@ namespace TagLib.Ogg
 		///    A <see cref="PageFlags" /> object containing the flags
 		///    that apply to the page described by the new instance.
 		/// </param>
-		public PageHeader (uint streamSerialNumber, uint pageNumber,
-		                   PageFlags flags)
+		public PageHeader(uint streamSerialNumber, uint pageNumber, PageFlags flags)
 		{
 			version = 0;
 			this.flags = flags;
@@ -140,13 +139,12 @@ namespace TagLib.Ogg
 			page_sequence_number = pageNumber;
 			size = 0;
 			data_size = 0;
-			packet_sizes = new List<int> ();
-			
-			if (pageNumber == 0 &&
-				(flags & PageFlags.FirstPacketContinued) == 0)
+			packet_sizes = new List<int>();
+
+			if (pageNumber == 0 && (flags & PageFlags.FirstPacketContinued) == 0)
 				this.flags |= PageFlags.FirstPageOfStream;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="PageHeader" /> by reading a raw Ogg page header
@@ -171,70 +169,66 @@ namespace TagLib.Ogg
 		///    The Ogg identifier could not be found at the correct
 		///    location.
 		/// </exception>
-		public PageHeader (File file, long position)
+		public PageHeader(File file, long position)
 		{
 			if (file == null)
-				throw new ArgumentNullException ("file");
-			
+				throw new ArgumentNullException("file");
+
 			if (position < 0 || position > file.Length - 27)
-				throw new ArgumentOutOfRangeException (
-					"position");
-			
-			file.Seek (position);
-			
+				throw new ArgumentOutOfRangeException("position");
+
+			file.Seek(position);
+
 			// An Ogg page header is at least 27 bytes, so we'll go
 			// ahead and read that much and then get the rest when
 			// we're ready for it.
-			
-			ByteVector data = file.ReadBlock (27);
-			if (data.Count < 27 || !data.StartsWith ("OggS"))
-				throw new CorruptFileException (
-					"Error reading page header");
-			
-			version = data [4];
-			this.flags = (PageFlags) data [5];
-			absolute_granular_position = data.Mid(6, 8).ToULong (
-				false);
-			stream_serial_number = data.Mid(14, 4).ToUInt (false);
-			page_sequence_number = data.Mid(18, 4).ToUInt (false);
+
+			ByteVector data = file.ReadBlock(27);
+			if (data.Count < 27 || !data.StartsWith("OggS"))
+				throw new CorruptFileException("Error reading page header");
+
+			version = data[4];
+			this.flags = (PageFlags) data[5];
+			absolute_granular_position = data.Mid(6, 8).ToULong(false);
+			stream_serial_number = data.Mid(14, 4).ToUInt(false);
+			page_sequence_number = data.Mid(18, 4).ToUInt(false);
 
 			// Byte number 27 is the number of page segments, which
 			// is the only variable length portion of the page
 			// header. After reading the number of page segments
 			// we'll then read in the coresponding data for this
 			// count.
-			int page_segment_count = data [26];
-			ByteVector page_segments =
-				file.ReadBlock (page_segment_count);
-			
+			int page_segment_count = data[26];
+			ByteVector page_segments = file.ReadBlock(page_segment_count);
+
 			// Another sanity check.
-			if (page_segment_count < 1 ||
-				page_segments.Count != page_segment_count)
-				throw new CorruptFileException (
-					"Incorrect number of page segments");
-			
+			if (page_segment_count < 1 || page_segments.Count != page_segment_count)
+				throw new CorruptFileException("Incorrect number of page segments");
+
 			// The base size of an Ogg page 27 bytes plus the number
 			// of lacing values.
-			size = (uint)(27 + page_segment_count);
-			packet_sizes = new List<int> ();
-			
+			size = (uint) (27 + page_segment_count);
+			packet_sizes = new List<int>();
+
 			int packet_size = 0;
 			data_size = 0;
-			
-			for (int i = 0; i < page_segment_count; i++) {
-				data_size += page_segments [i];
-				packet_size += page_segments [i];
-					
-				if (page_segments [i] < 255) {
-					packet_sizes.Add (packet_size);
+
+			for (int i = 0; i < page_segment_count; i++)
+			{
+				data_size += page_segments[i];
+				packet_size += page_segments[i];
+
+				if (page_segments[i] < 255)
+				{
+					packet_sizes.Add(packet_size);
 					packet_size = 0;
 				}
 			}
-			
+
 			if (packet_size > 0)
-				packet_sizes.Add (packet_size);
+				packet_sizes.Add(packet_size);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="PageHeader" /> by copying the values from another
@@ -253,31 +247,27 @@ namespace TagLib.Ogg
 		///    A <see cref="PageFlags"/> value specifying the flags to
 		///    use in the new instance.
 		/// </param>
-		public PageHeader (PageHeader original, uint offset,
-		                   PageFlags flags)
+		public PageHeader(PageHeader original, uint offset, PageFlags flags)
 		{
 			version = original.version;
 			this.flags = flags;
-			absolute_granular_position =
-				original.absolute_granular_position;
+			absolute_granular_position = original.absolute_granular_position;
 			stream_serial_number = original.stream_serial_number;
-			page_sequence_number =
-				original.page_sequence_number + offset;
+			page_sequence_number = original.page_sequence_number + offset;
 			size = original.size;
 			data_size = original.data_size;
-			packet_sizes = new List<int> ();
-			
-			if (page_sequence_number == 0 &&
-				(flags & PageFlags.FirstPacketContinued) == 0)
+			packet_sizes = new List<int>();
+
+			if (page_sequence_number == 0 && (flags & PageFlags.FirstPacketContinued) == 0)
 				this.flags |= PageFlags.FirstPageOfStream;
 		}
+
+		#endregion
 		
-#endregion
 		
 		
-		
-#region Public Properties
-		
+		#region Public Properties
+
 		/// <summary>
 		///    Gets and sets the sizes for the packets in the page
 		///    described by the current instance.
@@ -285,11 +275,14 @@ namespace TagLib.Ogg
 		/// <value>
 		///    A <see cref="int[]" /> containing the packet sizes.
 		/// </value>
-		public int [] PacketSizes {
-			get {return packet_sizes.ToArray ();}
-			set {
-				packet_sizes.Clear ();
-				packet_sizes.AddRange (value);
+		public int[] PacketSizes
+		{
+			get { return packet_sizes.ToArray(); }
+
+			set
+			{
+				packet_sizes.Clear();
+				packet_sizes.AddRange(value);
 			}
 		}
 
@@ -301,10 +294,11 @@ namespace TagLib.Ogg
 		///    A <see cref="PageFlags" /> value containing the page
 		///    flags.
 		/// </value>
-		public PageFlags Flags {
-			get {return flags;}
+		public PageFlags Flags
+		{
+			get { return flags; }
 		}
-		
+
 		/// <summary>
 		///    Gets the absolute granular position of the page described
 		///    by the current instance.
@@ -313,10 +307,11 @@ namespace TagLib.Ogg
 		///    A <see cref="long" /> value containing the absolute
 		///    granular position of the page.
 		/// </value>
-		public long AbsoluteGranularPosition {
-			get {return (long) absolute_granular_position;}
+		public long AbsoluteGranularPosition
+		{
+			get { return (long) absolute_granular_position; }
 		}
-		
+
 		/// <summary>
 		///    Gets the sequence number of the page described by the
 		///    current instance.
@@ -325,10 +320,11 @@ namespace TagLib.Ogg
 		///    A <see cref="uint" /> value containing the sequence
 		///    number of the page.
 		/// </value>
-		public uint PageSequenceNumber {
-			get {return page_sequence_number;}
+		public uint PageSequenceNumber
+		{
+			get { return page_sequence_number; }
 		}
-		
+
 		/// <summary>
 		///    Gets the serial number of stream that the page described
 		///    by the current instance belongs to.
@@ -337,20 +333,22 @@ namespace TagLib.Ogg
 		///    A <see cref="uint" /> value containing the stream serial
 		///    number.
 		/// </value>
-		public uint StreamSerialNumber {
-			get {return stream_serial_number;}
+		public uint StreamSerialNumber
+		{
+			get { return stream_serial_number; }
 		}
-		
+
 		/// <summary>
 		///    Gets the size of the header as it appeared on disk.
 		/// </summary>
 		/// <value>
 		///    A <see cref="uint" /> value containing the header size.
 		/// </value>
-		public uint Size {
-			get {return size;}
+		public uint Size
+		{
+			get { return size; }
 		}
-		
+
 		/// <summary>
 		///    Gets the size of the data portion of the page described
 		///    by the current instance as it appeared on disk.
@@ -358,16 +356,17 @@ namespace TagLib.Ogg
 		/// <value>
 		///    A <see cref="uint" /> value containing the data size.
 		/// </value>
-		public uint DataSize {
-			get {return data_size;}
+		public uint DataSize
+		{
+			get { return data_size; }
 		}
+
+		#endregion
 		
-#endregion
 		
 		
-		
-#region Public Methods
-		
+		#region Public Methods
+
 		/// <summary>
 		///    Renders the current instance as a raw Ogg page header.
 		/// </summary>
@@ -375,33 +374,30 @@ namespace TagLib.Ogg
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered version of the current instance.
 		/// </returns>
-		public ByteVector Render ()
+		public ByteVector Render()
 		{
-			ByteVector data = new ByteVector ();
-			
-			data.Add ("OggS");
-			data.Add (version); // stream structure version
-			data.Add ((byte) flags);
-			data.Add (ByteVector.FromULong (
-				absolute_granular_position, false));
-			data.Add (ByteVector.FromUInt (
-				stream_serial_number, false));
-			data.Add (ByteVector.FromUInt (
-				(uint) page_sequence_number, false));
-			data.Add (new ByteVector (4, 0)); // checksum, to be filled in later.
+			ByteVector data = new ByteVector();
+
+			data.Add("OggS");
+			data.Add(version); // stream structure version
+			data.Add((byte) flags);
+			data.Add(ByteVector.FromULong(absolute_granular_position, false));
+			data.Add(ByteVector.FromUInt(stream_serial_number, false));
+			data.Add(ByteVector.FromUInt(page_sequence_number, false));
+			data.Add(new ByteVector(4, 0)); // checksum, to be filled in later.
 			ByteVector page_segments = LacingValues;
-			data.Add ((byte) page_segments.Count);
-			data.Add (page_segments);
-			
+			data.Add((byte) page_segments.Count);
+			data.Add(page_segments);
+
 			return data;
 		}
+
+		#endregion
 		
-#endregion
 		
 		
-		
-#region Private Properties
-		
+		#region Private Properties
+
 		/// <summary>
 		///    Gets the rendered lacing values for the current instance.
 		/// </summary>
@@ -409,13 +405,16 @@ namespace TagLib.Ogg
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered lacing values.
 		/// </value>
-		private ByteVector LacingValues {
-			get {
-				ByteVector data = new ByteVector ();
-				
-				int [] sizes = PacketSizes;
-				
-				for (int i = 0; i < sizes.Length; i ++) {
+		private ByteVector LacingValues
+		{
+			get
+			{
+				ByteVector data = new ByteVector();
+
+				int[] sizes = PacketSizes;
+
+				for (int i = 0; i < sizes.Length; i ++)
+				{
 					// The size of a packet in an Ogg page
 					// is indicated by a series of "lacing
 					// values" where the sum of the values
@@ -423,28 +422,27 @@ namespace TagLib.Ogg
 					// these values is a byte. A value of
 					// less than 255 (0xff) indicates the
 					// end of the packet.
-					
-					int quot = sizes [i] / 255;
-					int rem  = sizes [i] % 255;
-					
+
+					int quot = sizes[i]/255;
+					int rem = sizes[i]%255;
+
 					for (int j = 0; j < quot; j++)
-						data.Add ((byte) 255);
-					
-					if (i < sizes.Length - 1 ||
-						(packet_sizes [i] % 255) != 0)
-						data.Add ((byte) rem);
+						data.Add(255);
+
+					if (i < sizes.Length - 1 || (packet_sizes[i]%255) != 0)
+						data.Add((byte) rem);
 				}
-				
+
 				return data;
 			}
 		}
+
+		#endregion
 		
-#endregion
 		
 		
-		
-#region IEquatable
-		
+		#region IEquatable
+
 		/// <summary>
 		///    Generates a hash code for the current instance.
 		/// </summary>
@@ -452,17 +450,19 @@ namespace TagLib.Ogg
 		///    A <see cref="int" /> value containing the hash code for
 		///    the current instance.
 		/// </returns>
-		public override int GetHashCode ()		{
-			unchecked {
-				return (int) (LacingValues.GetHashCode () ^
-					version ^ (int) flags ^
-					(int) absolute_granular_position ^
-					stream_serial_number ^
-					page_sequence_number ^ size ^
-					data_size);
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				return (int) (LacingValues.GetHashCode() ^
+				              version ^ (int) flags ^
+				              (int) absolute_granular_position ^
+				              stream_serial_number ^
+				              page_sequence_number ^ size ^
+				              data_size);
 			}
 		}
-		
+
 		/// <summary>
 		///    Checks whether or not the current instance is equal to
 		///    another object.
@@ -476,14 +476,14 @@ namespace TagLib.Ogg
 		///    current instance is equal to <paramref name="other" />.
 		/// </returns>
 		/// <seealso cref="M:System.IEquatable`1.Equals" />
-		public override bool Equals (object other)
+		public override bool Equals(object other)
 		{
 			if (!(other is PageHeader))
 				return false;
-			
-			return Equals ((PageHeader) other);
+
+			return Equals((PageHeader) other);
 		}
-		
+
 		/// <summary>
 		///    Checks whether or not the current instance is equal to
 		///    another instance of <see cref="PageHeader" />.
@@ -497,21 +497,18 @@ namespace TagLib.Ogg
 		///    current instance is equal to <paramref name="other" />.
 		/// </returns>
 		/// <seealso cref="M:System.IEquatable`1.Equals" />
-		public bool Equals (PageHeader other)
+		public bool Equals(PageHeader other)
 		{
 			return packet_sizes == other.packet_sizes &&
-				version == other.version &&
-				flags == other.flags &&
-				absolute_granular_position ==
-					other.absolute_granular_position &&
-				stream_serial_number ==
-					other.stream_serial_number &&
-				page_sequence_number ==
-					other.page_sequence_number &&
-				size == other.size &&
-				data_size == other.data_size;
+			       version == other.version &&
+			       flags == other.flags &&
+			       absolute_granular_position == other.absolute_granular_position &&
+			       stream_serial_number == other.stream_serial_number &&
+			       page_sequence_number == other.page_sequence_number &&
+			       size == other.size &&
+			       data_size == other.data_size;
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not two instances of <see
 		///    cref="PageHeader" /> are equal to eachother.
@@ -527,12 +524,11 @@ namespace TagLib.Ogg
 		///    equal to <paramref name="second" />. Otherwise, <see
 		///    langword="false" />.
 		/// </returns>
-		public static bool operator == (PageHeader first,
-		                                PageHeader second)
+		public static bool operator ==(PageHeader first, PageHeader second)
 		{
-			return first.Equals (second);
+			return first.Equals(second);
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not two instances of <see
 		///    cref="PageHeader" /> differ.
@@ -548,12 +544,11 @@ namespace TagLib.Ogg
 		///    unequal to <paramref name="second" />. Otherwise, <see
 		///    langword="false" />.
 		/// </returns>
-		public static bool operator != (PageHeader first,
-		                                PageHeader second)
+		public static bool operator !=(PageHeader first, PageHeader second)
 		{
-			return !first.Equals (second);
+			return !first.Equals(second);
 		}
-		
-#endregion
+
+		#endregion
 	}
 }

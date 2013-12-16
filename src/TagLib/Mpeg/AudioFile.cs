@@ -28,7 +28,8 @@
 
 using System;
 
-namespace TagLib.Mpeg {
+namespace TagLib.Mpeg
+{
 	/// <summary>
 	///    This class extends <see cref="TagLib.NonContainer.File" /> to
 	///    provide tagging and properties support for MPEG-1, MPEG-2, and
@@ -87,7 +88,7 @@ namespace TagLib.Mpeg {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public AudioFile (string path, ReadStyle propertiesStyle)
+		public AudioFile(string path, ReadStyle propertiesStyle)
 			: base (path, propertiesStyle)
 		{
 		}
@@ -104,7 +105,7 @@ namespace TagLib.Mpeg {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public AudioFile (string path) : base (path)
+		public AudioFile(string path) : base (path)
 		{
 		}
 		
@@ -126,8 +127,7 @@ namespace TagLib.Mpeg {
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public AudioFile (File.IFileAbstraction abstraction,
-		             ReadStyle propertiesStyle)
+		public AudioFile(File.IFileAbstraction abstraction, ReadStyle propertiesStyle)
 			: base (abstraction, propertiesStyle)
 		{
 		}
@@ -155,7 +155,7 @@ namespace TagLib.Mpeg {
 		
 		
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Gets a tag of a specified type from the current instance,
 		///    optionally creating a new tag if possible.
@@ -181,35 +181,35 @@ namespace TagLib.Mpeg {
 		///    <see cref="TagLib.Ape.Tag" /> will be added to the end of
 		///    the file. All other tag types will be ignored.
 		/// </remarks>
-		public override TagLib.Tag GetTag (TagTypes type, bool create)
+		public override TagLib.Tag GetTag(TagTypes type, bool create)
 		{
-			Tag t = (Tag as TagLib.NonContainer.Tag).GetTag (type);
-			
+			Tag t = (Tag as TagLib.NonContainer.Tag).GetTag(type);
+
 			if (t != null || !create)
 				return t;
-			
+
 			switch (type)
 			{
-			case TagTypes.Id3v1:
-				return EndTag.AddTag (type, Tag);
-			
-			case TagTypes.Id3v2:
-				return StartTag.AddTag (type, Tag);
-			
-			case TagTypes.Ape:
-				return EndTag.AddTag (type, Tag);
-			
-			default:
-				return null;
+				case TagTypes.Id3v1:
+					return EndTag.AddTag(type, Tag);
+
+				case TagTypes.Id3v2:
+					return StartTag.AddTag(type, Tag);
+
+				case TagTypes.Ape:
+					return EndTag.AddTag(type, Tag);
+
+				default:
+					return null;
 			}
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Protected Methods
-		
+
 		/// <summary>
 		///    Reads format specific information at the start of the
 		///    file.
@@ -228,18 +228,14 @@ namespace TagLib.Mpeg {
 		///    first 16384 bytes of code to avoid searching forever in
 		///    corrupt files.
 		/// </remarks>
-		protected override void ReadStart (long start,
-		                                   ReadStyle propertiesStyle)
+		protected override void ReadStart(long start, ReadStyle propertiesStyle)
 		{
 			// Only check the first 16 bytes so we're not stuck
 			// reading a bad file forever.
-			if (propertiesStyle != ReadStyle.None &&
-				!AudioHeader.Find (out first_header, this,
-					start, 0x4000))
-				throw new CorruptFileException (
-					"MPEG audio header not found.");
+			if (propertiesStyle != ReadStyle.None && !AudioHeader.Find(out first_header, this, start, 0x4000))
+				throw new CorruptFileException("MPEG audio header not found.");
 		}
-		
+
 		/// <summary>
 		///    Reads format specific information at the end of the
 		///    file.
@@ -253,14 +249,13 @@ namespace TagLib.Mpeg {
 		///    of accuracy to read the media properties, or <see
 		///    cref="ReadStyle.None" /> to ignore the properties.
 		/// </param>
-		protected override void ReadEnd (long end,
-		                                 ReadStyle propertiesStyle)
+		protected override void ReadEnd(long end, ReadStyle propertiesStyle)
 		{
 			// Make sure we have ID3v1 and ID3v2 tags.
-			GetTag (TagTypes.Id3v1, true);
-			GetTag (TagTypes.Id3v2, true);
+			GetTag(TagTypes.Id3v1, true);
+			GetTag(TagTypes.Id3v2, true);
 		}
-		
+
 		/// <summary>
 		///    Reads the audio properties from the file represented by
 		///    the current instance.
@@ -283,14 +278,12 @@ namespace TagLib.Mpeg {
 		///    media properties of the file represented by the current
 		///    instance.
 		/// </returns>
-		protected override Properties ReadProperties (long start,
-		                                              long end,
-		                                              ReadStyle propertiesStyle)
+		protected override Properties ReadProperties(long start, long end, ReadStyle propertiesStyle)
 		{
-			first_header.SetStreamLength (end - start);
-			return new Properties (TimeSpan.Zero, first_header);
+			first_header.SetStreamLength(end - start);
+			return new Properties(TimeSpan.Zero, first_header);
 		}
-		
+
 		#endregion
 	}
 }

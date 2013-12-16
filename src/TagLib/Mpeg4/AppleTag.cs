@@ -26,7 +26,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace TagLib.Mpeg4 {
+namespace TagLib.Mpeg4
+{
 	/// <summary>
 	///    This class extends <see cref="TagLib.Tag" /> to provide support
 	///    for processing Apple "ilst" tags.
@@ -85,7 +86,7 @@ namespace TagLib.Mpeg4 {
 		
 		
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Gets and sets whether or not the album described by the
 		///    current instance is a compilation.
@@ -97,27 +98,29 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "cpil" data box.
 		/// </remarks>
-		public bool IsCompilation {
-			get {
-				foreach (AppleDataBox box in DataBoxes (
-					BoxType.Cpil))
-					return box.Data.ToUInt () != 0;
-				
+		public bool IsCompilation
+		{
+			get
+			{
+				foreach (AppleDataBox box in DataBoxes(BoxType.Cpil))
+					return box.Data.ToUInt() != 0;
+
 				return false;
 			}
-			set {
-				SetData (BoxType.Cpil, new ByteVector(
+			set
+			{
+				SetData(BoxType.Cpil, new ByteVector(
 					(byte) (value ? 1 : 0)),
 					(uint) AppleDataBox.FlagType.ForTempo);
 			}
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Gets all data boxes that match any of the provided types.
 		/// </summary>
@@ -129,24 +132,28 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="T:System.Collections.Generic.IEnumerable`1" /> object enumerating the
 		///    matching boxes.
 		/// </returns>
-		public IEnumerable<AppleDataBox> DataBoxes (IEnumerable<ByteVector> types)
+		public IEnumerable<AppleDataBox> DataBoxes(IEnumerable<ByteVector> types)
 		{
 			// Check each box to see if the match any of the
 			// provided types. If a match is found, loop through the
 			// children and add any data box.
 			foreach (Box box in ilst_box.Children)
-				foreach (ByteVector v in types) {
-					if (FixId (v) != box.BoxType)
+			{
+				foreach (ByteVector v in types)
+				{
+					if (FixId(v) != box.BoxType)
 						continue;
-					foreach (Box data_box in box.Children) {
-						AppleDataBox adb = data_box as
-							AppleDataBox;
+
+					foreach (Box data_box in box.Children)
+					{
+						AppleDataBox adb = data_box as AppleDataBox;
 						if (adb != null)
 							yield return adb;
 					}
 				}
+			}
 		}
-		
+
 		/// <summary>
 		///    Gets all data boxes that match any of the provided types.
 		/// </summary>
@@ -158,11 +165,11 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="T:System.Collections.Generic.IEnumerable`1" /> object enumerating the
 		///    matching boxes.
 		/// </returns>
-		public IEnumerable<AppleDataBox> DataBoxes (params ByteVector [] types)
+		public IEnumerable<AppleDataBox> DataBoxes(params ByteVector[] types)
 		{
-			return DataBoxes (types as IEnumerable<ByteVector>);
+			return DataBoxes(types as IEnumerable<ByteVector>);
 		}
-		
+
 		/// <summary>
 		///    Gets all custom data boxes that match the specified mean
 		///    and name pair.
@@ -179,40 +186,36 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="T:System.Collections.Generic.IEnumerable`1" /> object enumerating the
 		///    matching boxes.
 		/// </returns>
-		public IEnumerable<AppleDataBox> DataBoxes (string mean,
-		                                            string name)
+		public IEnumerable<AppleDataBox> DataBoxes(string mean, string name)
 		{
 			// These children will have a box type of "----"
-			foreach (Box box in ilst_box.Children) {
+			foreach (Box box in ilst_box.Children)
+			{
 				if (box.BoxType != BoxType.DASH)
 					continue;
-				
+
 				// Get the mean and name boxes, make sure
 				// they're legit, and make sure that they match
 				// what we want. Then loop through and add all
 				// the data box children to our output.
-				AppleAdditionalInfoBox mean_box =
-					(AppleAdditionalInfoBox)
-					box.GetChild (BoxType.Mean);
-				AppleAdditionalInfoBox name_box =
-					(AppleAdditionalInfoBox)
-					box.GetChild (BoxType.Name);
-				
-				if (mean_box == null || name_box == null ||
-					mean_box.Text != mean ||
-					name_box.Text != name)
+				AppleAdditionalInfoBox mean_box = (AppleAdditionalInfoBox) box.GetChild(BoxType.Mean);
+				AppleAdditionalInfoBox name_box = (AppleAdditionalInfoBox) box.GetChild(BoxType.Name);
+
+				if (mean_box == null || name_box == null || mean_box.Text != mean || name_box.Text != name)
+				{
 					continue;
-				
-				foreach (Box data_box in box.Children) {
-					AppleDataBox adb =
-						data_box as AppleDataBox;
-					
+				}
+
+				foreach (Box data_box in box.Children)
+				{
+					AppleDataBox adb = data_box as AppleDataBox;
+
 					if (adb != null)
 						yield return adb;
 				}
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets all text values contained in a specified box type.
 		/// </summary>
@@ -224,19 +227,21 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="string[]" /> containing text from all
 		///    matching boxes.
 		/// </returns>
-		public string [] GetText (ByteVector type) {
-			List<string> result = new List<string> ();
-			foreach (AppleDataBox box in DataBoxes (type)) {
+		public string[] GetText(ByteVector type)
+		{
+			List<string> result = new List<string>();
+			foreach (AppleDataBox box in DataBoxes(type))
+			{
 				if (box.Text == null)
 					continue;
-				
-				foreach (string text in box.Text.Split (';'))
-					result.Add (text.Trim ());
+
+				foreach (string text in box.Text.Split(';'))
+					result.Add(text.Trim());
 			}
-			
-			return result.ToArray ();
+
+			return result.ToArray();
 		}
-		
+
 		/// <summary>
 		///    Sets the data for a specified box type to a collection of
 		///    boxes.
@@ -249,41 +254,44 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="AppleDataBox[]" /> containing boxes to add
 		///    for the specified type.
 		/// </param>
-		public void SetData (ByteVector type, AppleDataBox [] boxes)
+		public void SetData(ByteVector type, AppleDataBox[] boxes)
 		{
 			// Fix the type.
-			type = FixId (type);
-			
+			type = FixId(type);
+
 			bool added = false;
-			
+
 			foreach (Box box in ilst_box.Children)
-				if (type == box.BoxType) {
-					
+			{
+				if (type == box.BoxType)
+				{
+
 					// Clear the box's children.
-					box.ClearChildren ();
-					
+					box.ClearChildren();
+
 					// If we've already added new childen,
 					// continue.
 					if (added)
 						continue;
-					
+
 					added = true;
-					
+
 					// Add the children.
 					foreach (AppleDataBox b in boxes)
-						box.AddChild (b);
+						box.AddChild(b);
 				}
-			
+			}
+
 			if (added)
 				return;
-			
-			Box box2 = new AppleAnnotationBox (type);
-			ilst_box.AddChild (box2);
-			
+
+			Box box2 = new AppleAnnotationBox(type);
+			ilst_box.AddChild(box2);
+
 			foreach (AppleDataBox b in boxes)
-				box2.AddChild (b);
+				box2.AddChild(b);
 		}
-		
+
 		/// <summary>
 		///    Sets the data for a specified box type using values from
 		///    a <see cref="ByteVectorCollection" /> object.
@@ -300,21 +308,21 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="uint" /> value containing flags to use for
 		///    the added boxes.
 		/// </param>
-		public void SetData (ByteVector type, ByteVectorCollection data,
-		                     uint flags)
+		public void SetData(ByteVector type, ByteVectorCollection data, uint flags)
 		{
-			if (data == null || data.Count == 0) {
-				ClearData (type);
+			if (data == null || data.Count == 0)
+			{
+				ClearData(type);
 				return;
 			}
-			
-			AppleDataBox [] boxes = new AppleDataBox [data.Count];
+
+			AppleDataBox[] boxes = new AppleDataBox[data.Count];
 			for (int i = 0; i < data.Count; i ++)
-				boxes [i] = new AppleDataBox (data [i], flags);
-			
-			SetData (type, boxes);
+				boxes[i] = new AppleDataBox(data[i], flags);
+
+			SetData(type, boxes);
 		}
-		
+
 		/// <summary>
 		///    Sets the data for a specified box type using a single
 		///    <see cref="ByteVector" /> object.
@@ -331,16 +339,14 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="uint" /> value containing flags to use for
 		///    the added box.
 		/// </param>
-		public void SetData (ByteVector type, ByteVector data,
-		                     uint flags)
+		public void SetData(ByteVector type, ByteVector data, uint flags)
 		{
 			if (data == null || data.Count == 0)
-				ClearData (type);
+				ClearData(type);
 			else
-				SetData (type, new ByteVectorCollection (data),
-					flags);
+				SetData(type, new ByteVectorCollection(data), flags);
 		}
-      
+
 		/// <summary>
 		///    Sets the text for a specified box type.
 		/// </summary>
@@ -351,17 +357,18 @@ namespace TagLib.Mpeg4 {
 		/// <param name="text">
 		///    A <see cref="string[]" /> containing text to store.
 		/// </param>
-		public void SetText (ByteVector type, string [] text)
+		public void SetText(ByteVector type, string[] text)
 		{
 			// Remove empty data and return.
-			if (text == null) {
-				ilst_box.RemoveChild (FixId (type));
+			if (text == null)
+			{
+				ilst_box.RemoveChild(FixId(type));
 				return;
 			}
-			
-			SetText (type, string.Join ("; ", text));
+
+			SetText(type, string.Join("; ", text));
 		}
-		
+
 		/// <summary>
 		///    Sets the text for a specified box type.
 		/// </summary>
@@ -372,20 +379,20 @@ namespace TagLib.Mpeg4 {
 		/// <param name="text">
 		///    A <see cref="string" /> object containing text to store.
 		/// </param>
-		public void SetText (ByteVector type, string text)
+		public void SetText(ByteVector type, string text)
 		{
 			// Remove empty data and return.
-			if (string.IsNullOrEmpty (text)) {
-				ilst_box.RemoveChild (FixId (type));
+			if (string.IsNullOrEmpty(text))
+			{
+				ilst_box.RemoveChild(FixId(type));
 				return;
 			}
-			
-			ByteVectorCollection l = new ByteVectorCollection ();
-			l.Add (ByteVector.FromString (text, StringType.UTF8));
-			SetData (type, l, (uint)
-				AppleDataBox.FlagType.ContainsText);
+
+			ByteVectorCollection l = new ByteVectorCollection();
+			l.Add(ByteVector.FromString(text, StringType.UTF8));
+			SetData(type, l, (uint) AppleDataBox.FlagType.ContainsText);
 		}
-		
+
 		/// <summary>
 		///    Clears all data for a specified box type.
 		/// </summary>
@@ -405,7 +412,7 @@ namespace TagLib.Mpeg4 {
 		{
 			meta_box.RemoveChild (ilst_box);
 		}
-		
+
 		/// <summary>
 		/// Gets the text string from a specific data box in a Dash (----) atom
 		/// </summary>
@@ -415,13 +422,16 @@ namespace TagLib.Mpeg4 {
 		public string GetDashBox(string meanstring, string namestring)
 		{
 			AppleDataBox data_box = GetDashAtoms(meanstring, namestring);
-			if (data_box != null) {
+			if (data_box != null)
+			{
 				return data_box.Text;
-			} else {
+			}
+			else
+			{
 				return null;
 			}
 		}
-			
+
 		/// <summary>
 		/// Sets a specific strings in Dash (----) atom.  This method updates
 		/// and existing atom, or creates a new one.  If an empty datastring is
@@ -433,19 +443,23 @@ namespace TagLib.Mpeg4 {
 		public void SetDashBox(string meanstring, string namestring, string datastring)
 		{
 			AppleDataBox data_box = GetDashAtoms(meanstring, namestring);
-			
+
 			// If we did find a data_box and we have an empty datastring we should
 			// remove the entire dash box.
-			if (data_box != null && string.IsNullOrEmpty(datastring)) {
+			if (data_box != null && string.IsNullOrEmpty(datastring))
+			{
 				AppleAnnotationBox dash_box = GetParentDashBox(meanstring, namestring);
 				dash_box.ClearChildren();
 				ilst_box.RemoveChild(dash_box);
 				return;
 			}
-			
-			if (data_box != null) {
+
+			if (data_box != null)
+			{
 				data_box.Text = datastring;
-			} else {
+			}
+			else
+			{
 				//Create the new boxes, should use 1 for text as a flag
 				AppleAdditionalInfoBox amean_box = new AppleAdditionalInfoBox(BoxType.Mean);
 				AppleAdditionalInfoBox aname_box = new AppleAdditionalInfoBox(BoxType.Name);
@@ -460,7 +474,7 @@ namespace TagLib.Mpeg4 {
 				ilst_box.AddChild(whole_box);
 			}
 		}
-		
+
 		/// <summary>
 		/// Gets the AppleDataBox that corresponds to the specified mean and name values.
 		/// </summary>
@@ -469,34 +483,29 @@ namespace TagLib.Mpeg4 {
 		/// <returns>Existing AppleDataBox or null if one does not exist</returns>
 		private AppleDataBox GetDashAtoms(string meanstring, string namestring)
 		{
-			foreach (Box box in ilst_box.Children) {
+			foreach (Box box in ilst_box.Children)
+			{
 				if (box.BoxType != BoxType.DASH)
 					continue;
-				
+
 				// Get the mean and name boxes, make sure
 				// they're legit, check the Text fields for
 				// a match.  If we have a match return
 				// the AppleDatabox containing the data
-				
-				AppleAdditionalInfoBox mean_box =
-					(AppleAdditionalInfoBox)
-					box.GetChild(BoxType.Mean);
-				AppleAdditionalInfoBox name_box =
-					(AppleAdditionalInfoBox)
-					box.GetChild(BoxType.Name);
-					
-				if (mean_box == null || name_box == null ||
-					mean_box.Text != meanstring ||
-					name_box.Text != namestring) {
-					continue;
-				} else {
-					return (AppleDataBox)box.GetChild(BoxType.Data);
+
+				AppleAdditionalInfoBox mean_box = (AppleAdditionalInfoBox) box.GetChild(BoxType.Mean);
+				AppleAdditionalInfoBox name_box = (AppleAdditionalInfoBox) box.GetChild(BoxType.Name);
+
+				if (mean_box != null && name_box != null && mean_box.Text == meanstring && name_box.Text == namestring)
+				{
+					return (AppleDataBox) box.GetChild(BoxType.Data);
 				}
 			}
+
 			// If we haven't returned the found box yet, there isn't one, return null
 			return null;
 		}
-		
+
 		/// <summary>
 		/// Returns the Parent Dash box object for a given mean/name combination
 		/// </summary>
@@ -505,39 +514,35 @@ namespace TagLib.Mpeg4 {
 		/// <returns>AppleAnnotationBox object that is the parent for the mean/name combination</returns>
 		private AppleAnnotationBox GetParentDashBox(string meanstring, string namestring)
 		{
-			foreach (Box box in ilst_box.Children) {
+			foreach (Box box in ilst_box.Children)
+			{
 				if (box.BoxType != BoxType.DASH)
 					continue;
-				
+
 				// Get the mean and name boxes, make sure
 				// they're legit, check the Text fields for
 				// a match.  If we have a match return
 				// the AppleAnnotationBox that is the Parent
-				
-				AppleAdditionalInfoBox mean_box =
-					(AppleAdditionalInfoBox)
-					box.GetChild(BoxType.Mean);
-				AppleAdditionalInfoBox name_box =
-					(AppleAdditionalInfoBox)
-					box.GetChild(BoxType.Name);
-					
-				if (mean_box == null || name_box == null ||
-					mean_box.Text != meanstring ||
-					name_box.Text != namestring) {
-					continue;
-				} else {
-					return (AppleAnnotationBox)box;
+
+				AppleAdditionalInfoBox mean_box = (AppleAdditionalInfoBox) box.GetChild(BoxType.Mean);
+				AppleAdditionalInfoBox name_box = (AppleAdditionalInfoBox) box.GetChild(BoxType.Name);
+
+				if (mean_box != null && name_box != null && mean_box.Text == meanstring && name_box.Text == namestring)
+				{
+					return (AppleAnnotationBox) box;
 				}
 			}
+
 			// If we haven't returned the found box yet, there isn't one, return null
 			return null;
 		}
+
 		#endregion
 		
 		
 		
 		#region Internal Methods
-		
+
 		/// <summary>
 		///    Converts the provided ID into a readonly ID and fixes a
 		///    3 byte ID.
@@ -550,24 +555,23 @@ namespace TagLib.Mpeg4 {
 		///    A fixed <see cref="ReadOnlyByteVector" /> or <see
 		///    langword="null" /> if the ID could not be fixed.
 		/// </returns>
-		internal static ReadOnlyByteVector FixId (ByteVector id)
+		internal static ReadOnlyByteVector FixId(ByteVector id)
 		{
-			if (id.Count == 4) {
-				ReadOnlyByteVector roid =
-					id as ReadOnlyByteVector;
+			if (id.Count == 4)
+			{
+				ReadOnlyByteVector roid = id as ReadOnlyByteVector;
 				if (roid != null)
 					return roid;
-				
-				return new ReadOnlyByteVector (id);
+
+				return new ReadOnlyByteVector(id);
 			}
-			
+
 			if (id.Count == 3)
-				return new ReadOnlyByteVector (
-					0xa9, id [0], id [1], id [2]);
-			
+				return new ReadOnlyByteVector(0xa9, id[0], id[1], id[2]);
+
 			return null;
 		}
-		
+
 		#endregion
 		
 		
@@ -604,8 +608,9 @@ namespace TagLib.Mpeg4 {
 		/// <value>
 		///    Always <see cref="TagLib.TagTypes.Apple" />.
 		/// </value>
-		public override TagTypes TagTypes {
-			get {return TagTypes.Apple;}
+		public override TagTypes TagTypes
+		{
+			get { return TagTypes.Apple; }
 		}
 		
 		/// <summary>
@@ -620,14 +625,15 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "@nam" data box.
 		/// </remarks>
-		public override string Title {
-			get {
-				string [] text = GetText (BoxType.Nam);
-				return text.Length == 0 ? null : text [0];
+		public override string Title
+		{
+			get
+			{
+				string[] text = GetText(BoxType.Nam);
+				return text.Length == 0 ? null : text[0];
 			}
-			set {
-				SetText (BoxType.Nam, value);
-			}
+
+			set { SetText(BoxType.Nam, value); }
 		}
 		
 		/// <summary>
@@ -643,9 +649,10 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "@ART" data box.
 		/// </remarks>
-		public override string [] Performers {
-			get {return GetText (BoxType.Art);}
-			set {SetText (BoxType.Art, value);}
+		public override string [] Performers
+		{
+			get { return GetText(BoxType.Art); }
+			set { SetText(BoxType.Art, value); }
 		}
 		
 		/// <summary>
@@ -662,9 +669,10 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "aART" data box.
 		/// </remarks>
-		public override string [] AlbumArtists {
-			get {return GetText (BoxType.Aart);}
-			set {SetText(BoxType.Aart, value);}
+		public override string [] AlbumArtists
+		{
+			get { return GetText(BoxType.Aart); }
+			set { SetText(BoxType.Aart, value); }
 		}
 		
 		/// <summary>
@@ -679,9 +687,10 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "@wrt" data box.
 		/// </remarks>
-		public override string [] Composers {
-			get {return GetText (BoxType.Wrt);}
-			set {SetText (BoxType.Wrt, value);}
+		public override string[] Composers
+		{
+			get { return GetText(BoxType.Wrt); }
+			set { SetText(BoxType.Wrt, value); }
 		}
 		
 		/// <summary>
@@ -696,12 +705,15 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "@alb" data box.
 		/// </remarks>
-		public override string Album {
-			get {
-				string [] text = GetText (BoxType.Alb);
-				return text.Length == 0 ? null : text [0];
+		public override string Album
+		{
+			get
+			{
+				string[] text = GetText(BoxType.Alb);
+				return text.Length == 0 ? null : text[0];
 			}
-			set {SetText (BoxType.Alb, value);}
+
+			set { SetText(BoxType.Alb, value); }
 		}
 		
 		/// <summary>
@@ -716,12 +728,15 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "@cmt" data box.
 		/// </remarks>
-		public override string Comment {
-			get {
-				string [] text = GetText (BoxType.Cmt);
-				return text.Length == 0 ? null : text [0];
+		public override string Comment
+		{
+			get
+			{
+				string[] text = GetText(BoxType.Cmt);
+				return text.Length == 0 ? null : text[0];
 			}
-			set {SetText (BoxType.Cmt, value);}
+
+			set { SetText(BoxType.Cmt, value); }
 		}
 		
 		/// <summary>
@@ -737,38 +752,42 @@ namespace TagLib.Mpeg4 {
 		///    This property is implemented using the "@gen" and "gnre"
 		///    data boxes.
 		/// </remarks>
-		public override string [] Genres {
-			get {
-				string [] text = GetText (BoxType.Gen);
+		public override string [] Genres
+		{
+			get
+			{
+				string[] text = GetText(BoxType.Gen);
 				if (text.Length > 0)
 					return text;
 				
-				foreach (AppleDataBox box in DataBoxes (BoxType.Gnre)) {
-					if (box.Flags != (int) AppleDataBox
-						.FlagType.ContainsData)
+				foreach (AppleDataBox box in DataBoxes (BoxType.Gnre))
+				{
+					if (box.Flags != (int) AppleDataBox.FlagType.ContainsData)
 						continue;
 					
 					// iTunes stores genre's in the GNRE box
 					// as (ID3# + 1).
-					
-					ushort index = box.Data.ToUShort (true);
-					if (index == 0) continue;
-					
-					string str = TagLib.Genres
-						.IndexToAudio ((byte) (index - 1));
+
+					ushort index = box.Data.ToUShort(true);
+					if (index == 0)
+						continue;
+
+					string str = TagLib.Genres.IndexToAudio((byte) (index - 1));
 					
 					if (str == null)
 						continue;
-					
-					text = new string [] {str};
+
+					text = new string[] {str};
 					break;
 				}
 				
 				return text;
 			}
-			set {
-				ClearData (BoxType.Gnre);
-				SetText (BoxType.Gen, value);
+
+			set
+			{
+				ClearData(BoxType.Gnre);
+				SetText(BoxType.Gen, value);
 			}
 		}
 		
@@ -784,26 +803,29 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "@day" data box.
 		/// </remarks>
-		public override uint Year {
-			get {
+		public override uint Year
+		{
+			get
+			{
 				uint value;
-				foreach (AppleDataBox box in DataBoxes (BoxType.Day))
-					if (box.Text != null && (uint.TryParse (
+				foreach (AppleDataBox box in DataBoxes(BoxType.Day))
+					if (box.Text != null && (uint.TryParse(
 						box.Text, out value) ||
-						uint.TryParse (
-							box.Text.Length > 4 ?
-							box.Text.Substring (0, 4)
-							: box.Text, out value)))
+						uint.TryParse(
+							box.Text.Length > 4
+								? box.Text.Substring(0, 4)
+								: box.Text, out value)))
 						return value;
-				
+
 				return 0;
 			}
-			set {
+
+			set
+			{
 				if (value == 0)
-					ClearData (BoxType.Day);
+					ClearData(BoxType.Day);
 				else
-					SetText (BoxType.Day, value.ToString (
-						CultureInfo.InvariantCulture));
+					SetText(BoxType.Day, value.ToString(CultureInfo.InvariantCulture));
 			}
 		}
 		
@@ -819,30 +841,34 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "trkn" data box.
 		/// </remarks>
-		public override uint Track {
-			get {
+		public override uint Track
+		{
+			get
+			{
 				foreach (AppleDataBox box in DataBoxes (BoxType.Trkn))
-					if (box.Flags == (int)
-						AppleDataBox.FlagType.ContainsData &&
-						box.Data.Count >= 4)
-						return box.Data.Mid (2, 2).ToUShort ();
+				{
+					if (box.Flags == (int) AppleDataBox.FlagType.ContainsData && box.Data.Count >= 4)
+						return box.Data.Mid(2, 2).ToUShort();
+				}
 				
 				return 0;
 			}
-			set {
+
+			set
+			{
 				uint count = TrackCount;
-				if (value == 0 && count == 0) {
-					ClearData (BoxType.Trkn);
+				if (value == 0 && count == 0)
+				{
+					ClearData(BoxType.Trkn);
 					return;
 				}
-				
-				ByteVector v = ByteVector.FromUShort (0);
-				v.Add (ByteVector.FromUShort ((ushort) value));
-				v.Add (ByteVector.FromUShort ((ushort) count));
-				v.Add (ByteVector.FromUShort (0));
-				
-				SetData (BoxType.Trkn, v, (int)
-					AppleDataBox.FlagType.ContainsData);
+
+				ByteVector v = ByteVector.FromUShort(0);
+				v.Add(ByteVector.FromUShort((ushort) value));
+				v.Add(ByteVector.FromUShort((ushort) count));
+				v.Add(ByteVector.FromUShort(0));
+
+				SetData(BoxType.Trkn, v, (int) AppleDataBox.FlagType.ContainsData);
 			}
 		}
 		
@@ -858,29 +884,33 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "trkn" data box.
 		/// </remarks>
-		public override uint TrackCount {
-			get {
+		public override uint TrackCount
+		{
+			get
+			{
 				foreach (AppleDataBox box in DataBoxes (BoxType.Trkn))
-					if (box.Flags == (int)
-						AppleDataBox.FlagType.ContainsData &&
-						box.Data.Count >= 6)
+				{
+					if (box.Flags == (int) AppleDataBox.FlagType.ContainsData && box.Data.Count >= 6)
 						return box.Data.Mid (4, 2).ToUShort ();
+				}
 				
 				return 0;
 			}
-			set {
+
+			set
+			{
 				uint track = Track;
-				if (value == 0 && track == 0) {
-					ClearData (BoxType.Trkn);
+				if (value == 0 && track == 0)
+				{
+					ClearData(BoxType.Trkn);
 					return;
 				}
-				
-				ByteVector v = ByteVector.FromUShort (0);
-				v.Add (ByteVector.FromUShort ((ushort) track));
-				v.Add (ByteVector.FromUShort ((ushort) value));
-				v.Add (ByteVector.FromUShort (0));
-				SetData (BoxType.Trkn, v, (int)
-					AppleDataBox.FlagType.ContainsData);
+
+				ByteVector v = ByteVector.FromUShort(0);
+				v.Add(ByteVector.FromUShort((ushort) track));
+				v.Add(ByteVector.FromUShort((ushort) value));
+				v.Add(ByteVector.FromUShort(0));
+				SetData(BoxType.Trkn, v, (int) AppleDataBox.FlagType.ContainsData);
 			}
 		}
 		
@@ -896,30 +926,33 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "disk" data box.
 		/// </remarks>
-		public override uint Disc {
-			get {
+		public override uint Disc
+		{
+			get
+			{
 				foreach (AppleDataBox box in DataBoxes (BoxType.Disk))
-					if (box.Flags == (int)
-						AppleDataBox.FlagType.ContainsData &&
-						box.Data.Count >= 4)
-						return box.Data.Mid (2, 2).ToUShort ();
+				{
+					if (box.Flags == (int) AppleDataBox.FlagType.ContainsData &&  box.Data.Count >= 4)
+						return box.Data.Mid(2, 2).ToUShort();
+				}
 				
 				return 0;
 			}
-			set {
+			set
+			{
 				uint count = DiscCount;
-				if (value == 0 && count == 0) {
-					ClearData (BoxType.Disk);
+				if (value == 0 && count == 0)
+				{
+					ClearData(BoxType.Disk);
 					return;
 				}
-				
-				ByteVector v = ByteVector.FromUShort (0);
-				v.Add (ByteVector.FromUShort ((ushort) value));
-				v.Add (ByteVector.FromUShort ((ushort) count));
-				v.Add (ByteVector.FromUShort (0));
-				
-				SetData (BoxType.Disk, v, (int)
-					AppleDataBox.FlagType.ContainsData);
+
+				ByteVector v = ByteVector.FromUShort(0);
+				v.Add(ByteVector.FromUShort((ushort) value));
+				v.Add(ByteVector.FromUShort((ushort) count));
+				v.Add(ByteVector.FromUShort(0));
+
+				SetData(BoxType.Disk, v, (int) AppleDataBox.FlagType.ContainsData);
 			}
 		}
 		
@@ -935,29 +968,33 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "disk" data box.
 		/// </remarks>
-		public override uint DiscCount {
-			get {
-				foreach (AppleDataBox box in DataBoxes (BoxType.Disk))
-					if (box.Flags == (int)
-						AppleDataBox.FlagType.ContainsData &&
-						box.Data.Count >= 6)
-						return box.Data.Mid (4, 2).ToUShort ();
-				
+		public override uint DiscCount
+		{
+			get
+			{
+				foreach (AppleDataBox box in DataBoxes(BoxType.Disk))
+				{
+					if (box.Flags == (int) AppleDataBox.FlagType.ContainsData && box.Data.Count >= 6)
+						return box.Data.Mid(4, 2).ToUShort();
+				}
+
 				return 0;
 			}
-			set {
+
+			set
+			{
 				uint disc = Disc;
-				if (value == 0 && disc == 0) {
-					ClearData (BoxType.Disk);
+				if (value == 0 && disc == 0)
+				{
+					ClearData(BoxType.Disk);
 					return;
 				}
-				
-				ByteVector v = ByteVector.FromUShort (0);
-				v.Add (ByteVector.FromUShort ((ushort) disc));
-				v.Add (ByteVector.FromUShort ((ushort) value));
-				v.Add (ByteVector.FromUShort (0));
-				SetData (BoxType.Disk, v, (int)
-					AppleDataBox.FlagType.ContainsData);
+
+				ByteVector v = ByteVector.FromUShort(0);
+				v.Add(ByteVector.FromUShort((ushort) disc));
+				v.Add(ByteVector.FromUShort((ushort) value));
+				v.Add(ByteVector.FromUShort(0));
+				SetData(BoxType.Disk, v, (int) AppleDataBox.FlagType.ContainsData);
 			}
 		}
 		
@@ -973,15 +1010,19 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "@lyr" data box.
 		/// </remarks>
-		public override string Lyrics {
-			get {
-				foreach (AppleDataBox box in DataBoxes (BoxType.Lyr))
+		public override string Lyrics
+		{
+			get
+			{
+				foreach (AppleDataBox box in DataBoxes(BoxType.Lyr))
+				{
 					return box.Text;
+				}
+
 				return null;
 			}
-			set {
-				SetText (BoxType.Lyr, value);
-			}
+
+			set { SetText (BoxType.Lyr, value); }
 		}
 		
 		/// <summary>
@@ -996,16 +1037,21 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "@grp" data box.
 		/// </remarks>
-		public override string Grouping {
-			get {
+		public override string Grouping
+		{
+			get
+			{
 				foreach (AppleDataBox box in DataBoxes(BoxType.Grp))
+				{
 					return box.Text;
+				}
 				
 				return null;
 			}
-			set {SetText(BoxType.Grp, value);}
+
+			set { SetText(BoxType.Grp, value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the number of beats per minute in the audio
 		///    of the media represented by the current instance.
@@ -1018,27 +1064,33 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "tmpo" data box.
 		/// </remarks>
-		public override uint BeatsPerMinute {
-			get {
-				foreach (AppleDataBox box in DataBoxes (BoxType.Tmpo))
-					if (box.Flags == (uint)
-						AppleDataBox.FlagType.ForTempo)
-						return box.Data.ToUInt ();
-				
+		public override uint BeatsPerMinute
+		{
+			get
+			{
+				foreach (AppleDataBox box in DataBoxes(BoxType.Tmpo))
+				{
+					if (box.Flags == (uint) AppleDataBox.FlagType.ForTempo)
+						return box.Data.ToUInt();
+				}
+
 				return 0;
 			}
-			set {
-				if (value == 0) {
-					ClearData (BoxType.Tmpo);
+
+			set
+			{
+				if (value == 0)
+				{
+					ClearData(BoxType.Tmpo);
 					return;
 				}
-				
-				SetData (BoxType.Tmpo,
-					ByteVector.FromUShort ((ushort)value),
+
+				SetData(BoxType.Tmpo,
+					ByteVector.FromUShort((ushort) value),
 					(uint) AppleDataBox.FlagType.ForTempo);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the conductor or director of the media
 		///    represented by the current instance.
@@ -1051,16 +1103,19 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "cond" data box.
 		/// </remarks>
-		public override string Conductor {
-			get {
+		public override string Conductor
+		{
+			get
+			{
 				foreach (AppleDataBox box in DataBoxes(BoxType.Cond))
 					return box.Text;
-				
+
 				return null;
 			}
-			set {SetText(BoxType.Cond, value);}
+
+			set { SetText(BoxType.Cond, value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the copyright information for the media
 		///    represented by the current instance.
@@ -1073,16 +1128,19 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "cprt" data box.
 		/// </remarks>
-		public override string Copyright {
-			get {
+		public override string Copyright
+		{
+			get
+			{
 				foreach (AppleDataBox box in DataBoxes(BoxType.Cprt))
 					return box.Text;
-				
+
 				return null;
 			}
-			set {SetText(BoxType.Cprt, value);}
+
+			set { SetText(BoxType.Cprt, value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the sort names for the band or artist who
 		///    is credited in the creation of the entire album or
@@ -1102,11 +1160,12 @@ namespace TagLib.Mpeg4 {
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		///    http://code.google.com/p/mp4v2/wiki/iTunesMetadata
 		/// </remarks>
-		public override string [] AlbumArtistsSort {
-			get {return GetText (BoxType.Soaa);}
-			set {SetText (BoxType.Soaa, value);}
+		public override string[] AlbumArtistsSort
+		{
+			get { return GetText(BoxType.Soaa); }
+			set { SetText(BoxType.Soaa, value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the sort names of the performers or artists
 		///    who performed in the media described by the current instance.
@@ -1122,11 +1181,12 @@ namespace TagLib.Mpeg4 {
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		///    http://code.google.com/p/mp4v2/wiki/iTunesMetadata
 		/// </remarks>
-		public override string[] PerformersSort {
-			get {return GetText (BoxType.Soar);}
-			set {SetText (BoxType.Soar, value);}
+		public override string[] PerformersSort
+		{
+			get { return GetText(BoxType.Soar); }
+			set { SetText(BoxType.Soar, value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the sort names of the Composer credited
 		///    in the media described by the current instance.
@@ -1141,11 +1201,12 @@ namespace TagLib.Mpeg4 {
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		///    http://code.google.com/p/mp4v2/wiki/iTunesMetadata
 		/// </remarks>
-		public override string[] ComposersSort {
-			get {return GetText (BoxType.Soco);}
-			set {SetText (BoxType.Soco, value);}
+		public override string[] ComposersSort
+		{
+			get { return GetText(BoxType.Soco); }
+			set { SetText(BoxType.Soco, value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the sort names of the Album Title of
 		///    the media described by the current instance.
@@ -1160,14 +1221,17 @@ namespace TagLib.Mpeg4 {
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		///    http://code.google.com/p/mp4v2/wiki/iTunesMetadata
 		/// </remarks>
-		public override string AlbumSort {
-			get {
-				string [] text = GetText (BoxType.Soal);
-				return text.Length == 0 ? null : text [0];
+		public override string AlbumSort
+		{
+			get
+			{
+				string[] text = GetText(BoxType.Soal);
+				return text.Length == 0 ? null : text[0];
 			}
-			set {SetText (BoxType.Soal, value);}
+
+			set { SetText(BoxType.Soal, value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the sort names of the Track Title in the
 		///    media described by the current instance.
@@ -1182,12 +1246,15 @@ namespace TagLib.Mpeg4 {
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		///    http://code.google.com/p/mp4v2/wiki/iTunesMetadata
 		/// </remarks>
-		public override string TitleSort {
-			get {
-				string [] text = GetText (BoxType.Sonm);
-				return text.Length == 0 ? null : text [0];
+		public override string TitleSort
+		{
+			get
+			{
+				string[] text = GetText(BoxType.Sonm);
+				return text.Length == 0 ? null : text[0];
 			}
-			set {SetText (BoxType.Sonm, value);}
+
+			set { SetText(BoxType.Sonm, value); }
 		}
 
 		/// <summary>
@@ -1202,9 +1269,10 @@ namespace TagLib.Mpeg4 {
 		///    This property is implemented using the "dash"/"----" box type.
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		/// </remarks>
-		public override string MusicBrainzArtistId {
-			get {return GetDashBox("com.apple.iTunes","MusicBrainz Artist Id");}
-			set {SetDashBox("com.apple.iTunes", "MusicBrainz Artist Id", value);}
+		public override string MusicBrainzArtistId
+		{
+			get { return GetDashBox("com.apple.iTunes", "MusicBrainz Artist Id"); }
+			set { SetDashBox("com.apple.iTunes", "MusicBrainz Artist Id", value); }
 		}
 
 		/// <summary>
@@ -1219,9 +1287,10 @@ namespace TagLib.Mpeg4 {
 		///    This property is implemented using the "dash"/"----" box type.
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		/// </remarks>
-		public override string MusicBrainzReleaseId {
-			get {return GetDashBox("com.apple.iTunes","MusicBrainz Album Id");}
-			set {SetDashBox("com.apple.iTunes", "MusicBrainz Album Id",value);}
+		public override string MusicBrainzReleaseId
+		{
+			get { return GetDashBox("com.apple.iTunes", "MusicBrainz Album Id"); }
+			set { SetDashBox("com.apple.iTunes", "MusicBrainz Album Id", value); }
 		}
 
 		/// <summary>
@@ -1236,9 +1305,10 @@ namespace TagLib.Mpeg4 {
 		///    This property is implemented using the "dash"/"----" box type.
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		/// </remarks>
-		public override string MusicBrainzReleaseArtistId {
-			get {return GetDashBox("com.apple.iTunes","MusicBrainz Album Artist Id");}
-			set {SetDashBox("com.apple.iTunes", "MusicBrainz Album Artist Id",value);}
+		public override string MusicBrainzReleaseArtistId
+		{
+			get { return GetDashBox("com.apple.iTunes", "MusicBrainz Album Artist Id"); }
+			set { SetDashBox("com.apple.iTunes", "MusicBrainz Album Artist Id", value); }
 		}
 
 		/// <summary>
@@ -1253,9 +1323,10 @@ namespace TagLib.Mpeg4 {
 		///    This property is implemented using the "dash"/"----" box type.
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		/// </remarks>
-		public override string MusicBrainzTrackId {
-		    get {return GetDashBox("com.apple.iTunes","MusicBrainz Track Id");}
-		    set {SetDashBox("com.apple.iTunes", "MusicBrainz Track Id", value);}
+		public override string MusicBrainzTrackId
+		{
+			get { return GetDashBox("com.apple.iTunes", "MusicBrainz Track Id"); }
+			set { SetDashBox("com.apple.iTunes", "MusicBrainz Track Id", value); }
 		}
 
 		/// <summary>
@@ -1270,9 +1341,10 @@ namespace TagLib.Mpeg4 {
 		///    This property is implemented using the "dash"/"----" box type.
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		/// </remarks>
-		public override string MusicBrainzDiscId {
-			get {return GetDashBox("com.apple.iTunes","MusicBrainz Disc Id");}
-			set {SetDashBox("com.apple.iTunes", "MusicBrainz Disc Id",value);}
+		public override string MusicBrainzDiscId
+		{
+			get { return GetDashBox("com.apple.iTunes", "MusicBrainz Disc Id"); }
+			set { SetDashBox("com.apple.iTunes", "MusicBrainz Disc Id", value); }
 		}
 
 		/// <summary>
@@ -1287,9 +1359,10 @@ namespace TagLib.Mpeg4 {
 		///    This property is implemented using the "dash"/"----" box type.
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		/// </remarks>
-		public override string MusicIpId {
-			get {return GetDashBox("com.apple.iTunes","MusicIP PUID");}
-			set {SetDashBox("com.apple.iTunes", "MusicIP PUID",value);}
+		public override string MusicIpId
+		{
+			get { return GetDashBox("com.apple.iTunes", "MusicIP PUID"); }
+			set { SetDashBox("com.apple.iTunes", "MusicIP PUID", value); }
 		}
 
 		/// <summary>
@@ -1304,9 +1377,10 @@ namespace TagLib.Mpeg4 {
 		///    This property is implemented using the "dash"/"----" box type.
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		/// </remarks>
-		public override string AmazonId {
-			get {return GetDashBox("com.apple.iTunes","ASIN");}
-			set {SetDashBox("com.apple.iTunes", "ASIN",value);}
+		public override string AmazonId
+		{
+			get { return GetDashBox("com.apple.iTunes", "ASIN"); }
+			set { SetDashBox("com.apple.iTunes", "ASIN", value); }
 		}
 
 		/// <summary>
@@ -1321,9 +1395,10 @@ namespace TagLib.Mpeg4 {
 		///    This property is implemented using the "dash"/"----" box type.
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		/// </remarks>
-		public override string MusicBrainzReleaseStatus {
-			get {return GetDashBox("com.apple.iTunes","MusicBrainz Album Status");}
-			set {SetDashBox("com.apple.iTunes", "MusicBrainz Album Status",value);}
+		public override string MusicBrainzReleaseStatus
+		{
+			get { return GetDashBox("com.apple.iTunes", "MusicBrainz Album Status"); }
+			set { SetDashBox("com.apple.iTunes", "MusicBrainz Album Status", value); }
 		}
 
 		/// <summary>
@@ -1338,9 +1413,10 @@ namespace TagLib.Mpeg4 {
 		///    This property is implemented using the "dash"/"----" box type.
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		/// </remarks>
-		public override string MusicBrainzReleaseType {
-			get {return GetDashBox("com.apple.iTunes","MusicBrainz Album Type");}
-			set {SetDashBox("com.apple.iTunes", "MusicBrainz Album Type",value);}
+		public override string MusicBrainzReleaseType
+		{
+			get { return GetDashBox("com.apple.iTunes", "MusicBrainz Album Type"); }
+			set { SetDashBox("com.apple.iTunes", "MusicBrainz Album Type", value); }
 		}
 
 		/// <summary>
@@ -1355,9 +1431,10 @@ namespace TagLib.Mpeg4 {
 		///    This property is implemented using the "dash"/"----" box type.
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		/// </remarks>
-		public override string MusicBrainzReleaseCountry {
-			get {return GetDashBox("com.apple.iTunes","MusicBrainz Album Release Country");}
-			set {SetDashBox("com.apple.iTunes", "MusicBrainz Album Release Country",value);}
+		public override string MusicBrainzReleaseCountry
+		{
+			get { return GetDashBox("com.apple.iTunes", "MusicBrainz Album Release Country"); }
+			set { SetDashBox("com.apple.iTunes", "MusicBrainz Album Release Country", value); }
 		}
 
 		/// <summary>
@@ -1372,44 +1449,47 @@ namespace TagLib.Mpeg4 {
 		/// <remarks>
 		///    This property is implemented using the "covr" data box.
 		/// </remarks>
-		public override IPicture [] Pictures {
-			get {
-				List<Picture> l = new List<Picture> ();
-				
-				foreach (AppleDataBox box in DataBoxes(BoxType.Covr)) {
-					Picture p = new Picture (box.Data);
+		public override IPicture[] Pictures
+		{
+			get
+			{
+				List<Picture> l = new List<Picture>();
+
+				foreach (AppleDataBox box in DataBoxes(BoxType.Covr))
+				{
+					Picture p = new Picture(box.Data);
 					p.Type = PictureType.FrontCover;
-					l.Add (p);
+					l.Add(p);
 				}
-				
-				return (Picture []) l.ToArray ();
+
+				return (Picture[]) l.ToArray();
 			}
-			set {
-				if (value == null || value.Length == 0) {
-					ClearData (BoxType.Covr);
+			set
+			{
+				if (value == null || value.Length == 0)
+				{
+					ClearData(BoxType.Covr);
 					return;
 				}
-				
-				AppleDataBox [] boxes =
-					new AppleDataBox [value.Length];
-				for (int i = 0; i < value.Length; i ++) {
+
+				AppleDataBox[] boxes = new AppleDataBox[value.Length];
+				for (int i = 0; i < value.Length; i ++)
+				{
 					uint type = (uint)
 						AppleDataBox.FlagType.ContainsData;
-					
-					if (value [i].MimeType == "image/jpeg")
-						type = (uint)
-							AppleDataBox.FlagType.ContainsJpegData;
-					else if (value [i].MimeType == "image/png")
-						type = (uint)
-							AppleDataBox.FlagType.ContainsPngData;
-					
-					boxes [i] = new AppleDataBox (value [i].Data, type);
+
+					if (value[i].MimeType == "image/jpeg")
+						type = (uint) AppleDataBox.FlagType.ContainsJpegData;
+					else if (value[i].MimeType == "image/png")
+						type = (uint) AppleDataBox.FlagType.ContainsPngData;
+
+					boxes[i] = new AppleDataBox(value[i].Data, type);
 				}
-				
+
 				SetData(BoxType.Covr, boxes);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not the current instance is empty.
 		/// </summary>
@@ -1417,18 +1497,19 @@ namespace TagLib.Mpeg4 {
 		///    <see langword="true" /> if the current instance does not
 		///    any values. Otherwise <see langword="false" />.
 		/// </value>
-		public override bool IsEmpty {
-			get {return !ilst_box.HasChildren;}
+		public override bool IsEmpty
+		{
+			get { return !ilst_box.HasChildren; }
 		}
-		
+
 		/// <summary>
 		///    Clears the values stored in the current instance.
 		/// </summary>
-		public override void Clear ()
+		public override void Clear()
 		{
-			ilst_box.ClearChildren ();
+			ilst_box.ClearChildren();
 		}
-		
+
 		#endregion
 	}
 }

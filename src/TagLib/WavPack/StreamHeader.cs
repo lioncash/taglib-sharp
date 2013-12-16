@@ -27,8 +27,10 @@
 //
 
 using System;
+using System.Globalization;
 
-namespace TagLib.WavPack {
+namespace TagLib.WavPack
+{
 	/// <summary>
 	///    This struct implements <see cref="IAudioCodec" /> to provide
 	///    support for reading WavPack audio properties.
@@ -49,9 +51,8 @@ namespace TagLib.WavPack {
 		private const long SRATE_MASK  = (0xfL << SRATE_LSB);
 		
 		#endregion
-		
-		
-		
+
+
 		#region Private Fields
 		
 		/// <summary>
@@ -75,8 +76,8 @@ namespace TagLib.WavPack {
 		private uint samples;
 		
 		#endregion
-		
-		
+
+
 		#region Public Static Fields
 		
 		/// <summary>
@@ -93,9 +94,8 @@ namespace TagLib.WavPack {
 		public static readonly ReadOnlyByteVector FileIdentifier = "wvpk";
 		
 		#endregion
-		
-		
-		
+
+
 		#region Constructors
 		
 		/// <summary>
@@ -139,11 +139,10 @@ namespace TagLib.WavPack {
 		}
 		
 		#endregion
-		
-		
-		
+
+
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the duration of the media represented by the current
 		///    instance.
@@ -152,15 +151,16 @@ namespace TagLib.WavPack {
 		///    A <see cref="TimeSpan" /> containing the duration of the
 		///    media represented by the current instance.
 		/// </value>
-		public TimeSpan Duration {
-			get {
-				return AudioSampleRate > 0 ?
-					TimeSpan.FromSeconds ((double) samples /
-						(double) AudioSampleRate + 0.5) :
-					TimeSpan.Zero;
+		public TimeSpan Duration
+		{
+			get
+			{
+				return AudioSampleRate > 0
+					? TimeSpan.FromSeconds((double) samples/ (double) AudioSampleRate + 0.5)
+					: TimeSpan.Zero;
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the types of media represented by the current
 		///    instance.
@@ -168,10 +168,11 @@ namespace TagLib.WavPack {
 		/// <value>
 		///    Always <see cref="TagLib.MediaTypes.Audio" />.
 		/// </value>
-		public MediaTypes MediaTypes {
-			get {return MediaTypes.Audio;}
+		public MediaTypes MediaTypes
+		{
+			get { return MediaTypes.Audio; }
 		}
-		
+
 		/// <summary>
 		///    Gets a text description of the media represented by the
 		///    current instance.
@@ -180,12 +181,11 @@ namespace TagLib.WavPack {
 		///    A <see cref="string" /> object containing a description
 		///    of the media represented by the current instance.
 		/// </value>
-		public string Description {
-			get {return string.Format (
-				System.Globalization.CultureInfo.InvariantCulture,
-				"WavPack Version {0} Audio", Version);}
+		public string Description
+		{
+			get { return string.Format(CultureInfo.InvariantCulture, "WavPack Version {0} Audio", Version); }
 		}
-		
+
 		/// <summary>
 		///    Gets the bitrate of the audio represented by the current
 		///    instance.
@@ -194,14 +194,16 @@ namespace TagLib.WavPack {
 		///    A <see cref="int" /> value containing a bitrate of the
 		///    audio represented by the current instance.
 		/// </value>
-		public int AudioBitrate {
-			get {
-				return (int) (Duration > TimeSpan.Zero ?
-					((stream_length * 8L) /
-					Duration.TotalSeconds) / 1000 : 0);
-				}
+		public int AudioBitrate
+		{
+			get
+			{
+				return (int) (Duration > TimeSpan.Zero
+					? ((stream_length*8L) / Duration.TotalSeconds)/1000
+					: 0);
+			}
 		}
-		
+
 		/// <summary>
 		///    Gets the sample rate of the audio represented by the
 		///    current instance.
@@ -210,13 +212,11 @@ namespace TagLib.WavPack {
 		///    A <see cref="int" /> value containing the sample rate of
 		///    the audio represented by the current instance.
 		/// </value>
-		public int AudioSampleRate {
-			get {
-				return (int) (sample_rates [
-					(flags & SRATE_MASK) >> SRATE_LSB]);
-			}
+		public int AudioSampleRate
+		{
+			get { return (int) (sample_rates [(flags & SRATE_MASK) >> SRATE_LSB]); }
 		}
-		
+
 		/// <summary>
 		///    Gets the number of channels in the audio represented by
 		///    the current instance.
@@ -226,10 +226,11 @@ namespace TagLib.WavPack {
 		///    channels in the audio represented by the current
 		///    instance.
 		/// </value>
-		public int AudioChannels {
-			get {return ((flags & MONO_FLAG) != 0) ? 1 : 2;}
+		public int AudioChannels
+		{
+			get { return ((flags & MONO_FLAG) != 0) ? 1 : 2; }
 		}
-		
+
 		/// <summary>
 		///    Gets the WavPack version of the audio represented by the
 		///    current instance.
@@ -238,10 +239,11 @@ namespace TagLib.WavPack {
 		///    A <see cref="int" /> value containing the WavPack version
 		///    of the audio represented by the current instance.
 		/// </value>
-		public int Version {
-			get {return version;}
+		public int Version
+		{
+			get { return version; }
 		}
-		
+
 		/// <summary>
 		///    Gets the number of bits per sample in the audio
 		///    represented by the current instance.
@@ -251,17 +253,14 @@ namespace TagLib.WavPack {
 		///    per sample in the audio represented by the current
 		///    instance.
 		/// </value>
-		public int BitsPerSample {
-			get {
-				return (int) (((flags & BYTES_STORED) + 1) * 8 -
-					((flags & SHIFT_MASK) >> SHIFT_LSB));
-			}
+		public int BitsPerSample
+		{
+			get { return (int) (((flags & BYTES_STORED) + 1) * 8 - ((flags & SHIFT_MASK) >> SHIFT_LSB)); }
 		}
 		
 		#endregion
-		
-		
-		
+
+
 		#region IEquatable
 		
 		/// <summary>
@@ -271,9 +270,10 @@ namespace TagLib.WavPack {
 		///    A <see cref="int" /> value containing the hash code for
 		///    the current instance.
 		/// </returns>
-		public override int GetHashCode ()
+		public override int GetHashCode()
 		{
-			unchecked {
+			unchecked
+			{
 				return (int) (flags ^ samples ^ version);
 			}
 		}
@@ -298,7 +298,7 @@ namespace TagLib.WavPack {
 			
 			return Equals ((StreamHeader) other);
 		}
-		
+
 		/// <summary>
 		///    Checks whether or not the current instance is equal to
 		///    another instance of <see cref="StreamHeader" />.
@@ -312,13 +312,13 @@ namespace TagLib.WavPack {
 		///    current instance is equal to <paramref name="other" />.
 		/// </returns>
 		/// <seealso cref="M:System.IEquatable`1.Equals" />
-		public bool Equals (StreamHeader other)
+		public bool Equals(StreamHeader other)
 		{
 			return flags == other.flags &&
-				samples == other.samples &&
-				version == other.version;
+			       samples == other.samples &&
+			       version == other.version;
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not two instances of <see
 		///    cref="StreamHeader" /> are equal to eachother.
@@ -334,12 +334,11 @@ namespace TagLib.WavPack {
 		///    equal to <paramref name="second" />. Otherwise, <see
 		///    langword="false" />.
 		/// </returns>
-		public static bool operator == (StreamHeader first,
-		                                StreamHeader second)
+		public static bool operator ==(StreamHeader first, StreamHeader second)
 		{
-			return first.Equals (second);
+			return first.Equals(second);
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not two instances of <see
 		///    cref="StreamHeader" /> are unequal to eachother.
@@ -355,12 +354,11 @@ namespace TagLib.WavPack {
 		///    unequal to <paramref name="second" />. Otherwise, <see
 		///    langword="false" />.
 		/// </returns>
-		public static bool operator != (StreamHeader first,
-		                                StreamHeader second)
+		public static bool operator !=(StreamHeader first, StreamHeader second)
 		{
-			return !first.Equals (second);
+			return !first.Equals(second);
 		}
-		
+
 		#endregion
 	}
 }

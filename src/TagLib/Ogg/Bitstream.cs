@@ -32,7 +32,7 @@ namespace TagLib.Ogg
 	/// </summary>
 	public class Bitstream
 	{
-#region Private Fields
+		#region Private Fields
 		
 		/// <summary>
 		///    Contains the last packet of the previous page in case it
@@ -56,12 +56,11 @@ namespace TagLib.Ogg
 		/// </summary>
 		private long first_absolute_granular_position;
 		
-#endregion
-		
-		
-		
-#region Constructors
-		
+		#endregion
+
+
+		#region Constructors
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Bitstream" /> capable of processing a specified
@@ -82,25 +81,23 @@ namespace TagLib.Ogg
 		///    No registered codec capable of processing <paramref
 		///    name="page" /> could be found.
 		/// </exception>
-		public Bitstream (Page page)
+		public Bitstream(Page page)
 		{
 			if (page == null)
-				throw new ArgumentNullException ("page");
-			
+				throw new ArgumentNullException("page");
+
 			// Assume that the first packet is completely enclosed.
 			// This should be sufficient for codec recognition.
-			codec = Codec.GetCodec (page.Packets [0]);
+			codec = Codec.GetCodec(page.Packets[0]);
 
-			first_absolute_granular_position =
-				page.Header.AbsoluteGranularPosition;
+			first_absolute_granular_position = page.Header.AbsoluteGranularPosition;
 		}
-		
-#endregion
-		
-		
-		
-#region Public Methods
-		
+
+		#endregion
+
+
+		#region Public Methods
+
 		/// <summary>
 		///    Reads the next logical page in the stream.
 		/// </summary>
@@ -117,50 +114,52 @@ namespace TagLib.Ogg
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="page" /> is <see langword="null" />.
 		/// </exception>
-		public bool ReadPage (Page page)
+		public bool ReadPage(Page page)
 		{
 			if (page == null)
-				throw new ArgumentNullException ("page");
-			
+				throw new ArgumentNullException("page");
+
 			ByteVector[] packets = page.Packets;
-			
-			for (int i = 0; i < packets.Length; i ++) {
-				if ((page.Header.Flags &
-					PageFlags.FirstPacketContinued) == 0 &&
-					previous_packet != null) {
-					if (ReadPacket (previous_packet))
+
+			for (int i = 0; i < packets.Length; i ++)
+			{
+				if ((page.Header.Flags & PageFlags.FirstPacketContinued) == 0 && previous_packet != null)
+				{
+					if (ReadPacket(previous_packet))
 						return true;
 					previous_packet = null;
 				}
-				
-				
-				ByteVector packet = packets [i];
-				
+
+
+				ByteVector packet = packets[i];
+
 				// If we're at the first packet of the page, and
 				// we're continuing an old packet, combine the
 				// old with the new.
-				if (i == 0 && (page.Header.Flags &
-					PageFlags.FirstPacketContinued) != 0 &&
-					previous_packet != null) {
-					previous_packet.Add (packet);
+				if (i == 0 && (page.Header.Flags & PageFlags.FirstPacketContinued) != 0 && previous_packet != null)
+				{
+					previous_packet.Add(packet);
 					packet = previous_packet;
 				}
-				
+
 				previous_packet = null;
-				
-				if (i == packets.Length - 1) {
+
+				if (i == packets.Length - 1)
+				{
 					// If we're at the last packet of the
 					// page, store it.
-					previous_packet = new ByteVector (packet);
-				} else if (ReadPacket (packet)) {
+					previous_packet = new ByteVector(packet);
+				}
+				else if (ReadPacket(packet))
+				{
 					// Otherwise, we need to process it.
 					return true;
 				}
 			}
-			
+
 			return false;
 		}
-		
+
 		/// <summary>
 		///    Gets the duration of the stream represented by the
 		///    current instance.
@@ -173,19 +172,16 @@ namespace TagLib.Ogg
 		///    A <see cref="TimeSpan" /> object containing the duration
 		///    of the stream represented by the current instance.
 		/// </returns>
-		public TimeSpan GetDuration (long lastAbsoluteGranularPosition)
+		public TimeSpan GetDuration(long lastAbsoluteGranularPosition)
 		{
-			return codec.GetDuration (
-				first_absolute_granular_position,
-				lastAbsoluteGranularPosition);
+			return codec.GetDuration(first_absolute_granular_position, lastAbsoluteGranularPosition);
 		}
-		
-#endregion
-		
-		
-		
-#region Public Properties
-		
+
+		#endregion
+
+
+		#region Public Properties
+
 		/// <summary>
 		///    Gets the codec object used to interpret the stream
 		///    represented by the current instance.
@@ -194,15 +190,15 @@ namespace TagLib.Ogg
 		///    The <see cref="Codec" /> object used by the current
 		///    instance.
 		/// </value>
-		public Codec Codec {
-			get {return codec;}
+		public Codec Codec
+		{
+			get { return codec; }
 		}
-		
-#endregion
-		
-		
-		
-#region Public Properties
+
+		#endregion
+
+
+		#region Public Properties
 		
 		/// <summary>
 		///    Sents a packet to the codec processor to read it.
@@ -222,6 +218,6 @@ namespace TagLib.Ogg
 			return codec.ReadPacket (packet, packet_index++);
 		}
 		
-#endregion
+		#endregion
 	}
 }

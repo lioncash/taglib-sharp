@@ -19,8 +19,6 @@
 //
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections;
 using System.Diagnostics;
 
@@ -40,7 +38,7 @@ namespace TagLib.Aac
 		#endregion
 
 
-			
+
 		#region Constructors
 
 		/// <summary>
@@ -76,7 +74,7 @@ namespace TagLib.Aac
 		#region Public Methods
 		
 		/// <summary>
-		///    Reads an Int32 from the bitstream        
+		///    Reads an Int32 from the bitstream
 		/// </summary>
 		/// <param name="numberOfBits">
 		///    A <see cref="int" /> value containing the number

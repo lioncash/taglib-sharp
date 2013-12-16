@@ -24,7 +24,8 @@
 
 using System;
 
-namespace TagLib.Mpeg4 {
+namespace TagLib.Mpeg4
+{
 	/// <summary>
 	///    This class extends <see cref="FullBox" /> to provide an
 	///    implementation of a ISO/IEC 14496-12 MovieHeaderBox.
@@ -73,7 +74,7 @@ namespace TagLib.Mpeg4 {
 		
 		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="IsoMovieHeaderBox" /> with a provided header and
@@ -94,69 +95,64 @@ namespace TagLib.Mpeg4 {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="file" /> is <see langword="null" />.
 		/// </exception>
-		public IsoMovieHeaderBox (BoxHeader header, TagLib.File file,
-		                          IsoHandlerBox handler)
-			: base (header, file, handler)
+		public IsoMovieHeaderBox(BoxHeader header, TagLib.File file, IsoHandlerBox handler)
+			: base(header, file, handler)
 		{
 			if (file == null)
-				throw new ArgumentNullException ("file");
-			
+				throw new ArgumentNullException("file");
+
 			int bytes_remaining = DataSize;
 			ByteVector data;
-			
-			if (Version == 1) {
+
+			if (Version == 1)
+			{
 				// Read version one (large integers).
-				data = file.ReadBlock (Math.Min (28,
-					bytes_remaining));
+				data = file.ReadBlock(Math.Min(28, bytes_remaining));
 				if (data.Count >= 8)
-					creation_time = data.Mid (0,
-						8).ToULong ();
+					creation_time = data.Mid(0, 8).ToULong();
 				if (data.Count >= 16)
-					modification_time = data.Mid (8,
-						8).ToULong ();
+					modification_time = data.Mid(8, 8).ToULong();
 				if (data.Count >= 20)
-					timescale = data.Mid (16, 4).ToUInt ();
+					timescale = data.Mid(16, 4).ToUInt();
 				if (data.Count >= 28)
-					duration = data.Mid (20, 8).ToULong ();
+					duration = data.Mid(20, 8).ToULong();
 				bytes_remaining -= 28;
-			} else {
+			}
+			else
+			{
 				// Read version zero (normal integers).
-				data = file.ReadBlock (Math.Min (16,
-					bytes_remaining));
+				data = file.ReadBlock(Math.Min(16, bytes_remaining));
 				if (data.Count >= 4)
-					creation_time = data.Mid (0,
-						4).ToUInt ();
+					creation_time = data.Mid(0, 4).ToUInt();
 				if (data.Count >= 8)
-					modification_time = data.Mid (4,
-						4).ToUInt ();
+					modification_time = data.Mid(4, 4).ToUInt();
 				if (data.Count >= 12)
-					timescale = data.Mid (8, 4).ToUInt ();
+					timescale = data.Mid(8, 4).ToUInt();
 				if (data.Count >= 16)
-					duration = data.Mid (12, 4).ToUInt ();
+					duration = data.Mid(12, 4).ToUInt();
 				bytes_remaining -= 16;
 			}
-			
-			data = file.ReadBlock (Math.Min (6, bytes_remaining));
+
+			data = file.ReadBlock(Math.Min(6, bytes_remaining));
 			if (data.Count >= 4)
-				rate = data.Mid (0, 4).ToUInt ();
+				rate = data.Mid(0, 4).ToUInt();
 			if (data.Count >= 6)
-				volume = data.Mid (4, 2).ToUShort ();
-			file.Seek (file.Tell + 70);
+				volume = data.Mid(4, 2).ToUShort();
+			file.Seek(file.Tell + 70);
 			bytes_remaining -= 76;
-			
-			data = file.ReadBlock (Math.Min (4,
-				bytes_remaining));
-			
+
+			data = file.ReadBlock(Math.Min(4, bytes_remaining));
+
 			if (data.Count >= 4)
-				next_track_id = data.Mid (0, 4).ToUInt ();
+				next_track_id = data.Mid(0, 4).ToUInt();
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the creation time of movie represented by the
 		///    current instance.
@@ -165,14 +161,11 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="DateTime" /> value containing the creation
 		///    time of the movie represented by the current instance.
 		/// </value>
-		public DateTime CreationTime {
-			get {
-				return new System.DateTime (1904, 1, 1, 0, 0,
-					0).AddTicks ((long)(10000000 *
-						creation_time));
-			}
+		public DateTime CreationTime
+		{
+			get { return new DateTime(1904, 1, 1, 0, 0, 0).AddTicks((long) (10000000 * creation_time)); }
 		}
-		
+
 		/// <summary>
 		///    Gets the modification time of movie represented by the
 		///    current instance.
@@ -182,14 +175,11 @@ namespace TagLib.Mpeg4 {
 		///    modification time of the movie represented by the current
 		///    instance.
 		/// </value>
-		public DateTime ModificationTime {
-			get {
-				return new System.DateTime (1904, 1, 1, 0, 0,
-					0).AddTicks ((long)(10000000 *
-						modification_time));
-			}
+		public DateTime ModificationTime
+		{
+			get { return new DateTime(1904, 1, 1, 0, 0, 0).AddTicks((long) (10000000 * modification_time)); }
 		}
-		
+
 		/// <summary>
 		///    Gets the duration of the movie represented by the current
 		///    instance.
@@ -198,15 +188,16 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="TimeSpan" /> value containing the duration
 		///    of the movie represented by the current instance.
 		/// </value>
-		public TimeSpan Duration {
-			get {
+		public TimeSpan Duration
+		{
+			get
+			{
 				// The length is the number of ticks divided by
 				// ticks per second.
-				return TimeSpan.FromSeconds ((double) duration /
-					(double) timescale);
+				return TimeSpan.FromSeconds ((double) duration / (double) timescale);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the playback rate of the movie represented by the
 		///    current instance.
@@ -215,10 +206,11 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="double" /> value containing the playback
 		///    rate of the movie represented by the current instance.
 		/// </value>
-		public double Rate {
-			get {return ((double) rate) / ((double) 0x10000);}
+		public double Rate
+		{
+			get { return ((double) rate)/((double) 0x10000); }
 		}
-		
+
 		/// <summary>
 		///    Gets the playback volume of the movie represented by the
 		///    current instance.
@@ -227,10 +219,11 @@ namespace TagLib.Mpeg4 {
 		///    A <see cref="double" /> value containing the playback
 		///    volume of the movie represented by the current instance.
 		/// </value>
-		public double Volume {
-			get {return ((double) volume) / ((double) 0x100);}
+		public double Volume
+		{
+			get { return ((double) volume)/((double) 0x100); }
 		}
-		
+
 		/// <summary>
 		///    Gets the ID of the next track in the movie represented by
 		///    the current instance.
@@ -239,10 +232,11 @@ namespace TagLib.Mpeg4 {
 		///   A <see cref="uint" /> value containing the ID of the next
 		///   track in the movie represented by the current instance.
 		/// </value>
-		public uint NextTrackId {
-			get {return next_track_id;}
+		public uint NextTrackId
+		{
+			get { return next_track_id; }
 		}
-		
+
 		#endregion
 	}
 }

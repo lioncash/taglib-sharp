@@ -26,12 +26,14 @@
 using System;
 using System.Globalization;
 
-namespace TagLib.Ape {
+namespace TagLib.Ape
+{
 	/// <summary>
 	///    Indicates the compression level used when encoding a Monkey's
 	///    Audio APE file.
 	/// </summary>
-	public enum CompressionLevel {
+	public enum CompressionLevel
+	{
 		/// <summary>
 		///    The audio is not compressed.
 		/// </summary>
@@ -176,8 +178,7 @@ namespace TagLib.Ape {
 		/// <value>
 		///    "MAC "
 		/// </value>
-		public static readonly ReadOnlyByteVector FileIdentifier =
-			"MAC ";
+		public static readonly ReadOnlyByteVector FileIdentifier = "MAC ";
 		
 		#endregion
 		
@@ -237,7 +238,7 @@ namespace TagLib.Ape {
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the duration of the media represented by the current
 		///    instance.
@@ -246,18 +247,18 @@ namespace TagLib.Ape {
 		///    A <see cref="TimeSpan" /> containing the duration of the
 		///    media represented by the current instance.
 		/// </value>
-		public TimeSpan Duration {
-			get {
+		public TimeSpan Duration
+		{
+			get
+			{
 				if (sample_rate <= 0 || total_frames <= 0)
 					return TimeSpan.Zero;
-				
-				return TimeSpan.FromSeconds (
-					(double) ((total_frames - 1) *
-					blocks_per_frame + final_frame_blocks) /
-					(double) sample_rate);
+
+				return TimeSpan.FromSeconds(
+					(double) ((total_frames - 1) * blocks_per_frame + final_frame_blocks) / (double) sample_rate);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the types of media represented by the current
 		///    instance.
@@ -265,10 +266,11 @@ namespace TagLib.Ape {
 		/// <value>
 		///    Always <see cref="TagLib.MediaTypes.Audio" />.
 		/// </value>
-		public MediaTypes MediaTypes {
-			get {return MediaTypes.Audio;}
+		public MediaTypes MediaTypes
+		{
+			get { return MediaTypes.Audio; }
 		}
-		
+
 		/// <summary>
 		///    Gets a text description of the media represented by the
 		///    current instance.
@@ -277,15 +279,14 @@ namespace TagLib.Ape {
 		///    A <see cref="string" /> object containing a description
 		///    of the media represented by the current instance.
 		/// </value>
-		public string Description {
-			get {
-				return string.Format(
-					CultureInfo.InvariantCulture,
-					"Monkey's Audio APE Version {0:0.000}",
-					Version);
+		public string Description
+		{
+			get
+			{
+				return string.Format(CultureInfo.InvariantCulture, "Monkey's Audio APE Version {0:0.000}", Version);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the bitrate of the audio represented by the current
 		///    instance.
@@ -294,17 +295,18 @@ namespace TagLib.Ape {
 		///    A <see cref="int" /> value containing a bitrate of the
 		///    audio represented by the current instance.
 		/// </value>
-		public int AudioBitrate {
-			get {
+		public int AudioBitrate
+		{
+			get
+			{
 				TimeSpan d = Duration;
 				if (d <= TimeSpan.Zero)
 					return 0;
-				
-				return (int) ((stream_length * 8L) /
-					d.TotalSeconds) / 1000;
+
+				return (int) ((stream_length*8L)/d.TotalSeconds)/1000;
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the sample rate of the audio represented by the
 		///    current instance.
@@ -313,10 +315,11 @@ namespace TagLib.Ape {
 		///    A <see cref="int" /> value containing the sample rate of
 		///    the audio represented by the current instance.
 		/// </value>
-		public int AudioSampleRate {
-			get {return (int)sample_rate;}
+		public int AudioSampleRate
+		{
+			get { return (int) sample_rate; }
 		}
-		
+
 		/// <summary>
 		///    Gets the number of channels in the audio represented by
 		///    the current instance.
@@ -326,10 +329,11 @@ namespace TagLib.Ape {
 		///    channels in the audio represented by the current
 		///    instance.
 		/// </value>
-		public int AudioChannels {
-			get {return channels;}
+		public int AudioChannels
+		{
+			get { return channels; }
 		}
-		
+
 		/// <summary>
 		///    Gets the APE version of the audio represented by the
 		///    current instance.
@@ -338,10 +342,11 @@ namespace TagLib.Ape {
 		///    A <see cref="double" /> value containing the APE version
 		///    of the audio represented by the current instance.
 		/// </value>
-		public double Version {
-			get {return (double) version / (double) 1000;}
+		public double Version
+		{
+			get { return (double) version/(double) 1000; }
 		}
-		
+
 		/// <summary>
 		///    Gets the number of bits per sample in the audio
 		///    represented by the current instance.
@@ -351,10 +356,11 @@ namespace TagLib.Ape {
 		///    per sample in the audio represented by the current
 		///    instance.
 		/// </value>
-		public int BitsPerSample {
-			get {return bits_per_sample;}
+		public int BitsPerSample
+		{
+			get { return bits_per_sample; }
 		}
-		
+
 		/// <summary>
 		///    Gets the level of compression used when encoding the
 		///    audio represented by the current instance.
@@ -364,10 +370,11 @@ namespace TagLib.Ape {
 		///    level of compression used when encoding the audio
 		///    represented by the current instance.
 		/// </value>
-		public CompressionLevel Compression {
-			get {return compression_level;}
+		public CompressionLevel Compression
+		{
+			get { return compression_level; }
 		}
-		
+
 		#endregion
 	}
 }

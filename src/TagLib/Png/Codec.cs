@@ -21,8 +21,6 @@
 // USA
 //
 
-using System;
-
 namespace TagLib.Png
 {
 
@@ -40,7 +38,10 @@ namespace TagLib.Png
 		///    A <see cref="string" /> object containing a description
 		///    of the media represented by the current instance.
 		/// </value>
-		public override string Description { get { return "PNG File"; } }
+		public override string Description
+		{
+			get { return "PNG File"; }
+		}
 
 
 		/// <summary>
@@ -56,7 +57,8 @@ namespace TagLib.Png
 		/// <returns>
 		///    A new <see cref="Codec" /> instance.
 		/// </returns>
-		public Codec (int width, int height)
-			: base (width, height) {}
+		public Codec(int width, int height) : base(width, height)
+		{
+		}
 	}
 }

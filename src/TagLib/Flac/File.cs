@@ -28,7 +28,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace TagLib.Flac {
+namespace TagLib.Flac
+{
 	/// <summary>
 	///    This class extends <see cref="TagLib.NonContainer.File" /> to
 	///    provide tagging and properties support for Xiph's Flac audio
@@ -52,17 +53,17 @@ namespace TagLib.Flac {
 		/// <summary>
 		///    Contains the Flac metadata tag.
 		/// </summary>
-		private Metadata metadata = null;
+		private Metadata metadata;
 		
 		/// <summary>
 		///    Contains the combination of all file tags.
 		/// </summary>
-		private CombinedTag tag = null;
+		private CombinedTag tag;
 		
 		/// <summary>
 		///    Contains the Flac header block.
 		/// </summary>
-		private ByteVector header_block = null;
+		private ByteVector header_block;
 		
 		/// <summary>
 		///    Contains the stream start position.
@@ -74,7 +75,7 @@ namespace TagLib.Flac {
 		
 		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified path in the local file
@@ -92,11 +93,10 @@ namespace TagLib.Flac {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path, ReadStyle propertiesStyle)
-			: base (path, propertiesStyle)
+		public File(string path, ReadStyle propertiesStyle) : base(path, propertiesStyle)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified path in the local file
@@ -109,11 +109,10 @@ namespace TagLib.Flac {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path)
-			: base (path)
+		public File (string path) : base (path)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified file abstraction and
@@ -132,12 +131,10 @@ namespace TagLib.Flac {
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File (File.IFileAbstraction abstraction,
-		             ReadStyle propertiesStyle)
-			: base (abstraction, propertiesStyle)
+		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction, propertiesStyle)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified file abstraction with an
@@ -151,17 +148,16 @@ namespace TagLib.Flac {
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File (File.IFileAbstraction abstraction)
-			: base (abstraction)
+		public File(File.IFileAbstraction abstraction) : base(abstraction)
 		{
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets a abstract representation of all tags stored in the
 		///    current instance.
@@ -170,97 +166,99 @@ namespace TagLib.Flac {
 		///    A <see cref="TagLib.Tag" /> object representing all tags
 		///    stored in the current instance.
 		/// </value>
-		public override TagLib.Tag Tag {
-			get {return tag;}
+		public override TagLib.Tag Tag
+		{
+			get { return tag; }
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Saves the changes made in the current instance to the
 		///    file it represents.
 		/// </summary>
-		public override void Save ()
+		public override void Save()
 		{
 			Mode = AccessMode.Write;
-			try {
+			try
+			{
 				// Update the tags at the beginning of the file.
-				long metadata_start = StartTag.Write ();
+				long metadata_start = StartTag.Write();
 				long metadata_end;
-				
+
 				// Get all the blocks, but don't read the data for ones
 				// we're filling with stored data.
-				IList<Block> old_blocks = ReadBlocks (ref metadata_start,
+				IList<Block> old_blocks = ReadBlocks(ref metadata_start,
 					out metadata_end, BlockMode.Blacklist,
 					BlockType.XiphComment, BlockType.Picture);
-				
+
 				// Create new vorbis comments is they don't exist.
-				GetTag (TagTypes.Xiph, true);
-				
+				GetTag(TagTypes.Xiph, true);
+
 				// Create new blocks and add the basics.
-				List<Block> new_blocks = new List<Block> ();
-				new_blocks.Add (old_blocks [0]);
-				
+				List<Block> new_blocks = new List<Block>();
+				new_blocks.Add(old_blocks[0]);
+
 				// Add blocks we don't deal with from the file.
 				foreach (Block block in old_blocks)
+				{
 					if (block.Type != BlockType.StreamInfo &&
-						block.Type != BlockType.XiphComment &&
-						block.Type != BlockType.Picture &&
-						block.Type != BlockType.Padding)
-						new_blocks.Add (block);
-				
-				new_blocks.Add (new Block (BlockType.XiphComment,
-					(GetTag (TagTypes.Xiph, true) as
-						Ogg.XiphComment).Render (false)));
-				
-				foreach (IPicture picture in metadata.Pictures) {
+					    block.Type != BlockType.XiphComment &&
+					    block.Type != BlockType.Picture &&
+					    block.Type != BlockType.Padding)
+						new_blocks.Add(block);
+				}
+
+				new_blocks.Add(new Block(BlockType.XiphComment, 
+					(GetTag(TagTypes.Xiph, true) as Ogg.XiphComment).Render(false)));
+
+				foreach (IPicture picture in metadata.Pictures)
+				{
 					if (picture == null)
 						continue;
-					
-					new_blocks.Add (new Block (BlockType.Picture,
-						new Picture (picture).Render ()));
+
+					new_blocks.Add(new Block(BlockType.Picture,
+						new Picture(picture).Render()));
 				}
-				
+
 				// Get the length of the blocks.
 				long length = 0;
 				foreach (Block block in new_blocks)
 					length += block.TotalSize;
-				
+
 				// Find the padding size to avoid trouble. If that fails
 				// make some.
-				long padding_size = metadata_end - metadata_start -
-					BlockHeader.Size - length;
+				long padding_size = metadata_end - metadata_start - BlockHeader.Size - length;
 				if (padding_size < 0)
-					padding_size = 1024 * 4;
-				
+					padding_size = 1024*4;
+
 				// Add a padding block.
 				if (padding_size != 0)
-					new_blocks.Add (new Block (BlockType.Padding,
-						new ByteVector ((int) padding_size)));
-				
+					new_blocks.Add(new Block(BlockType.Padding, new ByteVector((int) padding_size)));
+
 				// Render the blocks.
-				ByteVector block_data = new ByteVector ();
+				ByteVector block_data = new ByteVector();
 				for (int i = 0; i < new_blocks.Count; i ++)
-					block_data.Add (new_blocks [i].Render (
-						i == new_blocks.Count - 1));
-				
+					block_data.Add(new_blocks[i].Render(i == new_blocks.Count - 1));
+
 				// Update the blocks.
-				Insert (block_data, metadata_start, metadata_end -
-					metadata_start);
-				
+				Insert(block_data, metadata_start, metadata_end - metadata_start);
+
 				// Update the tags at the end of the file.
-				EndTag.Write ();
-				
+				EndTag.Write();
+
 				TagTypesOnDisk = TagTypes;
-			} finally {
+			}
+			finally
+			{
 				Mode = AccessMode.Closed;
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets a tag of a specified type from the current instance,
 		///    optionally creating a new tag if possible.
@@ -279,38 +277,38 @@ namespace TagLib.Flac {
 		///    matching tag was found and none was created, <see
 		///    langword="null" /> is returned.
 		/// </returns>
-		public override TagLib.Tag GetTag (TagTypes type, bool create)
+		public override TagLib.Tag GetTag(TagTypes type, bool create)
 		{
 			switch (type)
 			{
-			case TagTypes.Xiph:
-				return metadata.GetComment (create, tag);
-				
-			case TagTypes.FlacMetadata:
-				return metadata;
+				case TagTypes.Xiph:
+					return metadata.GetComment(create, tag);
+
+				case TagTypes.FlacMetadata:
+					return metadata;
 			}
-			
-			Tag t = (base.Tag as TagLib.NonContainer.Tag).GetTag (type);
-			
+
+			Tag t = (base.Tag as TagLib.NonContainer.Tag).GetTag(type);
+
 			if (t != null || !create)
 				return t;
-			
+
 			switch (type)
 			{
-			case TagTypes.Id3v1:
-				return EndTag.AddTag (type, Tag);
-				
-			case TagTypes.Id3v2:
-				return StartTag.AddTag (type, Tag);
-				
-			case TagTypes.Ape:
-				return EndTag.AddTag (type, Tag);
-				
-			default:
-				return null;
+				case TagTypes.Id3v1:
+					return EndTag.AddTag(type, Tag);
+
+				case TagTypes.Id3v2:
+					return StartTag.AddTag(type, Tag);
+
+				case TagTypes.Ape:
+					return EndTag.AddTag(type, Tag);
+
+				default:
+					return null;
 			}
 		}
-		
+
 		/// <summary>
 		///    Removes a set of tag types from the current instance.
 		/// </summary>
@@ -322,23 +320,23 @@ namespace TagLib.Flac {
 		///    In order to remove all tags from a file, pass <see
 		///    cref="TagTypes.AllTags" /> as <paramref name="types" />.
 		/// </remarks>
-		public override void RemoveTags (TagTypes types)
+		public override void RemoveTags(TagTypes types)
 		{
 			if ((types & TagTypes.Xiph) != 0)
-				metadata.RemoveComment ();
-			
+				metadata.RemoveComment();
+
 			if ((types & TagTypes.FlacMetadata) != 0)
-				metadata.Clear ();
-			
-			base.RemoveTags (types);
+				metadata.Clear();
+
+			base.RemoveTags(types);
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Protected Methods
-		
+
 		/// <summary>
 		///    Reads format specific information at the start of the
 		///    file.
@@ -352,32 +350,30 @@ namespace TagLib.Flac {
 		///    of accuracy to read the media properties, or <see
 		///    cref="ReadStyle.None" /> to ignore the properties.
 		/// </param>
-		protected override void ReadStart (long start,
-		                                   ReadStyle propertiesStyle)
+		protected override void ReadStart(long start, ReadStyle propertiesStyle)
 		{
 			long end;
-			IList<Block> blocks = ReadBlocks (ref start, out end,
+			IList<Block> blocks = ReadBlocks(ref start, out end,
 				BlockMode.Whitelist, BlockType.StreamInfo,
 				BlockType.XiphComment, BlockType.Picture);
-			metadata = new Metadata (blocks);
-			
+			metadata = new Metadata(blocks);
+
 			TagTypesOnDisk |= metadata.TagTypes;
-			
-			if (propertiesStyle != ReadStyle.None) {
+
+			if (propertiesStyle != ReadStyle.None)
+			{
 				// Check that the first block is a
 				// METADATA_BLOCK_STREAMINFO.
-				if (blocks.Count == 0 ||
-					blocks [0].Type != BlockType.StreamInfo)
-					throw new CorruptFileException (
-						"FLAC stream does not begin with StreamInfo.");
-				
+				if (blocks.Count == 0 || blocks[0].Type != BlockType.StreamInfo)
+					throw new CorruptFileException("FLAC stream does not begin with StreamInfo.");
+
 				// The stream exists from the end of the last
 				// block to the end of the file.
 				stream_start = end;
-				header_block = blocks [0].Data;
+				header_block = blocks[0].Data;
 			}
 		}
-		
+
 		/// <summary>
 		///    Reads format specific information at the end of the
 		///    file.
@@ -391,13 +387,12 @@ namespace TagLib.Flac {
 		///    of accuracy to read the media properties, or <see
 		///    cref="ReadStyle.None" /> to ignore the properties.
 		/// </param>
-		protected override void ReadEnd (long end,
-		                                 ReadStyle propertiesStyle)
+		protected override void ReadEnd(long end, ReadStyle propertiesStyle)
 		{
-			tag = new CombinedTag (metadata, base.Tag);
-			GetTag (TagTypes.Xiph, true);
+			tag = new CombinedTag(metadata, base.Tag);
+			GetTag(TagTypes.Xiph, true);
 		}
-		
+
 		/// <summary>
 		///    Reads the audio properties from the file represented by
 		///    the current instance.
@@ -420,15 +415,12 @@ namespace TagLib.Flac {
 		///    media properties of the file represented by the current
 		///    instance.
 		/// </returns>
-		protected override Properties ReadProperties (long start,
-		                                              long end,
-		                                              ReadStyle propertiesStyle)
+		protected override Properties ReadProperties(long start, long end, ReadStyle propertiesStyle)
 		{
-			StreamHeader header = new StreamHeader (header_block,
-				end - stream_start);
-			return new Properties (TimeSpan.Zero, header);
+			StreamHeader header = new StreamHeader(header_block, end - stream_start);
+			return new Properties(TimeSpan.Zero, header);
 		}
-		
+
 		#endregion
 		
 		
@@ -454,7 +446,7 @@ namespace TagLib.Flac {
 			/// </summary>
 			Whitelist
 		}
-		
+
 		/// <summary>
 		///    Reads all metadata blocks starting from the current
 		///    instance, starting at a specified position.
@@ -485,50 +477,46 @@ namespace TagLib.Flac {
 		/// <exception cref="CorruptFileException">
 		///    "<c>fLaC</c>" could not be found.
 		/// </exception>
-		private IList<Block> ReadBlocks (ref long start, out long end,
-		                                 BlockMode mode,
-		                                 params BlockType[] types)
+		private IList<Block> ReadBlocks(ref long start, out long end, BlockMode mode, params BlockType[] types)
 		{
-			List<Block> blocks = new List<Block> ();
-			
-			long start_position = Find ("fLaC", start);
-			
+			List<Block> blocks = new List<Block>();
+
+			long start_position = Find("fLaC", start);
+
 			if (start_position < 0)
-				throw new CorruptFileException (
-					"FLAC stream not found at starting position.");
-			
+				throw new CorruptFileException("FLAC stream not found at starting position.");
+
 			end = start = start_position + 4;
-			
-			Seek (start);
-			
+
+			Seek(start);
+
 			BlockHeader header;
-			
-			do {
-				header = new BlockHeader (ReadBlock ((int)
-					BlockHeader.Size));
-				
+
+			do
+			{
+				header = new BlockHeader(ReadBlock((int) BlockHeader.Size));
+
 				bool found = false;
 				foreach (BlockType type in types)
-					if (header.BlockType == type) {
+				{
+					if (header.BlockType == type)
+					{
 						found = true;
 						break;
 					}
-				
-				if ((mode == BlockMode.Whitelist && found) ||
-					(mode == BlockMode.Blacklist && !found))
-					blocks.Add (new Block (header,
-						ReadBlock ((int)
-							header.BlockSize)));
+				}
+
+				if ((mode == BlockMode.Whitelist && found) || (mode == BlockMode.Blacklist && !found))
+					blocks.Add(new Block(header, ReadBlock((int) header.BlockSize)));
 				else
-					Seek (header.BlockSize,
-						System.IO.SeekOrigin.Current);
-				
+					Seek(header.BlockSize, System.IO.SeekOrigin.Current);
+
 				end += header.BlockSize + BlockHeader.Size;
 			} while (!header.IsLastBlock);
-			
+
 			return blocks;
 		}
-		
+
 		#endregion
 	}
 	
@@ -547,7 +535,7 @@ namespace TagLib.Flac {
 		///    Contains the pictures.
 		/// </summary>
 		private List<IPicture> pictures = new List<IPicture>();
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Metadata" /> using a collection of blocks.
@@ -560,11 +548,10 @@ namespace TagLib.Flac {
 		///    <paramref name="blocks" /> is <see langword="null" />.
 		/// </exception>
 		[Obsolete("Use Metadata(IEnumerable<Block>)")]
-		public Metadata (List<Block> blocks)
-			: this (blocks as IEnumerable<Block>)
+		public Metadata(List<Block> blocks) : this(blocks as IEnumerable<Block>)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Metadata" /> using a collection of blocks.
@@ -576,22 +563,23 @@ namespace TagLib.Flac {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="blocks" /> is <see langword="null" />.
 		/// </exception>
-		public Metadata (IEnumerable<Block> blocks)
+		public Metadata(IEnumerable<Block> blocks)
 		{
 			if (blocks == null)
-				throw new ArgumentNullException ("blocks");
-			
-			foreach (Block block in blocks) {
+				throw new ArgumentNullException("blocks");
+
+			foreach (Block block in blocks)
+			{
 				if (block.Data.Count == 0)
 					continue;
-				
+
 				if (block.Type == BlockType.XiphComment)
-					AddTag (new Ogg.XiphComment (block.Data));
+					AddTag(new Ogg.XiphComment(block.Data));
 				else if (block.Type == BlockType.Picture)
-					pictures.Add (new Picture (block.Data));
+					pictures.Add(new Picture(block.Data));
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the first Xiph comment stored in the current
 		///    instance, optionally creating one if necessary.
@@ -611,37 +599,37 @@ namespace TagLib.Flac {
 		///    If no matching tag was found and none was created, <see
 		///    langword="null" /> is returned.
 		/// </returns>
-		public Ogg.XiphComment GetComment (bool create, Tag copy)
+		public Ogg.XiphComment GetComment(bool create, Tag copy)
 		{
 			foreach (Tag t in Tags)
 				if (t is Ogg.XiphComment)
 					return t as Ogg.XiphComment;
-			
+
 			if (!create)
 				return null;
-			
-			Ogg.XiphComment c = new Ogg.XiphComment ();
-			
+
+			Ogg.XiphComment c = new Ogg.XiphComment();
+
 			if (copy != null)
-				copy.CopyTo (c, true);
-			
-			AddTag (c);
-			
+				copy.CopyTo(c, true);
+
+			AddTag(c);
+
 			return c;
 		}
-		
+
 		/// <summary>
 		///    Removes all child Xiph Comments from the current
 		///    instance.
 		/// </summary>
-		public void RemoveComment ()
+		public void RemoveComment()
 		{
 			Ogg.XiphComment c;
-			
-			while ((c = GetComment (false, null)) != null)
-				RemoveTag (c);
+
+			while ((c = GetComment(false, null)) != null)
+				RemoveTag(c);
 		}
-		
+
 		/// <summary>
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
@@ -649,10 +637,11 @@ namespace TagLib.Flac {
 		///    A bitwise combined <see cref="TagLib.TagTypes" /> value
 		///    containing the tag types stored in the current instance.
 		/// </value>
-		public override TagTypes TagTypes {
-			get {return TagTypes.FlacMetadata | base.TagTypes;}
+		public override TagTypes TagTypes
+		{
+			get { return TagTypes.FlacMetadata | base.TagTypes; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets a collection of pictures associated with
 		///    the media represented by the current instance.
@@ -662,21 +651,24 @@ namespace TagLib.Flac {
 		///    pictures associated with the media represented by the
 		///    current instance or an empty array if none are present.
 		/// </value>
-		public override IPicture[] Pictures {
-			get {return pictures.ToArray ();}
-			set {
-				pictures.Clear ();
+		public override IPicture[] Pictures
+		{
+			get { return pictures.ToArray(); }
+
+			set
+			{
+				pictures.Clear();
 				if (value != null)
-					pictures.AddRange (value);
+					pictures.AddRange(value);
 			}
 		}
-		
+
 		/// <summary>
 		///    Clears the values stored in the current instance.
 		/// </summary>
-		public override void Clear ()
+		public override void Clear()
 		{
-			pictures.Clear ();
+			pictures.Clear();
 		}
 	}
 }

@@ -27,10 +27,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System;
 using System.Collections.Generic;
 
-namespace TagLib.NonContainer {
+namespace TagLib.NonContainer
+{
 	/// <summary>
 	///    This class extends <see cref="CombinedTag" />, combining <see
 	///    cref="StartTag" /> and <see cref="EndTag" /> in such a way as
@@ -55,7 +55,7 @@ namespace TagLib.NonContainer {
 		
 		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Tag" /> for a specified <see cref="TagLib.File" />.
@@ -69,20 +69,20 @@ namespace TagLib.NonContainer {
 		///    the contents from the disk. <see cref="Read" /> must be
 		///    called to read the tags.
 		/// </remarks>
-		public Tag (File file) : base ()
+		public Tag(File file)
 		{
-			start_tag = new StartTag (file);
-			end_tag = new EndTag (file);
-			AddTag (start_tag);
-			AddTag (end_tag);
+			start_tag = new StartTag(file);
+			end_tag = new EndTag(file);
+			AddTag(start_tag);
+			AddTag(end_tag);
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the collection of tags appearing at the start of the
 		///    file.
@@ -91,10 +91,11 @@ namespace TagLib.NonContainer {
 		///    A <see cref="TagLib.NonContainer.StartTag" /> storing the
 		///    tags for the start of the file.
 		/// </value>
-		public StartTag StartTag {
-			get {return start_tag;}
+		public StartTag StartTag
+		{
+			get { return start_tag; }
 		}
-		
+
 		/// <summary>
 		///    Gets the collection of tags appearing at the end of the
 		///    file.
@@ -103,10 +104,11 @@ namespace TagLib.NonContainer {
 		///    A <see cref="TagLib.NonContainer.EndTag" /> storing the
 		///    tags for the end of the file.
 		/// </value>
-		public EndTag EndTag {
-			get {return end_tag;}
+		public EndTag EndTag
+		{
+			get { return end_tag; }
 		}
-		
+
 		/// <summary>
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
@@ -115,10 +117,11 @@ namespace TagLib.NonContainer {
 		///    containing the tag types contained in the current
 		///    instance.
 		/// </value>
-		public override TagTypes TagTypes {
-			get {return start_tag.TagTypes | end_tag.TagTypes;}
+		public override TagTypes TagTypes
+		{
+			get { return start_tag.TagTypes | end_tag.TagTypes; }
 		}
-		
+
 		/// <summary>
 		///    Gets the tags combined in the current instance.
 		/// </summary>
@@ -130,21 +133,23 @@ namespace TagLib.NonContainer {
 		///    This contains the combined children of <see
 		///    cref="Tag.StartTag" /> and <see cref="Tag.EndTag" />.
 		/// </remarks>
-		public override TagLib.Tag [] Tags {
-			get {
-				List<TagLib.Tag> tags = new List<TagLib.Tag> ();
-				tags.AddRange (start_tag.Tags);
-				tags.AddRange (end_tag.Tags);
-				return tags.ToArray ();
+		public override TagLib.Tag[] Tags
+		{
+			get
+			{
+				List<TagLib.Tag> tags = new List<TagLib.Tag>();
+				tags.AddRange(start_tag.Tags);
+				tags.AddRange(end_tag.Tags);
+				return tags.ToArray();
 			}
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Gets a tag of a specified type from the current instance.
 		/// </summary>
@@ -158,22 +163,23 @@ namespace TagLib.NonContainer {
 		///    matching tag was found and none was created, <see
 		///    langword="null" /> is returned.
 		/// </returns>
-		public TagLib.Tag GetTag (TagTypes type)
+		public TagLib.Tag GetTag(TagTypes type)
 		{
-			foreach (TagLib.Tag t in Tags) {
+			foreach (TagLib.Tag t in Tags)
+			{
 				if (type == TagTypes.Id3v1 && t is TagLib.Id3v1.Tag)
 					return t;
-				
+
 				if (type == TagTypes.Id3v2 && t is TagLib.Id3v2.Tag)
 					return t;
-				
+
 				if (type == TagTypes.Ape && t is TagLib.Ape.Tag)
 					return t;
 			}
-			
+
 			return null;
 		}
-		
+
 		/// <summary>
 		///    Removes a set of tag types from the current instance.
 		/// </summary>
@@ -185,12 +191,12 @@ namespace TagLib.NonContainer {
 		///    In order to remove all tags from a file, pass <see
 		///    cref="TagLib.TagTypes.AllTags" /> as <paramref name="types" />.
 		/// </remarks>
-		public void RemoveTags (TagTypes types)
+		public void RemoveTags(TagTypes types)
 		{
-			start_tag.RemoveTags (types);
-			end_tag.RemoveTags (types);
+			start_tag.RemoveTags(types);
+			end_tag.RemoveTags(types);
 		}
-		
+
 		/// <summary>
 		///    Reads the tags at the start and end of the file.
 		/// </summary>
@@ -206,12 +212,12 @@ namespace TagLib.NonContainer {
 		///    tags at the end begin. This also marks the seek position
 		///    at which the media ends.
 		/// </param>
-		public void Read (out long start, out long end)
+		public void Read(out long start, out long end)
 		{
-			start = ReadStart ();
-			end = ReadEnd ();
+			start = ReadStart();
+			end = ReadEnd();
 		}
-		
+
 		/// <summary>
 		///    Reads the tags stored at the start of the file into the
 		///    current instance.
@@ -221,11 +227,11 @@ namespace TagLib.NonContainer {
 		///    in the file at which the read tags end. This also
 		///    marks the seek position at which the media begins.
 		/// </returns>
-		public long ReadStart ()
+		public long ReadStart()
 		{
-			return start_tag.Read ();
+			return start_tag.Read();
 		}
-		
+
 		/// <summary>
 		///    Reads the tags stored at the end of the file into the
 		///    current instance.
@@ -235,11 +241,11 @@ namespace TagLib.NonContainer {
 		///    in the file at which the read tags begin. This also
 		///    marks the seek position at which the media ends.
 		/// </returns>
-		public long ReadEnd ()
+		public long ReadEnd()
 		{
-			return end_tag.Read ();
+			return end_tag.Read();
 		}
-		
+
 		/// <summary>
 		///    Writes the tags to the start and end of the file.
 		/// </summary>
@@ -255,12 +261,12 @@ namespace TagLib.NonContainer {
 		///    tags at the end begin. This also marks the seek position
 		///    at which the media ends.
 		/// </param>
-		public void Write (out long start, out long end)
+		public void Write(out long start, out long end)
 		{
-			start = start_tag.Write ();
-			end = end_tag.Write ();
+			start = start_tag.Write();
+			end = end_tag.Write();
 		}
-		
+
 		#endregion
 	}
 }
