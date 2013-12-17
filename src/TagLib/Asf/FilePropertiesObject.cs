@@ -24,7 +24,8 @@
 
 using System;
 
-namespace TagLib.Asf {
+namespace TagLib.Asf
+{
 	/// <summary>
 	///    This class extends <see cref="Object" /> to provide a
 	///    representation of an ASF File Properties object which can be read
@@ -90,11 +91,10 @@ namespace TagLib.Asf {
 		private uint maximum_bitrate;
 		
 		#endregion
-		
-		
-		
+
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="FilePropertiesObject" /> by reading the contents
@@ -119,36 +119,32 @@ namespace TagLib.Asf {
 		///    The object read from disk does not have the correct GUID
 		///    or smaller than the minimum size.
 		/// </exception>
-		public FilePropertiesObject (Asf.File file, long position)
-			: base (file, position)
+		public FilePropertiesObject(Asf.File file, long position) : base(file, position)
 		{
-			if (!Guid.Equals (Asf.Guid.AsfFilePropertiesObject))
-				throw new CorruptFileException (
-					"Object GUID incorrect.");
-			
+			if (!Guid.Equals(Asf.Guid.AsfFilePropertiesObject))
+				throw new CorruptFileException("Object GUID incorrect.");
+
 			if (OriginalSize < 104)
-				throw new CorruptFileException (
-					"Object size too small.");
-			
-			file_id = file.ReadGuid ();
-			file_size = file.ReadQWord ();
-			creation_date = file.ReadQWord ();
-			data_packets_count = file.ReadQWord ();
-			send_duration = file.ReadQWord ();
-			play_duration = file.ReadQWord ();
-			preroll = file.ReadQWord ();
-			flags = file.ReadDWord ();
-			minimum_data_packet_size = file.ReadDWord ();
-			maximum_data_packet_size = file.ReadDWord ();
-			maximum_bitrate = file.ReadDWord ();
+				throw new CorruptFileException("Object size too small.");
+
+			file_id = file.ReadGuid();
+			file_size = file.ReadQWord();
+			creation_date = file.ReadQWord();
+			data_packets_count = file.ReadQWord();
+			send_duration = file.ReadQWord();
+			play_duration = file.ReadQWord();
+			preroll = file.ReadQWord();
+			flags = file.ReadDWord();
+			minimum_data_packet_size = file.ReadDWord();
+			maximum_data_packet_size = file.ReadDWord();
+			maximum_bitrate = file.ReadDWord();
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the GUID for the file described by the current
 		///    instance.
@@ -157,10 +153,11 @@ namespace TagLib.Asf {
 		///    A <see cref="System.Guid" /> value containing the GUID
 		///    for the file described by the current instance.
 		/// </value>
-		public System.Guid FileId {
-			get {return file_id;}
+		public System.Guid FileId
+		{
+			get { return file_id; }
 		}
-		
+
 		/// <summary>
 		///    Gets the size of the file described by the current
 		///    instance.
@@ -169,10 +166,11 @@ namespace TagLib.Asf {
 		///    A <see cref="ulong" /> value containing the size of the
 		///    file described by the current instance.
 		/// </value>
-		public ulong FileSize {
-			get {return file_size;}
+		public ulong FileSize
+		{
+			get { return file_size; }
 		}
-		
+
 		/// <summary>
 		///    Gets the creation date of the file described by the
 		///    current instance.
@@ -181,10 +179,11 @@ namespace TagLib.Asf {
 		///    A <see cref="DateTime" /> value containing the creation
 		///    date of the file described by the current instance.
 		/// </value>
-		public DateTime CreationDate {
-			get {return new DateTime ((long)creation_date);}
+		public DateTime CreationDate
+		{
+			get { return new DateTime((long) creation_date); }
 		}
-		
+
 		/// <summary>
 		///    Gets the number of data packets in the file described by
 		///    the current instance.
@@ -194,10 +193,11 @@ namespace TagLib.Asf {
 		///    data packets in the file described by the current
 		///    instance.
 		/// </value>
-		public ulong DataPacketsCount {
-			get {return data_packets_count;}
+		public ulong DataPacketsCount
+		{
+			get { return data_packets_count; }
 		}
-		
+
 		/// <summary>
 		///    Gets the play duration of the file described by the
 		///    current instance.
@@ -206,10 +206,11 @@ namespace TagLib.Asf {
 		///    A <see cref="TimeSpan" /> value containing the play
 		///    duration of the file described by the current instance.
 		/// </value>
-		public TimeSpan PlayDuration {
-			get {return new TimeSpan ((long)play_duration);}
+		public TimeSpan PlayDuration
+		{
+			get { return new TimeSpan((long) play_duration); }
 		}
-		
+
 		/// <summary>
 		///    Gets the send duration of the file described by the
 		///    current instance.
@@ -218,10 +219,11 @@ namespace TagLib.Asf {
 		///    A <see cref="TimeSpan" /> value containing the send
 		///    duration of the file described by the current instance.
 		/// </value>
-		public TimeSpan SendDuration {
-			get {return new TimeSpan ((long)send_duration);}
+		public TimeSpan SendDuration
+		{
+			get { return new TimeSpan((long) send_duration); }
 		}
-		
+
 		/// <summary>
 		///    Gets the pre-roll of the file described by the current
 		///    instance.
@@ -230,10 +232,11 @@ namespace TagLib.Asf {
 		///    A <see cref="ulong" /> value containing the pre-roll of
 		///    the file described by the current instance.
 		/// </value>
-		public ulong Preroll {
-			get {return preroll;}
+		public ulong Preroll
+		{
+			get { return preroll; }
 		}
-		
+
 		/// <summary>
 		///    Gets the flags of the file described by the current
 		///    instance.
@@ -242,10 +245,11 @@ namespace TagLib.Asf {
 		///    A <see cref="uint" /> value containing the flags of the
 		///    file described by the current instance.
 		/// </value>
-		public uint Flags {
-			get {return flags;}
+		public uint Flags
+		{
+			get { return flags; }
 		}
-		
+
 		/// <summary>
 		///    Gets the minimum data packet size of the file described
 		///    by the current instance.
@@ -255,10 +259,11 @@ namespace TagLib.Asf {
 		///    packet size of the file described by the current
 		///    instance.
 		/// </value>
-		public uint MinimumDataPacketSize {
-			get {return minimum_data_packet_size;}
+		public uint MinimumDataPacketSize
+		{
+			get { return minimum_data_packet_size; }
 		}
-		
+
 		/// <summary>
 		///    Gets the maximum data packet size of the file described
 		///    by the current instance.
@@ -268,10 +273,11 @@ namespace TagLib.Asf {
 		///    packet size of the file described by the current
 		///    instance.
 		/// </value>
-		public uint MaximumDataPacketSize {
-			get {return maximum_data_packet_size;}
+		public uint MaximumDataPacketSize
+		{
+			get { return maximum_data_packet_size; }
 		}
-		
+
 		/// <summary>
 		///    Gets the maximum bitrate of the file described by the
 		///    current instance.
@@ -280,16 +286,16 @@ namespace TagLib.Asf {
 		///    A <see cref="uint" /> value containing the maximum
 		///    bitrate of the file described by the current instance.
 		/// </value>
-		public uint MaximumBitrate {
-			get {return maximum_bitrate;}
+		public uint MaximumBitrate
+		{
+			get { return maximum_bitrate; }
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Renders the current instance as a raw ASF object.
 		/// </summary>
@@ -297,23 +303,23 @@ namespace TagLib.Asf {
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered version of the current instance.
 		/// </returns>
-		public override ByteVector Render ()
+		public override ByteVector Render()
 		{
-			ByteVector output = file_id.ToByteArray ();
-			output.Add (RenderQWord (file_size));
-			output.Add (RenderQWord (creation_date));
-			output.Add (RenderQWord (data_packets_count));
-			output.Add (RenderQWord (send_duration));
-			output.Add (RenderQWord (play_duration));
-			output.Add (RenderQWord (preroll));
-			output.Add (RenderDWord (flags));
-			output.Add (RenderDWord (minimum_data_packet_size));
-			output.Add (RenderDWord (maximum_data_packet_size));
-			output.Add (RenderDWord (maximum_bitrate));
-			
-			return Render (output);
+			ByteVector output = file_id.ToByteArray();
+			output.Add(RenderQWord(file_size));
+			output.Add(RenderQWord(creation_date));
+			output.Add(RenderQWord(data_packets_count));
+			output.Add(RenderQWord(send_duration));
+			output.Add(RenderQWord(play_duration));
+			output.Add(RenderQWord(preroll));
+			output.Add(RenderDWord(flags));
+			output.Add(RenderDWord(minimum_data_packet_size));
+			output.Add(RenderDWord(maximum_data_packet_size));
+			output.Add(RenderDWord(maximum_bitrate));
+
+			return Render(output);
 		}
-		
+
 		#endregion
 	}
 }

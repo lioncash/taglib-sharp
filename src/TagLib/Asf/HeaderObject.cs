@@ -25,7 +25,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace TagLib.Asf {
+namespace TagLib.Asf
+{
 	/// <summary>
 	///    This class extends <see cref="Object" /> to provide a
 	///    representation of an ASF Header object which can be read from and
@@ -48,9 +49,8 @@ namespace TagLib.Asf {
 		#endregion
 		
 		
-		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="HeaderObject" /> by reading the contents from a
@@ -75,33 +75,28 @@ namespace TagLib.Asf {
 		///    The object read from disk does not have the correct GUID
 		///    or smaller than the minimum size.
 		/// </exception>
-		public HeaderObject (Asf.File file, long position)
-			: base (file, position)
+		public HeaderObject(Asf.File file, long position) : base(file, position)
 		{
-			if (!Guid.Equals (Asf.Guid.AsfHeaderObject))
-				throw new CorruptFileException (
-					"Object GUID incorrect.");
-			
+			if (!Guid.Equals(Asf.Guid.AsfHeaderObject))
+				throw new CorruptFileException("Object GUID incorrect.");
+
 			if (OriginalSize < 26)
-				throw new CorruptFileException (
-					"Object size too small.");
-			
-			children = new List<Object> ();
-			
-			uint child_count = file.ReadDWord ();
-			
-			reserved = file.ReadBlock (2);
-			
-			children.AddRange (file.ReadObjects (child_count,
-				file.Tell));
+				throw new CorruptFileException("Object size too small.");
+
+			children = new List<Object>();
+
+			uint child_count = file.ReadDWord();
+
+			reserved = file.ReadBlock(2);
+
+			children.AddRange(file.ReadObjects(child_count, file.Tell));
 		}
-		
+
 		#endregion
 		
 		
-		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the header extension object contained in the
 		///    current instance.
@@ -110,15 +105,18 @@ namespace TagLib.Asf {
 		///    A <see cref="HeaderExtensionObject" /> object containing
 		///    the header extension object.
 		/// </value>
-		public HeaderExtensionObject Extension {
-			get {
+		public HeaderExtensionObject Extension
+		{
+			get
+			{
 				foreach (Object child in children)
 					if (child is HeaderExtensionObject)
 						return child as HeaderExtensionObject;
+
 				return null;
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the child objects contained in the current instance.
 		/// </summary>
@@ -126,10 +124,11 @@ namespace TagLib.Asf {
 		///    A <see cref="T:System.Collections.Generic.IEnumerable`1" /> object enumerating
 		///    through the children of the current instance.
 		/// </value>
-		public IEnumerable<Object> Children {
-			get {return children;}
+		public IEnumerable<Object> Children
+		{
+			get { return children; }
 		}
-		
+
 		/// <summary>
 		///    Gets the media properties contained within the current
 		///    instance.
@@ -138,34 +137,34 @@ namespace TagLib.Asf {
 		///    A <see cref="Properties" /> object containing the media
 		///    properties of the current instance.
 		/// </value>
-		public Properties Properties {
-			get {
+		public Properties Properties
+		{
+			get
+			{
 				TimeSpan duration = TimeSpan.Zero;
-				List<ICodec> codecs = new List<ICodec> ();
-				
-				foreach (Object obj in Children) {
-					FilePropertiesObject fpobj = obj as
-						FilePropertiesObject;
-					
-					if (fpobj != null) {
-						duration = fpobj.PlayDuration -
-							new TimeSpan((long) fpobj.Preroll);
+				List<ICodec> codecs = new List<ICodec>();
+
+				foreach (Object obj in Children)
+				{
+					FilePropertiesObject fpobj = obj as FilePropertiesObject;
+					if (fpobj != null)
+					{
+						duration = fpobj.PlayDuration - new TimeSpan((long) fpobj.Preroll);
 						continue;
 					}
-					
-					StreamPropertiesObject spobj = obj as
-						StreamPropertiesObject;
-					
-					if (spobj != null) {
-						codecs.Add (spobj.Codec);
+
+					StreamPropertiesObject spobj = obj as StreamPropertiesObject;
+					if (spobj != null)
+					{
+						codecs.Add(spobj.Codec);
 						continue;
 					}
 				}
-				
-				return new Properties (duration, codecs);
+
+				return new Properties(duration, codecs);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not the current instance contains either
 		///    type of content descriptiors.
@@ -176,23 +175,26 @@ namespace TagLib.Asf {
 		///    cref="ExtendedContentDescriptionObject" />. Otherwise
 		///    <see langword="false" />.
 		/// </value>
-		public bool HasContentDescriptors {
-			get {
+		public bool HasContentDescriptors
+		{
+			get
+			{
 				foreach (Asf.Object child in children)
+				{
 					if (child.Guid == Asf.Guid.AsfContentDescriptionObject ||
-						child.Guid == Asf.Guid.AsfExtendedContentDescriptionObject)
+					    child.Guid == Asf.Guid.AsfExtendedContentDescriptionObject)
 						return true;
-				
+				}
+
 				return false;
 			}
 		}
-		
+
 		#endregion
 		
-		
-		
+
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Renders the current instance as a raw ASF object.
 		/// </summary>
@@ -200,33 +202,35 @@ namespace TagLib.Asf {
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered version of the current instance.
 		/// </returns>
-		public override ByteVector Render ()
+		public override ByteVector Render()
 		{
-			ByteVector output = new ByteVector ();
+			ByteVector output = new ByteVector();
 			uint child_count = 0;
-			
+
 			foreach (Object child in children)
-				if (child.Guid != Asf.Guid.AsfPaddingObject) {
-					output.Add (child.Render ());
+			{
+				if (child.Guid != Asf.Guid.AsfPaddingObject)
+				{
+					output.Add(child.Render());
 					child_count ++;
 				}
-			
-			long size_diff = (long) output.Count + 30 -
-				(long) OriginalSize;
-			
-			if (size_diff != 0) {
-				PaddingObject obj = new PaddingObject ((uint)
-					(size_diff > 0 ? 4096 : - size_diff));
-				
-				output.Add (obj.Render ());
+			}
+
+			long size_diff = (long) output.Count + 30 - (long) OriginalSize;
+
+			if (size_diff != 0)
+			{
+				PaddingObject obj = new PaddingObject((uint) (size_diff > 0 ? 4096 : - size_diff));
+
+				output.Add(obj.Render());
 				child_count ++;
 			}
-			
-			output.Insert (0, reserved);
-			output.Insert (0, RenderDWord (child_count));
-			return Render (output);
+
+			output.Insert(0, reserved);
+			output.Insert(0, RenderDWord(child_count));
+			return Render(output);
 		}
-		
+
 		/// <summary>
 		///    Adds a child object to the current instance.
 		/// </summary>
@@ -234,11 +238,11 @@ namespace TagLib.Asf {
 		///    A <see cref="Object" /> object to add to the current
 		///    instance.
 		/// </param>
-		public void AddObject (Object obj)
+		public void AddObject(Object obj)
 		{
-			children.Add (obj);
+			children.Add(obj);
 		}
-		
+
 		/// <summary>
 		///    Adds a child unique child object to the current instance,
 		///    replacing and existing child if present.
@@ -247,29 +251,34 @@ namespace TagLib.Asf {
 		///    A <see cref="Object" /> object to add to the current
 		///    instance.
 		/// </param>
-		public void AddUniqueObject (Object obj)
+		public void AddUniqueObject(Object obj)
 		{
 			for (int i = 0; i < children.Count; i ++)
-				if (children [i].Guid == obj.Guid) {
-					children [i] = obj;
+			{
+				if (children[i].Guid == obj.Guid)
+				{
+					children[i] = obj;
 					return;
 				}
-			
-			children.Add (obj);
+			}
+
+			children.Add(obj);
 		}
-		
+
 		/// <summary>
 		///    Removes the content description objects from the current
 		///    instance.
 		/// </summary>
-		public void RemoveContentDescriptors ()
+		public void RemoveContentDescriptors()
 		{
 			for (int i = children.Count - 1; i >= 0; i --)
-				if (children [i].Guid == Asf.Guid.AsfContentDescriptionObject ||
-					children [i].Guid == Asf.Guid.AsfExtendedContentDescriptionObject)
-					children.RemoveAt (i);
+			{
+				if (children[i].Guid == Asf.Guid.AsfContentDescriptionObject ||
+				    children[i].Guid == Asf.Guid.AsfExtendedContentDescriptionObject)
+					children.RemoveAt(i);
+			}
 		}
-		
+
 		#endregion
 	}
 }

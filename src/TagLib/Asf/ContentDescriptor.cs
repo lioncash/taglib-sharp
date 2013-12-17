@@ -24,13 +24,15 @@
 
 using System;
 
-namespace TagLib.Asf {
+namespace TagLib.Asf
+{
 	/// <summary>
 	///    Indicates the type of data stored in a <see
 	///    cref="ContentDescriptor" /> or <see cref="DescriptionRecord" />
 	///    object.
 	/// </summary>
-	public enum DataType {
+	public enum DataType
+	{
 		/// <summary>
 		///    The descriptor contains Unicode (UTF-16LE) text.
 		/// </summary>
@@ -104,9 +106,8 @@ namespace TagLib.Asf {
 		#endregion
 		
 		
-		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ContentDescriptor" /> with a specified name and
@@ -120,12 +121,12 @@ namespace TagLib.Asf {
 		///    A <see cref="string" /> object containing the value for
 		///    the new instance.
 		/// </param>
-		public ContentDescriptor (string name, string value)
+		public ContentDescriptor(string name, string value)
 		{
 			this.name = name;
 			this.strValue = value;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ContentDescriptor" /> with a specified name and
@@ -139,13 +140,13 @@ namespace TagLib.Asf {
 		///    A <see cref="ByteVector" /> object containing the value
 		///    for the new instance.
 		/// </param>
-		public ContentDescriptor (string name, ByteVector value)
+		public ContentDescriptor(string name, ByteVector value)
 		{
 			this.name = name;
 			this.type = DataType.Bytes;
-			this.byteValue = new ByteVector (value);
+			this.byteValue = new ByteVector(value);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ContentDescriptor" /> with a specified name and
@@ -159,13 +160,13 @@ namespace TagLib.Asf {
 		///    A <see cref="uint" /> value containing the value
 		///    for the new instance.
 		/// </param>
-		public ContentDescriptor (string name, uint value)
+		public ContentDescriptor(string name, uint value)
 		{
 			this.name = name;
 			this.type = DataType.DWord;
 			this.longValue = value;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ContentDescriptor" /> with a specified name and
@@ -179,13 +180,13 @@ namespace TagLib.Asf {
 		///    A <see cref="ulong" /> value containing the value
 		///    for the new instance.
 		/// </param>
-		public ContentDescriptor (string name, ulong value)
+		public ContentDescriptor(string name, ulong value)
 		{
 			this.name = name;
 			this.type = DataType.QWord;
 			this.longValue = value;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ContentDescriptor" /> with a specified name and
@@ -199,13 +200,13 @@ namespace TagLib.Asf {
 		///    A <see cref="ushort" /> value containing the value
 		///    for the new instance.
 		/// </param>
-		public ContentDescriptor (string name, ushort value)
+		public ContentDescriptor(string name, ushort value)
 		{
 			this.name = name;
 			this.type = DataType.Word;
 			this.longValue = value;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ContentDescriptor" /> with a specified name and
@@ -219,13 +220,13 @@ namespace TagLib.Asf {
 		///    A <see cref="bool" /> value containing the value
 		///    for the new instance.
 		/// </param>
-		public ContentDescriptor (string name, bool value)
+		public ContentDescriptor(string name, bool value)
 		{
 			this.name = name;
 			this.type = DataType.Bool;
 			this.longValue = value ? 1uL : 0;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ContentDescriptor" /> by reading its contents from
@@ -245,22 +246,20 @@ namespace TagLib.Asf {
 		///    <paramref name="file" /> must be at a seek position at
 		///    which the descriptor can be read.
 		/// </remarks>
-		protected internal ContentDescriptor (Asf.File file)
+		protected internal ContentDescriptor(Asf.File file)
 		{
 			if (file == null)
-				throw new ArgumentNullException ("file");
-			
-			if (!Parse (file))
-				throw new CorruptFileException (
-					"Failed to parse content descriptor.");
+				throw new ArgumentNullException("file");
+
+			if (!Parse(file))
+				throw new CorruptFileException("Failed to parse content descriptor.");
 		}
-		
+
 		#endregion
 		
 		
-		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the name of the current instance.
 		/// </summary>
@@ -268,10 +267,11 @@ namespace TagLib.Asf {
 		///    A <see cref="string" /> object containing the name of the
 		///    current instance.
 		/// </value>
-		public string Name {
-			get {return name;}
+		public string Name
+		{
+			get { return name; }
 		}
-		
+
 		/// <summary>
 		///    Gets the type of data contained in the current instance.
 		/// </summary>
@@ -279,16 +279,16 @@ namespace TagLib.Asf {
 		///    A <see cref="DataType" /> value indicating type of data
 		///    contained in the current instance.
 		/// </value>
-		public DataType Type {
-			get {return type;}
+		public DataType Type
+		{
+			get { return type; }
 		}
-		
+
 		#endregion
 		
 		
-		
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Gets a string representation of the current instance.
 		/// </summary>
@@ -296,17 +296,17 @@ namespace TagLib.Asf {
 		///    A <see cref="string" /> object containing the value of
 		///    the current instance.
 		/// </returns>
-		public override string ToString ()
+		public override string ToString()
 		{
 			if (type == DataType.Unicode)
 				return strValue;
-			
+
 			if (type == DataType.Bytes)
-				return byteValue.ToString (StringType.UTF16LE);
-			
-			return longValue.ToString ();
+				return byteValue.ToString(StringType.UTF16LE);
+
+			return longValue.ToString();
 		}
-		
+
 		/// <summary>
 		///    Gets the binary contents of the current instance.
 		/// </summary>
@@ -316,11 +316,11 @@ namespace TagLib.Asf {
 		///    /> if <see cref="Type" /> is unequal to <see
 		///    cref="DataType.Bytes" />.
 		/// </returns>
-		public ByteVector ToByteVector ()
+		public ByteVector ToByteVector()
 		{
 			return byteValue;
 		}
-		
+
 		/// <summary>
 		///    Gets the boolean value contained in the current instance.
 		/// </summary>
@@ -328,11 +328,11 @@ namespace TagLib.Asf {
 		///    A <see cref="bool" /> value containing the value of the
 		///    current instance.
 		/// </returns>
-		public bool ToBool ()
+		public bool ToBool()
 		{
 			return longValue != 0;
 		}
-		
+
 		/// <summary>
 		///    Gets the DWORD value contained in the current instance.
 		/// </summary>
@@ -340,16 +340,16 @@ namespace TagLib.Asf {
 		///    A <see cref="uint" /> value containing the value of the
 		///    current instance.
 		/// </returns>
-		public uint ToDWord ()
+		public uint ToDWord()
 		{
 			uint value;
 			if (type == DataType.Unicode && strValue != null &&
-				uint.TryParse (strValue, out value))
+			    uint.TryParse(strValue, out value))
 				return value;
-			
+
 			return (uint) longValue;
 		}
-		
+
 		/// <summary>
 		///    Gets the QWORD value contained in the current instance.
 		/// </summary>
@@ -357,16 +357,16 @@ namespace TagLib.Asf {
 		///    A <see cref="ulong" /> value containing the value of the
 		///    current instance.
 		/// </returns>
-		public ulong ToQWord ()
+		public ulong ToQWord()
 		{
 			ulong value;
 			if (type == DataType.Unicode && strValue != null &&
-				ulong.TryParse (strValue, out value))
+			    ulong.TryParse(strValue, out value))
 				return value;
-			
+
 			return longValue;
 		}
-		
+
 		/// <summary>
 		///    Gets the WORD value contained in the current instance.
 		/// </summary>
@@ -374,16 +374,16 @@ namespace TagLib.Asf {
 		///    A <see cref="ushort" /> value containing the value of the
 		///    current instance.
 		/// </returns>
-		public ushort ToWord ()
+		public ushort ToWord()
 		{
 			ushort value;
 			if (type == DataType.Unicode && strValue != null &&
-				ushort.TryParse (strValue, out value))
+			    ushort.TryParse(strValue, out value))
 				return value;
-			
+
 			return (ushort) longValue;
 		}
-		
+
 		/// <summary>
 		///    Renders the current instance as a raw ASF Description
 		///    Record.
@@ -392,50 +392,54 @@ namespace TagLib.Asf {
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered version of the current instance.
 		/// </returns>
-		public ByteVector Render ()
+		public ByteVector Render()
 		{
 			ByteVector value = null;
-			
+
 			switch (type)
 			{
-			case DataType.Unicode:
-				value = Object.RenderUnicode (strValue);
-				break;
-			case DataType.Bytes:
-				value = byteValue;
-				break;
-			case DataType.Bool:
-			case DataType.DWord:
-				value = Object.RenderDWord ((uint) longValue);
-				break;
-			case DataType.QWord:
-				value = Object.RenderQWord (longValue);
-				break;
-			case DataType.Word:
-				value = Object.RenderWord ((ushort) longValue);
-				break;
-			default:
-				return null;
+				case DataType.Unicode:
+					value = Object.RenderUnicode(strValue);
+					break;
+
+				case DataType.Bytes:
+					value = byteValue;
+					break;
+
+				case DataType.Bool:
+				case DataType.DWord:
+					value = Object.RenderDWord((uint) longValue);
+					break;
+
+				case DataType.QWord:
+					value = Object.RenderQWord(longValue);
+					break;
+
+				case DataType.Word:
+					value = Object.RenderWord((ushort) longValue);
+					break;
+
+				default:
+					return null;
 			}
-			
-			ByteVector name = Object.RenderUnicode (this.name);
-			
-			ByteVector output = new ByteVector ();
-			output.Add (Object.RenderWord ((ushort) name.Count));
-			output.Add (name);
-			output.Add (Object.RenderWord ((ushort) type));
-			output.Add (Object.RenderWord ((ushort) value.Count));
-			output.Add (value);
-			
+
+			ByteVector name = Object.RenderUnicode(this.name);
+
+			ByteVector output = new ByteVector();
+			output.Add(Object.RenderWord((ushort) name.Count));
+			output.Add(name);
+			output.Add(Object.RenderWord((ushort) type));
+			output.Add(Object.RenderWord((ushort) value.Count));
+			output.Add(value);
+
 			return output;
 		}
-		
+
 		#endregion
 		
 		
-		
 		#region Protected Methods
-		
+
 		/// <summary>
 		///    Populates the current instance by reading in the contents
 		///    from a file.
@@ -448,47 +452,47 @@ namespace TagLib.Asf {
 		///    <see langword="true" /> if the data was read correctly.
 		///    Otherwise <see langword="false" />.
 		/// </returns>
-		protected bool Parse (Asf.File file)
+		protected bool Parse(Asf.File file)
 		{
-			int name_count = file.ReadWord ();
-			name = file.ReadUnicode (name_count);
-			
-			type = (DataType) file.ReadWord ();
-			
-			int value_count = file.ReadWord ();
+			int name_count = file.ReadWord();
+			name = file.ReadUnicode(name_count);
+
+			type = (DataType) file.ReadWord();
+
+			int value_count = file.ReadWord();
 			switch (type)
 			{
-			case DataType.Word:
-				longValue = file.ReadWord ();
-				break;
-				
-			case DataType.Bool:
-				longValue = file.ReadDWord ();
-				break;
-				
-			case DataType.DWord:
-				longValue = file.ReadDWord ();
-				break;
-				
-			case DataType.QWord:
-				longValue = file.ReadQWord ();
-				break;
-				
-			case DataType.Unicode:
-				strValue = file.ReadUnicode (value_count);
-				break;
-				
-			case DataType.Bytes:
-				byteValue = file.ReadBlock (value_count);
-				break;
-				
-			default:
-				return false;
+				case DataType.Word:
+					longValue = file.ReadWord();
+					break;
+
+				case DataType.Bool:
+					longValue = file.ReadDWord();
+					break;
+
+				case DataType.DWord:
+					longValue = file.ReadDWord();
+					break;
+
+				case DataType.QWord:
+					longValue = file.ReadQWord();
+					break;
+
+				case DataType.Unicode:
+					strValue = file.ReadUnicode(value_count);
+					break;
+
+				case DataType.Bytes:
+					byteValue = file.ReadBlock(value_count);
+					break;
+
+				default:
+					return false;
 			}
-			
+
 			return true;
 		}
-		
+
 		#endregion
 	}
 }

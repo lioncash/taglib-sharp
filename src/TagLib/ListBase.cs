@@ -438,11 +438,11 @@ namespace TagLib
 		///    A <see cref="int" /> value indicating the index in
 		///    <paramref name="array" /> at which to start copying.
 		/// </param>
-		public void CopyTo (T [] array, int arrayIndex)
+		public void CopyTo(T[] array, int arrayIndex)
 		{
-			data.CopyTo (array, arrayIndex);
+			data.CopyTo(array, arrayIndex);
 		}
-		
+
 		#endregion
 
 		#region IEnumerable<T>

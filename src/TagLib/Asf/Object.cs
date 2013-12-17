@@ -24,7 +24,8 @@
 
 using System;
 
-namespace TagLib.Asf {
+namespace TagLib.Asf
+{
 	/// <summary>
 	///    This abstract class provides a basic representation of an ASF
 	///    object which can be read from and written to disk.
@@ -46,9 +47,8 @@ namespace TagLib.Asf {
 		#endregion
 		
 		
-		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Object" /> by reading the contents from a
@@ -69,21 +69,19 @@ namespace TagLib.Asf {
 		///    <paramref name="position" /> is less than zero or greater
 		///    than the size of the file.
 		/// </exception>
-		protected Object (Asf.File file, long position)
+		protected Object(Asf.File file, long position)
 		{
 			if (file == null)
-				throw new ArgumentNullException ("file");
-			
-			if (position < 0 ||
-				position > file.Length - 24)
-				throw new ArgumentOutOfRangeException (
-					"position");
-			
-			file.Seek (position);
-			id = file.ReadGuid ();
-			size = file.ReadQWord ();
+				throw new ArgumentNullException("file");
+
+			if (position < 0 || position > file.Length - 24)
+				throw new ArgumentOutOfRangeException("position");
+
+			file.Seek(position);
+			id = file.ReadGuid();
+			size = file.ReadQWord();
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Object" /> with a specified GUID.
@@ -92,17 +90,16 @@ namespace TagLib.Asf {
 		///    A <see cref="System.Guid" /> value containing the GUID to
 		///    use for the new instance.
 		/// </param>
-		protected Object (System.Guid guid)
+		protected Object(System.Guid guid)
 		{
 			id = guid;
 		}
-		
+
 		#endregion
 		
 		
-		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the GUID for the current instance.
 		/// </summary>
@@ -110,10 +107,11 @@ namespace TagLib.Asf {
 		///    A <see cref="System.Guid" /> object containing the GUID
 		///    of the current instance.
 		/// </value>
-		public System.Guid Guid {
-			get {return id;}
+		public System.Guid Guid
+		{
+			get { return id; }
 		}
-		
+
 		/// <summary>
 		///    Gets the original size of the current instance.
 		/// </summary>
@@ -121,16 +119,16 @@ namespace TagLib.Asf {
 		///    A <see cref="ulong" /> value containing the size of the
 		///    current instance as it originally appeared on disk.
 		/// </value>
-		public ulong OriginalSize {
-			get {return size;}
+		public ulong OriginalSize
+		{
+			get { return size; }
 		}
-		
+
 		#endregion
 		
 		
-		
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Renders the current instance as a raw ASF object.
 		/// </summary>
@@ -139,14 +137,13 @@ namespace TagLib.Asf {
 		///    rendered version of the current instance.
 		/// </returns>
 		/// <seealso cref="Render(ByteVector)" />
-		public abstract ByteVector Render ();
+		public abstract ByteVector Render();
 		
 		#endregion
 		
 		
-		
 		#region Public Static Methods
-		
+
 		/// <summary>
 		///    Renders a Unicode (wide) string.
 		/// </summary>
@@ -158,14 +155,13 @@ namespace TagLib.Asf {
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered value.
 		/// </returns>
-		public static ByteVector RenderUnicode (string value)
+		public static ByteVector RenderUnicode(string value)
 		{
-			ByteVector v = ByteVector.FromString (value,
-				StringType.UTF16LE);
-			v.Add (RenderWord (0));
+			ByteVector v = ByteVector.FromString(value, StringType.UTF16LE);
+			v.Add(RenderWord(0));
 			return v;
 		}
-		
+
 		/// <summary>
 		///    Renders a 4-byte DWORD.
 		/// </summary>
@@ -177,11 +173,11 @@ namespace TagLib.Asf {
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered value.
 		/// </returns>
-		public static ByteVector RenderDWord (uint value)
+		public static ByteVector RenderDWord(uint value)
 		{
-			return ByteVector.FromUInt (value, false);
+			return ByteVector.FromUInt(value, false);
 		}
-		
+
 		/// <summary>
 		///    Renders a 8-byte QWORD.
 		/// </summary>
@@ -193,11 +189,11 @@ namespace TagLib.Asf {
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered value.
 		/// </returns>
-		public static ByteVector RenderQWord (ulong value)
+		public static ByteVector RenderQWord(ulong value)
 		{
-			return ByteVector.FromULong (value, false);
+			return ByteVector.FromULong(value, false);
 		}
-		
+
 		/// <summary>
 		///    Renders a 2-byte WORD.
 		/// </summary>
@@ -209,17 +205,16 @@ namespace TagLib.Asf {
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered value.
 		/// </returns>
-		public static ByteVector RenderWord (ushort value)
+		public static ByteVector RenderWord(ushort value)
 		{
-			return ByteVector.FromUShort (value, false);
+			return ByteVector.FromUShort(value, false);
 		}
-		
+
 		#endregion
 		
 		
-		
 		#region Protected Methods
-		
+
 		/// <summary>
 		///    Renders the current instance as a raw ASF object
 		///    containing specified data.
@@ -238,16 +233,15 @@ namespace TagLib.Asf {
 		///    render their contents and then send the data through this
 		///    method to produce the final output.
 		/// </remarks>
-		protected ByteVector Render (ByteVector data)
+		protected ByteVector Render(ByteVector data)
 		{
-			ulong length = (ulong)
-				((data != null ? data.Count : 0) + 24);
-			ByteVector v = id.ToByteArray ();
-			v.Add (RenderQWord (length));
-			v.Add (data);
+			ulong length = (ulong) ((data != null ? data.Count : 0) + 24);
+			ByteVector v = id.ToByteArray();
+			v.Add(RenderQWord(length));
+			v.Add(data);
 			return v;
 		}
-		
+
 		#endregion
 	}
 }

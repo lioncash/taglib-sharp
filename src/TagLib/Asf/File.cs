@@ -24,7 +24,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace TagLib.Asf {
+namespace TagLib.Asf
+{
 	/// <summary>
 	///    This class extends <see cref="TagLib.File" /> to provide tagging
 	///    and properties support for Microsoft's ASF files.
@@ -52,9 +53,8 @@ namespace TagLib.Asf {
 		#endregion
 		
 		
-		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified path in the local file
@@ -72,12 +72,11 @@ namespace TagLib.Asf {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path, ReadStyle propertiesStyle)
-			: base (path)
+		public File(string path, ReadStyle propertiesStyle) : base(path)
 		{
-			Read (propertiesStyle);
+			Read(propertiesStyle);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified path in the local file
@@ -90,10 +89,10 @@ namespace TagLib.Asf {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path) : this (path, ReadStyle.Average)
+		public File(string path) : this(path, ReadStyle.Average)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified file abstraction and
@@ -112,12 +111,11 @@ namespace TagLib.Asf {
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File (File.IFileAbstraction abstraction,
-		             ReadStyle propertiesStyle) : base (abstraction)
+		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
 		{
-			Read (propertiesStyle);
+			Read(propertiesStyle);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified file abstraction with an
@@ -131,17 +129,15 @@ namespace TagLib.Asf {
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File (File.IFileAbstraction abstraction)
-			: this (abstraction, ReadStyle.Average)
+		public File(File.IFileAbstraction abstraction) : this(abstraction, ReadStyle.Average)
 		{
 		}
-		
+
 		#endregion
 		
 		
-		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets a abstract representation of all tags stored in the
 		///    current instance.
@@ -150,10 +146,11 @@ namespace TagLib.Asf {
 		///    A <see cref="TagLib.Tag" /> object representing all tags
 		///    stored in the current instance.
 		/// </value>
-		public override TagLib.Tag Tag {
-			get {return asf_tag;}
+		public override TagLib.Tag Tag
+		{
+			get { return asf_tag; }
 		}
-		
+
 		/// <summary>
 		///    Gets the media properties of the file represented by the
 		///    current instance.
@@ -163,50 +160,53 @@ namespace TagLib.Asf {
 		///    media properties of the file represented by the current
 		///    instance.
 		/// </value>
-		public override TagLib.Properties Properties {
-			get {return properties;}
+		public override TagLib.Properties Properties
+		{
+			get { return properties; }
 		}
-		
+
 		#endregion
 		
 		
-		
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Saves the changes made in the current instance to the
 		///    file it represents.
 		/// </summary>
-		public override void Save ()
+		public override void Save()
 		{
 			Mode = AccessMode.Write;
-			try {
-				HeaderObject header = new HeaderObject (this, 0);
-				
-				if (asf_tag == null) {
-					header.RemoveContentDescriptors ();
+			try
+			{
+				HeaderObject header = new HeaderObject(this, 0);
+
+				if (asf_tag == null)
+				{
+					header.RemoveContentDescriptors();
 					TagTypesOnDisk &= ~ TagTypes.Asf;
-				} else {
-					TagTypesOnDisk |= TagTypes.Asf;
-					header.AddUniqueObject (
-						asf_tag.ContentDescriptionObject);
-					header.AddUniqueObject (
-						asf_tag.ExtendedContentDescriptionObject);
-					header.Extension.AddUniqueObject (
-						asf_tag.MetadataLibraryObject);
 				}
-				
-				ByteVector output = header.Render ();
+				else
+				{
+					TagTypesOnDisk |= TagTypes.Asf;
+					header.AddUniqueObject(asf_tag.ContentDescriptionObject);
+					header.AddUniqueObject(asf_tag.ExtendedContentDescriptionObject);
+					header.Extension.AddUniqueObject(asf_tag.MetadataLibraryObject);
+				}
+
+				ByteVector output = header.Render();
 				long diff = output.Count - (long) header.OriginalSize;
-				Insert (output, 0, (long) header.OriginalSize);
-				
+				Insert(output, 0, (long) header.OriginalSize);
+
 				InvariantStartPosition += diff;
 				InvariantEndPosition += diff;
-			} finally {
+			}
+			finally
+			{
 				Mode = AccessMode.Closed;
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets a tag of a specified type from the current instance,
 		///    optionally creating a new tag if possible.
@@ -225,14 +225,14 @@ namespace TagLib.Asf {
 		///    matching tag was found and none was created, <see
 		///    langword="null" /> is returned.
 		/// </returns>
-		public override TagLib.Tag GetTag (TagTypes type, bool create)
+		public override TagLib.Tag GetTag(TagTypes type, bool create)
 		{
 			if (type == TagTypes.Asf)
 				return asf_tag;
-			
+
 			return null;
 		}
-		
+
 		/// <summary>
 		///    Removes a set of tag types from the current instance.
 		/// </summary>
@@ -244,12 +244,12 @@ namespace TagLib.Asf {
 		///    In order to remove all tags from a file, pass <see
 		///    cref="TagTypes.AllTags" /> as <paramref name="types" />.
 		/// </remarks>
-		public override void RemoveTags (TagTypes types)
+		public override void RemoveTags(TagTypes types)
 		{
 			if ((types & TagTypes.Asf) == TagTypes.Asf)
-				asf_tag.Clear ();
+				asf_tag.Clear();
 		}
-		
+
 		/// <summary>
 		///    Reads a 2-byte WORD from the current instance.
 		/// </summary>
@@ -257,11 +257,11 @@ namespace TagLib.Asf {
 		///    A <see cref="ushort" /> value containing the WORD read
 		///    from the current instance.
 		/// </returns>
-		public ushort ReadWord ()
+		public ushort ReadWord()
 		{
-			return ReadBlock (2).ToUShort (false);
+			return ReadBlock(2).ToUShort(false);
 		}
-		
+
 		/// <summary>
 		///    Reads a 4-byte DWORD from the current instance.
 		/// </summary>
@@ -269,11 +269,11 @@ namespace TagLib.Asf {
 		///    A <see cref="uint" /> value containing the DWORD read
 		///    from the current instance.
 		/// </returns>
-		public uint ReadDWord ()
+		public uint ReadDWord()
 		{
-			return ReadBlock (4).ToUInt (false);
+			return ReadBlock(4).ToUInt(false);
 		}
-		
+
 		/// <summary>
 		///    Reads a 8-byte QWORD from the current instance.
 		/// </summary>
@@ -281,11 +281,11 @@ namespace TagLib.Asf {
 		///    A <see cref="ulong" /> value containing the QWORD read
 		///    from the current instance.
 		/// </returns>
-		public ulong ReadQWord ()
+		public ulong ReadQWord()
 		{
-			return ReadBlock (8).ToULong (false);
+			return ReadBlock(8).ToULong(false);
 		}
-		
+
 		/// <summary>
 		///    Reads a 16-byte GUID from the current instance.
 		/// </summary>
@@ -293,11 +293,11 @@ namespace TagLib.Asf {
 		///    A <see cref="System.Guid" /> value containing the GUID
 		///    read from the current instance.
 		/// </returns>
-		public System.Guid ReadGuid ()
+		public System.Guid ReadGuid()
 		{
-			return new System.Guid (ReadBlock (16).Data);
+			return new System.Guid(ReadBlock(16).Data);
 		}
-		
+
 		/// <summary>
 		///    Reads a Unicode (UTF-16LE) string of specified length
 		///    from the current instance.
@@ -310,14 +310,14 @@ namespace TagLib.Asf {
 		///    A <see cref="string" /> object containing the Unicode
 		///    string read from the current instance.
 		/// </returns>
-		public string ReadUnicode (int length)
+		public string ReadUnicode(int length)
 		{
-			ByteVector data = ReadBlock (length);
-			string output = data.ToString (StringType.UTF16LE);
-			int i = output.IndexOf ('\0');
-			return (i >= 0) ? output.Substring (0, i) : output;
+			ByteVector data = ReadBlock(length);
+			string output = data.ToString(StringType.UTF16LE);
+			int i = output.IndexOf('\0');
+			return (i >= 0) ? output.Substring(0, i) : output;
 		}
-		
+
 		/// <summary>
 		///    Reads a collection of objects from the current instance.
 		/// </summary>
@@ -334,16 +334,16 @@ namespace TagLib.Asf {
 		///    through the <see cref="Object" /> objects read from the
 		///    current instance.
 		/// </returns>
-		public IEnumerable<Object> ReadObjects (uint count,
-		                                        long position)
+		public IEnumerable<Object> ReadObjects(uint count, long position)
 		{
-			for (int i = 0; i < (int) count; i ++) {
-				Object obj = ReadObject (position);
+			for (int i = 0; i < (int) count; i ++)
+			{
+				Object obj = ReadObject(position);
 				position += (long) obj.OriginalSize;
 				yield return obj;
 			}
 		}
-		
+
 		/// <summary>
 		///    Reads a <see cref="Object" /> from the current instance.
 		/// </summary>
@@ -355,48 +355,40 @@ namespace TagLib.Asf {
 		///    A new <see cref="Object" /> object of appropriate type as
 		///    read from the current instance.
 		/// </returns>
-		public Object ReadObject (long position)
+		public Object ReadObject(long position)
 		{
-			Seek (position);
-			System.Guid id = ReadGuid ();
-			
-			if (id.Equals (Guid.AsfFilePropertiesObject))
-				return new FilePropertiesObject (this,
-					position);
-			
-			if (id.Equals (Guid.AsfStreamPropertiesObject))
-				return new StreamPropertiesObject (this,
-					position);
-			
-			if (id.Equals (Guid.AsfContentDescriptionObject))
-				return new ContentDescriptionObject (this,
-					position);
-			
-			if (id.Equals (
-				Guid.AsfExtendedContentDescriptionObject))
-				return new ExtendedContentDescriptionObject (
-					this, position);
-			
-			if (id.Equals (Guid.AsfPaddingObject))
-				return new PaddingObject (this, position);
-			
-			if (id.Equals (Guid.AsfHeaderExtensionObject))
-				return new HeaderExtensionObject (this,
-					position);
-			
-			if (id.Equals (Guid.AsfMetadataLibraryObject))
-				return new MetadataLibraryObject (this,
-					position);
-			
-			return new UnknownObject (this, position);
+			Seek(position);
+			System.Guid id = ReadGuid();
+
+			if (id.Equals(Guid.AsfFilePropertiesObject))
+				return new FilePropertiesObject(this, position);
+
+			if (id.Equals(Guid.AsfStreamPropertiesObject))
+				return new StreamPropertiesObject(this, position);
+
+			if (id.Equals(Guid.AsfContentDescriptionObject))
+				return new ContentDescriptionObject(this, position);
+
+			if (id.Equals(Guid.AsfExtendedContentDescriptionObject))
+				return new ExtendedContentDescriptionObject(this, position);
+
+			if (id.Equals(Guid.AsfPaddingObject))
+				return new PaddingObject(this, position);
+
+			if (id.Equals(Guid.AsfHeaderExtensionObject))
+				return new HeaderExtensionObject(this, position);
+
+			if (id.Equals(Guid.AsfMetadataLibraryObject))
+				return new MetadataLibraryObject(this, position);
+
+			return new UnknownObject(this, position);
 		}
-		
+
 		#endregion
 		
 		
-		
 		#region Private Methods
-		
+
 		/// <summary>
 		///    Reads the contents of the current instance.
 		/// </summary>
@@ -405,27 +397,30 @@ namespace TagLib.Asf {
 		///    of accuracy to read the media properties, or <see
 		///    cref="ReadStyle.None" /> to ignore the properties.
 		/// </param>
-		private void Read (ReadStyle propertiesStyle)
+		private void Read(ReadStyle propertiesStyle)
 		{
 			Mode = AccessMode.Read;
-			try {
-				HeaderObject header = new HeaderObject (this, 0);
-				
+			try
+			{
+				HeaderObject header = new HeaderObject(this, 0);
+
 				if (header.HasContentDescriptors)
 					TagTypesOnDisk |= TagTypes.Asf;
-				
-				asf_tag = new Asf.Tag (header);
-				
+
+				asf_tag = new Asf.Tag(header);
+
 				InvariantStartPosition = (long) header.OriginalSize;
 				InvariantEndPosition = Length;
-				
+
 				if (propertiesStyle != ReadStyle.None)
 					properties = header.Properties;
-			} finally {
+			}
+			finally
+			{
 				Mode = AccessMode.Closed;
 			}
 		}
-		
+
 		#endregion
 	}
 }

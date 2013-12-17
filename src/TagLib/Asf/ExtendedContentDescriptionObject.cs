@@ -24,31 +24,30 @@
 //
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
-namespace TagLib.Asf {
+namespace TagLib.Asf
+{
 	/// <summary>
 	///    This class extends <see cref="Object" /> to provide a
 	///    representation of an ASF Extended Content Description object
 	///    which can be read from and written to disk.
 	/// </summary>
-	public class ExtendedContentDescriptionObject : Object,
-		IEnumerable<ContentDescriptor>
+	public class ExtendedContentDescriptionObject : Object, IEnumerable<ContentDescriptor>
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the content descriptors.
 		/// </summary>
-		private List<ContentDescriptor> descriptors =
-			new List<ContentDescriptor> ();
+		private List<ContentDescriptor> descriptors = new List<ContentDescriptor>();
 		
 		#endregion
-		
-		
-		
+
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ExtendedContentDescriptionObject" /> by reading the
@@ -73,41 +72,35 @@ namespace TagLib.Asf {
 		///    The object read from disk does not have the correct GUID
 		///    or smaller than the minimum size.
 		/// </exception>
-		public ExtendedContentDescriptionObject (Asf.File file,
-		                                         long position)
-			: base (file, position)
+		public ExtendedContentDescriptionObject(Asf.File file, long position) : base(file, position)
 		{
-			if (!Guid.Equals (
+			if (!Guid.Equals(
 				Asf.Guid.AsfExtendedContentDescriptionObject))
-				throw new CorruptFileException (
-					"Object GUID incorrect.");
-			
+				throw new CorruptFileException("Object GUID incorrect.");
+
 			if (OriginalSize < 26)
-				throw new CorruptFileException (
-					"Object size too small.");
-			
-			ushort count = file.ReadWord ();
-			
+				throw new CorruptFileException("Object size too small.");
+
+			ushort count = file.ReadWord();
+
 			for (ushort i = 0; i < count; i ++)
-				AddDescriptor (new ContentDescriptor (file));
+				AddDescriptor(new ContentDescriptor(file));
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ExtendedContentDescriptionObject" /> with no
 		///    contents.
 		/// </summary>
-		public ExtendedContentDescriptionObject ()
-			: base (Asf.Guid.AsfExtendedContentDescriptionObject)
+		public ExtendedContentDescriptionObject() : base(Asf.Guid.AsfExtendedContentDescriptionObject)
 		{
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets whether or not the current instance is empty.
 		/// </summary>
@@ -116,16 +109,16 @@ namespace TagLib.Asf {
 		///    contain any <see cref="ContentDescriptor" /> objects.
 		///    Otherwise <see langword="false" />.
 		/// </value>
-		public bool IsEmpty {
-			get {return descriptors.Count == 0;}
+		public bool IsEmpty
+		{
+			get { return descriptors.Count == 0; }
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Renders the current instance as a raw ASF object.
 		/// </summary>
@@ -133,19 +126,20 @@ namespace TagLib.Asf {
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered version of the current instance.
 		/// </returns>
-		public override ByteVector Render ()
+		public override ByteVector Render()
 		{
-			ByteVector output = new ByteVector ();
+			ByteVector output = new ByteVector();
 			ushort count = 0;
-			
-			foreach (ContentDescriptor desc in descriptors) {
+
+			foreach (ContentDescriptor desc in descriptors)
+			{
 				count ++;
-				output.Add (desc.Render ());
+				output.Add(desc.Render());
 			}
-			
-			return Render (RenderWord (count) + output);
+
+			return Render(RenderWord(count) + output);
 		}
-		
+
 		/// <summary>
 		///    Removes all descriptors with a given name from the
 		///    current instance.
@@ -154,13 +148,13 @@ namespace TagLib.Asf {
 		///    A <see cref="string" /> object containing the name of the
 		///    descriptors to be removed.
 		/// </param>
-		public void RemoveDescriptors (string name)
+		public void RemoveDescriptors(string name)
 		{
 			for (int i = descriptors.Count - 1; i >= 0; i --)
-				if (name == descriptors [i].Name)
-					descriptors.RemoveAt (i);
+				if (name == descriptors[i].Name)
+					descriptors.RemoveAt(i);
 		}
-		
+
 		/// <summary>
 		///    Gets all descriptors with any of a collection of names
 		///    from the current instance.
@@ -177,17 +171,17 @@ namespace TagLib.Asf {
 		///    through the <see cref="ContentDescriptor" /> objects
 		///    retrieved from the current instance.
 		/// </returns>
-		public IEnumerable<ContentDescriptor> GetDescriptors (params string [] names)
+		public IEnumerable<ContentDescriptor> GetDescriptors(params string[] names)
 		{
 			if (names == null)
-				throw new ArgumentNullException ("names");
-			
+				throw new ArgumentNullException("names");
+
 			foreach (string name in names)
 				foreach (ContentDescriptor desc in descriptors)
 					if (desc.Name == name)
 						yield return desc;
 		}
-		
+
 		/// <summary>
 		///    Adds a descriptor to the current instance.
 		/// </summary>
@@ -199,14 +193,14 @@ namespace TagLib.Asf {
 		///    <paramref name="descriptor" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public void AddDescriptor (ContentDescriptor descriptor)
+		public void AddDescriptor(ContentDescriptor descriptor)
 		{
 			if (descriptor == null)
-				throw new ArgumentNullException ("descriptor");
-			
-			descriptors.Add (descriptor);
+				throw new ArgumentNullException("descriptor");
+
+			descriptors.Add(descriptor);
 		}
-		
+
 		/// <summary>
 		///    Sets the a collection of desciptors for a given name,
 		///    removing the existing matching records.
@@ -230,27 +224,27 @@ namespace TagLib.Asf {
 		///    method, which are used for removing existing values and
 		///    determining where to position the new objects.
 		/// </remarks>
-		public void SetDescriptors (string name,
-		                            params ContentDescriptor [] descriptors)
+		public void SetDescriptors(string name, params ContentDescriptor[] descriptors)
 		{
 			if (name == null)
-				throw new ArgumentNullException ("name");
-			
+				throw new ArgumentNullException("name");
+
 			int position = this.descriptors.Count;
-			for (int i = this.descriptors.Count - 1; i >= 0; i --) {
-				if (name == this.descriptors [i].Name) {
-					this.descriptors.RemoveAt (i);
+			for (int i = this.descriptors.Count - 1; i >= 0; i --)
+			{
+				if (name == this.descriptors[i].Name)
+				{
+					this.descriptors.RemoveAt(i);
 					position = i;
 				}
 			}
-			this.descriptors.InsertRange (position, descriptors);
+			this.descriptors.InsertRange(position, descriptors);
 		}
-		
+
 		#endregion
-		
-		
-		
-#region IEnumerable
+
+
+		#region IEnumerable
 		
 		/// <summary>
 		///    Gets an enumerator for enumerating through the content
@@ -265,12 +259,11 @@ namespace TagLib.Asf {
 			return descriptors.GetEnumerator ();
 		}
 		
-		System.Collections.IEnumerator
-			System.Collections.IEnumerable.GetEnumerator ()
+		IEnumerator IEnumerable.GetEnumerator ()
 		{
 			return descriptors.GetEnumerator ();
 		}
-		
-#endregion
+
+		#endregion
 	}
 }

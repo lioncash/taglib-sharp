@@ -24,7 +24,8 @@
 
 using System;
 
-namespace TagLib.Asf {
+namespace TagLib.Asf
+{
 	/// <summary>
 	///    This class extends <see cref="Object" /> to provide a
 	///    representation of an ASF Content Description object which can be
@@ -60,9 +61,10 @@ namespace TagLib.Asf {
 		private string rating = string.Empty;
 		
 		#endregion
-		
+
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ContentDescriptionObject" /> by reading the
@@ -87,45 +89,40 @@ namespace TagLib.Asf {
 		///    The object read from disk does not have the correct GUID
 		///    or smaller than the minimum size.
 		/// </exception>
-		public ContentDescriptionObject (Asf.File file, long position)
-			: base (file, position)
+		public ContentDescriptionObject(Asf.File file, long position) : base(file, position)
 		{
 			if (Guid != Asf.Guid.AsfContentDescriptionObject)
-				throw new CorruptFileException (
-					"Object GUID incorrect.");
-			
+				throw new CorruptFileException("Object GUID incorrect.");
+
 			if (OriginalSize < 34)
-				throw new CorruptFileException (
-					"Object size too small.");
-			
-			ushort title_length = file.ReadWord ();
-			ushort author_length = file.ReadWord ();
-			ushort copyright_length = file.ReadWord ();
-			ushort description_length = file.ReadWord ();
-			ushort rating_length = file.ReadWord ();
-			
-			title = file.ReadUnicode (title_length);
-			author = file.ReadUnicode (author_length);
-			copyright = file.ReadUnicode (copyright_length);
-			description = file.ReadUnicode (description_length);
-			rating = file.ReadUnicode (rating_length);
+				throw new CorruptFileException("Object size too small.");
+
+			ushort title_length = file.ReadWord();
+			ushort author_length = file.ReadWord();
+			ushort copyright_length = file.ReadWord();
+			ushort description_length = file.ReadWord();
+			ushort rating_length = file.ReadWord();
+
+			title = file.ReadUnicode(title_length);
+			author = file.ReadUnicode(author_length);
+			copyright = file.ReadUnicode(copyright_length);
+			description = file.ReadUnicode(description_length);
+			rating = file.ReadUnicode(rating_length);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ContentDescriptionObject" /> with no contents.
 		/// </summary>
-		public ContentDescriptionObject ()
-			: base (Asf.Guid.AsfContentDescriptionObject)
+		public ContentDescriptionObject() : base(Asf.Guid.AsfContentDescriptionObject)
 		{
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
 		#region Public Region
-		
+
 		/// <summary>
 		///    Gets and sets the title of the media described by the
 		///    current instance.
@@ -134,14 +131,12 @@ namespace TagLib.Asf {
 		///    A <see cref="string" /> object containing the title of
 		///    the media or <see langword="null" /> if it is not set.
 		/// </value>
-		public string Title {
-			get {return title.Length == 0 ? null : title;}
-			set {
-				title = string.IsNullOrEmpty (value) ?
-					string.Empty : value;
-			}
+		public string Title
+		{
+			get { return title.Length == 0 ? null : title; }
+			set { title = string.IsNullOrEmpty(value) ? string.Empty : value; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the author or performer of the media
 		///    described by the current instance.
@@ -150,12 +145,10 @@ namespace TagLib.Asf {
 		///    A <see cref="string" /> object containing the author of
 		///    the media or <see langword="null" /> if it is not set.
 		/// </value>
-		public string Author {
+		public string Author
+		{
 			get {return author.Length == 0 ? null : author;}
-			set {
-				author = string.IsNullOrEmpty (value) ?
-					string.Empty : value;
-			}
+			set { author = string.IsNullOrEmpty (value) ? string.Empty : value; }
 		}
 		
 		/// <summary>
@@ -167,12 +160,10 @@ namespace TagLib.Asf {
 		///    information for the media or <see langword="null" /> if
 		///    it is not set.
 		/// </value>
-		public string Copyright {
+		public string Copyright
+		{
 			get {return copyright.Length == 0 ? null : copyright;}
-			set {
-				copyright = string.IsNullOrEmpty (value) ?
-					string.Empty : value;
-			}
+			set { copyright = string.IsNullOrEmpty (value) ? string.Empty : value; }
 		}
 		
 		/// <summary>
@@ -183,17 +174,12 @@ namespace TagLib.Asf {
 		///    A <see cref="string" /> object containing a description
 		///    of the media or <see langword="null" /> if it is not set.
 		/// </value>
-		public string Description {
-			get {
-				return description.Length == 0 ?
-					null : description;
-			}
-			set {
-				description = string.IsNullOrEmpty (value) ?
-					string.Empty : value;
-			}
+		public string Description
+		{
+			get { return description.Length == 0 ? null : description; }
+			set { description = string.IsNullOrEmpty (value) ? string.Empty : value; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the rating of the media described by the
 		///    current instance.
@@ -202,14 +188,12 @@ namespace TagLib.Asf {
 		///    A <see cref="string" /> object containing a rating of the
 		///    media or <see langword="null" /> if it is not set.
 		/// </value>
-		public string Rating {
-			get {return rating.Length == 0 ? null : rating;}
-			set {
-				rating = string.IsNullOrEmpty (value) ?
-					string.Empty : value;
-			}
+		public string Rating
+		{
+			get { return rating.Length == 0 ? null : rating; }
+			set { rating = string.IsNullOrEmpty(value) ? string.Empty : value; }
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not the current instance is empty.
 		/// </summary>
@@ -217,22 +201,23 @@ namespace TagLib.Asf {
 		///    <see langword="true" /> if all the values are cleared.
 		///    Otherwise <see langword="false" />.
 		/// </value>
-		public bool IsEmpty {
-			get {
+		public bool IsEmpty
+		{
+			get
+			{
 				return title.Length == 0 &&
-				author.Length == 0 &&
-				copyright.Length == 0 &&
-				description.Length == 0 &&
-				rating.Length == 0;
+				       author.Length == 0 &&
+				       copyright.Length == 0 &&
+				       description.Length == 0 &&
+				       rating.Length == 0;
 			}
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
 		#region Public Region
-		
+
 		/// <summary>
 		///    Renders the current instance as a raw ASF object.
 		/// </summary>
@@ -240,31 +225,28 @@ namespace TagLib.Asf {
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered version of the current instance.
 		/// </returns>
-		public override ByteVector Render ()
+		public override ByteVector Render()
 		{
-			ByteVector title_bytes = RenderUnicode (title);
-			ByteVector author_bytes = RenderUnicode (author);
-			ByteVector copyright_bytes = RenderUnicode (copyright);
-			ByteVector description_bytes =
-				RenderUnicode (description);
-			ByteVector rating_bytes = RenderUnicode (rating);
-			
-			ByteVector output = RenderWord ((ushort)
-				title_bytes.Count);
-			output.Add (RenderWord ((ushort) author_bytes.Count));
-			output.Add (RenderWord ((ushort) copyright_bytes.Count));
-			output.Add (RenderWord ((ushort)
-				description_bytes.Count));
-			output.Add (RenderWord ((ushort) rating_bytes.Count));
-			output.Add (title_bytes);
-			output.Add (author_bytes);
-			output.Add (copyright_bytes);
-			output.Add (description_bytes);
-			output.Add (rating_bytes);
-			
-			return Render (output);
+			ByteVector title_bytes = RenderUnicode(title);
+			ByteVector author_bytes = RenderUnicode(author);
+			ByteVector copyright_bytes = RenderUnicode(copyright);
+			ByteVector description_bytes = RenderUnicode(description);
+			ByteVector rating_bytes = RenderUnicode(rating);
+
+			ByteVector output = RenderWord((ushort) title_bytes.Count);
+			output.Add(RenderWord((ushort) author_bytes.Count));
+			output.Add(RenderWord((ushort) copyright_bytes.Count));
+			output.Add(RenderWord((ushort) description_bytes.Count));
+			output.Add(RenderWord((ushort) rating_bytes.Count));
+			output.Add(title_bytes);
+			output.Add(author_bytes);
+			output.Add(copyright_bytes);
+			output.Add(description_bytes);
+			output.Add(rating_bytes);
+
+			return Render(output);
 		}
-		
+
 		#endregion
 	}
 }

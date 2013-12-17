@@ -23,9 +23,11 @@
 //
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
-namespace TagLib.Asf {
+namespace TagLib.Asf
+{
 	/// <summary>
 	///    This class extends <see cref="Object" /> to provide a
 	///    representation of an ASF Metadata Library object which can be
@@ -35,19 +37,17 @@ namespace TagLib.Asf {
 		IEnumerable<DescriptionRecord>
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the description records.
 		/// </summary>
-		private List<DescriptionRecord> records =
-			new List<DescriptionRecord> ();
+		private List<DescriptionRecord> records = new List<DescriptionRecord>();
 		
 		#endregion
 		
 		
-		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="MetadataLibraryObject" /> by reading the contents
@@ -72,41 +72,36 @@ namespace TagLib.Asf {
 		///    The object read from disk does not have the correct GUID
 		///    or smaller than the minimum size.
 		/// </exception>
-		public MetadataLibraryObject (Asf.File file, long position)
-			: base (file, position)
+		public MetadataLibraryObject(Asf.File file, long position) : base(file, position)
 		{
-			if (!Guid.Equals (Asf.Guid.AsfMetadataLibraryObject))
-				throw new CorruptFileException (
-					"Object GUID incorrect.");
-			
+			if (!Guid.Equals(Asf.Guid.AsfMetadataLibraryObject))
+				throw new CorruptFileException("Object GUID incorrect.");
+
 			if (OriginalSize < 26)
-				throw new CorruptFileException (
-					"Object size too small.");
-			
-			ushort count = file.ReadWord ();
-			
-			for (ushort i = 0; i < count; i ++) {
-				DescriptionRecord rec = new DescriptionRecord (
-					file);
-				AddRecord (rec);
+				throw new CorruptFileException("Object size too small.");
+
+			ushort count = file.ReadWord();
+
+			for (ushort i = 0; i < count; i ++)
+			{
+				DescriptionRecord rec = new DescriptionRecord(file);
+				AddRecord(rec);
 			}
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="MetadataLibraryObject" /> with no contents.
 		/// </summary>
-		public MetadataLibraryObject ()
-			: base (Asf.Guid.AsfMetadataLibraryObject)
+		public MetadataLibraryObject() : base(Asf.Guid.AsfMetadataLibraryObject)
 		{
 		}
-		
+
 		#endregion
 		
 		
-		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets whether or not the current instance is empty.
 		/// </summary>
@@ -115,16 +110,16 @@ namespace TagLib.Asf {
 		///    contain any <see cref="DescriptionRecord" /> objects.
 		///    Otherwise <see langword="false" />.
 		/// </value>
-		public bool IsEmpty {
-			get {return records.Count == 0;}
+		public bool IsEmpty
+		{
+			get { return records.Count == 0; }
 		}
-		
+
 		#endregion
 		
 		
-		
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Renders the current instance as a raw ASF object.
 		/// </summary>
@@ -132,19 +127,20 @@ namespace TagLib.Asf {
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered version of the current instance.
 		/// </returns>
-		public override ByteVector Render ()
+		public override ByteVector Render()
 		{
-			ByteVector output = new ByteVector ();
+			ByteVector output = new ByteVector();
 			ushort count = 0;
-			
-			foreach (DescriptionRecord rec in records) {
+
+			foreach (DescriptionRecord rec in records)
+			{
 				count ++;
-				output.Add (rec.Render ());
+				output.Add(rec.Render());
 			}
-			
-			return Render (RenderWord (count) + output);
+
+			return Render(RenderWord(count) + output);
 		}
-		
+
 		/// <summary>
 		///    Removes all records with a given language, stream, and
 		///    name from the current instance.
@@ -161,19 +157,18 @@ namespace TagLib.Asf {
 		///    A <see cref="string" /> object containing the name of the
 		///    records to be removed.
 		/// </param>
-		public void RemoveRecords (ushort languageListIndex,
-		                           ushort streamNumber,
-		                           string name)
+		public void RemoveRecords(ushort languageListIndex, ushort streamNumber, string name)
 		{
-			for (int i = records.Count - 1; i >= 0; i --) {
-				DescriptionRecord rec = records [i];
+			for (int i = records.Count - 1; i >= 0; i --)
+			{
+				DescriptionRecord rec = records[i];
 				if (rec.LanguageListIndex == languageListIndex &&
-					rec.StreamNumber == streamNumber &&
-					rec.Name == name)
-					records.RemoveAt (i);
+				    rec.StreamNumber == streamNumber &&
+				    rec.Name == name)
+					records.RemoveAt(i);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets all records with a given language, stream, and any
 		///    of a collection of names from the current instance.
@@ -195,21 +190,20 @@ namespace TagLib.Asf {
 		///    through the <see cref="DescriptionRecord" /> objects
 		///    retrieved from the current instance.
 		/// </returns>
-		public IEnumerable<DescriptionRecord> GetRecords (ushort languageListIndex,
-		                                                  ushort streamNumber,
-		                                                  params string [] names)
+		public IEnumerable<DescriptionRecord> GetRecords(ushort languageListIndex, ushort streamNumber, params string[] names)
 		{
-			foreach (DescriptionRecord rec in records) {
+			foreach (DescriptionRecord rec in records)
+			{
 				if (rec.LanguageListIndex != languageListIndex ||
-					rec.StreamNumber != streamNumber)
+				    rec.StreamNumber != streamNumber)
 					continue;
-				
+
 				foreach (string name in names)
 					if (rec.Name == name)
 						yield return rec;
 			}
 		}
-		
+
 		/// <summary>
 		///    Adds a record to the current instance.
 		/// </summary>
@@ -217,11 +211,11 @@ namespace TagLib.Asf {
 		///    A <see cref="DescriptionRecord" /> object to add to the
 		///    current instance.
 		/// </param>
-		public void AddRecord (DescriptionRecord record)
+		public void AddRecord(DescriptionRecord record)
 		{
-			records.Add (record);
+			records.Add(record);
 		}
-		
+
 		/// <summary>
 		///    Sets the a collection of records for a given language,
 		///    stream, and name, removing the existing matching records.
@@ -251,29 +245,29 @@ namespace TagLib.Asf {
 		///    this method, which are used for removing existing values
 		///    and determining where to position the new object.
 		/// </remarks>
-		public void SetRecords (ushort languageListIndex,
-		                        ushort streamNumber, string name,
-		                        params DescriptionRecord [] records)
+		public void SetRecords(ushort languageListIndex, ushort streamNumber, string name, params DescriptionRecord[] records)
 		{
 			int position = this.records.Count;
-			for (int i = this.records.Count - 1; i >= 0; i --) {
-				DescriptionRecord rec = this.records [i];
+			for (int i = this.records.Count - 1; i >= 0; i --)
+			{
+				DescriptionRecord rec = this.records[i];
 				if (rec.LanguageListIndex == languageListIndex &&
-					rec.StreamNumber == streamNumber &&
-					rec.Name == name) {
-					this.records.RemoveAt (i);
+				    rec.StreamNumber == streamNumber &&
+				    rec.Name == name)
+				{
+					this.records.RemoveAt(i);
 					position = i;
 				}
 			}
-			this.records.InsertRange (position, records);
+
+			this.records.InsertRange(position, records);
 		}
-		
+
 		#endregion
 		
 		
-		
 		#region IEnumerable
-		
+
 		/// <summary>
 		///    Gets an enumerator for enumerating through the
 		///    description records.
@@ -282,17 +276,16 @@ namespace TagLib.Asf {
 		///    A <see cref="T:System.Collections.IEnumerator`1" /> for
 		///    enumerating through the description records.
 		/// </returns>
-		public IEnumerator<DescriptionRecord> GetEnumerator ()
+		public IEnumerator<DescriptionRecord> GetEnumerator()
 		{
-			return records.GetEnumerator ();
+			return records.GetEnumerator();
 		}
-		
-		System.Collections.IEnumerator
-			System.Collections.IEnumerable.GetEnumerator ()
+
+		IEnumerator IEnumerable.GetEnumerator()
 		{
-			return records.GetEnumerator ();
+			return records.GetEnumerator();
 		}
-		
+
 		#endregion
 	}
 }
