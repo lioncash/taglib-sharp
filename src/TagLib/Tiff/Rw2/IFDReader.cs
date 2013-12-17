@@ -32,7 +32,7 @@ namespace TagLib.Tiff.Rw2
 	public class IFDReader : TagLib.IFD.IFDReader
 	{
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructor. Reads an IFD from given file, using the given endianness.
@@ -61,12 +61,13 @@ namespace TagLib.Tiff.Rw2
 		/// 	A <see cref="System.UInt32"/> value with maximal possible offset. This is to limit
 		///     the size of the possible data;
 		/// </param>
-		public IFDReader (BaseTiffFile file, bool is_bigendian, IFDStructure structure, long base_offset, uint ifd_offset, uint max_offset) :
-			base (file, is_bigendian, structure, base_offset, ifd_offset, max_offset)
+		public IFDReader(BaseTiffFile file, bool is_bigendian, IFDStructure structure, long base_offset, uint ifd_offset,
+			uint max_offset)
+			: base(file, is_bigendian, structure, base_offset, ifd_offset, max_offset)
 		{
 		}
 
-#endregion
+		#endregion
 
 		/// <summary>
 		///    Try to parse the given IFD entry, used to discover format-specific entries.
@@ -91,49 +92,54 @@ namespace TagLib.Tiff.Rw2
 		///    A <see cref="IFDEntry"/> with the given parameters, or null if none was parsed, after
 		///    which the normal TIFF parsing is used.
 		/// </returns>
-		protected override IFDEntry ParseIFDEntry (ushort tag, ushort type, uint count, long base_offset, uint offset) {
-			if (tag == 0x002e && !seen_jpgfromraw) {
+		protected override IFDEntry ParseIFDEntry(ushort tag, ushort type, uint count, long base_offset, uint offset)
+		{
+			if (tag == 0x002e && !seen_jpgfromraw)
+			{
 				// FIXME: JpgFromRaw
 
-				file.Seek (base_offset + offset, SeekOrigin.Begin);
-				var data = file.ReadBlock ((int) count);
-				var mem_stream = new MemoryStream (data.Data);
-				var res = new StreamJPGAbstraction (mem_stream);
-				(file as Rw2.File).JpgFromRaw = new Jpeg.File (res, ReadStyle.Average);
+				file.Seek(base_offset + offset, SeekOrigin.Begin);
+				var data = file.ReadBlock((int) count);
+				var mem_stream = new MemoryStream(data.Data);
+				var res = new StreamJPGAbstraction(mem_stream);
+				(file as Rw2.File).JpgFromRaw = new Jpeg.File(res, ReadStyle.Average);
 
 				seen_jpgfromraw = true;
 				return null;
 			}
 
-			return base.ParseIFDEntry (tag, type, count, base_offset, offset);
+			return base.ParseIFDEntry(tag, type, count, base_offset, offset);
 		}
 
-		private bool seen_jpgfromraw = false;
+		private bool seen_jpgfromraw;
 	}
 
-	class StreamJPGAbstraction : File.IFileAbstraction
+	internal class StreamJPGAbstraction : File.IFileAbstraction
 	{
-		readonly Stream stream;
+		private readonly Stream stream;
 
-		public StreamJPGAbstraction (Stream stream)
+		public StreamJPGAbstraction(Stream stream)
 		{
 			this.stream = stream;
 		}
 
-		public string Name {
+		public string Name
+		{
 			get { return "JpgFromRaw.jpg"; }
 		}
 
-		public void CloseStream (System.IO.Stream stream)
+		public void CloseStream(System.IO.Stream stream)
 		{
-			stream.Close ();
+			stream.Close();
 		}
 
-		public System.IO.Stream ReadStream  {
+		public System.IO.Stream ReadStream
+		{
 			get { return stream; }
 		}
 
-		public System.IO.Stream WriteStream  {
+		public System.IO.Stream WriteStream
+		{
 			get { return stream; }
 		}
 	}

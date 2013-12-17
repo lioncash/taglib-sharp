@@ -22,8 +22,6 @@
 //
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 
 using TagLib.Image;
 using TagLib.IFD;
@@ -70,9 +68,8 @@ namespace TagLib.Tiff
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path, ReadStyle propertiesStyle)
-			: this (new File.LocalFileAbstraction (path),
-				propertiesStyle)
+		public File(string path, ReadStyle propertiesStyle)
+			: this(new File.LocalFileAbstraction(path), propertiesStyle)
 		{
 		}
 
@@ -88,7 +85,7 @@ namespace TagLib.Tiff
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path) : base (path)
+		public File(string path) : base(path)
 		{
 		}
 
@@ -110,16 +107,18 @@ namespace TagLib.Tiff
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File (File.IFileAbstraction abstraction,
-		             ReadStyle propertiesStyle) : base (abstraction)
+		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
 		{
-			ImageTag = new CombinedImageTag (TagTypes.TiffIFD | TagTypes.XMP);
+			ImageTag = new CombinedImageTag(TagTypes.TiffIFD | TagTypes.XMP);
 
 			Mode = AccessMode.Read;
-			try {
-				Read (propertiesStyle);
+			try
+			{
+				Read(propertiesStyle);
 				TagTypesOnDisk = TagTypes;
-			} finally {
+			}
+			finally
+			{
 				Mode = AccessMode.Closed;
 			}
 		}
@@ -136,7 +135,7 @@ namespace TagLib.Tiff
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		protected File (IFileAbstraction abstraction) : base (abstraction)
+		protected File(IFileAbstraction abstraction) : base(abstraction)
 		{
 		}
 
@@ -153,7 +152,8 @@ namespace TagLib.Tiff
 		///    media properties of the file represented by the current
 		///    instance.
 		/// </value>
-		public override TagLib.Properties Properties {
+		public override TagLib.Properties Properties
+		{
 			get { return properties; }
 		}
 
@@ -165,14 +165,17 @@ namespace TagLib.Tiff
 		///    Saves the changes made in the current instance to the
 		///    file it represents.
 		/// </summary>
-		public override void Save ()
+		public override void Save()
 		{
 			Mode = AccessMode.Write;
-			try {
-				WriteFile ();
+			try
+			{
+				WriteFile();
 
 				TagTypesOnDisk = TagTypes;
-			} finally {
+			}
+			finally
+			{
 				Mode = AccessMode.Closed;
 			}
 		}
@@ -184,24 +187,24 @@ namespace TagLib.Tiff
 		/// <summary>
 		///    Render the whole file and write it back.
 		/// </summary>
-		private void WriteFile ()
+		private void WriteFile()
 		{
 			// Check, if IFD0 is contained
 			IFDTag exif = ImageTag.Exif;
 			if (exif == null)
-				throw new Exception ("Tiff file without tags");
+				throw new Exception("Tiff file without tags");
 
-			UpdateTags (exif);
+			UpdateTags(exif);
 
 			// first IFD starts at 8
 			uint first_ifd_offset = 8;
-			ByteVector data = RenderHeader (first_ifd_offset);
+			ByteVector data = RenderHeader(first_ifd_offset);
 
-			var renderer = new IFDRenderer (IsBigEndian, exif.Structure, first_ifd_offset);
+			var renderer = new IFDRenderer(IsBigEndian, exif.Structure, first_ifd_offset);
 
-			data.Add (renderer.Render ());
+			data.Add(renderer.Render());
 
-			Insert (data, 0, Length);
+			Insert(data, 0, Length);
 		}
 
 		/// <summary>
@@ -228,24 +231,28 @@ namespace TagLib.Tiff
 		///    of accuracy to read the media properties, or <see
 		///    cref="ReadStyle.None" /> to ignore the properties.
 		/// </param>
-		protected void Read (ReadStyle propertiesStyle)
+		protected void Read(ReadStyle propertiesStyle)
 		{
 			Mode = AccessMode.Read;
-			try {
-				uint first_ifd_offset = ReadHeader ();
-				ReadIFD (first_ifd_offset);
+			try
+			{
+				uint first_ifd_offset = ReadHeader();
+				ReadIFD(first_ifd_offset);
 
 				// Find XMP data
-				var xmp_entry = ImageTag.Exif.Structure.GetEntry (0, (ushort) IFDEntryTag.XMP) as ByteVectorIFDEntry;
-				if (xmp_entry != null) {
-					ImageTag.AddTag (new XmpTag (xmp_entry.Data.ToString (), this));
+				var xmp_entry = ImageTag.Exif.Structure.GetEntry(0, (ushort) IFDEntryTag.XMP) as ByteVectorIFDEntry;
+				if (xmp_entry != null)
+				{
+					ImageTag.AddTag(new XmpTag(xmp_entry.Data.ToString(), this));
 				}
 
 				if (propertiesStyle == ReadStyle.None)
 					return;
 
-				properties = ExtractProperties ();
-			} finally {
+				properties = ExtractProperties();
+			}
+			finally
+			{
 				Mode = AccessMode.Closed;
 			}
 		}
@@ -259,18 +266,19 @@ namespace TagLib.Tiff
 		///    at the right values. When no guess at all can be made,
 		///    <see langword="null" /> is returned.
 		/// </returns>
-		protected virtual Properties ExtractProperties ()
+		protected virtual Properties ExtractProperties()
 		{
 			int width = 0, height = 0;
 
-			IFDTag tag = GetTag (TagTypes.TiffIFD) as IFDTag;
+			IFDTag tag = GetTag(TagTypes.TiffIFD) as IFDTag;
 			IFDStructure structure = tag.Structure;
 
-			width = (int) (structure.GetLongValue (0, (ushort) IFDEntryTag.ImageWidth) ?? 0);
-			height = (int) (structure.GetLongValue (0, (ushort) IFDEntryTag.ImageLength) ?? 0);
+			width = (int) (structure.GetLongValue(0, (ushort) IFDEntryTag.ImageWidth) ?? 0);
+			height = (int) (structure.GetLongValue(0, (ushort) IFDEntryTag.ImageLength) ?? 0);
 
-			if (width > 0 && height > 0) {
-				return new Properties (TimeSpan.Zero, CreateCodec (width, height));
+			if (width > 0 && height > 0)
+			{
+				return new Properties(TimeSpan.Zero, CreateCodec(width, height));
 			}
 
 			return null;
@@ -282,9 +290,9 @@ namespace TagLib.Tiff
 		/// <returns>
 		///    A <see cref="Codec" /> object.
 		/// </returns>
-		protected virtual Codec CreateCodec (int width, int height)
+		protected virtual Codec CreateCodec(int width, int height)
 		{
-			return new Codec (width, height);
+			return new Codec(width, height);
 		}
 
 		#endregion

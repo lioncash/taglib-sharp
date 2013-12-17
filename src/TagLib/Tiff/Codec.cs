@@ -30,7 +30,7 @@ namespace TagLib.Tiff
 	/// </summary>
 	public class Codec : Image.Codec
 	{
-		private string description = "TIFF File";
+		private readonly string description = "TIFF File";
 
 		/// <summary>
 		///    Gets a text description of the media represented by the
@@ -40,7 +40,10 @@ namespace TagLib.Tiff
 		///    A <see cref="string" /> object containing a description
 		///    of the media represented by the current instance.
 		/// </value>
-		public override string Description { get { return description; } }
+		public override string Description
+		{
+			get { return description; }
+		}
 
 
 		/// <summary>
@@ -56,8 +59,9 @@ namespace TagLib.Tiff
 		/// <returns>
 		///    A new <see cref="Codec" /> instance.
 		/// </returns>
-		public Codec (int width, int height)
-			: base (width, height) {}
+		public Codec(int width, int height) : base(width, height)
+		{
+		}
 
 		/// <summary>
 		///    Constructs a new <see cref="Codec" /> with the given width
@@ -75,8 +79,8 @@ namespace TagLib.Tiff
 		/// <returns>
 		///    A new <see cref="Codec" /> instance.
 		/// </returns>
-		public Codec (int width, int height, string description)
-			: base (width, height) {
+		public Codec(int width, int height, string description) : base(width, height)
+		{
 			this.description = description;
 		}
 	}

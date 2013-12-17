@@ -32,7 +32,7 @@ namespace TagLib.Tiff.Rw2
 	{
 		private File file;
 
-		internal IFDTag (File file) : base ()
+		internal IFDTag(File file)
 		{
 			this.file = file;
 		}
@@ -47,13 +47,16 @@ namespace TagLib.Tiff.Rw2
 		/// <remarks>
 		///    <para>Panasonic stores these in a somewhat unstandard location.</para>
 		/// </remarks>
-		public override uint? ISOSpeedRatings {
+		public override uint? ISOSpeedRatings
+		{
 			// TODO: The value in JPGFromRAW should probably be used as well.
-			get {
-				return Structure.GetLongValue (0, (ushort) PanasonicMakerNoteEntryTag.ISO);
+			get
+			{
+				return Structure.GetLongValue(0, (ushort) PanasonicMakerNoteEntryTag.ISO);
 			}
-			set {
-				Structure.SetLongValue (0, (ushort) PanasonicMakerNoteEntryTag.ISO, value.HasValue ? (uint) value : 0);
+			set
+			{
+				Structure.SetLongValue(0, (ushort) PanasonicMakerNoteEntryTag.ISO, value.HasValue ? (uint) value : 0);
 			}
 		}
 
@@ -67,18 +70,22 @@ namespace TagLib.Tiff.Rw2
 		/// <remarks>
 		///    <para>Panasonic stores these in a somewhat unstandard location.</para>
 		/// </remarks>
-		public override uint? FocalLengthIn35mmFilm {
-			get {
+		public override uint? FocalLengthIn35mmFilm
+		{
+			get
+			{
 				var jpg = file.JpgFromRaw;
 				if (jpg == null)
 					return base.FocalLengthIn35mmFilm;
-				var tag = jpg.GetTag (TagTypes.TiffIFD, true) as Image.ImageTag;
+				var tag = jpg.GetTag(TagTypes.TiffIFD, true) as Image.ImageTag;
 				if (tag == null)
 					return base.FocalLengthIn35mmFilm;
 				return tag.FocalLengthIn35mmFilm ?? base.FocalLengthIn35mmFilm;
 			}
-			set {
-				(file.JpgFromRaw.GetTag (TagTypes.TiffIFD, true) as Image.ImageTag).FocalLengthIn35mmFilm = value;
+
+			set
+			{
+				(file.JpgFromRaw.GetTag(TagTypes.TiffIFD, true) as Image.ImageTag).FocalLengthIn35mmFilm = value;
 			}
 		}
 	}

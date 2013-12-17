@@ -61,7 +61,8 @@ namespace TagLib.Tiff.Rw2
 		///    media properties of the file represented by the current
 		///    instance.
 		/// </value>
-		public override TagLib.Properties Properties {
+		public override TagLib.Properties Properties
+		{
 			get { return properties; }
 		}
 
@@ -72,14 +73,16 @@ namespace TagLib.Tiff.Rw2
 		///    A <see cref="bool" /> which is true if tags can be written to the
 		///    current file, otherwise false.
 		/// </value>
-		public override bool Writeable {
+		public override bool Writeable
+		{
 			get { return false; }
 		}
 
 		/// <summary>
 		///     The JPEG file that's embedded in the RAW file.
 		/// </summary>
-		public Jpeg.File JpgFromRaw {
+		public Jpeg.File JpgFromRaw
+		{
 			get;
 			internal set;
 		}
@@ -105,9 +108,8 @@ namespace TagLib.Tiff.Rw2
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path, ReadStyle propertiesStyle)
-			: this (new File.LocalFileAbstraction (path),
-				propertiesStyle)
+		public File(string path, ReadStyle propertiesStyle)
+			: this(new File.LocalFileAbstraction(path), propertiesStyle)
 		{
 		}
 
@@ -123,7 +125,7 @@ namespace TagLib.Tiff.Rw2
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path) : this (path, ReadStyle.Average)
+		public File(string path) : this(path, ReadStyle.Average)
 		{
 		}
 
@@ -145,11 +147,10 @@ namespace TagLib.Tiff.Rw2
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File (File.IFileAbstraction abstraction,
-		             ReadStyle propertiesStyle) : base (abstraction)
+		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
 		{
 			Magic = 85; // Panasonic uses 0x55
-			Read (propertiesStyle);
+			Read(propertiesStyle);
 		}
 
 		/// <summary>
@@ -164,8 +165,7 @@ namespace TagLib.Tiff.Rw2
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		protected File (IFileAbstraction abstraction)
-			: this (abstraction, ReadStyle.Average)
+		protected File(IFileAbstraction abstraction) : this(abstraction, ReadStyle.Average)
 		{
 		}
 
@@ -177,9 +177,9 @@ namespace TagLib.Tiff.Rw2
 		///    Saves the changes made in the current instance to the
 		///    file it represents.
 		/// </summary>
-		public override void Save ()
+		public override void Save()
 		{
-			throw new NotSupportedException ();
+			throw new NotSupportedException();
 		}
 
 		/// <summary>
@@ -200,10 +200,11 @@ namespace TagLib.Tiff.Rw2
 		///    matching tag was found and none was created, <see
 		///    langword="null" /> is returned.
 		/// </returns>
-		public override TagLib.Tag GetTag (TagLib.TagTypes type, bool create)
+		public override TagLib.Tag GetTag(TagLib.TagTypes type, bool create)
 		{
-			TagLib.Tag tag = base.GetTag (type, false);
-			if (tag != null) {
+			TagLib.Tag tag = base.GetTag(type, false);
+			if (tag != null)
+			{
 				return tag;
 			}
 
@@ -211,10 +212,10 @@ namespace TagLib.Tiff.Rw2
 				return null;
 
 			if (type != TagTypes.TiffIFD)
-				return base.GetTag (type, create);
+				return base.GetTag(type, create);
 
-			ImageTag new_tag = new IFDTag (this);
-			ImageTag.AddTag (new_tag);
+			ImageTag new_tag = new IFDTag(this);
+			ImageTag.AddTag(new_tag);
 			return new_tag;
 		}
 
@@ -230,20 +231,22 @@ namespace TagLib.Tiff.Rw2
 		///    of accuracy to read the media properties, or <see
 		///    cref="ReadStyle.None" /> to ignore the properties.
 		/// </param>
-		private void Read (ReadStyle propertiesStyle)
+		private void Read(ReadStyle propertiesStyle)
 		{
 			Mode = AccessMode.Read;
-			try {
-				ImageTag = new CombinedImageTag (TagTypes.TiffIFD);
+			try
+			{
+				ImageTag = new CombinedImageTag(TagTypes.TiffIFD);
 
-				ReadFile ();
+				ReadFile();
 
 				TagTypesOnDisk = TagTypes;
 
 				if (propertiesStyle != ReadStyle.None)
-					properties = ExtractProperties ();
-
-			} finally {
+					properties = ExtractProperties();
+			}
+			finally
+			{
 				Mode = AccessMode.Closed;
 			}
 		}
@@ -251,14 +254,14 @@ namespace TagLib.Tiff.Rw2
 		/// <summary>
 		///    Parses the RW2 file
 		/// </summary>
-		private void ReadFile ()
+		private void ReadFile()
 		{
 			// A RW2 file starts with a Tiff header followed by a RW2 header
-			uint first_ifd_offset = ReadHeader ();
-			uint raw_ifd_offset = ReadAdditionalRW2Header ();
+			uint first_ifd_offset = ReadHeader();
+			uint raw_ifd_offset = ReadAdditionalRW2Header();
 
-			ReadIFD (first_ifd_offset, 3);
-			ReadIFD (raw_ifd_offset, 1);
+			ReadIFD(first_ifd_offset, 3);
+			ReadIFD(raw_ifd_offset, 1);
 		}
 
 		/// <summary>
@@ -267,16 +270,16 @@ namespace TagLib.Tiff.Rw2
 		/// <returns>
 		///    A <see cref="System.UInt32"/> with the offset to the IFD with the RAW data.
 		/// </returns>
-		private uint ReadAdditionalRW2Header ()
+		private uint ReadAdditionalRW2Header()
 		{
 			// RW2 Header
 			//
 			// Seems to be 16 bytes, no idea on the meaning of these.
 
-			ByteVector header = ReadBlock (16);
+			ByteVector header = ReadBlock(16);
 
 			if (header.Count != 16)
-				throw new CorruptFileException ("Unexpected end of RW2 header");
+				throw new CorruptFileException("Unexpected end of RW2 header");
 
 			return (uint) Tell;
 		}
@@ -290,23 +293,24 @@ namespace TagLib.Tiff.Rw2
 		///    at the right values. When no guess at all can be made,
 		///    <see langword="null" /> is returned.
 		/// </returns>
-		private Properties ExtractProperties ()
+		private Properties ExtractProperties()
 		{
 			int width = 0, height = 0;
 
-			IFDTag tag = GetTag (TagTypes.TiffIFD) as IFDTag;
+			IFDTag tag = GetTag(TagTypes.TiffIFD) as IFDTag;
 			IFDStructure structure = tag.Structure;
 
-			width = (int) (structure.GetLongValue (0, 0x07) ?? 0);
-			height = (int) (structure.GetLongValue (0, 0x06) ?? 0);
+			width = (int) (structure.GetLongValue(0, 0x07) ?? 0);
+			height = (int) (structure.GetLongValue(0, 0x06) ?? 0);
 
 			var vendor = ImageTag.Make;
 			if (vendor == "LEICA")
 				vendor = "Leica";
-			var desc = String.Format ("{0} RAW File", vendor);
+			var desc = String.Format("{0} RAW File", vendor);
 
-			if (width > 0 && height > 0) {
-				return new Properties (TimeSpan.Zero, new Codec (width, height, desc));
+			if (width > 0 && height > 0)
+			{
+				return new Properties(TimeSpan.Zero, new Codec(width, height, desc));
 			}
 
 			return null;
@@ -339,9 +343,9 @@ namespace TagLib.Tiff.Rw2
 		/// 	A <see cref="System.UInt32"/> value with maximal possible offset. This is to limit
 		///     the size of the possible data;
 		/// </param>
-		protected override TagLib.IFD.IFDReader CreateIFDReader (BaseTiffFile file, bool is_bigendian, IFDStructure structure, long base_offset, uint ifd_offset, uint max_offset)
+		protected override TagLib.IFD.IFDReader CreateIFDReader(BaseTiffFile file, bool is_bigendian, IFDStructure structure, long base_offset, uint ifd_offset, uint max_offset)
 		{
-			return new IFDReader (file, is_bigendian, structure, base_offset, ifd_offset, max_offset);
+			return new IFDReader(file, is_bigendian, structure, base_offset, ifd_offset, max_offset);
 		}
 
 		#endregion

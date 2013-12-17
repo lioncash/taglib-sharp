@@ -45,7 +45,8 @@ namespace TagLib.Tiff.Nef
 		///    A <see cref="bool" /> which is true if tags can be written to the
 		///    current file, otherwise false.
 		/// </value>
-		public override bool Writeable {
+		public override bool Writeable
+		{
 			get { return false; }
 		}
 
@@ -70,9 +71,8 @@ namespace TagLib.Tiff.Nef
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path, ReadStyle propertiesStyle)
-			: this (new File.LocalFileAbstraction (path),
-				propertiesStyle)
+		public File(string path, ReadStyle propertiesStyle)
+			: this(new File.LocalFileAbstraction(path), propertiesStyle)
 		{
 		}
 
@@ -88,7 +88,7 @@ namespace TagLib.Tiff.Nef
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path) : this (path, ReadStyle.Average)
+		public File(string path) : this(path, ReadStyle.Average)
 		{
 		}
 
@@ -110,8 +110,8 @@ namespace TagLib.Tiff.Nef
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File (File.IFileAbstraction abstraction,
-		             ReadStyle propertiesStyle) : base (abstraction, propertiesStyle)
+		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle)
+			: base(abstraction, propertiesStyle)
 		{
 		}
 
@@ -127,8 +127,8 @@ namespace TagLib.Tiff.Nef
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		protected File (IFileAbstraction abstraction)
-			: this (abstraction, ReadStyle.Average)
+		protected File(IFileAbstraction abstraction)
+			: this(abstraction, ReadStyle.Average)
 		{
 		}
 
@@ -140,9 +140,9 @@ namespace TagLib.Tiff.Nef
 		///    Saves the changes made in the current instance to the
 		///    file it represents.
 		/// </summary>
-		public override void Save ()
+		public override void Save()
 		{
-			throw new NotSupportedException ();
+			throw new NotSupportedException();
 		}
 
 		#endregion
@@ -153,9 +153,9 @@ namespace TagLib.Tiff.Nef
 		/// <returns>
 		///    A <see cref="Codec" /> object.
 		/// </returns>
-		protected override Codec CreateCodec (int width, int height)
+		protected override Codec CreateCodec(int width, int height)
 		{
-			return new Codec (width, height, "Nikon Raw File");
+			return new Codec(width, height, "Nikon Raw File");
 		}
 	}
 }

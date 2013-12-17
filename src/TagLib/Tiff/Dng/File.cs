@@ -48,10 +48,10 @@ namespace TagLib.Tiff.Dng
 		///    A <see cref="bool" /> which is true if tags can be written to the
 		///    current file, otherwise false.
 		/// </value>
-		public override bool Writeable {
+		public override bool Writeable
+		{
 			get { return false; }
 		}
-
 
 		#endregion
 
@@ -74,9 +74,8 @@ namespace TagLib.Tiff.Dng
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path, ReadStyle propertiesStyle)
-			: this (new File.LocalFileAbstraction (path),
-				propertiesStyle)
+		public File(string path, ReadStyle propertiesStyle)
+			: this(new File.LocalFileAbstraction(path), propertiesStyle)
 		{
 		}
 
@@ -92,7 +91,7 @@ namespace TagLib.Tiff.Dng
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path) : this (path, ReadStyle.Average)
+		public File(string path) : this(path, ReadStyle.Average)
 		{
 		}
 
@@ -114,8 +113,8 @@ namespace TagLib.Tiff.Dng
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File (File.IFileAbstraction abstraction,
-		             ReadStyle propertiesStyle) : base (abstraction, propertiesStyle)
+		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle)
+			: base(abstraction, propertiesStyle)
 		{
 		}
 
@@ -131,8 +130,8 @@ namespace TagLib.Tiff.Dng
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		protected File (IFileAbstraction abstraction)
-			: this (abstraction, ReadStyle.Average)
+		protected File(IFileAbstraction abstraction)
+			: this(abstraction, ReadStyle.Average)
 		{
 		}
 
@@ -144,9 +143,9 @@ namespace TagLib.Tiff.Dng
 		///    Saves the changes made in the current instance to the
 		///    file it represents.
 		/// </summary>
-		public override void Save ()
+		public override void Save()
 		{
-			throw new NotSupportedException ();
+			throw new NotSupportedException();
 		}
 
 		#endregion
@@ -160,34 +159,38 @@ namespace TagLib.Tiff.Dng
 		///    at the right values. When no guess at all can be made,
 		///    <see langword="null" /> is returned.
 		/// </returns>
-		protected override Properties ExtractProperties ()
+		protected override Properties ExtractProperties()
 		{
 			int width = 0, height = 0;
 
-			IFDTag tag = GetTag (TagTypes.TiffIFD) as IFDTag;
+			IFDTag tag = GetTag(TagTypes.TiffIFD) as IFDTag;
 			IFDStructure structure = tag.Structure;
 
 			// DNG uses SubIFDs for images, the one with SubfileType = 0 is the RAW data.
-			var sub_ifds = structure.GetEntry (0, (ushort) IFDEntryTag.SubIFDs) as SubIFDArrayEntry;
-			if (sub_ifds == null) {
-				return base.ExtractProperties ();
+			var sub_ifds = structure.GetEntry(0, (ushort) IFDEntryTag.SubIFDs) as SubIFDArrayEntry;
+			if (sub_ifds == null)
+			{
+				return base.ExtractProperties();
 			}
 
-			foreach (var entry in sub_ifds.Entries) {
-				var type = entry.GetLongValue (0, (ushort) IFDEntryTag.NewSubfileType);
-				if (type == 0) {
-					width = (int) (entry.GetLongValue (0, (ushort) IFDEntryTag.ImageWidth) ?? 0);
-					height = (int) (entry.GetLongValue (0, (ushort) IFDEntryTag.ImageLength) ?? 0);
+			foreach (var entry in sub_ifds.Entries)
+			{
+				var type = entry.GetLongValue(0, (ushort) IFDEntryTag.NewSubfileType);
+				if (type == 0)
+				{
+					width = (int) (entry.GetLongValue(0, (ushort) IFDEntryTag.ImageWidth) ?? 0);
+					height = (int) (entry.GetLongValue(0, (ushort) IFDEntryTag.ImageLength) ?? 0);
 					break; // No need to iterate the other SubIFDs
 				}
 			}
 
-			if (width > 0 && height > 0) {
-				return new Properties (TimeSpan.Zero, CreateCodec (width, height));
+			if (width > 0 && height > 0)
+			{
+				return new Properties(TimeSpan.Zero, CreateCodec(width, height));
 			}
 
 			// Fall back to normal detection.
-			return base.ExtractProperties ();
+			return base.ExtractProperties();
 		}
 
 		/// <summary>
@@ -196,9 +199,9 @@ namespace TagLib.Tiff.Dng
 		/// <returns>
 		///    A <see cref="Codec" /> object.
 		/// </returns>
-		protected override Codec CreateCodec (int width, int height)
+		protected override Codec CreateCodec(int width, int height)
 		{
-			return new Codec (width, height, "Adobe Digital Negative File");
+			return new Codec(width, height, "Adobe Digital Negative File");
 		}
 	}
 }
