@@ -28,7 +28,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
+using System.Text;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace TagLib.Ogg
 {
@@ -1157,26 +1161,53 @@ namespace TagLib.Ogg
 		{
 			get
 			{
-				string[] covers = GetField("COVERART");
-				IPicture[] pictures = new Picture[covers.Length];
-				for (int ii = 0; ii < covers.Length; ii++)
+				string[] covers = GetField("METADATA_BLOCK_PICTURE");
+				IPicture[] pictures = new IPicture[covers.Length];
+
+				for (int i = 0; i < covers.Length; i++)
 				{
-					ByteVector data = new ByteVector(Convert.FromBase64String(covers[ii]));
-					pictures[ii] = new Picture(data);
+					byte[] pic = Convert.FromBase64String(covers[i]);
+					ByteVector bv = new ByteVector(pic);
+
+					// TODO: Break into own getter/setter
+					// NOTE: Commented out lines ARE valid.
+					//       They're just there as a lookup for when I make them into getters.
+					//int coverType   = bv.ToInt(0, true);
+					int mimeLength  = bv.ToInt(4, true);
+					int descriptionLength = bv.ToInt(8+mimeLength, true);
+					//int widthInPix       = bv.ToInt(12+mimeLength+descriptionLength, true);
+					//int heightInPix      = bv.ToInt(16+mimeLength+descriptionLength, true);
+					//int colorDepthBpp    = bv.ToInt(20+mimeLength+descriptionLength, true);
+					//int numColorsUsed    = bv.ToInt(24+mimeLength+descriptionLength, true);
+					int lenOfPictureData = bv.ToInt(28+mimeLength+descriptionLength, true);
+
+					// Make a slice to just the image data
+					pictures[i] = new Picture(bv.Slice(32 + mimeLength + descriptionLength, lenOfPictureData));
 				}
+
 				return pictures;
 			}
 
 			set
 			{
+				// TODO: Implement saving correctly.
+				// Currently just directly saves the image data.
+				// We want to save cover type, etc before this.
 				string[] covers = new string[value.Length];
-				for (int ii = 0; ii < value.Length; ii++)
+				for (int i = 0; i < value.Length; i++)
 				{
-					IPicture old = value[ii];
-					covers[ii] = Convert.ToBase64String(old.Data.Data);
+					IPicture old = value[i];
+					covers[i] = Convert.ToBase64String(old.Data.Data);
 				}
-				SetField("COVERART", covers);
+
+				SetField("METADATA_BLOCK_PICTURE", covers);
 			}
+		}
+
+		public string[] PictureType
+		{
+			get;
+			private set;
 		}
 
 		/// <summary>
@@ -1190,22 +1221,29 @@ namespace TagLib.Ogg
 		/// <remarks>
 		///    This property is implemented using the "COMPILATION" field.
 		/// </remarks>
-		public bool IsCompilation {
-			get {
+		public bool IsCompilation
+		{
+			get
+			{
 				string text;
 				int value;
 
-				if ((text = GetFirstField ("COMPILATION")) !=
-					null && int.TryParse (text, out value)) {
-						return value == 1;
+				if ((text = GetFirstField("COMPILATION")) !=  null && int.TryParse(text, out value))
+				{
+					return value == 1;
 				}
 				return false;
 			}
-			set {
-				if (value) {
-					SetField ("COMPILATION", "1");
-				} else {
-					RemoveField ("COMPILATION");
+
+			set
+			{
+				if (value)
+				{
+					SetField("COMPILATION", "1");
+				}
+				else
+				{
+					RemoveField("COMPILATION");
 				}
 			}
 		}
@@ -1222,31 +1260,41 @@ namespace TagLib.Ogg
 		///    "REPLAYGAIN_TRACK_GAIN" field. Set the value to double.NaN
 		///    to clear the field.
 		/// </remarks>
-		public override double ReplayGainTrackGain {
-			get {
-				string text = GetFirstField ("REPLAYGAIN_TRACK_GAIN");
+		public override double ReplayGainTrackGain
+		{
+			get
+			{
+				string text = GetFirstField("REPLAYGAIN_TRACK_GAIN");
 				double value;
-				
-				if (text == null) {
+
+				if (text == null)
+				{
 					return double.NaN;
 				}
-				if (text.ToLower(CultureInfo.InvariantCulture).EndsWith("db")) {
-					text = text.Substring (0, text.Length - 2).Trim();
+				if (text.ToLower(CultureInfo.InvariantCulture).EndsWith("db"))
+				{
+					text = text.Substring(0, text.Length - 2).Trim();
 				}
-				
-				if (double.TryParse (text, NumberStyles.Float,
-					CultureInfo.InvariantCulture, out value)) {
+
+				if (double.TryParse(text, NumberStyles.Float,
+					CultureInfo.InvariantCulture, out value))
+				{
 					return value;
 				}
 				return double.NaN;
 			}
-			set {
-				if (double.IsNaN (value)) {
-					RemoveField ("REPLAYGAIN_TRACK_GAIN");
-				} else {
+
+			set
+			{
+				if (double.IsNaN(value))
+				{
+					RemoveField("REPLAYGAIN_TRACK_GAIN");
+				}
+				else
+				{
 					string text = value.ToString("0.00 dB",
 						CultureInfo.InvariantCulture);
-					SetField ("REPLAYGAIN_TRACK_GAIN", text);
+					SetField("REPLAYGAIN_TRACK_GAIN", text);
 				}
 			}
 		}
@@ -1263,24 +1311,30 @@ namespace TagLib.Ogg
 		///    "REPLAYGAIN_TRACK_PEAK" field. Set the value to double.NaN
 		///    to clear the field.
 		/// </remarks>
-		public override double ReplayGainTrackPeak {
-			get {
+		public override double ReplayGainTrackPeak
+		{
+			get
+			{
 				string text;
 				double value;
 
-				if ((text = GetFirstField ("REPLAYGAIN_TRACK_PEAK")) !=
-					null && double.TryParse (text, NumberStyles.Float,
-						CultureInfo.InvariantCulture, out value)) {
-						return value;
+				if ((text = GetFirstField("REPLAYGAIN_TRACK_PEAK")) != null &&
+					double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
+				{
+					return value;
 				}
 				return double.NaN;
 			}
-			set {
-				if (double.IsNaN (value)) {
-					RemoveField ("REPLAYGAIN_TRACK_PEAK");
-				} else {
-					string text = value.ToString ("0.000000", CultureInfo.InvariantCulture);
-					SetField ("REPLAYGAIN_TRACK_PEAK", text);
+			set
+			{
+				if (double.IsNaN(value))
+				{
+					RemoveField("REPLAYGAIN_TRACK_PEAK");
+				}
+				else
+				{
+					string text = value.ToString("0.000000", CultureInfo.InvariantCulture);
+					SetField("REPLAYGAIN_TRACK_PEAK", text);
 				}
 			}
 		}
@@ -1297,31 +1351,41 @@ namespace TagLib.Ogg
 		///    "REPLAYGAIN_ALBUM_GAIN" field. Set the value to double.NaN
 		///    to clear the field.
 		/// </remarks>
-		public override double ReplayGainAlbumGain {
-			get {
-				string text = GetFirstField ("REPLAYGAIN_ALBUM_GAIN");
+		public override double ReplayGainAlbumGain
+		{
+			get
+			{
+				string text = GetFirstField("REPLAYGAIN_ALBUM_GAIN");
 				double value;
 
-				if (text == null) {
+				if (text == null)
+				{
 					return double.NaN;
 				}
-				if (text.ToLower(CultureInfo.InvariantCulture).EndsWith("db")) {
-					text = text.Substring (0, text.Length - 2).Trim();
+				if (text.ToLower(CultureInfo.InvariantCulture).EndsWith("db"))
+				{
+					text = text.Substring(0, text.Length - 2).Trim();
 				}
-				
-				if (double.TryParse (text, NumberStyles.Float,
-					CultureInfo.InvariantCulture, out value)) {
+
+				if (double.TryParse(text, NumberStyles.Float,
+					CultureInfo.InvariantCulture, out value))
+				{
 					return value;
 				}
 				return double.NaN;
 			}
-			set {
-				if (double.IsNaN (value)) {
-					RemoveField ("REPLAYGAIN_ALBUM_GAIN");
-				} else {
-					string text = value.ToString ("0.00 dB",
+
+			set
+			{
+				if (double.IsNaN(value))
+				{
+					RemoveField("REPLAYGAIN_ALBUM_GAIN");
+				}
+				else
+				{
+					string text = value.ToString("0.00 dB",
 						CultureInfo.InvariantCulture);
-					SetField ("REPLAYGAIN_ALBUM_GAIN", text);
+					SetField("REPLAYGAIN_ALBUM_GAIN", text);
 				}
 			}
 		}
@@ -1338,24 +1402,30 @@ namespace TagLib.Ogg
 		///    "REPLAYGAIN_ALBUM_PEAK" field. Set the value to double.NaN
 		///    to clear the field.
 		/// </remarks>
-		public override double ReplayGainAlbumPeak {
-			get {
+		public override double ReplayGainAlbumPeak
+		{
+			get
+			{
 				string text;
 				double value;
 
-				if ((text = GetFirstField ("REPLAYGAIN_ALBUM_PEAK")) !=
-					null && double.TryParse (text, NumberStyles.Float,
-						CultureInfo.InvariantCulture, out value)) {
-						return value;
+				if ((text = GetFirstField("REPLAYGAIN_ALBUM_PEAK")) != null &&
+					double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
+				{
+					return value;
 				}
 				return double.NaN;
 			}
-			set {
-				if (double.IsNaN (value)) {
-					RemoveField ("REPLAYGAIN_ALBUM_PEAK");
-				} else {
+			set
+			{
+				if (double.IsNaN(value))
+				{
+					RemoveField("REPLAYGAIN_ALBUM_PEAK");
+				}
+				else
+				{
 					string text = value.ToString("0.000000", CultureInfo.InvariantCulture);
-					SetField ("REPLAYGAIN_ALBUM_PEAK", text);
+					SetField("REPLAYGAIN_ALBUM_PEAK", text);
 				}
 			}
 		}
@@ -1367,24 +1437,26 @@ namespace TagLib.Ogg
 		///    <see langword="true" /> if the current instance does not
 		///    any values. Otherwise <see langword="false" />.
 		/// </value>
-		public override bool IsEmpty {
-			get {
-				foreach (string [] values in field_list.Values)
+		public override bool IsEmpty
+		{
+			get
+			{
+				foreach (string[] values in field_list.Values)
 					if (values.Length != 0)
 						return false;
-				
+
 				return true;
 			}
 		}
-		
+
 		/// <summary>
 		///    Clears the values stored in the current instance.
 		/// </summary>
-		public override void Clear ()
+		public override void Clear()
 		{
-			field_list.Clear ();
+			field_list.Clear();
 		}
-		
+
 		#endregion
 	}
 }
