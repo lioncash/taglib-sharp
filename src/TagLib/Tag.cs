@@ -28,7 +28,8 @@
 
 using System;
 
-namespace TagLib {
+namespace TagLib
+{
 	/// <summary>
 	///    Indicates the tag types used by a file.
 	/// </summary>
@@ -157,8 +158,8 @@ namespace TagLib {
 		///    for tags of type <see cref="TagLib.CombinedTag" /> may
 		///    contain multiple or no types.
 		/// </remarks>
-		public abstract TagTypes TagTypes {get;}
-		
+		public abstract TagTypes TagTypes { get; }
+
 		/// <summary>
 		///    Gets and sets the title for the media described by the
 		///    current instance.
@@ -175,11 +176,12 @@ namespace TagLib {
 		///    episode of Star Trek), or "Harold and Kumar Go To White
 		///    Castle" (a movie).
 		/// </remarks>
-		public virtual string Title {
-			get {return null;}
-			set {}
+		public virtual string Title
+		{
+			get { return null; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the sort name for the title of the media 
 		///    described by the current instance.
@@ -192,11 +194,12 @@ namespace TagLib {
 		/// <remarks>
 		///    Possibly used to sort compilations, or episodic content.
 		/// </remarks>
-		public virtual string TitleSort {
-			get {return null;}
-			set {}
+		public virtual string TitleSort
+		{
+			get { return null; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the performers or artists who performed in
 		///    the media described by the current instance.
@@ -220,11 +223,12 @@ namespace TagLib {
 		///    applications should not try to limit the user in what
 		///    choice they may make.</para>
 		/// </remarks>
-		public virtual string [] Performers {
-			get {return new string [] {};}
-			set {}
+		public virtual string[] Performers
+		{
+			get { return new string[] {}; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the sort names of the performers or artists
 		///    who performed in the media described by the current instance.
@@ -242,11 +246,12 @@ namespace TagLib {
 		///    sorted as "Beatles, The".
 		///    </para>
 		/// </remarks>
-		public virtual string [] PerformersSort {
-			get {return new string [] {};}
-			set {}
+		public virtual string[] PerformersSort
+		{
+			get { return new string[] {}; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the band or artist who is credited in the
 		///    creation of the entire album or collection containing the
@@ -272,11 +277,12 @@ namespace TagLib {
 		///    muliple artist it is best to stick with a single band
 		///    name. For example, "The Beatles".</para>
 		/// </remarks>
-		public virtual string [] AlbumArtists {
-			get {return new string [] {};}
-			set {}
+		public virtual string[] AlbumArtists
+		{
+			get { return new string[] {}; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the sort names for the band or artist who
 		///    is credited in the creation of the entire album or
@@ -304,11 +310,12 @@ namespace TagLib {
 		///    muliple artist it is best to stick with a single band
 		///    name. For example, "Beatles, The".</para>
 		/// </remarks>
-		public virtual string [] AlbumArtistsSort {
-			get {return new string [] {};}
-			set {}
+		public virtual string[] AlbumArtistsSort
+		{
+			get { return new string[] {}; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the composers of the media represented by
 		///    the current instance.
@@ -323,11 +330,12 @@ namespace TagLib {
 		///    script writers, or persons who claim authorship of the
 		///    media.</para>
 		/// </remarks>
-		public virtual string [] Composers {
-			get {return new string [] {};}
-			set {}
+		public virtual string[] Composers
+		{
+			get { return new string[] {}; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the sort names for the composers of the 
 		///    media represented by the current instance.
@@ -347,11 +355,12 @@ namespace TagLib {
 		///    muliple artist it is best to stick with a single composer.
 		///    For example, "McCartney, Paul".</para>
 		/// </remarks>
-		public virtual string [] ComposersSort {
-			get {return new string [] {};}
-			set {}
+		public virtual string[] ComposersSort
+		{
+			get { return new string[] {}; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the album of the media represented by the
 		///    current instance.
@@ -371,11 +380,12 @@ namespace TagLib {
 		///    set of TV episodes), or "Back To The Future Trilogy" (a 
 		///    boxed set of movies).</para>
 		/// </remarks>
-		public virtual string Album {
-			get {return null;}
-			set {}
+		public virtual string Album
+		{
+			get { return null; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the sort names for the Album Title of the 
 		///    media represented by the current instance.
@@ -390,11 +400,12 @@ namespace TagLib {
 		///    sorting of compilations or albums with Similar Titles.
 		///    </para>
 		/// </remarks>
-		public virtual string AlbumSort {
-			get {return null;}
-			set {}
+		public virtual string AlbumSort
+		{
+			get { return null; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets a user comment on the media represented by
 		///    the current instance.
@@ -415,11 +426,12 @@ namespace TagLib {
 		///    accessible, perhaps even including it in the main
 		///    interface.</para>
 		/// </remarks>
-		public virtual string Comment {
-			get {return null;}
-			set {}
+		public virtual string Comment
+		{
+			get { return null; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the genres of the media represented by the
 		///    current instance.
@@ -437,11 +449,12 @@ namespace TagLib {
 		///    Additionally, <see cref="TagLib.Genres.Video" /> contains video
 		///    genres as used by DivX.</para>
 		/// </remarks>
-		public virtual string [] Genres {
-			get {return new string [] {};}
-			set {}
+		public virtual string[] Genres
+		{
+			get { return new string[] {}; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the year that the media represented by the
 		///    current instance was recorded.
@@ -460,11 +473,12 @@ namespace TagLib {
 		///    specific implementations are necessary access the higher
 		///    precision values.</para>
 		/// </remarks>
-		public virtual uint Year {
-			get {return 0;}
-			set {}
+		public virtual uint Year
+		{
+			get { return 0; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the position of the media represented by
 		///    the current instance in its containing album.
@@ -479,11 +493,12 @@ namespace TagLib {
 		///    album cover and no more than <see cref="TrackCount"
 		///    /> if <see cref="TrackCount" /> is non-zero.</para>
 		/// </remarks>
-		public virtual uint Track {
-			get {return 0;}
-			set {}
+		public virtual uint Track
+		{
+			get { return 0; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the number of tracks in the album
 		///    containing the media represented by the current instance.
@@ -498,11 +513,12 @@ namespace TagLib {
 		///    <see cref="Track" />. If <see cref="Track" /> is zero,
 		///    this value should also be zero.</para>
 		/// </remarks>
-		public virtual uint TrackCount {
-			get {return 0;}
-			set {}
+		public virtual uint TrackCount
+		{
+			get { return 0; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the number of the disc containing the media
 		///    represented by the current instance in the boxed set.
@@ -519,11 +535,12 @@ namespace TagLib {
 		///    be no more than <see cref="DiscCount" /> if <see
 		///    cref="DiscCount" /> is non-zero.</para>
 		/// </remarks>
-		public virtual uint Disc {
-			get {return 0;}
-			set {}
+		public virtual uint Disc
+		{
+			get { return 0; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the number of discs in the boxed set
 		///    containing the media represented by the current instance.
@@ -538,11 +555,12 @@ namespace TagLib {
 		///    <see cref="Disc" />. If <see cref="Disc" /> is zero,
 		///    this value should also be zero.</para>
 		/// </remarks>
-		public virtual uint DiscCount {
-			get {return 0;}
-			set {}
+		public virtual uint DiscCount
+		{
+			get { return 0; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the lyrics or script of the media
 		///    represented by the current instance.
@@ -560,11 +578,12 @@ namespace TagLib {
 		///    synchronized lyrics, but those must be accessed using
 		///    format specific implementations.</para>
 		/// </remarks>
-		public virtual string Lyrics {
-			get {return null;}
-			set {}
+		public virtual string Lyrics
+		{
+			get { return null; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the grouping on the album which the media
 		///    in the current instance belongs to.
@@ -580,11 +599,12 @@ namespace TagLib {
 		///    be a movement. It could also be parts of a series like
 		///    "Introduction", "Closing Remarks", etc.</para>
 		/// </remarks>
-		public virtual string Grouping {
-			get {return null;}
-			set {}
+		public virtual string Grouping
+		{
+			get { return null; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the number of beats per minute in the audio
 		///    of the media represented by the current instance.
@@ -599,11 +619,12 @@ namespace TagLib {
 		///    match songs. It should be calculated from the audio or
 		///    pulled from a database.</para>
 		/// </remarks>
-		public virtual uint BeatsPerMinute {
-			get {return 0;}
-			set {}
+		public virtual uint BeatsPerMinute
+		{
+			get { return 0; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the conductor or director of the media
 		///    represented by the current instance.
@@ -617,11 +638,12 @@ namespace TagLib {
 		///    <para>This field is most useful for organizing classical
 		///    music and movies.</para>
 		/// </remarks>
-		public virtual string Conductor {
-			get {return null;}
-			set {}
+		public virtual string Conductor
+		{
+			get { return null; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the copyright information for the media
 		///    represented by the current instance.
@@ -640,11 +662,12 @@ namespace TagLib {
 		///    media creation tools should definitely allow
 		///    modification.</para>
 		/// </remarks>
-		public virtual string Copyright {
-			get {return null;}
-			set {}
+		public virtual string Copyright
+		{
+			get { return null; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the MusicBrainz Artist ID of the media represented by
 		///    the current instance.
@@ -658,9 +681,10 @@ namespace TagLib {
 		///    <para>This field represents the MusicBrainz ArtistID, and is used
 		///    to uniquely identify a particular Artist of the track.</para>
 		/// </remarks>
-		public virtual string MusicBrainzArtistId {
+		public virtual string MusicBrainzArtistId
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -676,9 +700,10 @@ namespace TagLib {
 		///    <para>This field represents the MusicBrainz ReleaseID, and is used
 		///    to uniquely identify a particular Release to which this track belongs.</para>
 		/// </remarks>
-		public virtual string MusicBrainzReleaseId {
+		public virtual string MusicBrainzReleaseId
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -694,9 +719,10 @@ namespace TagLib {
 		///    <para>This field represents the MusicBrainz Release ArtistID, and is used
 		///    to uniquely identify a particular Album Artist credited with the Album.</para>
 		/// </remarks>
-		public virtual string MusicBrainzReleaseArtistId {
+		public virtual string MusicBrainzReleaseArtistId
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -712,9 +738,10 @@ namespace TagLib {
 		///    <para>This field represents the MusicBrainz TrackID, and is used
 		///    to uniquely identify a particular track.</para>
 		/// </remarks>
-		public virtual string MusicBrainzTrackId {
+		public virtual string MusicBrainzTrackId
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -731,9 +758,10 @@ namespace TagLib {
 		///    to uniquely identify the particular Released Media associated with
 		///    this track.</para>
 		/// </remarks>
-		public virtual string MusicBrainzDiscId {
+		public virtual string MusicBrainzDiscId
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -749,9 +777,10 @@ namespace TagLib {
 		///    <para>This field represents the MusicIP PUID, and is an acoustic
 		///    fingerprint identifier.  It Identifies what this track "Sounds Like".</para>
 		/// </remarks>
-		public virtual string MusicIpId {
+		public virtual string MusicIpId
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -767,9 +796,10 @@ namespace TagLib {
 		///    <para>This field represents the AmazonID, and is used
 		///    to identify the particular track or album in the Amazon Catalog.</para>
 		/// </remarks>
-		public virtual string AmazonId {
+		public virtual string AmazonId
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -786,9 +816,10 @@ namespace TagLib {
 		///    to describes how 'official' a Release is.  Common Status are: Official, Promotion,
 		///    Bootleg, Pseudo-release.</para>
 		/// </remarks>
-		public virtual string MusicBrainzReleaseStatus {
+		public virtual string MusicBrainzReleaseStatus
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -807,9 +838,10 @@ namespace TagLib {
 		///    and Other.  Careful thought must be given when using this field to decide if
 		///    a particular track "Is a Compilation".</para>
 		/// </remarks>
-		public virtual string MusicBrainzReleaseType {
+		public virtual string MusicBrainzReleaseType
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -828,9 +860,10 @@ namespace TagLib {
 		///    label itself will typically be more relevant. eg, a release on "Foo Records UK" 
 		///    that has "Made in Austria" printed on it, will likely be a UK release.</para>
 		/// </remarks>
-		public virtual string MusicBrainzReleaseCountry {
+		public virtual string MusicBrainzReleaseCountry
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -840,9 +873,10 @@ namespace TagLib {
 		///    A <see cref="bool" /> value in dB for the track gain as
 		///    per the ReplayGain specification.
 		/// </value>
-		public virtual double ReplayGainTrackGain {
+		public virtual double ReplayGainTrackGain
+		{
 			get { return double.NaN; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -852,9 +886,10 @@ namespace TagLib {
 		///    A <see cref="bool" /> value for the track peak as per the
 		///    ReplayGain specification.
 		/// </value>
-		public virtual double ReplayGainTrackPeak {
+		public virtual double ReplayGainTrackPeak
+		{
 			get { return double.NaN; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -864,9 +899,10 @@ namespace TagLib {
 		///    A <see cref="bool" /> value in dB for the album gain as
 		///    per the ReplayGain specification.
 		/// </value>
-		public virtual double ReplayGainAlbumGain {
+		public virtual double ReplayGainAlbumGain
+		{
 			get { return double.NaN; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -876,9 +912,10 @@ namespace TagLib {
 		///    A <see cref="bool" /> value for the album peak as per the
 		///    ReplayGain specification.
 		/// </value>
-		public virtual double ReplayGainAlbumPeak {
+		public virtual double ReplayGainAlbumPeak
+		{
 			get { return double.NaN; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -896,11 +933,12 @@ namespace TagLib {
 		///    holding any type of image, including pictures of the
 		///    band, the recording studio, the concert, etc.</para>
 		/// </remarks>
-		public virtual IPicture [] Pictures {
-			get {return new Picture [] {};}
-			set {}
+		public virtual IPicture[] Pictures
+		{
+			get { return new Picture[] {}; }
+			set { }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the same value as <see cref="Performers"
 		///    />.
@@ -914,11 +952,12 @@ namespace TagLib {
 		///    cref="AlbumArtists" /> for album artists.
 		/// </remarks>
 		[Obsolete("For album artists use AlbumArtists. For track artists, use Performers")]
-		public virtual string [] Artists {
-			get {return Performers;}
-			set {Performers = value;}
+		public virtual string[] Artists
+		{
+			get { return Performers; }
+			set { Performers = value; }
 		}
-		
+
 		/// <summary>
 		///    Gets the same value as <see cref="FirstPerformer" />.
 		/// </summary>
@@ -931,10 +970,11 @@ namespace TagLib {
 		///    cref="FirstAlbumArtist" /> for album artists.
 		/// </remarks>
 		[Obsolete("For album artists use FirstAlbumArtist. For track artists, use FirstPerformer")]
-		public string FirstArtist {
-			get {return FirstPerformer;}
+		public string FirstArtist
+		{
+			get { return FirstPerformer; }
 		}
-		
+
 		/// <summary>
 		///    Gets the first value contained in <see
 		///    cref="AlbumArtists" />.
@@ -948,10 +988,11 @@ namespace TagLib {
 		///    This property is provided for convenience. Use <see
 		///    cref="AlbumArtists" /> to set the value.
 		/// </remarks>
-		public string FirstAlbumArtist {
-			get {return FirstInGroup(AlbumArtists);}
+		public string FirstAlbumArtist
+		{
+			get { return FirstInGroup(AlbumArtists); }
 		}
-		
+
 		/// <summary>
 		///    Gets the first value contained in <see
 		///    cref="AlbumArtistsSort" />.
@@ -965,10 +1006,11 @@ namespace TagLib {
 		///    This property is provided for convenience. Use <see
 		///    cref="AlbumArtistsSort" /> to set the value.
 		/// </remarks>
-		public string FirstAlbumArtistSort {
-			get {return FirstInGroup(AlbumArtistsSort);}
+		public string FirstAlbumArtistSort
+		{
+			get { return FirstInGroup(AlbumArtistsSort); }
 		}
-		
+
 		/// <summary>
 		///    Gets the first value contained in <see
 		///    cref="Performers" />.
@@ -982,8 +1024,9 @@ namespace TagLib {
 		///    This property is provided for convenience. Use <see
 		///    cref="Performers" /> to set the value.
 		/// </remarks>
-		public string FirstPerformer {
-			get {return FirstInGroup(Performers);}
+		public string FirstPerformer
+		{
+			get { return FirstInGroup(Performers); }
 		}
 
 		/// <summary>
@@ -999,10 +1042,11 @@ namespace TagLib {
 		///    This property is provided for convenience. Use <see
 		///    cref="PerformersSort" /> to set the value.
 		/// </remarks>
-		public string FirstPerformerSort {
-			get {return FirstInGroup(PerformersSort);}
+		public string FirstPerformerSort
+		{
+			get { return FirstInGroup(PerformersSort); }
 		}
-		
+
 		/// <summary>
 		///    Gets the first value contained in <see
 		///    cref="ComposersSort" />.
@@ -1016,10 +1060,11 @@ namespace TagLib {
 		///    This property is provided for convenience. Use <see
 		///    cref="ComposersSort" /> to set the value.
 		/// </remarks>
-		public string FirstComposerSort {
-			get {return FirstInGroup(ComposersSort);}
+		public string FirstComposerSort
+		{
+			get { return FirstInGroup(ComposersSort); }
 		}
-		
+
 		/// <summary>
 		///    Gets the first value contained in <see
 		///    cref="Composers" />.
@@ -1033,10 +1078,11 @@ namespace TagLib {
 		///    This property is provided for convenience. Use <see
 		///    cref="Composers" /> to set the value.
 		/// </remarks>
-		public string FirstComposer {
-			get {return FirstInGroup(Composers);}
+		public string FirstComposer
+		{
+			get { return FirstInGroup(Composers); }
 		}
-		
+
 		/// <summary>
 		///    Gets the first value contained in <see cref="Genres" />.
 		/// </summary>
@@ -1049,10 +1095,11 @@ namespace TagLib {
 		///    This property is provided for convenience. Use <see
 		///    cref="Genres" /> to set the value.
 		/// </remarks>
-		public string FirstGenre {
-			get {return FirstInGroup(Genres);}
+		public string FirstGenre
+		{
+			get { return FirstInGroup(Genres); }
 		}
-		
+
 		/// <summary>
 		///    Gets the same value as <see cref="JoinedPerformers" />.
 		/// </summary>
@@ -1065,10 +1112,11 @@ namespace TagLib {
 		///    cref="JoinedAlbumArtists" /> for album artists.
 		/// </remarks>
 		[Obsolete("For album artists use JoinedAlbumArtists. For track artists, use JoinedPerformers")]
-		public string JoinedArtists {
-			get {return JoinedPerformers;}
+		public string JoinedArtists
+		{
+			get { return JoinedPerformers; }
 		}
-		
+
 		/// <summary>
 		///    Gets a semicolon separated string containing the values
 		///    in <see cref="AlbumArtists" />.
@@ -1081,10 +1129,11 @@ namespace TagLib {
 		///    This property is provided for convenience. Use <see
 		///    cref="AlbumArtists" /> to set the value.
 		/// </remarks>
-		public string JoinedAlbumArtists {
-			get {return JoinGroup(AlbumArtists);}
+		public string JoinedAlbumArtists
+		{
+			get { return JoinGroup(AlbumArtists); }
 		}
-		
+
 		/// <summary>
 		///    Gets a semicolon separated string containing the values
 		///    in <see cref="Performers" />.
@@ -1097,10 +1146,11 @@ namespace TagLib {
 		///    This property is provided for convenience. Use <see
 		///    cref="Performers" /> to set the value.
 		/// </remarks>
-		public string JoinedPerformers {
-			get {return JoinGroup(Performers);}
+		public string JoinedPerformers
+		{
+			get { return JoinGroup(Performers); }
 		}
-		
+
 		/// <summary>
 		///    Gets a semicolon separated string containing the values
 		///    in <see cref="PerformersSort" />.
@@ -1113,10 +1163,11 @@ namespace TagLib {
 		///    This property is provided for convenience. Use <see
 		///    cref="PerformersSort" /> to set the value.
 		/// </remarks>
-		public string JoinedPerformersSort {
-			get {return JoinGroup(PerformersSort);}
+		public string JoinedPerformersSort
+		{
+			get { return JoinGroup(PerformersSort); }
 		}
-		
+
 		/// <summary>
 		///    Gets a semicolon separated string containing the values
 		///    in <see cref="Composers" />.
@@ -1129,10 +1180,11 @@ namespace TagLib {
 		///    This property is provided for convenience. Use <see
 		///    cref="Composers" /> to set the value.
 		/// </remarks>
-		public string JoinedComposers {
-			get {return JoinGroup(Composers);}
+		public string JoinedComposers
+		{
+			get { return JoinGroup(Composers); }
 		}
-		
+
 		/// <summary>
 		///    Gets a semicolon separated string containing the values
 		///    in <see cref="Genres" />.
@@ -1145,10 +1197,11 @@ namespace TagLib {
 		///    This property is provided for convenience. Use <see
 		///    cref="Genres" /> to set the value.
 		/// </remarks>
-		public string JoinedGenres {
-			get {return JoinGroup(Genres);}
+		public string JoinedGenres
+		{
+			get { return JoinGroup(Genres); }
 		}
-		
+
 		/// <summary>
 		///    Gets the first string in an array.
 		/// </summary>
@@ -1160,12 +1213,13 @@ namespace TagLib {
 		///    <paramref name="group" />, or <see langword="null" /> if
 		///    the array is <see langword="null" /> or empty.
 		/// </returns>
-		private static string FirstInGroup(string [] group)
+		private static string FirstInGroup(string[] group)
 		{
-			return group == null || group.Length == 0 ?
-				null : group [0];
+			return group == null || group.Length == 0
+				? null
+				: group[0];
 		}
-		
+
 		/// <summary>
 		///    Joins a array of strings into a single, semicolon
 		///    separated, string.
@@ -1177,12 +1231,12 @@ namespace TagLib {
 		///    A semicolon separated <see cref="string" /> object
 		///    containing the values from <paramref name="group" />.
 		/// </returns>
-		private static string JoinGroup (string [] group)
+		private static string JoinGroup(string[] group)
 		{
 			if (group == null)
 				return null;
-			
-			return string.Join ("; ", group);
+
+			return string.Join("; ", group);
 		}
 
 		/// <summary>
@@ -1197,27 +1251,29 @@ namespace TagLib {
 		///    supported by <see cref="Tag" />, but it may be extended
 		///    by child classes to support other values.
 		/// </remarks>
-		public virtual bool IsEmpty {
-			get {
-				return IsNullOrLikeEmpty (Title) &&
-				IsNullOrLikeEmpty (Grouping) &&
-				IsNullOrLikeEmpty (AlbumArtists) &&
-				IsNullOrLikeEmpty (Performers) &&
-				IsNullOrLikeEmpty (Composers) &&
-				IsNullOrLikeEmpty (Conductor) &&
-				IsNullOrLikeEmpty (Copyright) &&
-				IsNullOrLikeEmpty (Album) &&
-				IsNullOrLikeEmpty (Comment) &&
-				IsNullOrLikeEmpty (Genres) &&
-				Year == 0 &&
-				BeatsPerMinute == 0 &&
-				Track == 0 &&
-				TrackCount == 0 &&
-				Disc == 0 &&
-				DiscCount == 0;
+		public virtual bool IsEmpty
+		{
+			get
+			{
+				return IsNullOrLikeEmpty(Title) &&
+				       IsNullOrLikeEmpty(Grouping) &&
+				       IsNullOrLikeEmpty(AlbumArtists) &&
+				       IsNullOrLikeEmpty(Performers) &&
+				       IsNullOrLikeEmpty(Composers) &&
+				       IsNullOrLikeEmpty(Conductor) &&
+				       IsNullOrLikeEmpty(Copyright) &&
+				       IsNullOrLikeEmpty(Album) &&
+				       IsNullOrLikeEmpty(Comment) &&
+				       IsNullOrLikeEmpty(Genres) &&
+				       Year == 0 &&
+				       BeatsPerMinute == 0 &&
+				       Track == 0 &&
+				       TrackCount == 0 &&
+				       Disc == 0 &&
+				       DiscCount == 0;
 			}
 		}
-		
+
 		/// <summary>
 		///    Clears the values stored in the current instance.
 		/// </summary>
@@ -1226,7 +1282,7 @@ namespace TagLib {
 		///    clear all values.
 		/// </remarks>
 		public abstract void Clear ();
-		
+
 		/// <summary>
 		///    Copies all standard values from one tag to another,
 		///    optionally overwriting existing values.
@@ -1257,18 +1313,17 @@ namespace TagLib {
 		///    is <see langword="null" />.
 		/// </exception>
 		[Obsolete("Use Tag.CopyTo(Tag,bool)")]
-		public static void Duplicate (Tag source, Tag target,
-		                              bool overwrite)
+		public static void Duplicate(Tag source, Tag target, bool overwrite)
 		{
 			if (source == null)
-				throw new ArgumentNullException ("source");
-			
+				throw new ArgumentNullException("source");
+
 			if (target == null)
-				throw new ArgumentNullException ("target");
-			
-			source.CopyTo (target, overwrite);
+				throw new ArgumentNullException("target");
+
+			source.CopyTo(target, overwrite);
 		}
-		
+
 		/// <summary>
 		///    Copies the values from the current instance to another
 		///    <see cref="TagLib.Tag" />, optionally overwriting
@@ -1293,60 +1348,60 @@ namespace TagLib {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="target" /> is <see langword="null" />.
 		/// </exception>
-		public virtual void CopyTo (Tag target, bool overwrite)
+		public virtual void CopyTo(Tag target, bool overwrite)
 		{
 			if (target == null)
-				throw new ArgumentNullException ("target");
-			
-			if (overwrite || IsNullOrLikeEmpty (target.Title))
+				throw new ArgumentNullException("target");
+
+			if (overwrite || IsNullOrLikeEmpty(target.Title))
 				target.Title = Title;
-			
-			if (overwrite || IsNullOrLikeEmpty (target.AlbumArtists))
+
+			if (overwrite || IsNullOrLikeEmpty(target.AlbumArtists))
 				target.AlbumArtists = AlbumArtists;
-			
-			if (overwrite || IsNullOrLikeEmpty (target.Performers))
+
+			if (overwrite || IsNullOrLikeEmpty(target.Performers))
 				target.Performers = Performers;
-			
-			if (overwrite || IsNullOrLikeEmpty (target.Composers))
+
+			if (overwrite || IsNullOrLikeEmpty(target.Composers))
 				target.Composers = Composers;
-			
-			if (overwrite || IsNullOrLikeEmpty (target.Album))
+
+			if (overwrite || IsNullOrLikeEmpty(target.Album))
 				target.Album = Album;
-			
-			if (overwrite || IsNullOrLikeEmpty (target.Comment))
+
+			if (overwrite || IsNullOrLikeEmpty(target.Comment))
 				target.Comment = Comment;
-			
-			if (overwrite || IsNullOrLikeEmpty (target.Genres))
+
+			if (overwrite || IsNullOrLikeEmpty(target.Genres))
 				target.Genres = Genres;
-			
+
 			if (overwrite || target.Year == 0)
 				target.Year = Year;
-			
+
 			if (overwrite || target.Track == 0)
 				target.Track = Track;
-			
+
 			if (overwrite || target.TrackCount == 0)
 				target.TrackCount = TrackCount;
-			
+
 			if (overwrite || target.Disc == 0)
 				target.Disc = Disc;
-			
+
 			if (overwrite || target.DiscCount == 0)
 				target.DiscCount = DiscCount;
-			
+
 			if (overwrite || target.BeatsPerMinute == 0)
 				target.BeatsPerMinute = BeatsPerMinute;
-			
-			if (overwrite || IsNullOrLikeEmpty (target.Grouping))
+
+			if (overwrite || IsNullOrLikeEmpty(target.Grouping))
 				target.Grouping = Grouping;
-			
-			if (overwrite || IsNullOrLikeEmpty (target.Conductor))
+
+			if (overwrite || IsNullOrLikeEmpty(target.Conductor))
 				target.Conductor = Conductor;
-			
-			if (overwrite || IsNullOrLikeEmpty (target.Copyright))
+
+			if (overwrite || IsNullOrLikeEmpty(target.Copyright))
 				target.Copyright = Copyright;
 		}
-		
+
 		/// <summary>
 		///    Checks if a <see cref="string" /> is <see langword="null"
 		///    /> or contains only whitespace characters.
@@ -1359,11 +1414,11 @@ namespace TagLib {
 		///    langword="null" /> or contains only whitespace
 		///    characters. Otherwise <see langword="false" />.
 		/// </returns>
-		private static bool IsNullOrLikeEmpty (string value)
+		private static bool IsNullOrLikeEmpty(string value)
 		{
-			return value == null || value.Trim ().Length == 0;
+			return value == null || value.Trim().Length == 0;
 		}
-		
+
 		/// <summary>
 		///    Checks if all the strings in the array return <see
 		///    langword="true" /> with <see
@@ -1380,15 +1435,15 @@ namespace TagLib {
 		///    cref="IsNullOrLikeEmpty(string)" />. Otherwise <see
 		///    langword="false" />.
 		/// </returns>
-		private static bool IsNullOrLikeEmpty (string [] value)
+		private static bool IsNullOrLikeEmpty(string[] value)
 		{
 			if (value == null)
 				return true;
-			
+
 			foreach (string s in value)
-				if (!IsNullOrLikeEmpty (s))
+				if (!IsNullOrLikeEmpty(s))
 					return false;
-			
+
 			return true;
 		}
 	}

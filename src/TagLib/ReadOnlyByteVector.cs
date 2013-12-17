@@ -27,7 +27,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace TagLib {
+namespace TagLib
+{
 	/// <summary>
 	///    This class extends <see cref="ByteVector" /> to provide an
 	///    immutable version.
@@ -35,15 +36,15 @@ namespace TagLib {
 	public sealed class ReadOnlyByteVector : ByteVector
 	{
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ReadOnlyByteVector" /> with no contents.
 		/// </summary>
-		public ReadOnlyByteVector () : base ()
+		public ReadOnlyByteVector()
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ReadOnlyByteVector" /> of a specified length filled
@@ -57,11 +58,10 @@ namespace TagLib {
 		///    A <see cref="byte" /> specifying the value to use for the
 		///    bytes added to the new instance.
 		/// </param>
-		public ReadOnlyByteVector (int size, byte value)
-			: base (size, value)
+		public ReadOnlyByteVector(int size, byte value) : base(size, value)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ReadOnlyByteVector" /> of a specified length filled
@@ -75,10 +75,10 @@ namespace TagLib {
 		///    <para>To specify the value to fill the new instance with,
 		///    use <see cref="ReadOnlyByteVector(int,byte)" />.</para>
 		/// </remarks>
-		public ReadOnlyByteVector (int size) : this (size, 0)
+		public ReadOnlyByteVector(int size) : this(size, 0)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ReadOnlyByteVector" /> by copying the contents from
@@ -88,10 +88,10 @@ namespace TagLib {
 		///    A <see cref="ByteVector" /> object to copy the values
 		///    from.
 		/// </param>
-		public ReadOnlyByteVector (ByteVector vector) : base (vector)
+		public ReadOnlyByteVector(ByteVector vector) : base(vector)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ReadOnlyByteVector" /> by copying a specified
@@ -108,11 +108,10 @@ namespace TagLib {
 		///    <para>If copying the entire contents of an array, use
 		///    <see cref="ReadOnlyByteVector(byte[])" />.</para>
 		/// </remarks>
-		public ReadOnlyByteVector (byte [] data, int length)
-			: base (data, length)
+		public ReadOnlyByteVector(byte[] data, int length) : base(data, length)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ReadOnlyByteVector" /> by copying the contents of a
@@ -125,16 +124,15 @@ namespace TagLib {
 		///    <para>To copy only part of the array, use <see
 		///    cref="ReadOnlyByteVector(byte[],int)" />.</para>
 		/// </remarks>
-		public ReadOnlyByteVector (params byte [] data) : base (data)
+		public ReadOnlyByteVector(params byte[] data) : base(data)
 		{
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
 		#region Operators
-		
+
 		/// <summary>
 		///    Implicitly converts a <see cref="byte" /> to a new
 		///    <see cref="ReadOnlyByteVector" />.
@@ -146,11 +144,11 @@ namespace TagLib {
 		///    A <see cref="ReadOnlyByteVector" /> equivalent to
 		///    <paramref name="value" />.
 		/// </returns>
-		public static implicit operator ReadOnlyByteVector (byte value)
+		public static implicit operator ReadOnlyByteVector(byte value)
 		{
-			return new ReadOnlyByteVector (value);
+			return new ReadOnlyByteVector(value);
 		}
-		
+
 		/// <summary>
 		///    Implicitly converts a <see cref="byte[]" /> to a new
 		///    <see cref="ReadOnlyByteVector" />.
@@ -162,11 +160,11 @@ namespace TagLib {
 		///    A <see cref="ReadOnlyByteVector" /> equivalent to
 		///    <paramref name="value" />.
 		/// </returns>
-		public static implicit operator ReadOnlyByteVector (byte [] value)
+		public static implicit operator ReadOnlyByteVector(byte[] value)
 		{
-			return new ReadOnlyByteVector (value);
+			return new ReadOnlyByteVector(value);
 		}
-		
+
 		/// <summary>
 		///    Implicitly converts a <see cref="string" /> object to a
 		///    new <see cref="ReadOnlyByteVector" /> using the UTF-8
@@ -179,38 +177,38 @@ namespace TagLib {
 		///    A <see cref="ReadOnlyByteVector" /> equivalent to
 		///    <paramref name="value" />.
 		/// </returns>
-		public static implicit operator ReadOnlyByteVector (string value)
+		public static implicit operator ReadOnlyByteVector(string value)
 		{
-			return new ReadOnlyByteVector (ByteVector.FromString (
-				value, StringType.UTF8));
+			return new ReadOnlyByteVector(ByteVector.FromString(value, StringType.UTF8));
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
 		#region IList<T>
-		
+
 		/// <summary>
 		///    Gets whether or not the current instance is read-only.
 		/// </summary>
 		/// <value>
 		///    Always <see langword="true" />.
 		/// </value>
-		public override bool IsReadOnly {
-			get {return true;}
+		public override bool IsReadOnly
+		{
+			get { return true; }
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not the current instance is fixed size.
 		/// </summary>
 		/// <value>
 		///    Always <see langword="true" />.
 		/// </value>
-		public override bool IsFixedSize {
-			get {return true;}
+		public override bool IsFixedSize
+		{
+			get { return true; }
 		}
-		
+
 		#endregion
 	}
 }

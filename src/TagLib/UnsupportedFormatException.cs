@@ -42,14 +42,17 @@ namespace TagLib {
 	///
 	/// public class ExceptionTest
 	/// {
-	/// 	public static void Main ()
-	/// 	{
-	/// 		try {
-	/// 			File file = File.Create ("myfile.flv"); // Not supported, YET!
-	/// 		} catch (UnsupportedFormatException e) {
-	/// 			Console.WriteLine ("That file format is not supported: {0}", e.ToString ());
-	/// 		}
-	///	}
+	///     public static void Main ()
+	///     {
+	///         try
+	///         {
+	///             File file = File.Create ("myfile.flv"); // Not supported, YET!
+	///         }
+	///         catch (UnsupportedFormatException e)
+	///         {
+	///             Console.WriteLine ("That file format is not supported: {0}", e.ToString ());
+	///         }
+	///     }
 	/// }
 	///    </code>
 	///    <code lang="C++">
@@ -61,11 +64,14 @@ namespace TagLib {
 	///
 	/// void main ()
 	/// {
-	/// 	try {
-	/// 		File file = File::Create ("myfile.flv"); // Not supported, YET!
-	/// 	} catch (UnsupportedFormatException^ e) {
-	/// 		Console::WriteLine ("That file format is not supported: {0}", e);
-	/// 	}
+	///     try
+	///     {
+	///         File file = File::Create ("myfile.flv"); // Not supported, YET!
+	///     }
+	///     catch (UnsupportedFormatException^ e)
+	///     {
+	///         Console::WriteLine ("That file format is not supported: {0}", e);
+	///     }
 	/// }
 	///    </code>
 	///    <code lang="VB">
@@ -73,13 +79,13 @@ namespace TagLib {
 	/// Imports TagLib
 	///
 	/// Public Class ExceptionTest
-	/// 	Public Shared Sub Main ()
-	/// 		Try
-	/// 			file As File = File.Create ("myfile.flv") ' Not supported, YET!
-	/// 		Catch e As UnsupportedFormatException
-	/// 			Console.WriteLine ("That file format is not supported: {0}", e.ToString ());
-	/// 		End Try
-	///	End Sub
+	///     Public Shared Sub Main()
+	///         Try
+	///             file As File = File.Create("myfile.flv") ' Not supported, YET!
+	///         Catch e As UnsupportedFormatException
+	///             Console.WriteLine("That file format is not supported: {0}", e.ToString ());
+	///         End Try
+	///     End Sub
 	/// End Class
 	///    </code>
 	///    <code lang="Boo">
@@ -87,9 +93,9 @@ namespace TagLib {
 	/// import TagLib
 	///
 	/// try:
-	/// 	file As File = File.Create ("myfile.flv") # Not supported, YET!
+	///     file As File = File.Create ("myfile.flv") # Not supported, YET!
 	/// catch e as UnsupportedFormatException:
-	/// 	Console.WriteLine ("That file format is not supported: {0}", e.ToString ());
+	///     Console.WriteLine ("That file format is not supported: {0}", e.ToString ());
 	///    </code>
 	/// </example>
 	[Serializable]
@@ -104,20 +110,19 @@ namespace TagLib {
 		///    A <see cref="string" /> containing a message explaining
 		///    the reason for the exception.
 		/// </param>
-		public UnsupportedFormatException (string message)
-			: base(message)
+		public UnsupportedFormatException(string message) : base(message)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="UnsupportedFormatException" /> with the default
 		///    values.
 		/// </summary>
-		public UnsupportedFormatException () : base()
+		public UnsupportedFormatException()
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="UnsupportedFormatException" /> with a specified
@@ -131,12 +136,10 @@ namespace TagLib {
 		///    A <see cref="Exception" /> object to be contained in the
 		///    new exception. For example, previously caught exception.
 		/// </param>
-		public UnsupportedFormatException (string message,
-		                                   Exception innerException)
-			: base (message, innerException)
+		public UnsupportedFormatException(string message, Exception innerException) : base(message, innerException)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="UnsupportedFormatException" /> from a specified
@@ -155,9 +158,7 @@ namespace TagLib {
 		///    cref="UnsupportedFormatException" /> implements the <see
 		///    cref="ISerializable" /> interface.
 		/// </remarks>
-		protected UnsupportedFormatException (SerializationInfo info,
-		                                      StreamingContext context)
-			: base(info, context)
+		protected UnsupportedFormatException(SerializationInfo info, StreamingContext context) : base(info, context)
 		{
 		}
 	}

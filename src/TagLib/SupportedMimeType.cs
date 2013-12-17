@@ -28,7 +28,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace TagLib {
+namespace TagLib
+{
 	/// <summary>
 	///    This class provides an attribute for listing supported mime-types
 	///    for classes that extend <see cref="File" />.
@@ -54,8 +55,7 @@ namespace TagLib {
 		///    Contains the registered <see cref="SupportedMimeType" />
 		///    objects.
 		/// </summary>
-		private static List<SupportedMimeType> mimetypes =
-			new List<SupportedMimeType> ();
+		private static List<SupportedMimeType> mimetypes = new List<SupportedMimeType> ();
 		
 		/// <summary>
 		///    Contains the mime-type.
@@ -66,17 +66,17 @@ namespace TagLib {
 		///    Contains the extension.
 		/// </summary>
 		private string extension;
-		
+
 		/// <summary>
 		///    Constructs and initializes the <see
 		///    cref="SupportedMimeType" /> class by initializing the
 		///    <see cref="FileTypes" /> class.
 		/// </summary>
-		static SupportedMimeType ()
+		static SupportedMimeType()
 		{
-			FileTypes.Init ();
+			FileTypes.Init();
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of the <see
 		///    cref="SupportedMimeType" /> attribute for a specified
@@ -95,12 +95,12 @@ namespace TagLib {
 		///    type. Eg. <c>SupportedMimeType("taglib/mp3",
 		///    "mp3")</c>.</para>
 		/// </remarks>
-		public SupportedMimeType (string mimetype)
+		public SupportedMimeType(string mimetype)
 		{
 			this.mimetype = mimetype;
-			mimetypes.Add (this);
+			mimetypes.Add(this);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of the <see
 		///    cref="SupportedMimeType" /> attribute for a specified
@@ -123,12 +123,11 @@ namespace TagLib {
 		///    type. Eg. <c>SupportedMimeType("taglib/mp3",
 		///    "mp3")</c>.</para>
 		/// </remarks>
-		public SupportedMimeType (string mimetype, string extension)
-			: this (mimetype)
+		public SupportedMimeType(string mimetype, string extension) : this(mimetype)
 		{
 			this.extension = extension;
 		}
-		
+
 		/// <summary>
 		///    Gets the mime-type registered by the current instance.
 		/// </summary>
@@ -140,10 +139,11 @@ namespace TagLib {
 		///    <para>The value is in the format "generic/specific". For
 		///    example, "video/mp4".</para>
 		/// </remarks>
-		public string MimeType {
-			get {return mimetype;}
+		public string MimeType
+		{
+			get { return mimetype; }
 		}
-		
+
 		/// <summary>
 		///    Gets the extension registered by the current instance.
 		/// </summary>
@@ -156,10 +156,11 @@ namespace TagLib {
 		///    <para>The value is the file extension minus the preceding
 		///    ".". For example, "m4v".</para>
 		/// </remarks>
-		public string Extension {
-			get {return extension;}
+		public string Extension
+		{
+			get { return extension; }
 		}
-		
+
 		/// <summary>
 		///    Gets all the mime-types that have been registered with
 		///    <see cref="SupportedMimeType" />.
@@ -174,13 +175,15 @@ namespace TagLib {
 		///    cref="TagLib.File.Create(string,string,ReadStyle)" /> to
 		///    match file types.</para>
 		/// </remarks>
-		public static IEnumerable<string> AllMimeTypes {
-			get {
-				foreach(SupportedMimeType type in mimetypes)
+		public static IEnumerable<string> AllMimeTypes
+		{
+			get
+			{
+				foreach (SupportedMimeType type in mimetypes)
 					yield return type.MimeType;
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets all the extensions that have been registered with
 		///    <see cref="SupportedMimeType" />.
@@ -194,10 +197,12 @@ namespace TagLib {
 		///    <para>These values are currently not used in file type
 		///    recognition.</para>
 		/// </remarks>
-		public static IEnumerable<string> AllExtensions {
-			get {
-				foreach(SupportedMimeType type in mimetypes)
-					if(type.Extension != null)
+		public static IEnumerable<string> AllExtensions
+		{
+			get
+			{
+				foreach (SupportedMimeType type in mimetypes)
+					if (type.Extension != null)
 						yield return type.Extension;
 			}
 		}

@@ -30,7 +30,8 @@ using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace TagLib {
+namespace TagLib
+{
 	/// <summary>
 	///    This class implements <see cref="T:System.Collections.Generic.IList`1"/>
 	///    for objects that implement <see cref="T:System.IComparable`1"/>,
@@ -44,12 +45,12 @@ namespace TagLib {
 		private List<T> data = new List<T> ();
 
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="T:TagLib.ListBase`1" /> with no contents.
 		/// </summary>
-		public ListBase ()
+		public ListBase()
 		{
 		}
 
@@ -64,7 +65,7 @@ namespace TagLib {
 		public ListBase(ListBase<T> list)
 		{
 			if (list != null)
-				Add (list);
+				Add(list);
 		}
 
 		/// <summary>
@@ -75,16 +76,16 @@ namespace TagLib {
 		///   A <see cref="System.Array" /> containing objects to add to
 		///   the current instance.
 		/// </param>
-		public ListBase (params T [] list)
+		public ListBase(params T[] list)
 		{
 			if (list != null)
-				Add (list);
+				Add(list);
 		}
 
 		#endregion
 
 		#region Properties
-		
+
 		/// <summary>
 		///    Gets whether or not the current instance is empty.
 		/// </summary>
@@ -92,8 +93,9 @@ namespace TagLib {
 		///    <see langword="true" /> if the current instance is empty;
 		///    otherwise <see langword="false" />.
 		/// </value>
-		public bool IsEmpty {
-			get {return Count == 0;}
+		public bool IsEmpty
+		{
+			get { return Count == 0; }
 		}
 
 		#endregion
@@ -109,7 +111,8 @@ namespace TagLib {
 		/// </param>
 		public void Add(ListBase<T> list)
 		{
-			if(list != null) {
+			if (list != null)
+			{
 				data.AddRange(list);
 			}
 		}
@@ -123,7 +126,8 @@ namespace TagLib {
 		/// </param>
 		public void Add(IEnumerable<T> list)
 		{
-			if(list != null) {
+			if (list != null)
+			{
 				data.AddRange(list);
 			}
 		}
@@ -135,9 +139,10 @@ namespace TagLib {
 		///    An array containing elements to add to the current
 		///    instance.
 		/// </param>
-		public void Add(T [] list)
+		public void Add(T[] list)
 		{
-			if(list != null) {
+			if (list != null)
+			{
 				data.AddRange(list);
 			}
 		}
@@ -157,18 +162,21 @@ namespace TagLib {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="item" /> is <see langword="null" />.
 		/// </exception>
-		public virtual void SortedInsert (T item, bool unique)
+		public virtual void SortedInsert(T item, bool unique)
 		{
 			if (item == null)
-				throw new ArgumentNullException ("item");
-			
+				throw new ArgumentNullException("item");
+
 			int i = 0;
-			for(; i < data.Count; i++) {
-				if(item.CompareTo(data[i]) == 0 && unique) {
+			for (; i < data.Count; i++)
+			{
+				if (item.CompareTo(data[i]) == 0 && unique)
+				{
 					return;
 				}
 
-				if(item.CompareTo(data[i]) <= 0) {
+				if (item.CompareTo(data[i]) <= 0)
+				{
 					break;
 				}
 			}
@@ -186,14 +194,14 @@ namespace TagLib {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="item" /> is <see langword="null" />.
 		/// </exception>
-		public void SortedInsert (T item)
+		public void SortedInsert(T item)
 		{
 			if (item == null)
-				throw new ArgumentNullException ("item");
-			
+				throw new ArgumentNullException("item");
+
 			SortedInsert(item, false);
 		}
-		
+
 		/// <summary>
 		///    Converts the current instance to an array.
 		/// </summary>
@@ -201,7 +209,7 @@ namespace TagLib {
 		///    A <see cref="System.Array" /> containing the contents of
 		///    the current instance.
 		/// </returns>
-		public T [] ToArray ()
+		public T[] ToArray()
 		{
 			return data.ToArray();
 		}
@@ -209,17 +217,18 @@ namespace TagLib {
 		#endregion
 
 		#region IList<T>
-		
+
 		/// <summary>
 		///    Gets whether or not the current instance is read-only.
 		/// </summary>
 		/// <value>
 		///    Always <see langword="false" />.
 		/// </value>
-		public bool IsReadOnly {
+		public bool IsReadOnly
+		{
 			get { return false; }
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not the current instance has a fixed
 		///    size.
@@ -227,29 +236,31 @@ namespace TagLib {
 		/// <value>
 		///    Always <see langword="false" />.
 		/// </value>
-		public bool IsFixedSize {
+		public bool IsFixedSize
+		{
 			get { return false; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the value as a specified index.
 		/// </summary>
-		public T this [int index] {
+		public T this[int index]
+		{
 			get { return data[index]; }
 			set { data[index] = value; }
 		}
-		
+
 		/// <summary>
 		///    Adds a single item to end of the current instance.
 		/// </summary>
 		/// <param name="item">
 		///    An object to add to the end of the current instance.
 		/// </param>
-		public void Add (T item)
+		public void Add(T item)
 		{
-			data.Add (item);
+			data.Add(item);
 		}
-		
+
 		/// <summary>
 		///    Clears the contents of the current instance.
 		/// </summary>
@@ -257,7 +268,7 @@ namespace TagLib {
 		{
 			data.Clear ();
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not the current instance contains a
 		///    specified object.
@@ -269,11 +280,11 @@ namespace TagLib {
 		///    <see langword="true" /> if the item could be found;
 		///    otherwise <see langword="false" />.
 		/// </returns>
-		public bool Contains (T item)
+		public bool Contains(T item)
 		{
-			return data.Contains (item);
+			return data.Contains(item);
 		}
-		
+
 		/// <summary>
 		///    Gets the index of the first occurance of a value.
 		/// </summary>
@@ -284,11 +295,11 @@ namespace TagLib {
 		///    A <see cref="int" /> value containing the first index
 		///    at which the value was found, or -1 if it was not found.
 		/// </returns>
-		public int IndexOf (T item)
+		public int IndexOf(T item)
 		{
-			return data.IndexOf (item);
+			return data.IndexOf(item);
 		}
-		
+
 		/// <summary>
 		///    Inserts a single value into the current instance at a
 		//     specified index.
@@ -300,11 +311,11 @@ namespace TagLib {
 		/// <param name="item">
 		///    An object to insert into the current instance.
 		/// </param>
-		public void Insert (int index, T item)
+		public void Insert(int index, T item)
 		{
-			data.Insert (index, item);
+			data.Insert(index, item);
 		}
-		
+
 		/// <summary>
 		///    Removes the first occurance of an object from the current
 		///    instance.
@@ -317,11 +328,11 @@ namespace TagLib {
 		///    otherwise the value did not appear in the current
 		///    instance and <see langword="false" /> is returned.
 		/// </returns>
-		public bool Remove (T item)
+		public bool Remove(T item)
 		{
-			return data.Remove (item);
+			return data.Remove(item);
 		}
-		
+
 		/// <summary>
 		///    Removes the item at the specified index.
 		/// </summary>
@@ -329,11 +340,11 @@ namespace TagLib {
 		///    A <see cref="int" /> value specifying the position at
 		///    which to remove an item.
 		/// </param>
-		public void RemoveAt (int index)
+		public void RemoveAt(int index)
 		{
-			data.RemoveAt (index);
+			data.RemoveAt(index);
 		}
-		
+
 		/// <summary>
 		///    Gets a string representation of the contents of the
 		///    current instance, joined by a separator.
@@ -346,19 +357,21 @@ namespace TagLib {
 		///    A <see cref="string" /> object containing the contents
 		///    of the current instance.
 		/// </returns>
-		public string ToString (string separator)
+		public string ToString(string separator)
 		{
 			StringBuilder builder = new StringBuilder();
 
-			for(int i = 0; i < Count; i++) {
-				if(i != 0) {
+			for (int i = 0; i < Count; i++)
+			{
+				if (i != 0)
+				{
 					builder.Append(separator);
 				}
 
-				builder.Append(this[i].ToString());
+				builder.Append(this[i]);
 			}
 
-			return builder.ToString ();
+			return builder.ToString();
 		}
 
 		/// <summary>
@@ -369,7 +382,7 @@ namespace TagLib {
 		///    A <see cref="string" /> object containing the contents
 		///    of the current instance.
 		/// </returns>
-		public override string ToString ()
+		public override string ToString()
 		{
 			return ToString(", ");
 		}
@@ -377,7 +390,7 @@ namespace TagLib {
 		#endregion
 
 		#region ICollection<T>
-		
+
 		/// <summary>
 		///    Gets the number of elements in the current instance.
 		/// </summary>
@@ -385,20 +398,22 @@ namespace TagLib {
 		///    A <see cref="int" /> value containing the number of
 		///    elements in the current instance.
 		/// </value>
-		public int Count {
-			get {return data.Count;}
+		public int Count
+		{
+			get { return data.Count; }
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not the current instance is synchronized.
 		/// </summary>
 		/// <value>
 		///    Always <see langword="false" />.
 		/// </value>
-		public bool IsSynchronized { 
-			get {return false;}
+		public bool IsSynchronized
+		{
+			get { return false; }
 		}
-		
+
 		/// <summary>
 		///    Gets the object that can be used to synchronize the
 		///    current instance.
@@ -407,10 +422,11 @@ namespace TagLib {
 		///    A <see cref="object" /> that can be used to synchronize
 		///    the current instance.
 		/// </value>
-		public object SyncRoot { 
-			get {return this;}
+		public object SyncRoot
+		{
+			get { return this; }
 		}
-		
+
 		/// <summary>
 		///    Copies the current instance to an array, starting at a
 		///    specified index.

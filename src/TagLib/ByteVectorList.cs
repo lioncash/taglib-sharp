@@ -44,10 +44,10 @@ namespace TagLib
 		///    Constructs and initializes a new instance of <see
 		///    cref="ByteVectorCollection" /> with no contents.
 		/// </summary>
-		public ByteVectorCollection ()
+		public ByteVectorCollection()
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ByteVectorCollection" /> with specified contents.
@@ -60,7 +60,7 @@ namespace TagLib
 		public ByteVectorCollection(IEnumerable<ByteVector> list)
 		{
 			if (list != null)
-				Add (list);
+				Add(list);
 		}
 
 		/// <summary>
@@ -71,12 +71,12 @@ namespace TagLib
 		///   A <see cref="ByteVector[]" /> containing objects to add to
 		///   the current instance.
 		/// </param>
-		public ByteVectorCollection (params ByteVector[] list)
+		public ByteVectorCollection(params ByteVector[] list)
 		{
 			if (list != null)
-				Add (list);
+				Add(list);
 		}
-		
+
 		/// <summary>
 		///    Performs a sorted insert of a <see cref="ByteVector" />
 		///    object into the current instance, optionally only adding
@@ -94,15 +94,16 @@ namespace TagLib
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="item" /> is <see langword="null" />.
 		/// </exception>
-		public override void SortedInsert (ByteVector item, bool unique)
+		public override void SortedInsert(ByteVector item, bool unique)
 		{
 			if (item == null)
-				throw new ArgumentNullException ("item");
-			
+				throw new ArgumentNullException("item");
+
 			// FIXME: This is not used, but if it is a faster
 			// method could be used.
 			int i = 0;
-			for(; i < Count; i++) {
+			for (; i < Count; i++)
+			{
 				if (item == this[i] && unique)
 					return;
 
@@ -110,9 +111,9 @@ namespace TagLib
 					break;
 			}
 
-			Insert (i + 1, item);
+			Insert(i + 1, item);
 		}
-		
+
 		/// <summary>
 		///    Converts the current instance to a <see cref="ByteVector"
 		///    /> by joining the contents together with a specified
@@ -129,23 +130,24 @@ namespace TagLib
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="separator" /> is <see langword="null" />.
 		/// </exception>
-		public ByteVector ToByteVector (ByteVector separator)
+		public ByteVector ToByteVector(ByteVector separator)
 		{
 			if (separator == null)
-				throw new ArgumentNullException ("separator");
-			
+				throw new ArgumentNullException("separator");
+
 			ByteVector vector = new ByteVector();
-			
-			for(int i = 0; i < Count; i++) {
-				if(i != 0 && separator.Count > 0)
+
+			for (int i = 0; i < Count; i++)
+			{
+				if (i != 0 && separator.Count > 0)
 					vector.Add(separator);
-				
+
 				vector.Add(this[i]);
 			}
-			
+
 			return vector;
 		}
-		
+
 		/// <summary>
 		///    Splits a <see cref="ByteVector" /> object using a
 		///    pattern.
@@ -181,42 +183,36 @@ namespace TagLib
 		/// <exception cref="ArgumentOutOfRangeException">
 		///    <paramref name="byteAlign" /> is less than 1.
 		/// </exception>
-		public static ByteVectorCollection Split (ByteVector vector,
-		                                          ByteVector pattern,
-		                                          int byteAlign,
-		                                          int max)
+		public static ByteVectorCollection Split(ByteVector vector, ByteVector pattern, int byteAlign, int max)
 		{
 			if (vector == null)
-				throw new ArgumentNullException ("vector");
-			
+				throw new ArgumentNullException("vector");
+
 			if (pattern == null)
-				throw new ArgumentNullException ("pattern");
-			
+				throw new ArgumentNullException("pattern");
+
 			if (byteAlign < 1)
-				throw new ArgumentOutOfRangeException (
-					"byteAlign",
-					"byteAlign must be at least 1.");
-			
-			ByteVectorCollection list = new ByteVectorCollection ();
+				throw new ArgumentOutOfRangeException("byteAlign", "byteAlign must be at least 1.");
+
+			ByteVectorCollection list = new ByteVectorCollection();
 			int previous_offset = 0;
-			
+
 			for (int offset = vector.Find(pattern, 0, byteAlign);
-				offset != -1 && (max < 1 ||
-					max > list.Count + 1);
-				offset = vector.Find (pattern,
-					offset + pattern.Count, byteAlign)) {
-				list.Add (vector.Mid (previous_offset,
+				offset != -1 && (max < 1 || max > list.Count + 1);
+				offset = vector.Find(pattern, offset + pattern.Count, byteAlign))
+			{
+				list.Add(vector.Mid(previous_offset,
 					offset - previous_offset));
 				previous_offset = offset + pattern.Count;
 			}
-			
+
 			if (previous_offset < vector.Count)
-				list.Add (vector.Mid (previous_offset,
+				list.Add(vector.Mid(previous_offset,
 					vector.Count - previous_offset));
-			
+
 			return list;
 		}
-		
+
 		/// <summary>
 		///    Splits a <see cref="ByteVector" /> object using a
 		///    pattern.
@@ -245,13 +241,11 @@ namespace TagLib
 		/// <exception cref="ArgumentOutOfRangeException">
 		///    <paramref name="byteAlign" /> is less than 1.
 		/// </exception>
-		public static ByteVectorCollection Split (ByteVector vector,
-		                                          ByteVector pattern,
-		                                          int byteAlign)
+		public static ByteVectorCollection Split(ByteVector vector, ByteVector pattern, int byteAlign)
 		{
 			return Split(vector, pattern, byteAlign, 0);
 		}
-		
+
 		/// <summary>
 		///    Splits a <see cref="ByteVector" /> object using a
 		///    pattern.
@@ -271,8 +265,7 @@ namespace TagLib
 		///    <paramref name="vector" /> or <paramref name="pattern" />
 		///    is <see langword="null" />.
 		/// </exception>
-		public static ByteVectorCollection Split (ByteVector vector,
-		                                          ByteVector pattern)
+		public static ByteVectorCollection Split(ByteVector vector, ByteVector pattern)
 		{
 			return Split(vector, pattern, 1);
 		}

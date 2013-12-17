@@ -25,7 +25,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace TagLib {
+namespace TagLib
+{
 	/// <summary>
 	///    This static class provides a mechanism for registering file
 	///    classes and mime-types, to be used when constructing a class via
@@ -57,7 +58,7 @@ namespace TagLib {
 		///    Mono. Not reflecting taglib-sharp.dll saves about 120KB
 		///    of heap.
 		/// </remarks>
-		private static Type [] static_file_types = new Type [] {
+		private static readonly Type[] static_file_types = {
 			typeof(TagLib.Aac.File),
 			typeof(TagLib.Aiff.File),
 			typeof(TagLib.Ape.File),
@@ -93,21 +94,21 @@ namespace TagLib {
 		{
 			Init();
 		}
-		
+
 		/// <summary>
 		///    Initializes the class by registering the default types.
 		/// </summary>
-		internal static void Init ()
+		internal static void Init()
 		{
-			if(file_types != null)
+			if (file_types != null)
 				return;
-			
+
 			file_types = new Dictionary<string, Type>();
-			
-			foreach(Type type in static_file_types)
-				Register (type);
+
+			foreach (Type type in static_file_types)
+				Register(type);
 		}
-		
+
 		/// <summary>
 		///    Registers a <see cref="File" /> subclass to be used when
 		///    creating files via <see cref="File.Create(string)" />.
@@ -120,18 +121,18 @@ namespace TagLib {
 		///    <paramref name="type" /> should use the <see
 		///    cref="SupportedMimeType" /> custom attribute.
 		/// </remarks>
-		public static void Register (Type type)
+		public static void Register(Type type)
 		{
-			Attribute [] attrs = Attribute.GetCustomAttributes (type,
-				typeof(SupportedMimeType), false);
-			
-			if(attrs == null || attrs.Length == 0)
+			Attribute[] attrs = Attribute.GetCustomAttributes(type,
+				typeof (SupportedMimeType), false);
+
+			if (attrs == null || attrs.Length == 0)
 				return;
-			
-			foreach(SupportedMimeType attr in attrs)
+
+			foreach (SupportedMimeType attr in attrs)
 				file_types.Add(attr.MimeType, type);
 		}
-		
+
 		/// <summary>
 		///    Gets a dictionary containing all the supported mime-types
 		///    and file classes used by <see cref="File.Create(string)"
@@ -141,8 +142,9 @@ namespace TagLib {
 		///    A <see cref="T:System.Collections.Generic.IDictionary`2" /> object containing the
 		///    supported mime-types.
 		/// </value>
-		public static IDictionary<string, Type> AvailableTypes {
-			get {return file_types;}
+		public static IDictionary<string, Type> AvailableTypes
+		{
+			get { return file_types; }
 		}
 	}
 }

@@ -161,7 +161,7 @@ namespace TagLib
 		///    A <see cref="string" /> object containing the mime-type
 		///    of the picture data stored in the current instance.
 		/// </value>
-		string MimeType {get; set;}
+		string MimeType { get; set; }
 		
 		/// <summary>
 		///    Gets and sets the type of content visible in the picture
@@ -172,7 +172,7 @@ namespace TagLib
 		///    content visible in the picture stored in the current
 		///    instance.
 		/// </value>
-		PictureType Type {get; set;}
+		PictureType Type { get; set; }
 		
 		/// <summary>
 		///    Gets and sets a description of the picture stored in the
@@ -182,7 +182,7 @@ namespace TagLib
 		///    A <see cref="string" /> object containing a description
 		///    of the picture stored in the current instance.
 		/// </value>
-		string Description {get; set;}
+		string Description { get; set; }
 		
 		/// <summary>
 		///    Gets and sets the picture data stored in the current
@@ -192,7 +192,7 @@ namespace TagLib
 		///    A <see cref="ByteVector" /> object containing the picture
 		///    data stored in the current instance.
 		/// </value>
-		ByteVector Data {get; set;}
+		ByteVector Data { get; set; }
 	}
 	
 	/// <summary>
