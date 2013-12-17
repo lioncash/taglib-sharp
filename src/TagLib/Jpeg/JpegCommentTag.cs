@@ -38,7 +38,7 @@ namespace TagLib.Jpeg
 		/// <param name="value">
 		///    The value of the comment.
 		/// </param>
-		public JpegCommentTag (string value)
+		public JpegCommentTag(string value)
 		{
 			Value = value;
 		}
@@ -46,7 +46,8 @@ namespace TagLib.Jpeg
 		/// <summary>
 		///    Constructor. Creates a new empty comment.
 		/// </summary>
-		public JpegCommentTag () {
+		public JpegCommentTag()
+		{
 			Value = null;
 		}
 
@@ -67,7 +68,8 @@ namespace TagLib.Jpeg
 		///    A <see cref="string" /> containing the comment of the
 		///    current instace.
 		/// </value>
-		public override string Comment {
+		public override string Comment
+		{
 			get { return Value; }
 			set { Value = value; }
 		}
@@ -82,14 +84,15 @@ namespace TagLib.Jpeg
 		/// <value>
 		///    Always <see cref="TagLib.TagTypes.JpegComment" />.
 		/// </value>
-		public override TagTypes TagTypes {
+		public override TagTypes TagTypes
+		{
 			get { return TagTypes.JpegComment; }
 		}
 
 		/// <summary>
 		///    Clears the values stored in the current instance.
 		/// </summary>
-		public override void Clear ()
+		public override void Clear()
 		{
 			Value = null;
 		}

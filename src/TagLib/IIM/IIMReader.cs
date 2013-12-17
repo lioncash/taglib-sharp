@@ -31,53 +31,57 @@ namespace TagLib.IIM
 		/// <summary>
 		/// The magic bytes that start a new IPTC-IIM segment
 		/// </summary>
-		private static readonly byte[] IPTC_IIM_SEGMENT = new byte[] { 0x1C, 0x02};
+		private static readonly byte[] IPTC_IIM_SEGMENT = { 0x1C, 0x02};
 
 		private IIMTag Tag { get; set; }
 		private ByteVector Data { get; set; }
 
-		public IIMReader (ByteVector data)
+		public IIMReader(ByteVector data)
 		{
 			Data = data;
-			Tag = new IIMTag ();
+			Tag = new IIMTag();
 		}
 
-		public IIMTag Process ()
+		public IIMTag Process()
 		{
 			// now process the IIM segments which all start with 0x1C 0x02 followed by the type
 			// of the IIM segment
 			int findOffset = 0;
 			int count = 0;
-			for (int i = Data.Find (IPTC_IIM_SEGMENT, findOffset); i >= findOffset; i = Data.Find (IPTC_IIM_SEGMENT, findOffset)) {
+			for (int i = Data.Find(IPTC_IIM_SEGMENT, findOffset); i >= findOffset; i = Data.Find(IPTC_IIM_SEGMENT, findOffset))
+			{
 				count++;
 				// skip over segment marker
 				i += IPTC_IIM_SEGMENT.Length;
 
-				int len = Data.Mid (i + 1).ToUShort ();
+				int len = Data.Mid(i + 1).ToUShort();
 
 				// ENHANCE: enhance encoding used for string conversion. Unfortunately this is
 				// not detectable from IIM data.
-				switch (Data [i]) {
+				switch (Data[i])
+				{
 					case 5: // Object Name
-						Tag.Title = Data.ToString (StringType.Latin1, i + 3, len);
+						Tag.Title = Data.ToString(StringType.Latin1, i + 3, len);
 						break;
 					case 25: // Keywords
-						Tag.AddKeyword (Data.ToString (StringType.Latin1, i + 3, len));
+						Tag.AddKeyword(Data.ToString(StringType.Latin1, i + 3, len));
 						break;
 					case 80: // By-line
-						Tag.Creator = Data.ToString (StringType.Latin1, i + 3, len);
+						Tag.Creator = Data.ToString(StringType.Latin1, i + 3, len);
 						break;
 					case 116: // Copyright notice
-						Tag.Copyright = Data.ToString (StringType.Latin1, i + 3, len);
+						Tag.Copyright = Data.ToString(StringType.Latin1, i + 3, len);
 						break;
 					case 120: // Caption/Abstract
-						Tag.Comment = Data.ToString (StringType.Latin1, i + 3, len);
+						Tag.Comment = Data.ToString(StringType.Latin1, i + 3, len);
 						break;
 				}
 				findOffset = i + 3 + len;
 			}
+
 			if (count == 0)
 				return null;
+
 			return Tag;
 		}
 	}

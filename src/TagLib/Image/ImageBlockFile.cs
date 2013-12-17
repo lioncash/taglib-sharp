@@ -65,13 +65,13 @@ namespace TagLib.Image
 			/// <param name="length">
 			///    A <see cref="System.Int64"/> with the length of the block
 			/// </param>
-			public MetadataBlock (long start, long length)
+			public MetadataBlock(long start, long length)
 			{
 				if (start < 0)
-					throw new ArgumentOutOfRangeException ("start");
+					throw new ArgumentOutOfRangeException("start");
 
 				if (length < 0)
-					throw new ArgumentOutOfRangeException ("length");
+					throw new ArgumentOutOfRangeException("length");
 
 				Start = start;
 				Length = length;
@@ -80,7 +80,9 @@ namespace TagLib.Image
 			/// <summary>
 			///    Constructor. Creates a new instance with an empty block
 			/// </summary>
-			public MetadataBlock () : this (0, 0) {}
+			public MetadataBlock() : this(0, 0)
+			{
+			}
 
 
 			/// <summary>
@@ -97,7 +99,7 @@ namespace TagLib.Image
 			/// <remarks>
 			///    Overlapping means here also that blocks directly follow.
 			/// </remarks>
-			public bool OverlapsWith (MetadataBlock block)
+			public bool OverlapsWith(MetadataBlock block)
 			{
 				if (block.Start >= Start && block.Start <= Start + Length)
 					return true;
@@ -114,20 +116,22 @@ namespace TagLib.Image
 			/// <param name="block">
 			///    A <see cref="MetadataBlock"/> with the block to add.
 			/// </param>
-			public void Add (MetadataBlock block)
+			public void Add(MetadataBlock block)
 			{
-				if (block.Start >= Start && block.Start <= Start + Length) {
-					Length = Math.Max (Length, block.Start + block.Length - Start);
+				if (block.Start >= Start && block.Start <= Start + Length)
+				{
+					Length = Math.Max(Length, block.Start + block.Length - Start);
 					return;
 				}
 
-				if (Start >= block.Start && Start <= block.Start + block.Length) {
-					Length = Math.Max (block.Length, Start + Length - block.Start);
+				if (Start >= block.Start && Start <= block.Start + block.Length)
+				{
+					Length = Math.Max(block.Length, Start + Length - block.Start);
 					Start = block.Start;
 					return;
 				}
 
-				throw new ArgumentException (String.Format ("blocks do not overlap: {0} and {1}", this, block));
+				throw new ArgumentException(String.Format("blocks do not overlap: {0} and {1}", this, block));
 			}
 
 
@@ -142,7 +146,7 @@ namespace TagLib.Image
 			///    A <see cref="System.Boolean"/> which is true if the current
 			///    instance is before the given block.
 			/// </returns>
-			public bool Before (MetadataBlock block)
+			public bool Before(MetadataBlock block)
 			{
 				return (Start + Length < block.Start);
 			}
@@ -156,7 +160,7 @@ namespace TagLib.Image
 			///    A <see cref="System.String"/> representing the current
 			///    instance.
 			/// </returns>
-			public override string ToString ()
+			public override string ToString()
 			{
 				return string.Format("[MetadataBlock: Start={0}, Length={1}]", Start, Length);
 			}
@@ -165,7 +169,7 @@ namespace TagLib.Image
 		/// <summary>
 		///    An odered list of the metadata blocks. The blocks do not overlap.
 		/// </summary>
-		private List<MetadataBlock> metadata_blocks = new List<MetadataBlock> ();
+		private List<MetadataBlock> metadata_blocks = new List<MetadataBlock>();
 
 
 		/// <summary>
@@ -177,34 +181,39 @@ namespace TagLib.Image
 		/// <param name="length">
 		///    A <see cref="System.Int64"/> with the length of the metadata block
 		/// </param>
-		protected void AddMetadataBlock (long start, long length)
+		protected void AddMetadataBlock(long start, long length)
 		{
-			MetadataBlock new_block = new MetadataBlock (start, length);
+			MetadataBlock new_block = new MetadataBlock(start, length);
 
 			// We keep the list sorted and unique. Therefore, we add the new block to
 			// the list and join overlapping blocks if necessary.
 
 			// iterate through all existing blocks.
-			for (int i = 0; i < metadata_blocks.Count; i++) {
-
+			for (int i = 0; i < metadata_blocks.Count; i++)
+			{
 				var block = metadata_blocks[i];
 
 				// if one block overlaps with the new one, join them.
-				if (new_block.OverlapsWith (block)) {
-					block.Add (new_block);
+				if (new_block.OverlapsWith(block))
+				{
+					block.Add(new_block);
 
 					// Since we joined two blocks, they may overlap with
 					// other blocks which follows in the list. Therfore,
 					// we iterate through the tail of the list and join
 					// blocks which are now contained.
 					i++;
-					while (i < metadata_blocks.Count) {
+					while (i < metadata_blocks.Count)
+					{
 						var next_block = metadata_blocks[i];
 
-						if (block.OverlapsWith (next_block)) {
-							block.Add (next_block);
-							metadata_blocks.Remove (next_block);
-						} else {
+						if (block.OverlapsWith(next_block))
+						{
+							block.Add(next_block);
+							metadata_blocks.Remove(next_block);
+						}
+						else
+						{
 							return;
 						}
 
@@ -214,14 +223,16 @@ namespace TagLib.Image
 
 					// if the new block is 'smaller' than the one in the list,
 					// just add it to the list.
-				} else if (new_block.Before (block)) {
-					metadata_blocks.Insert (i, new_block);
+				}
+				else if (new_block.Before(block))
+				{
+					metadata_blocks.Insert(i, new_block);
 					return;
 				}
 			}
 
 			// if the new block is 'bigger' than all other blocks, at it to the end.
-			metadata_blocks.Add (new_block);
+			metadata_blocks.Add(new_block);
 		}
 
 
@@ -244,28 +255,28 @@ namespace TagLib.Image
 
 			// start iterating through the metadata block from the end,
 			// because deleting such blocks do not affect the smaller indices.
-			for (int i = metadata_blocks.Count - 1; i >= 0; i--) {
+			for (int i = metadata_blocks.Count - 1; i >= 0; i--)
+			{
 				var block = metadata_blocks[i];
 
 				// this is the block to save the metadata in
-				if (block.Start <= start && block.Start + block.Length >= start) {
-
+				if (block.Start <= start && block.Start + block.Length >= start)
+				{
 					// the metadata is saved starting at the beginning of the block,
 					// because the bytes will be removed.
-					Insert (data, block.Start, block.Length);
+					Insert(data, block.Start, block.Length);
 					new_start = block.Start;
-
-				} else {
-
+				}
+				else
+				{
 					// remove block
-					Insert ("", block.Start, block.Length);
+					Insert("", block.Start, block.Length);
 
 					// update start of the metadata block, if metadata was written
 					// before, i.e. we have removed a block which is before the saved
 					// metadata
 					if (block.Start < start)
 						new_start -= block.Length;
-
 				}
 			}
 
@@ -289,7 +300,7 @@ namespace TagLib.Image
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		protected ImageBlockFile (string path) : base (path)
+		protected ImageBlockFile(string path) : base(path)
 		{
 		}
 
@@ -305,7 +316,7 @@ namespace TagLib.Image
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		protected ImageBlockFile (IFileAbstraction abstraction) : base (abstraction)
+		protected ImageBlockFile(IFileAbstraction abstraction) : base(abstraction)
 		{
 		}
 

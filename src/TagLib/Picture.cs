@@ -29,7 +29,8 @@
 
 using System;
 
-namespace TagLib {
+namespace TagLib
+{
 	/// <summary>
 	///    Specifies the type of content appearing in the picture.
 	/// </summary>
@@ -227,15 +228,15 @@ namespace TagLib {
 		
 		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Picture" /> with no data or values.
 		/// </summary>
-		public Picture ()
+		public Picture()
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Picture" /> by reading in the contents of a
@@ -248,16 +249,16 @@ namespace TagLib {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public Picture (string path)
+		public Picture(string path)
 		{
 			if (path == null)
-				throw new ArgumentNullException ("path");
-			
-			Data = ByteVector.FromPath (path);
-			FillInMimeFromData ();
+				throw new ArgumentNullException("path");
+
+			Data = ByteVector.FromPath(path);
+			FillInMimeFromData();
 			Description = path;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Picture" /> by reading in the contents of a
@@ -271,16 +272,16 @@ namespace TagLib {
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public Picture (File.IFileAbstraction abstraction)
+		public Picture(File.IFileAbstraction abstraction)
 		{
 			if (abstraction == null)
-				throw new ArgumentNullException ("abstraction");
-			
-			Data = ByteVector.FromFile (abstraction);
-			FillInMimeFromData ();
+				throw new ArgumentNullException("abstraction");
+
+			Data = ByteVector.FromFile(abstraction);
+			FillInMimeFromData();
 			Description = abstraction.Name;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Picture" /> by using the contents of a <see
@@ -293,15 +294,15 @@ namespace TagLib {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="data" /> is <see langword="null" />.
 		/// </exception>
-		public Picture (ByteVector data)
+		public Picture(ByteVector data)
 		{
 			if (data == null)
-				throw new ArgumentNullException ("data");
-			
-			Data = new ByteVector (data);
-			FillInMimeFromData ();
+				throw new ArgumentNullException("data");
+
+			Data = new ByteVector(data);
+			FillInMimeFromData();
 		}
-		
+
 		#endregion
 		
 		
@@ -326,7 +327,7 @@ namespace TagLib {
 		{
 			return new Picture (filename);
 		}
-		
+
 		/// <summary>
 		///    Creates a new <see cref="Picture" />, populating it with
 		///    the contents of a file.
@@ -341,17 +342,17 @@ namespace TagLib {
 		///    the file's contents.
 		/// </returns>
 		[Obsolete("Use Picture(File.IFileAbstraction abstraction) constructor instead.")]
-		public static Picture CreateFromFile (File.IFileAbstraction abstraction)
+		public static Picture CreateFromFile(File.IFileAbstraction abstraction)
 		{
-			return new Picture (abstraction);
+			return new Picture(abstraction);
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets and sets the mime-type of the picture data
 		///    stored in the current instance.
@@ -360,11 +361,12 @@ namespace TagLib {
 		///    A <see cref="string" /> object containing the mime-type
 		///    of the picture data stored in the current instance.
 		/// </value>
-		public string MimeType {
+		public string MimeType
+		{
 			get { return mime_type; }
 			set { mime_type = value; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the type of content visible in the picture
 		///    stored in the current instance.
@@ -374,11 +376,12 @@ namespace TagLib {
 		///    content visible in the picture stored in the current
 		///    instance.
 		/// </value>
-		public PictureType Type {
+		public PictureType Type
+		{
 			get { return type; }
 			set { type = value; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets a description of the picture stored in the
 		///    current instance.
@@ -387,11 +390,12 @@ namespace TagLib {
 		///    A <see cref="string" /> object containing a description
 		///    of the picture stored in the current instance.
 		/// </value>
-		public string Description {
+		public string Description
+		{
 			get { return description; }
 			set { description = value; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the picture data stored in the current
 		///    instance.
@@ -400,51 +404,57 @@ namespace TagLib {
 		///    A <see cref="ByteVector" /> object containing the picture
 		///    data stored in the current instance.
 		/// </value>
-		public ByteVector Data {
+		public ByteVector Data
+		{
 			get { return data; }
 			set { data = value; }
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Private Methods
-		
+
 		/// <summary>
 		///    Fills in the mime type of the current instance by reading
 		///    the first few bytes of the file. If the format cannot be
 		///    identified, it assumed to be a JPEG file.
 		/// </summary>
-		private void FillInMimeFromData ()
+		private void FillInMimeFromData()
 		{
 			string mimetype = "image/jpeg";
 			string ext = "jpg";
-			
+
 			if (Data.Count >= 4 &&
-				(Data[1] == 'P' &&
-				 Data[2] == 'N' &&
-				 Data[3] == 'G')) {
+			   (Data[1] == 'P' &&
+			    Data[2] == 'N' &&
+			    Data[3] == 'G'))
+			{
 				mimetype = "image/png";
 				ext = "png";
-			} else if (Data.Count >= 3 &&
-				(Data[0] == 'G' &&
-				 Data[1] == 'I' &&
-				 Data[2] == 'F')) {
+			}
+			else if (Data.Count >= 3 &&
+			        (Data[0] == 'G' &&
+			         Data[1] == 'I' &&
+			         Data[2] == 'F'))
+			{
 				mimetype = "image/gif";
 				ext = "gif";
-			} else if (Data.Count >= 2 &&
-				(Data[0] == 'B' &&
-				 Data[1] == 'M')) {
+			}
+			else if (Data.Count >= 2 &&
+			        (Data[0] == 'B' &&
+				     Data[1] == 'M'))
+			{
 				mimetype = "image/bmp";
 				ext = "bmp";
 			}
-			
+
 			MimeType = mimetype;
 			Type = PictureType.FrontCover;
 			Description = "cover." + ext;
 		}
-		
+
 		#endregion
 	}
 }

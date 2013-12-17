@@ -23,8 +23,6 @@
 // USA
 //
 
-using System;
-
 namespace TagLib.Jpeg
 {
 	/// <summary>
@@ -41,7 +39,10 @@ namespace TagLib.Jpeg
 		///    A <see cref="string" /> object containing a description
 		///    of the media represented by the current instance.
 		/// </value>
-		public override string Description { get { return "JFIF File"; } }
+		public override string Description
+		{
+			get { return "JFIF File"; }
+		}
 
 
 		/// <summary>
@@ -60,7 +61,8 @@ namespace TagLib.Jpeg
 		/// <returns>
 		///    A new <see cref="Codec" /> instance.
 		/// </returns>
-		public Codec (int width, int height, int quality)
-			: base (width, height, quality) {}
+		public Codec(int width, int height, int quality) : base(width, height, quality)
+		{
+		}
 	}
 }

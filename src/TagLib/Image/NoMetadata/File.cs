@@ -56,7 +56,6 @@ namespace TagLib.Image.NoMetadata
 	[SupportedMimeType("taglib/x3f", "x3f")]    // FIXME: Not supported yet!
 	public class File : TagLib.Image.File
 	{
-
 		#region public Properties
 
 		/// <summary>
@@ -68,7 +67,8 @@ namespace TagLib.Image.NoMetadata
 		///    media properties of the file represented by the current
 		///    instance.
 		/// </value>
-		public override TagLib.Properties Properties {
+		public override TagLib.Properties Properties
+		{
 			get { return null; }
 		}
 
@@ -79,7 +79,8 @@ namespace TagLib.Image.NoMetadata
 		///    A <see cref="bool" /> which is true if tags can be written to the
 		///    current file, otherwise false.
 		/// </value>
-		public override bool Writeable {
+		public override bool Writeable
+		{
 			get { return false; }
 		}
 
@@ -104,9 +105,8 @@ namespace TagLib.Image.NoMetadata
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path, ReadStyle propertiesStyle)
-			: this (new File.LocalFileAbstraction (path),
-				propertiesStyle)
+		public File(string path, ReadStyle propertiesStyle)
+			: this(new File.LocalFileAbstraction(path), propertiesStyle)
 		{
 		}
 
@@ -122,7 +122,7 @@ namespace TagLib.Image.NoMetadata
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path) : this (path, ReadStyle.Average)
+		public File(string path) : this(path, ReadStyle.Average)
 		{
 		}
 
@@ -144,10 +144,9 @@ namespace TagLib.Image.NoMetadata
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File (File.IFileAbstraction abstraction,
-		             ReadStyle propertiesStyle) : base (abstraction)
+		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
 		{
-			ImageTag = new CombinedImageTag (TagTypes.XMP);
+			ImageTag = new CombinedImageTag(TagTypes.XMP);
 		}
 
 		/// <summary>
@@ -162,8 +161,7 @@ namespace TagLib.Image.NoMetadata
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		protected File (IFileAbstraction abstraction)
-			: this (abstraction, ReadStyle.Average)
+		protected File (IFileAbstraction abstraction) : this (abstraction, ReadStyle.Average)
 		{
 		}
 
@@ -175,9 +173,9 @@ namespace TagLib.Image.NoMetadata
 		///    Saves the changes made in the current instance to the
 		///    file it represents.
 		/// </summary>
-		public override void Save ()
+		public override void Save()
 		{
-			throw new NotSupportedException ();
+			throw new NotSupportedException();
 		}
 
 		#endregion

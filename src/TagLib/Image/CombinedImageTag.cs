@@ -37,8 +37,7 @@ namespace TagLib.Image
 	/// </summary>
 	public class CombinedImageTag : ImageTag
 	{
-
-#region Private Fields
+		#region Private Fields
 
 		/// <summary>
 		///    Direct access to the Exif (IFD) tag (if any)
@@ -65,26 +64,29 @@ namespace TagLib.Image
 		///    Returns all image tags in this tag, with XMP
 		///    and Exif first.
 		/// </summary>
-		public List<ImageTag> AllTags {
-			get {
-				if (all_tags == null) {
-					all_tags = new List<ImageTag> ();
+		public List<ImageTag> AllTags
+		{
+			get
+			{
+				if (all_tags == null)
+				{
+					all_tags = new List<ImageTag>();
 					if (Xmp != null)
-						all_tags.Add (Xmp);
+						all_tags.Add(Xmp);
 					if (Exif != null)
-						all_tags.Add (Exif);
-					all_tags.AddRange (OtherTags);
+						all_tags.Add(Exif);
+					all_tags.AddRange(OtherTags);
 				}
 
 				return all_tags;
 			}
 		}
 
-		private List<ImageTag> all_tags = null;
+		private List<ImageTag> all_tags;
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
@@ -96,20 +98,21 @@ namespace TagLib.Image
 		///    types of metadata that can be contained in this
 		///    combined tag.
 		/// </param>
-		public CombinedImageTag (TagTypes allowed_types)
+		public CombinedImageTag(TagTypes allowed_types)
 		{
 			AllowedTypes = allowed_types;
-			OtherTags = new List<ImageTag> ();
+			OtherTags = new List<ImageTag>();
 		}
 
-#endregion
+		#endregion
 
-#region Protected Methods
+		#region Protected Methods
 
-		internal void AddTag (ImageTag tag)
+		internal void AddTag(ImageTag tag)
 		{
 			if ((tag.TagTypes & AllowedTypes) != tag.TagTypes)
-				throw new Exception (String.Format ("Attempted to add {0} to an image, but the only allowed types are {1}", tag.TagTypes, AllowedTypes));
+				throw new Exception(String.Format("Attempted to add {0} to an image, but the only allowed types are {1}",
+					tag.TagTypes, AllowedTypes));
 
 			if (tag is IFDTag)
 				Exif = tag as IFDTag;
@@ -117,48 +120,54 @@ namespace TagLib.Image
 			{
 				// we treat a IPTC-IIM tag as a XMP tag. However, we prefer the real XMP tag.
 				// See comments in Jpeg/File.cs for what we should do to deal with this properly.
-				if (Xmp != null && (tag is IIM.IIMTag || Xmp is IIM.IIMTag)) {
+				if (Xmp != null && (tag is IIM.IIMTag || Xmp is IIM.IIMTag))
+				{
 					var iimTag = tag as IIM.IIMTag;
-					if (iimTag == null) {
+					if (iimTag == null)
+					{
 						iimTag = Xmp as IIM.IIMTag;
 						Xmp = tag as XmpTag;
 					}
 
-					if (string.IsNullOrEmpty (Xmp.Title))
+					if (string.IsNullOrEmpty(Xmp.Title))
 						Xmp.Title = iimTag.Title;
-					if (string.IsNullOrEmpty (Xmp.Creator))
+					if (string.IsNullOrEmpty(Xmp.Creator))
 						Xmp.Creator = iimTag.Creator;
-					if (string.IsNullOrEmpty (Xmp.Copyright))
+					if (string.IsNullOrEmpty(Xmp.Copyright))
 						Xmp.Copyright = iimTag.Copyright;
-					if (string.IsNullOrEmpty (Xmp.Comment))
+					if (string.IsNullOrEmpty(Xmp.Comment))
 						Xmp.Comment = iimTag.Comment;
 					if (Xmp.Keywords == null)
 						Xmp.Keywords = iimTag.Keywords;
-				} else {
+				}
+				else
+				{
 					Xmp = tag as XmpTag;
 				}
 			}
 			else
-				OtherTags.Add (tag);
+			{
+				OtherTags.Add(tag);
+			}
 
 			all_tags = null;
 		}
 
-		internal void RemoveTag (ImageTag tag)
+		internal void RemoveTag(ImageTag tag)
 		{
 			if (tag is IFDTag)
 				Exif = null;
 			else if (tag is XmpTag)
 				Xmp = null;
 			else
-				OtherTags.Remove (tag);
+				OtherTags.Remove(tag);
 
 			all_tags = null;
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods (Tag)
+		#region Public Methods (Tag)
 
 		/// <summary>
 		///    Gets the tag types contained in the current instance.
@@ -168,8 +177,10 @@ namespace TagLib.Image
 		///    containing the tag types contained in the current
 		///    instance.
 		/// </value>
-		public override TagTypes TagTypes {
-			get {
+		public override TagTypes TagTypes
+		{
+			get
+			{
 				TagTypes types = TagTypes.None;
 
 				foreach (ImageTag tag in AllTags)
@@ -182,15 +193,15 @@ namespace TagLib.Image
 		/// <summary>
 		///    Clears all of the child tags.
 		/// </summary>
-		public override void Clear ()
+		public override void Clear()
 		{
 			foreach (ImageTag tag in AllTags)
-				tag.Clear ();
+				tag.Clear();
 		}
 
-#endregion
+		#endregion
 
-#region Public Properties (ImageTag)
+		#region Public Properties (ImageTag)
 
 		/// <summary>
 		///    Gets or sets the keywords for the image described
@@ -200,9 +211,12 @@ namespace TagLib.Image
 		///    A <see cref="string[]" /> containing the keywords of the
 		///    current instace.
 		/// </value>
-		public override string[] Keywords {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override string[] Keywords
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					string[] value = tag.Keywords;
 					if (value != null && value.Length > 0)
 						return value;
@@ -210,7 +224,9 @@ namespace TagLib.Image
 
 				return new string[] {};
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.Keywords = value;
 			}
@@ -224,9 +240,12 @@ namespace TagLib.Image
 		///    A <see cref="System.Nullable"/> containing the rating of the
 		///    current instace.
 		/// </value>
-		public override uint? Rating {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override uint? Rating
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					uint? value = tag.Rating;
 
 					if (value != null)
@@ -235,7 +254,9 @@ namespace TagLib.Image
 
 				return null;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.Rating = value;
 			}
@@ -248,9 +269,12 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="System.Nullable"/> with the time the image was taken.
 		/// </value>
-		public override DateTime? DateTime {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override DateTime? DateTime
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					DateTime? value = tag.DateTime;
 
 					if (value != null)
@@ -259,7 +283,9 @@ namespace TagLib.Image
 
 				return null;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.DateTime = value;
 			}
@@ -273,9 +299,12 @@ namespace TagLib.Image
 		///    A <see cref="TagLib.Image.ImageOrientation" /> containing the orienatation of the
 		///    image
 		/// </value>
-		public override ImageOrientation Orientation {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override ImageOrientation Orientation
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					ImageOrientation value = tag.Orientation;
 
 					if ((uint) value >= 1U && (uint) value <= 8U)
@@ -284,7 +313,9 @@ namespace TagLib.Image
 
 				return ImageOrientation.None;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.Orientation = value;
 			}
@@ -298,9 +329,12 @@ namespace TagLib.Image
 		///    A <see cref="string" /> containing the name of the
 		///    software the current instace was created with.
 		/// </value>
-		public override string Software {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override string Software
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					string value = tag.Software;
 
 					if (!string.IsNullOrEmpty(value))
@@ -309,7 +343,9 @@ namespace TagLib.Image
 
 				return null;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.Software = value;
 			}
@@ -323,9 +359,12 @@ namespace TagLib.Image
 		///    A <see cref="System.Nullable"/> with the latitude ranging from -90.0
 		///    to +90.0 degrees.
 		/// </value>
-		public override double? Latitude {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override double? Latitude
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					double? value = tag.Latitude;
 
 					if (value != null)
@@ -334,7 +373,9 @@ namespace TagLib.Image
 
 				return null;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.Latitude = value;
 			}
@@ -348,9 +389,12 @@ namespace TagLib.Image
 		///    A <see cref="System.Nullable"/> with the longitude ranging from -180.0
 		///    to +180.0 degrees.
 		/// </value>
-		public override double? Longitude {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override double? Longitude
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					double? value = tag.Longitude;
 
 					if (value != null)
@@ -359,7 +403,9 @@ namespace TagLib.Image
 
 				return null;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.Longitude = value;
 			}
@@ -373,9 +419,12 @@ namespace TagLib.Image
 		///    A <see cref="System.Nullable"/> with the altitude. A positive value
 		///    is above sea level, a negative one below sea level. The unit is meter.
 		/// </value>
-		public override double? Altitude {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override double? Altitude
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					double? value = tag.Altitude;
 
 					if (value != null)
@@ -384,7 +433,9 @@ namespace TagLib.Image
 
 				return null;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.Altitude = value;
 			}
@@ -397,9 +448,12 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="System.Nullable"/> with the exposure time in seconds.
 		/// </value>
-		public override double? ExposureTime {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override double? ExposureTime
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					double? value = tag.ExposureTime;
 
 					if (value != null)
@@ -408,7 +462,9 @@ namespace TagLib.Image
 
 				return null;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.ExposureTime = value;
 			}
@@ -421,9 +477,12 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="System.Nullable"/> with the FNumber.
 		/// </value>
-		public override double? FNumber {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override double? FNumber
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					double? value = tag.FNumber;
 
 					if (value != null)
@@ -432,7 +491,9 @@ namespace TagLib.Image
 
 				return null;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.FNumber = value;
 			}
@@ -445,9 +506,12 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="System.Nullable"/> with the ISO speed as defined in ISO 12232.
 		/// </value>
-		public override uint? ISOSpeedRatings {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override uint? ISOSpeedRatings
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					uint? value = tag.ISOSpeedRatings;
 
 					if (value != null)
@@ -456,7 +520,9 @@ namespace TagLib.Image
 
 				return null;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.ISOSpeedRatings = value;
 			}
@@ -469,9 +535,12 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="System.Nullable"/> with the focal length in millimeters.
 		/// </value>
-		public override double? FocalLength {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override double? FocalLength
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					double? value = tag.FocalLength;
 
 					if (value != null)
@@ -480,7 +549,9 @@ namespace TagLib.Image
 
 				return null;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.FocalLength = value;
 			}
@@ -493,9 +564,12 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="System.Nullable"/> with the focal length in 35mm equivalent in millimeters.
 		/// </value>
-		public override uint? FocalLengthIn35mmFilm {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override uint? FocalLengthIn35mmFilm
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					uint? value = tag.FocalLengthIn35mmFilm;
 
 					if (value != null)
@@ -504,7 +578,9 @@ namespace TagLib.Image
 
 				return null;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.FocalLengthIn35mmFilm = value;
 			}
@@ -517,9 +593,12 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="string" /> with the manufacture name.
 		/// </value>
-		public override string Make {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override string Make
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					string value = tag.Make;
 
 					if (!string.IsNullOrEmpty(value))
@@ -528,7 +607,8 @@ namespace TagLib.Image
 
 				return null;
 			}
-			set {
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.Make = value;
 			}
@@ -541,9 +621,12 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="string" /> with the model name.
 		/// </value>
-		public override string Model {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override string Model
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					string value = tag.Model;
 
 					if (!string.IsNullOrEmpty(value))
@@ -552,7 +635,9 @@ namespace TagLib.Image
 
 				return null;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.Model = value;
 			}
@@ -564,26 +649,31 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="string" /> with the name of the creator.
 		/// </value>
-		public override string Creator {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override string Creator
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					string value = tag.Creator;
 
-					if (! string.IsNullOrEmpty (value))
+					if (! string.IsNullOrEmpty(value))
 						return value;
 				}
 
 				return null;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.Creator = value;
 			}
 		}
 
-#endregion
+		#endregion
 
-#region Public Properties (Tag)
+		#region Public Properties (Tag)
 
 
 		/// <summary>
@@ -595,18 +685,23 @@ namespace TagLib.Image
 		///    the media described by the current instance or <see
 		///    langword="null" /> if no value is present.
 		/// </value>
-		public override string Title {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override string Title
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					string value = tag.Title;
 
-					if (! string.IsNullOrEmpty (value))
+					if (! string.IsNullOrEmpty(value))
 						return value;
 				}
 
 				return null;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.Title = value;
 			}
@@ -621,18 +716,23 @@ namespace TagLib.Image
 		///    on the media represented by the current instance or <see
 		///    langword="null" /> if no value is present.
 		/// </value>
-		public override string Comment {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override string Comment
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					string value = tag.Comment;
 
-					if (! string.IsNullOrEmpty (value))
+					if (! string.IsNullOrEmpty(value))
 						return value;
 				}
 
 				return String.Empty;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.Comment = value;
 			}
@@ -647,24 +747,28 @@ namespace TagLib.Image
 		///    information for the media represented by the current
 		///    instance or <see langword="null" /> if no value present.
 		/// </value>
-		public override string Copyright {
-			get {
-				foreach (ImageTag tag in AllTags) {
+		public override string Copyright
+		{
+			get
+			{
+				foreach (ImageTag tag in AllTags)
+				{
 					string value = tag.Copyright;
 
-					if (! string.IsNullOrEmpty (value))
+					if (! string.IsNullOrEmpty(value))
 						return value;
 				}
 
 				return null;
 			}
-			set {
+
+			set
+			{
 				foreach (ImageTag tag in AllTags)
 					tag.Copyright = value;
 			}
 		}
 
-#endregion
-
+		#endregion
 	}
 }

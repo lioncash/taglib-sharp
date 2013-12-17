@@ -19,11 +19,8 @@
 //  You should have received a copy of the GNU Lesser General Public
 //  License along with this library; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-using System;
-using System.Collections.Generic;
 
-using TagLib.Image;
-using TagLib.IFD.Entries;
+using System.Collections.Generic;
 
 namespace TagLib.IIM
 {
@@ -31,19 +28,16 @@ namespace TagLib.IIM
 	{
 		private List<string> m_Keywords;
 
-		public IIMTag ()
+		public IIMTag()
 		{
 		}
 
 		public override TagLib.TagTypes TagTypes
 		{
-			get
-			{
-				return TagLib.TagTypes.IPTCIIM;
-			}
+			get { return TagLib.TagTypes.IPTCIIM; }
 		}
 
-		public override void Clear ()
+		public override void Clear()
 		{
 			Title = null;
 			m_Keywords = null;
@@ -59,18 +53,20 @@ namespace TagLib.IIM
 
 		public override string[] Keywords
 		{
-			get {
+			get
+			{
 				if (m_Keywords == null)
 					return null;
-				return m_Keywords.ToArray ();
+				return m_Keywords.ToArray();
 			}
 		}
 
-		internal void AddKeyword (string keyword)
+		internal void AddKeyword(string keyword)
 		{
 			if (m_Keywords == null)
-				m_Keywords = new List<string> ();
-			m_Keywords.Add (keyword);
+				m_Keywords = new List<string>();
+
+			m_Keywords.Add(keyword);
 		}
 	}
 }

@@ -34,8 +34,7 @@ namespace TagLib.Image
 	/// </summary>
 	public abstract class ImageTag : Tag
 	{
-
-#region Public Properties
+		#region Public Properties
 
 		/// <summary>
 		///    Gets or sets the keywords for the image described
@@ -45,9 +44,10 @@ namespace TagLib.Image
 		///    A <see cref="string[]" /> containing the keywords of the
 		///    current instace.
 		/// </value>
-		public virtual string[] Keywords {
-			get { return new string [] {}; }
-			set {}
+		public virtual string[] Keywords
+		{
+			get { return new string[] {}; }
+			set { }
 		}
 
 		/// <summary>
@@ -58,9 +58,10 @@ namespace TagLib.Image
 		///    A <see cref="System.Nullable"/> containing the rating of the
 		///    current instace.
 		/// </value>
-		public virtual uint? Rating {
+		public virtual uint? Rating
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -70,9 +71,10 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="System.Nullable"/> with the time the image was taken.
 		/// </value>
-		public virtual DateTime? DateTime {
+		public virtual DateTime? DateTime
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -83,9 +85,10 @@ namespace TagLib.Image
 		///    A <see cref="TagLib.Image.ImageOrientation" /> containing the orientation of the
 		///    image
 		/// </value>
-		public virtual ImageOrientation Orientation {
+		public virtual ImageOrientation Orientation
+		{
 			get { return ImageOrientation.None; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -96,9 +99,10 @@ namespace TagLib.Image
 		///    A <see cref="string" /> containing the name of the
 		///    software the current instace was created with.
 		/// </value>
-		public virtual string Software {
+		public virtual string Software
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -109,9 +113,10 @@ namespace TagLib.Image
 		///    A <see cref="System.Nullable"/> with the latitude ranging from -90.0
 		///    to +90.0 degrees.
 		/// </value>
-		public virtual double? Latitude {
+		public virtual double? Latitude
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -122,9 +127,10 @@ namespace TagLib.Image
 		///    A <see cref="System.Nullable"/> with the longitude ranging from -180.0
 		///    to +180.0 degrees.
 		/// </value>
-		public virtual double? Longitude {
+		public virtual double? Longitude
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -135,9 +141,10 @@ namespace TagLib.Image
 		///    A <see cref="System.Nullable"/> with the altitude. A positive value
 		///    is above sea level, a negative one below sea level. The unit is meter.
 		/// </value>
-		public virtual double? Altitude {
+		public virtual double? Altitude
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -147,9 +154,10 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="System.Nullable"/> with the exposure time in seconds.
 		/// </value>
-		public virtual double? ExposureTime {
+		public virtual double? ExposureTime
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -171,9 +179,10 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="System.Nullable"/> with the ISO speed as defined in ISO 12232.
 		/// </value>
-		public virtual uint? ISOSpeedRatings {
+		public virtual uint? ISOSpeedRatings
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -183,9 +192,10 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="System.Nullable"/> with the focal length in millimeters.
 		/// </value>
-		public virtual double? FocalLength {
+		public virtual double? FocalLength
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -195,9 +205,10 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="System.Nullable"/> with the focal length in 35mm equivalent in millimeters.
 		/// </value>
-		public virtual uint? FocalLengthIn35mmFilm {
+		public virtual uint? FocalLengthIn35mmFilm
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -207,9 +218,10 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="string" /> with the manufacture name.
 		/// </value>
-		public virtual string Make {
+		public virtual string Make
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -219,9 +231,10 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="string" /> with the model name.
 		/// </value>
-		public virtual string Model {
+		public virtual string Model
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
 		/// <summary>
@@ -230,12 +243,12 @@ namespace TagLib.Image
 		/// <value>
 		///    A <see cref="string" /> with the name of the creator.
 		/// </value>
-		public virtual string Creator {
+		public virtual string Creator
+		{
 			get { return null; }
-			set {}
+			set { }
 		}
 
-#endregion
-
+		#endregion
 	}
 }

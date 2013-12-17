@@ -54,7 +54,7 @@ namespace TagLib.Image
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		protected File (string path) : base (path)
+		protected File(string path) : base(path)
 		{
 		}
 
@@ -70,7 +70,7 @@ namespace TagLib.Image
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		protected File (IFileAbstraction abstraction) : base (abstraction)
+		protected File(IFileAbstraction abstraction) : base(abstraction)
 		{
 		}
 
@@ -86,7 +86,10 @@ namespace TagLib.Image
 		///    A <see cref="TagLib.Tag" /> object representing all tags
 		///    stored in the current instance.
 		/// </value>
-		public override Tag Tag { get { return ImageTag; } }
+		public override Tag Tag
+		{
+			get { return ImageTag; }
+		}
 
 		/// <summary>
 		///    Gets a abstract representation of all tags stored in the
@@ -96,7 +99,8 @@ namespace TagLib.Image
 		///    A <see cref="TagLib.Image.CombinedImageTag" /> object
 		///    representing all image tags stored in the current instance.
 		/// </value>
-		public CombinedImageTag ImageTag {
+		public CombinedImageTag ImageTag
+		{
 			get { return image_tag; }
 			protected set { image_tag = value; }
 		}
@@ -111,11 +115,12 @@ namespace TagLib.Image
 		///    that all tags are in place and properties can be safely used
 		///    to set values.
 		/// </summary>
-		public void EnsureAvailableTags ()
+		public void EnsureAvailableTags()
 		{
-			foreach (TagTypes type in Enum.GetValues (typeof (TagTypes))) {
+			foreach (TagTypes type in Enum.GetValues(typeof (TagTypes)))
+			{
 				if ((type & ImageTag.AllowedTypes) != 0x00 && type != TagTypes.AllTags)
-					GetTag (type, true);
+					GetTag(type, true);
 			}
 		}
 
@@ -130,17 +135,18 @@ namespace TagLib.Image
 		///    In order to remove all tags from a file, pass <see
 		///    cref="TagTypes.AllTags" /> as <paramref name="types" />.
 		/// </remarks>
-		public override void RemoveTags (TagLib.TagTypes types)
+		public override void RemoveTags(TagLib.TagTypes types)
 		{
-			List<ImageTag> to_delete = new List<ImageTag> ();
+			List<ImageTag> to_delete = new List<ImageTag>();
 
-			foreach (ImageTag tag in ImageTag.AllTags) {
+			foreach (ImageTag tag in ImageTag.AllTags)
+			{
 				if ((tag.TagTypes & types) == tag.TagTypes)
-					to_delete.Add (tag);
+					to_delete.Add(tag);
 			}
 
 			foreach (ImageTag tag in to_delete)
-				ImageTag.RemoveTag (tag);
+				ImageTag.RemoveTag(tag);
 		}
 
 		/// <summary>
@@ -161,9 +167,10 @@ namespace TagLib.Image
 		///    matching tag was found and none was created, <see
 		///    langword="null" /> is returned.
 		/// </returns>
-		public override TagLib.Tag GetTag (TagLib.TagTypes type, bool create)
+		public override TagLib.Tag GetTag(TagLib.TagTypes type, bool create)
 		{
-			foreach (ImageTag tag in ImageTag.AllTags) {
+			foreach (ImageTag tag in ImageTag.AllTags)
+			{
 				if ((tag.TagTypes & type) == type)
 					return tag;
 			}
@@ -172,34 +179,36 @@ namespace TagLib.Image
 				return null;
 
 			ImageTag new_tag = null;
-			switch (type) {
-			case TagTypes.JpegComment:
-				new_tag = new JpegCommentTag ();
-				break;
+			switch (type)
+			{
+				case TagTypes.JpegComment:
+					new_tag = new JpegCommentTag();
+					break;
 
-			case TagTypes.GifComment:
-				new_tag = new GifCommentTag ();
-				break;
+				case TagTypes.GifComment:
+					new_tag = new GifCommentTag();
+					break;
 
-			case TagTypes.Png:
-				new_tag = new PngTag ();
-				break;
+				case TagTypes.Png:
+					new_tag = new PngTag();
+					break;
 
-			case TagTypes.TiffIFD:
-				new_tag = new IFDTag ();
-				break;
+				case TagTypes.TiffIFD:
+					new_tag = new IFDTag();
+					break;
 
-			case TagTypes.XMP:
-				new_tag = new XmpTag ();
-				break;
+				case TagTypes.XMP:
+					new_tag = new XmpTag();
+					break;
 			}
 
-			if (new_tag != null) {
-				ImageTag.AddTag (new_tag);
+			if (new_tag != null)
+			{
+				ImageTag.AddTag(new_tag);
 				return new_tag;
 			}
 
-			throw new NotImplementedException (String.Format ("Adding tag of type {0} not supported!", type));
+			throw new NotImplementedException(String.Format("Adding tag of type {0} not supported!", type));
 		}
 
 		/// <summary>
@@ -208,17 +217,18 @@ namespace TagLib.Image
 		/// <param name='file'>
 		/// 	File to copy metadata from.
 		/// </param>
-		public void CopyFrom (TagLib.Image.File file)
+		public void CopyFrom(TagLib.Image.File file)
 		{
-			EnsureAvailableTags ();
+			EnsureAvailableTags();
 			var from_tag = file.ImageTag;
 			var to_tag = ImageTag;
-			foreach (var prop in typeof (TagLib.Image.ImageTag).GetProperties ()) {
+			foreach (var prop in typeof (TagLib.Image.ImageTag).GetProperties())
+			{
 				if (!prop.CanWrite || prop.Name == "TagTypes")
 					continue;
 
-				var value = prop.GetValue (from_tag, null);
-				prop.SetValue (to_tag, value, null);
+				var value = prop.GetValue(from_tag, null);
+				prop.SetValue(to_tag, value, null);
 			}
 		}
 
