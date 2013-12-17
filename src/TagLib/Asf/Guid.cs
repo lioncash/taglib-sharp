@@ -21,9 +21,8 @@
 // USA
 //
 
-using System;
-
-namespace TagLib.Asf {
+namespace TagLib.Asf
+{
 	/// <summary>
 	///    This static class contains common <see cref="System.Guid" />
 	///    values used by ASF Objects.

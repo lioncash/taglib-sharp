@@ -28,11 +28,11 @@
 //
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace TagLib {
+namespace TagLib
+{
 	/// <summary>
 	///    This class extends <see cref="T:TagLib.ListBase`1"/> to represent
 	///    a collection of <see cref="ByteVector" /> objects.

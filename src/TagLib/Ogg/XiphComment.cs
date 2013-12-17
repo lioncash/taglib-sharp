@@ -28,10 +28,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
-using System.IO;
-using System.Text;
 using ICSharpCode.SharpZipLib.Zip;
 
 namespace TagLib.Ogg
@@ -1276,8 +1273,7 @@ namespace TagLib.Ogg
 					text = text.Substring(0, text.Length - 2).Trim();
 				}
 
-				if (double.TryParse(text, NumberStyles.Float,
-					CultureInfo.InvariantCulture, out value))
+				if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
 				{
 					return value;
 				}
@@ -1292,8 +1288,7 @@ namespace TagLib.Ogg
 				}
 				else
 				{
-					string text = value.ToString("0.00 dB",
-						CultureInfo.InvariantCulture);
+					string text = value.ToString("0.00 dB", CultureInfo.InvariantCulture);
 					SetField("REPLAYGAIN_TRACK_GAIN", text);
 				}
 			}
@@ -1367,8 +1362,7 @@ namespace TagLib.Ogg
 					text = text.Substring(0, text.Length - 2).Trim();
 				}
 
-				if (double.TryParse(text, NumberStyles.Float,
-					CultureInfo.InvariantCulture, out value))
+				if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
 				{
 					return value;
 				}
@@ -1383,8 +1377,7 @@ namespace TagLib.Ogg
 				}
 				else
 				{
-					string text = value.ToString("0.00 dB",
-						CultureInfo.InvariantCulture);
+					string text = value.ToString("0.00 dB", CultureInfo.InvariantCulture);
 					SetField("REPLAYGAIN_ALBUM_GAIN", text);
 				}
 			}

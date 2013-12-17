@@ -23,7 +23,6 @@
 //
 
 using System;
-using System.Globalization;
 
 namespace TagLib.Aiff
 {

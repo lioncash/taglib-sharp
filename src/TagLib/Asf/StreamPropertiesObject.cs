@@ -23,9 +23,9 @@
 //
 
 using System;
-using System.Text;
 
-namespace TagLib.Asf {
+namespace TagLib.Asf
+{
 	/// <summary>
 	///    This class extends <see cref="Object" /> to provide a
 	///    representation of an ASF Stream Properties object which can be
