@@ -30,7 +30,6 @@ namespace TagLib.IFD.Tags
 	/// </summary>
 	public enum NikonWorldTimeEntryTag : ushort
 	{
-
 		/// <summary>
 		///    Timezone. (Hex: 0X0000)
 		/// </summary>
@@ -45,6 +44,5 @@ namespace TagLib.IFD.Tags
 		///    Date display format. (Hex: 0X0003)
 		/// </summary>
 		DateDisplayFormat                                   = 3,
-
 	}
 }

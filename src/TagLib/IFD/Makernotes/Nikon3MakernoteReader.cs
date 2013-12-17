@@ -30,8 +30,9 @@ namespace TagLib.IFD.Makernotes
 	/// <summary>
 	///     This class contains Nikon3 makernote specific reading logic.
 	/// </summary>
-	public class Nikon3MakernoteReader : IFDReader {
-#region Constructors
+	public class Nikon3MakernoteReader : IFDReader
+	{
+		#region Constructors
 
 		/// <summary>
 		///    Constructor. Reads an IFD from given file, using the given endianness.
@@ -60,14 +61,14 @@ namespace TagLib.IFD.Makernotes
 		/// 	A <see cref="System.UInt32"/> value with maximal possible offset. This is to limit
 		///     the size of the possible data;
 		/// </param>
-		public Nikon3MakernoteReader (File file, bool is_bigendian, IFDStructure structure, long base_offset, uint ifd_offset, uint max_offset) :
-			base (file, is_bigendian, structure, base_offset, ifd_offset, max_offset)
+		public Nikon3MakernoteReader(File file, bool is_bigendian, IFDStructure structure, long base_offset, uint ifd_offset, uint max_offset)
+			: base(file, is_bigendian, structure, base_offset, ifd_offset, max_offset)
 		{
 		}
 
-#endregion
+		#endregion
 
-#region Protected Methods
+		#region Protected Methods
 
 		/// <summary>
 		///    Try to parse the given IFD entry, used to discover format-specific entries.
@@ -92,9 +93,10 @@ namespace TagLib.IFD.Makernotes
 		///    A <see cref="IFDEntry"/> with the given parameters, or null if none was parsed, after
 		///    which the normal TIFF parsing is used.
 		/// </returns>
-		protected override IFDEntry ParseIFDEntry (ushort tag, ushort type, uint count, long base_offset, uint offset)
+		protected override IFDEntry ParseIFDEntry(ushort tag, ushort type, uint count, long base_offset, uint offset)
 		{
-			if (tag == (ushort) Nikon3MakerNoteEntryTag.Preview) {
+			if (tag == (ushort) Nikon3MakerNoteEntryTag.Preview)
+			{
 				// SubIFD with Preview Image
 				// The entry itself is usually a long
 				// TODO: handle JPEGInterchangeFormat and JPEGInterchangeFormatLength correctly
@@ -108,16 +110,15 @@ namespace TagLib.IFD.Makernotes
 
 				type = (ushort) IFDEntryType.IFD;
 
-				IFDStructure ifd_structure = new IFDStructure ();
-				IFDReader reader = CreateSubIFDReader (file, is_bigendian, ifd_structure, base_offset, offset, max_offset);
+				IFDStructure ifd_structure = new IFDStructure();
+				IFDReader reader = CreateSubIFDReader(file, is_bigendian, ifd_structure, base_offset, offset, max_offset);
 
-				reader.Read (1);
-				return new SubIFDEntry (tag, type, (uint) ifd_structure.Directories.Length, ifd_structure);
+				reader.Read(1);
+				return new SubIFDEntry(tag, type, (uint) ifd_structure.Directories.Length, ifd_structure);
 			}
-			return base.ParseIFDEntry (tag, type, count, base_offset, offset);
+			return base.ParseIFDEntry(tag, type, count, base_offset, offset);
 		}
 
-#endregion
-
+		#endregion
 	}
 }

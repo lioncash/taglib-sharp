@@ -32,8 +32,7 @@ namespace TagLib.IFD.Entries
 	/// </summary>
 	public class StripOffsetsIFDEntry : ArrayIFDEntry<uint>
 	{
-
-#region Private Fields
+		#region Private Fields
 
 		/// <value>
 		///    Store the strip length to read them before writing.
@@ -45,9 +44,9 @@ namespace TagLib.IFD.Entries
 		/// </value>
 		private File file;
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructor.
@@ -65,19 +64,19 @@ namespace TagLib.IFD.Entries
 		/// <param name="file">
 		///    The file from which the strips will be read.
 		/// </param>
-		public StripOffsetsIFDEntry (ushort tag, uint[] values, uint[] byte_counts, File file) : base (tag)
+		public StripOffsetsIFDEntry(ushort tag, uint[] values, uint[] byte_counts, File file) : base(tag)
 		{
 			Values = values;
 			this.byte_counts = byte_counts;
 			this.file = file;
 
 			if (values.Length != byte_counts.Length)
-				throw new Exception ("strip offsets and strip byte counts do not have the same length");
+				throw new Exception("strip offsets and strip byte counts do not have the same length");
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Renders the current instance to a <see cref="ByteVector"/>
@@ -98,28 +97,29 @@ namespace TagLib.IFD.Entries
 		/// <returns>
 		///    A <see cref="ByteVector"/> with the rendered data.
 		/// </returns>
-		public override ByteVector Render (bool is_bigendian, uint offset, out ushort type, out uint count)
+		public override ByteVector Render(bool is_bigendian, uint offset, out ushort type, out uint count)
 		{
 			// The StripOffsets are an array of offsets, where the image data can be found.
 			// We store the offsets and behind the offsets the image data is stored. Therfore,
 			// the ByteVector data first collects the image data and the offsets itself are
 			// collected by offset_data. Then both are concatenated.
-			ByteVector data = new ByteVector ();
-			ByteVector offset_data = new ByteVector ();
+			ByteVector data = new ByteVector();
+			ByteVector offset_data = new ByteVector();
 
 			// every offset needs 4 byte, we need to reserve the bytes.
-			uint data_offset = offset + (uint) (4 * Values.Length);
+			uint data_offset = offset + (uint) (4*Values.Length);
 
-			for (int i = 0; i < Values.Length; i++) {
+			for (int i = 0; i < Values.Length; i++)
+			{
 				uint new_offset = (uint) (data_offset + data.Count);
 
-				file.Seek (Values[i], SeekOrigin.Begin);
-				data.Add (file.ReadBlock ((int) byte_counts[i]));
+				file.Seek(Values[i], SeekOrigin.Begin);
+				data.Add(file.ReadBlock((int) byte_counts[i]));
 
 				// update strip offset data to new offset
 				Values[i] = new_offset;
 
-				offset_data.Add (ByteVector.FromUInt (new_offset, is_bigendian));
+				offset_data.Add(ByteVector.FromUInt(new_offset, is_bigendian));
 			}
 
 			// If the StripOffsets only consists of one offset, this doesn't work, because this offset
@@ -130,12 +130,12 @@ namespace TagLib.IFD.Entries
 			// consists at least of 4 bytes, which is probably the case every time, but to be sure ...)
 			// However, the strip offset in the array must also be adjusted, if the offset_data is ignored.
 			if (Values.Length > 1)
-				data.Insert (0, offset_data);
+				data.Insert(0, offset_data);
 			else
 				Values[0] = offset;
 
 			while (data.Count < 4)
-				data.Add (0x00);
+				data.Add(0x00);
 
 			// the entry is a single long entry where the value is an offset to the data
 			// the offset is automatically updated by the renderer.
@@ -145,7 +145,6 @@ namespace TagLib.IFD.Entries
 			return data;
 		}
 
-#endregion
-
+		#endregion
 	}
 }

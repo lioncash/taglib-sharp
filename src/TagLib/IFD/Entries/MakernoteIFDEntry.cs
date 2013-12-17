@@ -31,8 +31,8 @@ namespace TagLib.IFD.Entries
 	///    The information of the makernote types is from:
 	///    http://exiv2.org/makernote.html
 	/// </summary>
-	public enum MakernoteType {
-
+	public enum MakernoteType
+	{
 		/// <summary>
 		///    The manufactor could not be determined
 		/// </summary>
@@ -126,8 +126,7 @@ namespace TagLib.IFD.Entries
 	/// </remarks>
 	public class MakernoteIFDEntry : IFDEntry
 	{
-
-#region Private Fields
+		#region Private Fields
 
 		/// <value>
 		///    Stores the prefix of the makernote
@@ -152,9 +151,9 @@ namespace TagLib.IFD.Entries
 		/// </value>
 		private bool? is_bigendian;
 
-#endregion
+		#endregion
 
-#region Properties
+		#region Properties
 
 		/// <value>
 		///    The ID of the tag, the current instance belongs to
@@ -172,9 +171,9 @@ namespace TagLib.IFD.Entries
 		/// </value>
 		public IFDStructure Structure { get; private set; }
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Construcor.
@@ -234,12 +233,14 @@ namespace TagLib.IFD.Entries
 		/// <param name="makernote_type">
 		///    A <see cref="MakernoteType"/> with the type of the makernote.
 		/// </param>
-		public MakernoteIFDEntry (ushort tag, IFDStructure structure, MakernoteType makernote_type)
-			: this (tag, structure, makernote_type, null, 0, true, null) {}
+		public MakernoteIFDEntry(ushort tag, IFDStructure structure, MakernoteType makernote_type)
+			: this(tag, structure, makernote_type, null, 0, true, null)
+		{
+		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Renders the current instance to a <see cref="ByteVector"/>
@@ -273,7 +274,6 @@ namespace TagLib.IFD.Entries
 			return data;
 		}
 
-#endregion
-
+		#endregion
 	}
 }

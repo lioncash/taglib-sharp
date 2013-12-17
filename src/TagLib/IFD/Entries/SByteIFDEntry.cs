@@ -30,8 +30,7 @@ namespace TagLib.IFD.Entries
 	/// </summary>
 	public class SByteIFDEntry : IFDEntry
 	{
-
-#region Properties
+		#region Properties
 
 		/// <value>
 		///    The ID of the tag, the current instance belongs to
@@ -43,9 +42,9 @@ namespace TagLib.IFD.Entries
 		/// </value>
 		public sbyte Value { get; private set; }
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Construcor.
@@ -57,15 +56,15 @@ namespace TagLib.IFD.Entries
 		/// <param name="value">
 		///    A <see cref="System.SByte"/> to be stored
 		/// </param>
-		public SByteIFDEntry (ushort tag, sbyte value)
+		public SByteIFDEntry(ushort tag, sbyte value)
 		{
 			Tag = tag;
 			Value = value;
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Renders the current instance to a <see cref="ByteVector"/>
@@ -86,7 +85,7 @@ namespace TagLib.IFD.Entries
 		/// <returns>
 		///    A <see cref="ByteVector"/> with the rendered data.
 		/// </returns>
-		public ByteVector Render (bool is_bigendian, uint offset, out ushort type, out uint count)
+		public ByteVector Render(bool is_bigendian, uint offset, out ushort type, out uint count)
 		{
 			type = (ushort) IFDEntryType.SByte;
 			count = 1;
@@ -94,7 +93,6 @@ namespace TagLib.IFD.Entries
 			return (byte) Value;
 		}
 
-#endregion
-
+		#endregion
 	}
 }

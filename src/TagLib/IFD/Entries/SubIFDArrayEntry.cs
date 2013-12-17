@@ -31,21 +31,21 @@ namespace TagLib.IFD.Entries
 	/// </summary>
 	public class SubIFDArrayEntry : IFDEntry
 	{
+		#region Public Properties
 
 		/// <value>
 		///    The ID of the tag, the current instance belongs to
 		/// </value>
-		public ushort Tag {
-			get;
-			set;
-		}
+		public ushort Tag { get; set; }
 
 		/// <value>
 		///    The structures of the IFDs to which this entry points.
 		/// </value>
 		public IFDStructure [] Entries { get; private set; }
 
-#region Constructors
+		#endregion
+
+		#region Constructors
 
 		/// <summary>
 		///    Constructor.
@@ -63,9 +63,9 @@ namespace TagLib.IFD.Entries
 			Entries = entries.ToArray ();
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Renders the current instance to a <see cref="ByteVector"/>
@@ -86,12 +86,11 @@ namespace TagLib.IFD.Entries
 		/// <returns>
 		///    A <see cref="ByteVector"/> with the rendered data.
 		/// </returns>
-		public ByteVector Render (bool is_bigendian, uint offset, out ushort type, out uint count)
+		public ByteVector Render(bool is_bigendian, uint offset, out ushort type, out uint count)
 		{
-			throw new NotImplementedException ("Not implemented yet!");
+			throw new NotImplementedException("Not implemented yet!");
 		}
 
-#endregion
-
+		#endregion
 	}
 }

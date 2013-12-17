@@ -30,8 +30,7 @@ namespace TagLib.IFD.Entries
 	/// </summary>
 	public class LongArrayIFDEntry : ArrayIFDEntry<uint>
 	{
-
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Construcor.
@@ -48,9 +47,9 @@ namespace TagLib.IFD.Entries
 			Values = values;
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Renders the current instance to a <see cref="ByteVector"/>
@@ -83,7 +82,6 @@ namespace TagLib.IFD.Entries
 			return data;
 		}
 
-#endregion
-
+		#endregion
 	}
 }

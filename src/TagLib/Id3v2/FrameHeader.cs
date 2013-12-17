@@ -29,7 +29,8 @@
 
 using System;
 
-namespace TagLib.Id3v2 {
+namespace TagLib.Id3v2
+{
 	/// <summary>
 	///    Indicates the flags applied to a <see cref="FrameHeader" />
 	///    object.
@@ -110,11 +111,10 @@ namespace TagLib.Id3v2 {
 		private FrameFlags flags;
 		
 		#endregion
-		
-		
-		
+
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="FrameHeader" /> by reading it from raw header data
@@ -142,86 +142,81 @@ namespace TagLib.Id3v2 {
 		///    frame identifier or <paramref name="version" /> is less
 		///    than 2 or more than 4.
 		/// </exception>
-		public FrameHeader (ByteVector data, byte version)
+		public FrameHeader(ByteVector data, byte version)
 		{
 			if (data == null)
-				throw new ArgumentNullException ("data");
-			
+				throw new ArgumentNullException("data");
+
 			flags = 0;
 			frame_size = 0;
-			
+
 			if (version < 2 || version > 4)
-				throw new CorruptFileException (
-					"Unsupported tag version.");
-			
+				throw new CorruptFileException("Unsupported tag version.");
+
 			if (data.Count < (version == 2 ? 3 : 4))
-				throw new CorruptFileException (
-					"Data must contain at least a frame ID.");
-			
+				throw new CorruptFileException("Data must contain at least a frame ID.");
+
 			switch (version)
 			{
-			case 2:
-				// Set the frame ID -- the first three bytes
-				frame_id = ConvertId (data.Mid (0, 3), version,
-					false);
-			
-				// If the full header information was not passed
-				// in, do not continue to the steps to parse the
-				// frame size and flags.
-				if (data.Count < 6)
+				case 2:
+					// Set the frame ID -- the first three bytes
+					frame_id = ConvertId(data.Mid(0, 3), version,
+						false);
+
+					// If the full header information was not passed
+					// in, do not continue to the steps to parse the
+					// frame size and flags.
+					if (data.Count < 6)
+						return;
+
+					frame_size = data.Mid(3, 3).ToUInt();
 					return;
-				
-				frame_size = data.Mid (3, 3).ToUInt ();
-				return;
-			
-			case 3:
-				// Set the frame ID -- the first four bytes
-				frame_id = ConvertId (data.Mid (0, 4), version,
-					false);
-				
-				// If the full header information was not passed
-				// in, do not continue to the steps to parse the
-				// frame size and flags.
-				if (data.Count < 10)
+
+				case 3:
+					// Set the frame ID -- the first four bytes
+					frame_id = ConvertId(data.Mid(0, 4), version,
+						false);
+
+					// If the full header information was not passed
+					// in, do not continue to the steps to parse the
+					// frame size and flags.
+					if (data.Count < 10)
+						return;
+
+					// Store the flags internally as version 2.4.
+					frame_size = data.Mid(4, 4).ToUInt();
+					flags = (FrameFlags) (
+						((data[8] << 7) & 0x7000) |
+						((data[9] >> 4) & 0x000C) |
+						((data[9] << 1) & 0x0040));
+
 					return;
-				
-				// Store the flags internally as version 2.4.
-				frame_size = data.Mid (4, 4).ToUInt ();
-				flags = (FrameFlags) (
-					((data [8] << 7) & 0x7000) |
-					((data [9] >> 4) & 0x000C) |
-					((data [9] << 1) & 0x0040));
-				
-				return;
-			
-			case 4:
-				// Set the frame ID -- the first four bytes
-				frame_id = new ReadOnlyByteVector (
-					data.Mid (0, 4));
-				
-				// If the full header information was not passed
-				// in, do not continue to the steps to parse the
-				// frame size and flags.
-				if (data.Count < 10)
+
+				case 4:
+					// Set the frame ID -- the first four bytes
+					frame_id = new ReadOnlyByteVector(data.Mid(0, 4));
+
+					// If the full header information was not passed
+					// in, do not continue to the steps to parse the
+					// frame size and flags.
+					if (data.Count < 10)
+						return;
+
+					frame_size = SynchData.ToUInt(data.Mid(4, 4));
+					flags = (FrameFlags) data.Mid(8, 2).ToUShort();
+
 					return;
-				
-				frame_size = SynchData.ToUInt (data.Mid (4, 4));
-				flags = (FrameFlags) data.Mid (8, 2).ToUShort ();
-				
-				return;
-			
-			default:
-				throw new CorruptFileException (
-					"Unsupported tag version.");
+
+				default:
+					throw new CorruptFileException("Unsupported tag version.");
 			}
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets and sets the identifier of the frame described by
 		///    the current instance.
@@ -234,19 +229,20 @@ namespace TagLib.Id3v2 {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="value" /> is <see langword="null" />.
 		/// </exception>
-		public ReadOnlyByteVector FrameId {
-			get {return frame_id;}
-			set {
+		public ReadOnlyByteVector FrameId
+		{
+			get { return frame_id; }
+			set
+			{
 				if (value == null)
-					throw new ArgumentNullException (
-						"value");
-				
-				frame_id = value.Count == 4 ?
-					value : new ReadOnlyByteVector (
-						value.Mid (0, 4));
+					throw new ArgumentNullException("value");
+
+				frame_id = value.Count == 4
+					? value
+					: new ReadOnlyByteVector(value.Mid(0, 4));
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the size of the frame described by the
 		///    current instance, minus the header.
@@ -255,11 +251,12 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="uint" /> value containing the size of the
 		///    frame described by the current instance.
 		/// </value>
-		public uint FrameSize {
-			get {return frame_size;}
-			set {frame_size = value;}
+		public uint FrameSize
+		{
+			get { return frame_size; }
+			set { frame_size = value; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the flags applied to the current instance.
 		/// </summary>
@@ -272,23 +269,23 @@ namespace TagLib.Id3v2 {
 		///    or encryption, neither of which are supported by the
 		///    library.
 		/// </exception>
-		public FrameFlags Flags {
-			get {return flags;}
-			set {
-				if ((value & (FrameFlags.Compression |
-					FrameFlags.Encryption)) != 0)
-					throw new ArgumentException (
-						"Encryption and compression are not supported.",
-						"value");
-				
+		public FrameFlags Flags
+		{
+			get { return flags; }
+			set
+			{
+				if ((value & (FrameFlags.Compression | FrameFlags.Encryption)) != 0)
+					throw new ArgumentException("Encryption and compression are not supported.", "value");
+
 				flags = value;
 			}
 		}
-		
+
 		#endregion
-		
+
+
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Renders the current instance, encoded in a specified
 		///    ID3v2 version.
@@ -305,47 +302,43 @@ namespace TagLib.Id3v2 {
 		///    The version specified in the current instance is
 		///    unsupported.
 		/// </exception>
-		public ByteVector Render (byte version) {
-			ByteVector data = new ByteVector ();
-			ByteVector id = ConvertId (frame_id, version, true);
-			
+		public ByteVector Render(byte version)
+		{
+			ByteVector data = new ByteVector();
+			ByteVector id = ConvertId(frame_id, version, true);
+
 			if (id == null)
-				throw new NotImplementedException ();
-			
+				throw new NotImplementedException();
+
 			switch (version)
 			{
-			case 2:
-				data.Add (id);
-				data.Add (ByteVector.FromUInt (frame_size)
-					.Mid (1, 3));
-				
-				return data;
-			
-			case 3:
-				ushort new_flags = (ushort) (
-					(((ushort)flags << 1) & 0xE000) |
-					(((ushort)flags << 4) & 0x00C0) |
-					(((ushort)flags >> 1) & 0x0020));
-				
-				data.Add (id);
-				data.Add (ByteVector.FromUInt (frame_size));
-				data.Add (ByteVector.FromUShort (new_flags));
-				
-				return data;
-			
-			case 4:
-				data.Add (id);
-				data.Add (SynchData.FromUInt (frame_size));
-				data.Add (ByteVector.FromUShort ((ushort) flags));
-				
-				return data;
-			
-			default:
-				throw new NotImplementedException (
-					"Unsupported tag version.");
+				case 2:
+					data.Add(id);
+					data.Add(ByteVector.FromUInt(frame_size).Mid(1, 3));
+					return data;
+
+				case 3:
+					ushort new_flags = (ushort) (
+						(((ushort) flags << 1) & 0xE000) |
+						(((ushort) flags << 4) & 0x00C0) |
+						(((ushort) flags >> 1) & 0x0020));
+
+					data.Add(id);
+					data.Add(ByteVector.FromUInt(frame_size));
+					data.Add(ByteVector.FromUShort(new_flags));
+					return data;
+
+				case 4:
+					data.Add(id);
+					data.Add(SynchData.FromUInt(frame_size));
+					data.Add(ByteVector.FromUShort((ushort) flags));
+					return data;
+
+				default:
+					throw new NotImplementedException("Unsupported tag version.");
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the size of a header for a specified ID3v2 version.
 		/// </summary>
@@ -353,136 +346,134 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="byte" /> value specifying the version of
 		///    ID3v2 to get the size for.
 		/// </param>
-		public static uint Size (byte version)
+		public static uint Size(byte version)
 		{
 			return (uint) (version < 3 ? 6 : 10);
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
 		#region Private Methods
-		
-		private static ReadOnlyByteVector ConvertId (ByteVector id,
-		                                             byte version,
-		                                             bool toVersion)
+
+		private static ReadOnlyByteVector ConvertId(ByteVector id, byte version, bool toVersion)
 		{
-			if (version >= 4) {
-				ReadOnlyByteVector outid =
-					id as ReadOnlyByteVector;
-				
-				return outid != null ?
-					outid : new ReadOnlyByteVector (id);
+			if (version >= 4)
+			{
+				ReadOnlyByteVector outid = id as ReadOnlyByteVector;
+
+				return outid != null ? outid : new ReadOnlyByteVector(id);
 			}
-			
+
 			if (id == null || version < 2)
 				return null;
-			
-			if (!toVersion && (id == FrameType.EQUA ||
-				id == FrameType.RVAD || id == FrameType.TRDA ||
-				id == FrameType.TSIZ))
+
+			if (!toVersion && (id == FrameType.EQUA || id == FrameType.RVAD || id == FrameType.TRDA ||  id == FrameType.TSIZ))
 				return null;
-			
+
 			if (version == 2)
-				for (int i = 0; i < version2_frames.GetLength (0); i ++) {
-					if (!version2_frames [i,
-						toVersion ? 1 : 0].Equals (id))
+			{
+				for (int i = 0; i < version2_frames.GetLength(0); i ++)
+				{
+					if (!version2_frames[i,
+						toVersion ? 1 : 0].Equals(id))
 						continue;
-					
-					return version2_frames [i,
+
+					return version2_frames[i,
 						toVersion ? 0 : 1];
 				}
-			
+			}
+
 			if (version == 3)
-				for (int i = 0; i < version3_frames.GetLength (0); i ++) {
-					if (!version3_frames [i,
-						toVersion ? 1 : 0].Equals (id))
+			{
+				for (int i = 0; i < version3_frames.GetLength(0); i ++)
+				{
+					if (!version3_frames[i, toVersion ? 1 : 0].Equals(id))
 						continue;
-					
-					return version3_frames [i,
+
+					return version3_frames[i,
 						toVersion ? 0 : 1];
 				}
-			
+			}
+
 			if ((id.Count != 4 && version > 2) ||
-				(id.Count != 3 && version == 2))
+			    (id.Count != 3 && version == 2))
 				return null;
-			
-			return id is ReadOnlyByteVector ?
-				id as ReadOnlyByteVector :
-				new ReadOnlyByteVector (id);
+
+			return id is ReadOnlyByteVector
+				? id as ReadOnlyByteVector
+				: new ReadOnlyByteVector(id);
 		}
-		
+
 		private static readonly ReadOnlyByteVector [,] version2_frames =
-			new ReadOnlyByteVector [59,2] {
-				{ "BUF", "RBUF" },
-				{ "CNT", "PCNT" },
-				{ "COM", "COMM" },
-				{ "CRA", "AENC" },
-				{ "ETC", "ETCO" },
-				{ "GEO", "GEOB" },
-				{ "IPL", "TIPL" },
-				{ "MCI", "MCDI" },
-				{ "MLL", "MLLT" },
-				{ "PIC", "APIC" },
-				{ "POP", "POPM" },
-				{ "REV", "RVRB" },
-				{ "SLT", "SYLT" },
-				{ "STC", "SYTC" },
-				{ "TAL", "TALB" },
-				{ "TBP", "TBPM" },
-				{ "TCM", "TCOM" },
-				{ "TCO", "TCON" },
-				{ "TCP", "TCMP" },
-				{ "TCR", "TCOP" },
-				{ "TDA", "TDAT" },
-				{ "TIM", "TIME" },
-				{ "TDY", "TDLY" },
-				{ "TEN", "TENC" },
-				{ "TFT", "TFLT" },
-				{ "TKE", "TKEY" },
-				{ "TLA", "TLAN" },
-				{ "TLE", "TLEN" },
-				{ "TMT", "TMED" },
-				{ "TOA", "TOAL" },
-				{ "TOF", "TOFN" },
-				{ "TOL", "TOLY" },
-				{ "TOR", "TDOR" },
-				{ "TOT", "TOAL" },
-				{ "TP1", "TPE1" },
-				{ "TP2", "TPE2" },
-				{ "TP3", "TPE3" },
-				{ "TP4", "TPE4" },
-				{ "TPA", "TPOS" },
-				{ "TPB", "TPUB" },
-				{ "TRC", "TSRC" },
-				{ "TRK", "TRCK" },
-				{ "TSS", "TSSE" },
-				{ "TT1", "TIT1" },
-				{ "TT2", "TIT2" },
-				{ "TT3", "TIT3" },
-				{ "TXT", "TOLY" },
-				{ "TXX", "TXXX" },
-				{ "TYE", "TDRC" },
-				{ "UFI", "UFID" },
-				{ "ULT", "USLT" },
-				{ "WAF", "WOAF" },
-				{ "WAR", "WOAR" },
-				{ "WAS", "WOAS" },
-				{ "WCM", "WCOM" },
-				{ "WCP", "WCOP" },
-				{ "WPB", "WPUB" },
-				{ "WXX", "WXXX" },
-				{ "XRV", "RVA2" }
-			};
+		{
+			{ "BUF", "RBUF" },
+			{ "CNT", "PCNT" },
+			{ "COM", "COMM" },
+			{ "CRA", "AENC" },
+			{ "ETC", "ETCO" },
+			{ "GEO", "GEOB" },
+			{ "IPL", "TIPL" },
+			{ "MCI", "MCDI" },
+			{ "MLL", "MLLT" },
+			{ "PIC", "APIC" },
+			{ "POP", "POPM" },
+			{ "REV", "RVRB" },
+			{ "SLT", "SYLT" },
+			{ "STC", "SYTC" },
+			{ "TAL", "TALB" },
+			{ "TBP", "TBPM" },
+			{ "TCM", "TCOM" },
+			{ "TCO", "TCON" },
+			{ "TCP", "TCMP" },
+			{ "TCR", "TCOP" },
+			{ "TDA", "TDAT" },
+			{ "TIM", "TIME" },
+			{ "TDY", "TDLY" },
+			{ "TEN", "TENC" },
+			{ "TFT", "TFLT" },
+			{ "TKE", "TKEY" },
+			{ "TLA", "TLAN" },
+			{ "TLE", "TLEN" },
+			{ "TMT", "TMED" },
+			{ "TOA", "TOAL" },
+			{ "TOF", "TOFN" },
+			{ "TOL", "TOLY" },
+			{ "TOR", "TDOR" },
+			{ "TOT", "TOAL" },
+			{ "TP1", "TPE1" },
+			{ "TP2", "TPE2" },
+			{ "TP3", "TPE3" },
+			{ "TP4", "TPE4" },
+			{ "TPA", "TPOS" },
+			{ "TPB", "TPUB" },
+			{ "TRC", "TSRC" },
+			{ "TRK", "TRCK" },
+			{ "TSS", "TSSE" },
+			{ "TT1", "TIT1" },
+			{ "TT2", "TIT2" },
+			{ "TT3", "TIT3" },
+			{ "TXT", "TOLY" },
+			{ "TXX", "TXXX" },
+			{ "TYE", "TDRC" },
+			{ "UFI", "UFID" },
+			{ "ULT", "USLT" },
+			{ "WAF", "WOAF" },
+			{ "WAR", "WOAR" },
+			{ "WAS", "WOAS" },
+			{ "WCM", "WCOM" },
+			{ "WCP", "WCOP" },
+			{ "WPB", "WPUB" },
+			{ "WXX", "WXXX" },
+			{ "XRV", "RVA2" }
+		};
 		
 		private static readonly ReadOnlyByteVector [,] version3_frames =
-			new ReadOnlyByteVector [3,2] {
-				{ "TORY", "TDOR" },
-				{ "TYER", "TDRC" },
-				{ "XRVA", "RVA2" }
-
-			};
+		{
+			{ "TORY", "TDOR" },
+			{ "TYER", "TDRC" },
+			{ "XRVA", "RVA2" }
+		};
 		
 		#endregion
 	}

@@ -30,7 +30,6 @@ namespace TagLib.IFD.Tags
 	/// </summary>
 	public enum NikonPictureControlEntryTag : ushort
 	{
-
 		/// <summary>
 		///    Version. (Hex: 0X0000)
 		/// </summary>
@@ -95,6 +94,5 @@ namespace TagLib.IFD.Tags
 		///    Toning saturation. (Hex: 0X0039)
 		/// </summary>
 		ToningSaturation                                    = 57,
-
 	}
 }

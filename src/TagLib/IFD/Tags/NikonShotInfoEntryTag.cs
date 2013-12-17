@@ -75,6 +75,5 @@ namespace TagLib.IFD.Tags
 		///    Shutter count. (Hex: 0X0276)
 		/// </summary>
 		ShutterCount                                        = 630,
-
 	}
 }

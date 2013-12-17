@@ -30,8 +30,7 @@ namespace TagLib.IFD.Entries
 	/// </summary>
 	public class SubIFDEntry : IFDEntry
 	{
-
-#region Properties
+		#region Properties
 
 		/// <value>
 		///    The ID of the tag, the current instance belongs to
@@ -57,8 +56,10 @@ namespace TagLib.IFD.Entries
 		/// <value>
 		///    The number of entries in the entire IFD.
 		/// </value>
-		public int ChildCount {
-			get {
+		public int ChildCount
+		{
+			get
+			{
 				int sum = 0;
 				foreach (var directory in Structure.Directories)
 					sum += directory.Count;
@@ -82,7 +83,7 @@ namespace TagLib.IFD.Entries
 		/// <param name="structure">
 		///    A <see cref="IFDStructure"/> to be stored
 		/// </param>
-		public SubIFDEntry (ushort tag, ushort type, uint count, IFDStructure structure)
+		public SubIFDEntry(ushort tag, ushort type, uint count, IFDStructure structure)
 		{
 			Tag = tag;
 			Type = type;
@@ -90,9 +91,9 @@ namespace TagLib.IFD.Entries
 			Structure = structure;
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Renders the current instance to a <see cref="ByteVector"/>
@@ -113,16 +114,15 @@ namespace TagLib.IFD.Entries
 		/// <returns>
 		///    A <see cref="ByteVector"/> with the rendered data.
 		/// </returns>
-		public ByteVector Render (bool is_bigendian, uint offset, out ushort type, out uint count)
+		public ByteVector Render(bool is_bigendian, uint offset, out ushort type, out uint count)
 		{
 			type = (ushort) Type;
 			count = 1;
 
 			count = Count;
-			return new IFDRenderer (is_bigendian, Structure, offset).Render ();
+			return new IFDRenderer(is_bigendian, Structure, offset).Render();
 		}
 
-#endregion
-
+		#endregion
 	}
 }

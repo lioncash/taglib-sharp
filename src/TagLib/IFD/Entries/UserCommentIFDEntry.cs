@@ -32,8 +32,7 @@ namespace TagLib.IFD.Entries
 	/// </summary>
 	public class UserCommentIFDEntry : IFDEntry
 	{
-
-#region Constant Values
+		#region Constant Values
 
 		/// <summary>
 		///   Marker for an ASCII-encoded UserComment tag.
@@ -60,9 +59,9 @@ namespace TagLib.IFD.Entries
 		/// </summary>
 		public static readonly ByteVector COMMENT_UNDEFINED_CODE = new byte[] {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
-#endregion
+		#endregion
 
-#region Properties
+		#region Properties
 
 		/// <value>
 		///    The ID of the tag, the current instance belongs to
@@ -74,9 +73,9 @@ namespace TagLib.IFD.Entries
 		/// </value>
 		public string Value { get; private set; }
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Construcor.
@@ -88,7 +87,7 @@ namespace TagLib.IFD.Entries
 		/// <param name="value">
 		///    A <see cref="string"/> to be stored
 		/// </param>
-		public UserCommentIFDEntry (ushort tag, string value)
+		public UserCommentIFDEntry(ushort tag, string value)
 		{
 			Tag = tag;
 			Value = value;
@@ -107,42 +106,50 @@ namespace TagLib.IFD.Entries
 		/// <param name="file">
 		///    The file that's currently being parsed, used for reporting corruptions.
 		/// </param>
-		public UserCommentIFDEntry (ushort tag, ByteVector data, TagLib.File file)
+		public UserCommentIFDEntry(ushort tag, ByteVector data, TagLib.File file)
 		{
 			Tag = tag;
 
-			if (data.StartsWith (COMMENT_ASCII_CODE)) {
-				Value = TrimNull (data.ToString (StringType.Latin1, COMMENT_ASCII_CODE.Count, data.Count - COMMENT_ASCII_CODE.Count));
+			if (data.StartsWith(COMMENT_ASCII_CODE))
+			{
+				Value = TrimNull(data.ToString(StringType.Latin1, COMMENT_ASCII_CODE.Count, data.Count - COMMENT_ASCII_CODE.Count));
 				return;
 			}
 
-			if (data.StartsWith (COMMENT_UNICODE_CODE)) {
-				Value = TrimNull (data.ToString (StringType.UTF8, COMMENT_UNICODE_CODE.Count, data.Count - COMMENT_UNICODE_CODE.Count));
+			if (data.StartsWith(COMMENT_UNICODE_CODE))
+			{
+				Value = TrimNull(data.ToString(StringType.UTF8, COMMENT_UNICODE_CODE.Count, data.Count - COMMENT_UNICODE_CODE.Count));
 				return;
 			}
 
-			var trimmed = data.ToString ().Trim ();
-			if (trimmed.Length == 0 || trimmed == "\0") {
+			var trimmed = data.ToString().Trim();
+			if (trimmed.Length == 0 || trimmed == "\0")
+			{
 				Value = String.Empty;
 				return;
 			}
 
 			// Some programs like e.g. CanonZoomBrowser inserts just the first 0x00-byte
 			// followed by 7-bytes of trash.
-			if (data.StartsWith ((byte) 0x00) && data.Count >= 8) {
+			if (data.StartsWith((byte) 0x00) && data.Count >= 8)
+			{
 
 				// And CanonZoomBrowser fills some trailing bytes of the comment field
 				// with '\0'. So we return only the characters before the first '\0'.
-				int term = data.Find ("\0", 8);
-				if (term != -1) {
-					Value = data.ToString (StringType.Latin1, 8, term - 8);
-				} else {
-					Value = data.ToString (StringType.Latin1, 8, data.Count - 8);
+				int term = data.Find("\0", 8);
+				if (term != -1)
+				{
+					Value = data.ToString(StringType.Latin1, 8, term - 8);
+				}
+				else
+				{
+					Value = data.ToString(StringType.Latin1, 8, data.Count - 8);
 				}
 				return;
 			}
 
-			if (data.Data.Length == 0) {
+			if (data.Data.Length == 0)
+			{
 				Value = String.Empty;
 				return;
 			}
@@ -152,26 +159,27 @@ namespace TagLib.IFD.Entries
 			int length = data.Count - offset;
 
 			// Corruption that starts with a Unicode header and a count byte.
-			if (data.StartsWith (COMMENT_BAD_UNICODE_CODE)) {
+			if (data.StartsWith(COMMENT_BAD_UNICODE_CODE))
+			{
 				offset = COMMENT_BAD_UNICODE_CODE.Count;
 				length = data.Count - offset;
 			}
 
-			file.MarkAsCorrupt ("UserComment with other encoding than Latin1 or Unicode");
-			Value = TrimNull (data.ToString (StringType.UTF8, offset, length));
+			file.MarkAsCorrupt("UserComment with other encoding than Latin1 or Unicode");
+			Value = TrimNull(data.ToString(StringType.UTF8, offset, length));
 		}
 
-		private string TrimNull (string value)
+		private string TrimNull(string value)
 		{
-			int term = value.IndexOf ('\0');
+			int term = value.IndexOf('\0');
 			if (term > -1)
-				value = value.Substring (0, term);
+				value = value.Substring(0, term);
 			return value;
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Renders the current instance to a <see cref="ByteVector"/>
@@ -192,20 +200,19 @@ namespace TagLib.IFD.Entries
 		/// <returns>
 		///    A <see cref="ByteVector"/> with the rendered data.
 		/// </returns>
-		public ByteVector Render (bool is_bigendian, uint offset, out ushort type, out uint count)
+		public ByteVector Render(bool is_bigendian, uint offset, out ushort type, out uint count)
 		{
 			type = (ushort) IFDEntryType.Undefined;
 
-			ByteVector data = new ByteVector ();
-			data.Add (COMMENT_UNICODE_CODE);
-			data.Add (ByteVector.FromString (Value, StringType.UTF8));
+			ByteVector data = new ByteVector();
+			data.Add(COMMENT_UNICODE_CODE);
+			data.Add(ByteVector.FromString(Value, StringType.UTF8));
 
 			count = (uint) data.Count;
 
 			return data;
 		}
 
-#endregion
-
+		#endregion
 	}
 }

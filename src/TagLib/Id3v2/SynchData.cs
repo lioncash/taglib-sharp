@@ -28,7 +28,8 @@
 
 using System;
 
-namespace TagLib.Id3v2 {
+namespace TagLib.Id3v2
+{
 	/// <summary>
 	///    This static class provides support for encoding and decoding
 	///    unsynchronized data and numbers.
@@ -56,21 +57,21 @@ namespace TagLib.Id3v2 {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="data" /> is <see langword="null" />.
 		/// </exception>
-		public static uint ToUInt (ByteVector data)
+		public static uint ToUInt(ByteVector data)
 		{
 			if (data == null)
-				throw new ArgumentNullException ("data");
-			
+				throw new ArgumentNullException("data");
+
 			uint sum = 0;
 			int last = data.Count > 4 ? 3 : data.Count - 1;
-			
-			for(int i = 0; i <= last; i++)
-				sum |= (uint) (data [i] & 0x7f)
-					<< ((last - i) * 7);
-			
+
+			for (int i = 0; i <= last; i++)
+				sum |= (uint) (data[i] & 0x7f)
+				       << ((last - i)*7);
+
 			return sum;
 		}
-		
+
 		/// <summary>
 		///    Encodes a <see cref="uint" /> value as synchronized
 		///    integer data.
@@ -86,20 +87,19 @@ namespace TagLib.Id3v2 {
 		/// <exception cref="ArgumentOutOfRangeException">
 		///    <paramref name="value" /> is greater than 268435455.
 		/// </exception>
-		public static ByteVector FromUInt (uint value)
+		public static ByteVector FromUInt(uint value)
 		{
 			if ((value >> 28) != 0)
-				throw new ArgumentOutOfRangeException ("value",
-					"value must be less than 268435456.");
-			
-			ByteVector v = new ByteVector (4, 0);
-			
+				throw new ArgumentOutOfRangeException("value", "value must be less than 268435456.");
+
+			ByteVector v = new ByteVector(4, 0);
+
 			for (int i = 0; i < 4; i++)
-				v [i] = (byte) (value >> ((3 - i) * 7) & 0x7f);
-			
+				v[i] = (byte) (value >> ((3 - i)*7) & 0x7f);
+
 			return v;
 		}
-		
+
 		/// <summary>
 		///    Unsynchronizes a <see cref="ByteVector" /> object by
 		///    inserting empty bytes where necessary.
@@ -110,17 +110,16 @@ namespace TagLib.Id3v2 {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="data" /> is <see langword="null" />.
 		/// </exception>
-		public static void UnsynchByteVector (ByteVector data)
+		public static void UnsynchByteVector(ByteVector data)
 		{
 			if (data == null)
-				throw new ArgumentNullException ("data");
-			
+				throw new ArgumentNullException("data");
+
 			for (int i = data.Count - 2; i >= 0; i --)
-				if (data [i] == 0xFF && (data [i+1] == 0 ||
-					(data [i+1] & 0xE0) != 0))
-					data.Insert (i+1, 0);
+				if (data[i] == 0xFF && (data[i + 1] == 0 || (data[i + 1] & 0xE0) != 0))
+					data.Insert(i + 1, 0);
 		}
-		
+
 		/// <summary>
 		///    Resynchronizes a <see cref="ByteVector" /> object by
 		///    removing the added bytes.
@@ -131,24 +130,28 @@ namespace TagLib.Id3v2 {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="data" /> is <see langword="null" />.
 		/// </exception>
-		public static void ResynchByteVector (ByteVector data)
+		public static void ResynchByteVector(ByteVector data)
 		{
-			if (data == null) {
-				throw new ArgumentNullException ("data");
+			if (data == null)
+			{
+				throw new ArgumentNullException("data");
 			}
 
 			int i = 0, j = 0;
-			while (i < data.Count - 1) {
-				if (i != j) {
+			while (i < data.Count - 1)
+			{
+				if (i != j)
+				{
 					data[j] = data[i];
 				}
 				i += data[i] == 0xFF && data[i + 1] == 0 ? 2 : 1;
 				j++;
 			}
-			if (i < data.Count) {
+			if (i < data.Count)
+			{
 				data[j++] = data[i++];
 			}
-			data.Resize (j);
+			data.Resize(j);
 		}
 	}
 }

@@ -25,9 +25,6 @@
 // USA
 //
 
-using System.Collections;
-using System;
-
 namespace TagLib.Id3v2
 {
 	/// <summary>
@@ -36,19 +33,18 @@ namespace TagLib.Id3v2
 	/// </summary>
 	public class UnknownFrame : Frame
 	{
-#region Private Properties
+		#region Private Properties
 		
 		/// <summary>
 		///    Contains the field data.
 		/// </summary>
 		private ByteVector field_data = null;
 		
-#endregion
-		
-		
-		
-#region Constructors
-		
+		#endregion
+
+
+		#region Constructors
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="UnknownFrame" /> with a specified type.
@@ -61,12 +57,11 @@ namespace TagLib.Id3v2
 		///    A <see cref="ByteVector"/> object containing the contents
 		///    of the frame.
 		/// </param>
-		public UnknownFrame (ByteVector type, ByteVector data)
-			: base (type, 4)
+		public UnknownFrame(ByteVector type, ByteVector data) : base(type, 4)
 		{
 			field_data = data;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="UnknownFrame" /> with a specified type.
@@ -75,10 +70,10 @@ namespace TagLib.Id3v2
 		///    A <see cref="ByteVector" /> object containing an ID3v2.4
 		///    frame identifier.
 		/// </param>
-		public UnknownFrame (ByteVector type) : this (type, null)
+		public UnknownFrame(ByteVector type) : this(type, null)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="UnknownFrame" /> by reading its raw data in a
@@ -92,12 +87,11 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    raw frame is encoded in.
 		/// </param>
-		public UnknownFrame (ByteVector data, byte version)
-			: base (data, version)
+		public UnknownFrame(ByteVector data, byte version) : base(data, version)
 		{
-			SetData (data, 0, version, true);
+			SetData(data, 0, version, true);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="UnknownFrame" /> by reading its raw data in a
@@ -119,36 +113,33 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    raw frame is encoded in.
 		/// </param>
-		protected internal UnknownFrame (ByteVector data, int offset,
-		                                 FrameHeader header,
-		                                 byte version)
+		protected internal UnknownFrame(ByteVector data, int offset, FrameHeader header, byte version)
 			: base(header)
 		{
-			SetData (data, offset, version, false);
+			SetData(data, offset, version, false);
 		}
-		
-#endregion
-		
-		
-		
-#region Public Properties
-		
+
+		#endregion
+
+
+		#region Public Properties
+
 		/// <summary>
 		///    Gets and sets the field data in the current instance.
 		/// </summary>
 		/// <value>
 		///    A <see cref="ByteVector" /> containing the field data.
 		/// </value>
-		public ByteVector Data {
-			get {return field_data;}
-			set {field_data = value;}
+		public ByteVector Data
+		{
+			get { return field_data; }
+			set { field_data = value; }
 		}
-		
-#endregion
-		
-		
-		
-#region Public Methods
+
+		#endregion
+
+
+		#region Public Methods
 		
 		/// <summary>
 		///    Gets a string representation of the current instance.
@@ -162,11 +153,10 @@ namespace TagLib.Id3v2
 			return base.ToString ();
 		}
 		
-#endregion
-				
-		
-		
-#region Protected Methods
+		#endregion
+
+
+		#region Protected Methods
 		
 		/// <summary>
 		///    Populates the values in the current instance by parsing
@@ -180,12 +170,11 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    field data is encoded in.
 		/// </param>
-		protected override void ParseFields (ByteVector data,
-		                                     byte version)
+		protected override void ParseFields (ByteVector data, byte version)
 		{
 			field_data = data;
 		}
-		
+
 		/// <summary>
 		///    Renders the values in the current instance into field
 		///    data for a specified version.
@@ -198,11 +187,11 @@ namespace TagLib.Id3v2
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered field data.
 		/// </returns>
-		protected override ByteVector RenderFields (byte version)
+		protected override ByteVector RenderFields(byte version)
 		{
-			return field_data ?? new ByteVector ();
+			return field_data ?? new ByteVector();
 		}
-		
-#endregion
+
+		#endregion
 	}
 }

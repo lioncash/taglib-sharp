@@ -21,9 +21,8 @@
 // USA
 //
 
-using System;
-
-namespace TagLib.Id3v2 {
+namespace TagLib.Id3v2
+{
        /// <summary>
        ///    <see cref="FrameType" /> provides references to different frame
        ///    types used by the library.
@@ -37,7 +36,8 @@ namespace TagLib.Id3v2 {
        ///    external user could use <c>tag.GetTextAsString ("TIT2");</c> with
        ///    the same result.</para>
        /// </remarks>
-	internal static class FrameType {
+	internal static class FrameType
+	{
 		public static readonly ReadOnlyByteVector APIC = "APIC";
 		public static readonly ReadOnlyByteVector COMM = "COMM";
 		public static readonly ReadOnlyByteVector EQUA = "EQUA";

@@ -30,8 +30,7 @@ namespace TagLib.IFD.Entries
 	/// </summary>
 	public class LongIFDEntry : IFDEntry
 	{
-
-#region Properties
+		#region Properties
 
 		/// <value>
 		///    The ID of the tag, the current instance belongs to
@@ -43,9 +42,9 @@ namespace TagLib.IFD.Entries
 		/// </value>
 		public uint Value { get; private set; }
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Construcor.
@@ -63,9 +62,9 @@ namespace TagLib.IFD.Entries
 			Value = value;
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Renders the current instance to a <see cref="ByteVector"/>
@@ -94,7 +93,6 @@ namespace TagLib.IFD.Entries
 			return ByteVector.FromUInt (Value, is_bigendian);
 		}
 
-#endregion
-
+		#endregion
 	}
 }

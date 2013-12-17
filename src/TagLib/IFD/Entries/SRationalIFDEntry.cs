@@ -30,8 +30,7 @@ namespace TagLib.IFD.Entries
 	/// </summary>
 	public class SRationalIFDEntry : IFDEntry
 	{
-
-#region Properties
+		#region Properties
 
 		/// <value>
 		///    The ID of the tag, the current instance belongs to
@@ -43,9 +42,9 @@ namespace TagLib.IFD.Entries
 		/// </value>
 		public SRational Value { get; private set; }
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Construcor.
@@ -57,15 +56,15 @@ namespace TagLib.IFD.Entries
 		/// <param name="value">
 		///    A <see cref="SRational"/> to be stored
 		/// </param>
-		public SRationalIFDEntry (ushort tag, SRational value)
+		public SRationalIFDEntry(ushort tag, SRational value)
 		{
 			Tag = tag;
 			Value = value;
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Renders the current instance to a <see cref="ByteVector"/>
@@ -86,19 +85,18 @@ namespace TagLib.IFD.Entries
 		/// <returns>
 		///    A <see cref="ByteVector"/> with the rendered data.
 		/// </returns>
-		public ByteVector Render (bool is_bigendian, uint offset, out ushort type, out uint count)
+		public ByteVector Render(bool is_bigendian, uint offset, out ushort type, out uint count)
 		{
 			type = (ushort) IFDEntryType.SRational;
 			count = 1;
 
-			ByteVector data = new ByteVector ();
-			data.Add (ByteVector.FromInt (Value.Numerator, is_bigendian));
-			data.Add (ByteVector.FromInt (Value.Denominator, is_bigendian));
+			ByteVector data = new ByteVector();
+			data.Add(ByteVector.FromInt(Value.Numerator, is_bigendian));
+			data.Add(ByteVector.FromInt(Value.Denominator, is_bigendian));
 
 			return data;
 		}
 
-#endregion
-
+		#endregion
 	}
 }

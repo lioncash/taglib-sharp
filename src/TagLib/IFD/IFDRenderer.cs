@@ -32,9 +32,9 @@ namespace TagLib.IFD
 	/// <summary>
 	///     This class contains all the IFD rendering code.
 	/// </summary>
-	public class IFDRenderer {
-
-#region Private Fields
+	public class IFDRenderer
+	{
+		#region Private Fields
 
 		/// <summary>
 		///    The IFD structure that will be rendered.
@@ -53,9 +53,9 @@ namespace TagLib.IFD
 		/// </summary>
 		private readonly uint ifd_offset;
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructor. Will render the given IFD structure.
@@ -71,16 +71,16 @@ namespace TagLib.IFD
 		///    current IFD. All offsets inside the IFD must be adjusted
 		///    according to this given offset.
 		/// </param>
-		public IFDRenderer (bool is_bigendian, IFDStructure structure, uint ifd_offset)
+		public IFDRenderer(bool is_bigendian, IFDStructure structure, uint ifd_offset)
 		{
 			this.is_bigendian = is_bigendian;
 			this.structure = structure;
 			this.ifd_offset = ifd_offset;
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Renders the current instance to a <see cref="ByteVector"/>.
@@ -88,25 +88,26 @@ namespace TagLib.IFD
 		/// <returns>
 		///    A <see cref="ByteVector"/> containing the rendered IFD.
 		/// </returns>
-		public ByteVector Render ()
+		public ByteVector Render()
 		{
-			ByteVector ifd_data = new ByteVector ();
+			ByteVector ifd_data = new ByteVector();
 
 			uint current_offset = ifd_offset;
 			var directories = structure.directories;
 
-			for (int index = 0; index < directories.Count; index++) {
-				ByteVector data = RenderIFD (directories [index], current_offset, index == directories.Count - 1);
+			for (int index = 0; index < directories.Count; index++)
+			{
+				ByteVector data = RenderIFD(directories[index], current_offset, index == directories.Count - 1);
 				current_offset += (uint) data.Count;
-				ifd_data.Add (data);
+				ifd_data.Add(data);
 			}
 
 			return ifd_data;
 		}
 
-#endregion
+		#endregion
 
-#region Private Methods
+		#region Private Methods
 
 		/// <summary>
 		///    Renders the IFD to an ByteVector where the offset of the IFD
@@ -129,52 +130,55 @@ namespace TagLib.IFD
 		/// <returns>
 		///    A <see cref="ByteVector"/> with the rendered IFD.
 		/// </returns>
-		private ByteVector RenderIFD (IFDDirectory directory, uint ifd_offset, bool last)
+		private ByteVector RenderIFD(IFDDirectory directory, uint ifd_offset, bool last)
 		{
-			if (directory.Count > (int)UInt16.MaxValue)
-				throw new Exception (String.Format ("Directory has too much entries: {0}", directory.Count));
+			if (directory.Count > (int) UInt16.MaxValue)
+				throw new Exception(String.Format("Directory has too much entries: {0}", directory.Count));
 
 			// Remove empty SUB ifds.
-			var tags = new List<ushort> (directory.Keys);
-			foreach (var tag in tags) {
-				var entry = directory [tag];
-				if (entry is SubIFDEntry && (entry as SubIFDEntry).ChildCount == 0) {
-					directory.Remove (tag);
+			var tags = new List<ushort>(directory.Keys);
+			foreach (var tag in tags)
+			{
+				var entry = directory[tag];
+				if (entry is SubIFDEntry && (entry as SubIFDEntry).ChildCount == 0)
+				{
+					directory.Remove(tag);
 				}
 			}
 
 			ushort entry_count = (ushort) directory.Count;
 
 			// ifd_offset + size of entry_count + entries + next ifd offset
-			uint data_offset = ifd_offset + 2 + 12 * (uint) entry_count + 4;
+			uint data_offset = ifd_offset + 2 + 12*(uint) entry_count + 4;
 
 			// store the entries itself
-			ByteVector entry_data = new ByteVector ();
+			ByteVector entry_data = new ByteVector();
 
 			// store the data referenced by the entries
-			ByteVector offset_data = new ByteVector ();
+			ByteVector offset_data = new ByteVector();
 
-			entry_data.Add (ByteVector.FromUShort (entry_count, is_bigendian));
+			entry_data.Add(ByteVector.FromUShort(entry_count, is_bigendian));
 
 			foreach (IFDEntry entry in directory.Values)
-				RenderEntryData (entry, entry_data, offset_data, data_offset);
+				RenderEntryData(entry, entry_data, offset_data, data_offset);
 
 			if (last)
-				entry_data.Add ("\0\0\0\0");
+				entry_data.Add("\0\0\0\0");
 			else
-				entry_data.Add (ByteVector.FromUInt ((uint) (data_offset + offset_data.Count), is_bigendian));
+				entry_data.Add(ByteVector.FromUInt((uint) (data_offset + offset_data.Count), is_bigendian));
 
 			if (data_offset - ifd_offset != entry_data.Count)
-				throw new Exception (String.Format ("Expected IFD data size was {0} but is {1}", data_offset - ifd_offset, entry_data.Count));
+				throw new Exception(String.Format("Expected IFD data size was {0} but is {1}", data_offset - ifd_offset,
+					entry_data.Count));
 
-			entry_data.Add (offset_data);
+			entry_data.Add(offset_data);
 
 			return entry_data;
 		}
 
-#endregion
+		#endregion
 
-#region Protected Methods
+		#region Protected Methods
 
 		/// <summary>
 		///    Adds the data of a single entry to <paramref name="entry_data"/>.
@@ -194,12 +198,12 @@ namespace TagLib.IFD
 		/// <param name="offset">
 		///    A <see cref="System.UInt32"/> with the offset field of the entry.
 		/// </param>
-		protected void RenderEntry (ByteVector entry_data, ushort tag, ushort type, uint count, uint offset)
+		protected void RenderEntry(ByteVector entry_data, ushort tag, ushort type, uint count, uint offset)
 		{
-			entry_data.Add (ByteVector.FromUShort (tag, is_bigendian));
-			entry_data.Add (ByteVector.FromUShort (type, is_bigendian));
-			entry_data.Add (ByteVector.FromUInt (count, is_bigendian));
-			entry_data.Add (ByteVector.FromUInt (offset, is_bigendian));
+			entry_data.Add(ByteVector.FromUShort(tag, is_bigendian));
+			entry_data.Add(ByteVector.FromUShort(type, is_bigendian));
+			entry_data.Add(ByteVector.FromUInt(count, is_bigendian));
+			entry_data.Add(ByteVector.FromUInt(offset, is_bigendian));
 		}
 
 		/// <summary>
@@ -225,31 +229,32 @@ namespace TagLib.IFD
 		///    entries starts. It is needed to adjust the offsets of the entries
 		///    itself.
 		/// </param>
-		protected virtual void RenderEntryData (IFDEntry entry, ByteVector entry_data, ByteVector offset_data, uint data_offset)
+		protected virtual void RenderEntryData(IFDEntry entry, ByteVector entry_data, ByteVector offset_data, uint data_offset)
 		{
 			ushort tag = (ushort) entry.Tag;
 			uint offset = (uint) (data_offset + offset_data.Count);
 
 			ushort type;
 			uint count;
-			ByteVector data = entry.Render (is_bigendian, offset, out type, out count);
+			ByteVector data = entry.Render(is_bigendian, offset, out type, out count);
 
 			// store data in offset, if it is smaller than 4 byte
-			if (data.Count <= 4) {
+			if (data.Count <= 4)
+			{
 
 				while (data.Count < 4)
-					data.Add ("\0");
+					data.Add("\0");
 
-				offset = data.ToUInt (is_bigendian);
+				offset = data.ToUInt(is_bigendian);
 				data = null;
 			}
 
 			// preserve word boundary of offsets
-			if (data != null && data.Count % 2 != 0)
-				data.Add ("\0");
+			if (data != null && data.Count%2 != 0)
+				data.Add("\0");
 
-			RenderEntry (entry_data, tag, type, count, offset);
-			offset_data.Add (data);
+			RenderEntry(entry_data, tag, type, count, offset);
+			offset_data.Add(data);
 		}
 
 		/// <summary>
@@ -266,12 +271,11 @@ namespace TagLib.IFD
 		///    current IFD. All offsets inside the IFD must be adjusted
 		///    according to this given offset.
 		/// </param>
-		protected virtual IFDRenderer CreateSubRenderer (bool is_bigendian, IFDStructure structure, uint ifd_offset)
+		protected virtual IFDRenderer CreateSubRenderer(bool is_bigendian, IFDStructure structure, uint ifd_offset)
 		{
-			return new IFDRenderer (is_bigendian, structure, ifd_offset);
+			return new IFDRenderer(is_bigendian, structure, ifd_offset);
 		}
 
-#endregion
-
+		#endregion
 	}
 }

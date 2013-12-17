@@ -30,19 +30,16 @@ namespace TagLib.IFD
 	/// </summary>
 	public interface IFDEntry
 	{
-
-#region Properties
+		#region Properties
 
 		/// <value>
 		///    The ID of the tag, the current instance belongs to
 		/// </value>
-		ushort Tag {
-			get;
-		}
+		ushort Tag { get; }
 
-#endregion
+		#endregion
 
-#region Methods
+		#region Methods
 
 		/// <summary>
 		///    Renders the current instance to a <see cref="ByteVector"/>
@@ -63,10 +60,9 @@ namespace TagLib.IFD
 		/// <returns>
 		///    A <see cref="ByteVector"/> with the rendered data.
 		/// </returns>
-		ByteVector Render (bool is_bigendian, uint offset, out ushort type, out uint count);
+		ByteVector Render(bool is_bigendian, uint offset, out ushort type, out uint count);
 
-#endregion
-
+		#endregion
 	}
 
 
@@ -75,8 +71,7 @@ namespace TagLib.IFD
 	/// </summary>
 	public abstract class ArrayIFDEntry<T> : IFDEntry
 	{
-
-#region Properties
+		#region Properties
 
 		/// <value>
 		///    The ID of the tag, the current instance belongs to
@@ -88,9 +83,9 @@ namespace TagLib.IFD
 		/// </value>
 		public T [] Values { get; protected set; }
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructor.
@@ -99,14 +94,14 @@ namespace TagLib.IFD
 		///    A <see cref="System.UInt16"/> with the tag ID of the entry this instance
 		///    represents
 		/// </param>
-		public ArrayIFDEntry (ushort tag)
+		protected ArrayIFDEntry (ushort tag)
 		{
 			Tag = tag;
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Renders the current instance to a <see cref="ByteVector"/>
@@ -127,9 +122,8 @@ namespace TagLib.IFD
 		/// <returns>
 		///    A <see cref="ByteVector"/> with the rendered data.
 		/// </returns>
-		public abstract ByteVector Render (bool is_bigendian, uint offset, out ushort type, out uint count);
+		public abstract ByteVector Render(bool is_bigendian, uint offset, out ushort type, out uint count);
 
-#endregion
-
+		#endregion
 	}
 }

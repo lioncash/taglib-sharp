@@ -34,8 +34,7 @@ namespace TagLib.IFD.Entries
 	/// </summary>
 	public class ThumbnailDataIFDEntry : IFDEntry
 	{
-
-#region Properties
+		#region Properties
 
 		/// <value>
 		///    The ID of the tag, the current instance belongs to
@@ -47,9 +46,9 @@ namespace TagLib.IFD.Entries
 		/// </value>
 		public ByteVector Data { get; private set; }
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Construcor.
@@ -61,15 +60,15 @@ namespace TagLib.IFD.Entries
 		/// <param name="data">
 		///    A <see cref="ByteVector"/> with the thumbnail data to be stored
 		/// </param>
-		public ThumbnailDataIFDEntry (ushort tag, ByteVector data)
+		public ThumbnailDataIFDEntry(ushort tag, ByteVector data)
 		{
 			Tag = tag;
 			Data = data;
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Renders the current instance to a <see cref="ByteVector"/>
@@ -90,7 +89,7 @@ namespace TagLib.IFD.Entries
 		/// <returns>
 		///    A <see cref="ByteVector"/> with the rendered data.
 		/// </returns>
-		public ByteVector Render (bool is_bigendian, uint offset, out ushort type, out uint count)
+		public ByteVector Render(bool is_bigendian, uint offset, out ushort type, out uint count)
 		{
 			// the entry is a single long entry where the value is an offset to the data
 			// the offset is automatically updated by the renderer.
@@ -100,7 +99,6 @@ namespace TagLib.IFD.Entries
 			return Data;
 		}
 
-#endregion
-
+		#endregion
 	}
 }

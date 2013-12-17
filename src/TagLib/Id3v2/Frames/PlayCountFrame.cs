@@ -26,9 +26,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System;
-
-namespace TagLib.Id3v2 {
+namespace TagLib.Id3v2
+{
 	/// <summary>
 	///    This class extends <see cref="Frame" />, implementing support for
 	///    ID3v2 Play Count (PCNT) Frames.
@@ -41,30 +40,30 @@ namespace TagLib.Id3v2 {
 	///
 	/// public static class TrackUtil
 	/// {
-	/// 	public static int GetPlayCount (string filename)
-	/// 	{
-	/// 		File file = File.Create (filename, ReadStyle.None);
-	/// 		Id3v2.Tag tag = file.GetTag (TagTypes.Id3v2, false) as Id3v2.Tag;
-	/// 		if (tag == null)
-	/// 			return 0;
-	/// 		
-	/// 		PlayCountFrame frame = PlayCountFrame.Get (tag, false);
-	/// 		if (frame == null)
-	/// 			return 0;
+	///     public static int GetPlayCount (string filename)
+	///     {
+	///         File file = File.Create (filename, ReadStyle.None);
+	///         Id3v2.Tag tag = file.GetTag (TagTypes.Id3v2, false) as Id3v2.Tag;
+	///         if (tag == null)
+	///             return 0;
 	///
-	/// 		return frame.PlayCount;
-	/// 	}
-	/// 	
-	/// 	public static void IncrementPlayCount (string filename)
-	/// 	{
-	/// 		File file = File.Create (filename, ReadStyle.None);
-	/// 		Id3v2.Tag tag = file.GetTag (TagTypes.Id3v2, true) as Id3v2.Tag;
-	/// 		if (tag == null)
-	/// 			return;
-	/// 		
-	/// 		PlayCountFrame.Get (tag, true).PlayCount ++;
-	/// 		file.Save ();
-	/// 	}
+	///         PlayCountFrame frame = PlayCountFrame.Get (tag, false);
+	///         if (frame == null)
+	///             return 0;
+	///
+	///         return frame.PlayCount;
+	///     }
+	///
+	///     public static void IncrementPlayCount (string filename)
+	///     {
+	///         File file = File.Create (filename, ReadStyle.None);
+	///         Id3v2.Tag tag = file.GetTag (TagTypes.Id3v2, true) as Id3v2.Tag;
+	///         if (tag == null)
+	///             return;
+	///
+	///         PlayCountFrame.Get (tag, true).PlayCount ++;
+	///         file.Save ();
+	///     }
 	/// }
 	///    </code>
 	///    <code lang="C++">
@@ -78,30 +77,30 @@ namespace TagLib.Id3v2 {
 	/// public ref class TrackUtil abstract sealed
 	/// {
 	/// public:
-	/// 	static int GetPlayCount (String^ filename)
-	/// 	{
-	/// 		File^ file = File.Create (filename, ReadStyle.None);
-	/// 		Id3v2::Tag^ tag = dynamic_cast&lt;Id3v2::Tag^> (file.GetTag (TagTypes::Id3v2, false));
-	/// 		if (tag == null)
-	/// 			return 0;
-	/// 		
-	/// 		PlayCountFrame^ frame = PlayCountFrame::Get (tag, false);
-	/// 		if (frame == null)
-	/// 			return 0;
+	///     static int GetPlayCount (String^ filename)
+	///     {
+	///         File^ file = File.Create (filename, ReadStyle.None);
+	///         Id3v2::Tag^ tag = dynamic_cast&lt;Id3v2::Tag^> (file.GetTag (TagTypes::Id3v2, false));
+	///         if (tag == null)
+	///             return 0;
 	///
-	/// 		return frame->PlayCount;
-	/// 	}
-	/// 	
-	/// 	static void IncrementPlayCount (String^ filename)
-	/// 	{
-	/// 		File^ file = File::Create (filename, ReadStyle::None);
-	/// 		Id3v2.Tag^ tag = dynamic_cast&lt;Id3v2::Tag^> (file.GetTag (TagTypes::Id3v2, true));
-	/// 		if (tag == null)
-	/// 			return;
-	/// 		
-	/// 		PlayCountFrame::Get (tag, true)->PlayCount ++;
-	/// 		file->Save ();
-	/// 	}
+	///         PlayCountFrame^ frame = PlayCountFrame::Get (tag, false);
+	///         if (frame == null)
+	///             return 0;
+	///
+	///         return frame->PlayCount;
+	///     }
+	///
+	///     static void IncrementPlayCount (String^ filename)
+	///     {
+	///         File^ file = File::Create (filename, ReadStyle::None);
+	///         Id3v2.Tag^ tag = dynamic_cast&lt;Id3v2::Tag^> (file.GetTag (TagTypes::Id3v2, true));
+	///         if (tag == null)
+	///             return;
+	///
+	///         PlayCountFrame::Get (tag, true)->PlayCount ++;
+	///         file->Save ();
+	///     }
 	/// }
 	///    </code>
 	///    <code lang="VB">
@@ -109,25 +108,25 @@ namespace TagLib.Id3v2 {
 	/// Imports TagLib.Id3v2
 	///
 	/// Public Shared Class TrackUtil
-	/// 	Public Shared Sub GetPlayCount (filename As String) As Integer
-	/// 		Dim file As File = File.Create (filename, ReadStyle.None)
-	/// 		Dim tag As Id3v2.Tag = file.GetTag (TagTypes.Id3v2, False)
-	/// 		If tag Is Nothing Then Return 0
-	/// 		
-	/// 		Dim frame As PlayCountFrame = PlayCountFrame.Get (tag, False)
-	///		If frame Is Nothing Then Return 0
+	///     Public Shared Sub GetPlayCount (filename As String) As Integer
+	///         Dim file As File = File.Create (filename, ReadStyle.None)
+	///         Dim tag As Id3v2.Tag = file.GetTag (TagTypes.Id3v2, False)
+	///         If tag Is Nothing Then Return 0
+	/// 
+	///         Dim frame As PlayCountFrame = PlayCountFrame.Get (tag, False)
+	///         If frame Is Nothing Then Return 0
 	///
-	/// 		Return frame.PlayCount
-	/// 	End Sub
+	///         Return frame.PlayCount
+	///     End Sub
 	///
-	///	Public Shared Sub IncrementPlayCount (filename As String)
-	/// 		Dim file As File = File.Create (filename, ReadStyle.None)
-	/// 		Dim tag As Id3v2.Tag = file.GetTag (TagTypes.Id3v2, True)
-	/// 		If tag Is Nothing Then Exit Sub
-	/// 		
-	/// 		PlayCountFrame.Get (tag, True).PlayCount += 1
-	/// 		file.Save ()
-	/// 	End Sub
+	///     Public Shared Sub IncrementPlayCount (filename As String)
+	///         Dim file As File = File.Create (filename, ReadStyle.None)
+	///         Dim tag As Id3v2.Tag = file.GetTag (TagTypes.Id3v2, True)
+	///         If tag Is Nothing Then Exit Sub
+	///
+	///         PlayCountFrame.Get (tag, True).PlayCount += 1
+	///         file.Save ()
+	///     End Sub
 	/// End Class
 	///    </code>
 	///    <code lang="Boo">
@@ -135,26 +134,26 @@ namespace TagLib.Id3v2 {
 	/// import TagLib.Id3v2
 	/// 
 	/// public static class TrackUtil:
-	/// 	static def GetPlayCount (filename as string) as int:
-	/// 		file As File = File.Create (filename, ReadStyle.None)
-	/// 		tag as Id3v2.Tag = file.GetTag (TagTypes.Id3v2, false)
-	///		if tag == null:
-	/// 			return 0
-	/// 		
-	/// 		frame as PlayCountFrame = PlayCountFrame.Get (tag, false)
-	/// 		if frame == null:
-	///			return 0
+	///     static def GetPlayCount (filename as string) as int:
+	///         file As File = File.Create (filename, ReadStyle.None)
+	///         tag as Id3v2.Tag = file.GetTag (TagTypes.Id3v2, false)
+	///         if tag == null:
+	///             return 0
 	///
-	/// 		return frame.PlayCount
+	///         frame as PlayCountFrame = PlayCountFrame.Get (tag, false)
+	///         if frame == null:
+	///             return 0
 	///
-	///	static def IncrementPlayCount (filename as string):
-	/// 		file as File = File.Create (filename, ReadStyle.None)
-	/// 		tag as Id3v2.Tag = file.GetTag (TagTypes.Id3v2, True)
-	///		if tag == null:
-	/// 			return
-	/// 		
-	/// 		PlayCountFrame.Get (tag, true).PlayCount ++
-	/// 		file.Save ()
+	///         return frame.PlayCount
+	///
+	///     static def IncrementPlayCount (filename as string):
+	///         file as File = File.Create (filename, ReadStyle.None)
+	///         tag as Id3v2.Tag = file.GetTag (TagTypes.Id3v2, True)
+	///         if tag == null:
+	///             return
+	/// 
+	///         PlayCountFrame.Get (tag, true).PlayCount ++
+	///         file.Save ()
 	///    </code>
 	/// </example>
 	public class PlayCountFrame : Frame
@@ -168,11 +167,10 @@ namespace TagLib.Id3v2 {
 		private ulong play_count = 0;
 		
 		#endregion
-		
-		
-		
+
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="PlayCountFrame" /> with a count of zero.
@@ -182,10 +180,10 @@ namespace TagLib.Id3v2 {
 		///    the tag. Consider using <see cref="Get" /> for more
 		///    integrated frame creation.
 		/// </remarks>
-		public PlayCountFrame () : base (FrameType.PCNT, 4)
+		public PlayCountFrame() : base(FrameType.PCNT, 4)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="PlayCountFrame" /> by reading its raw data in a
@@ -199,12 +197,11 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    raw frame is encoded in.
 		/// </param>
-		public PlayCountFrame (ByteVector data, byte version)
-			: base (data, version)
+		public PlayCountFrame(ByteVector data, byte version) : base(data, version)
 		{
-			SetData (data, 0, version, true);
+			SetData(data, 0, version, true);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="PlayCountFrame" /> by reading its raw data in a
@@ -226,19 +223,17 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    raw frame is encoded in.
 		/// </param>
-		protected internal PlayCountFrame (ByteVector data, int offset,
-		                                   FrameHeader header,
-		                                   byte version) : base(header)
+		protected internal PlayCountFrame(ByteVector data, int offset, FrameHeader header, byte version)
+			: base(header)
 		{
-			SetData (data, offset, version, false);
+			SetData(data, offset, version, false);
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets and sets the play count of the current instance.
 		/// </summary>
@@ -246,17 +241,17 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="ulong" /> containing the play count of the
 		///    current instance.
 		/// </value>
-		public ulong PlayCount {
-			get {return play_count;}
-			set {play_count = value;}
+		public ulong PlayCount
+		{
+			get { return play_count; }
+			set { play_count = value; }
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
 		#region Public Static Methods
-		
+
 		/// <summary>
 		///    Gets a play count frame from a specified tag, optionally
 		///    creating it if it does not exist.
@@ -274,30 +269,30 @@ namespace TagLib.Id3v2 {
 		///    wasn't found and <paramref name="create" /> is <see
 		///    langword="false" />.
 		/// </returns>
-		public static PlayCountFrame Get (Tag tag, bool create)
+		public static PlayCountFrame Get(Tag tag, bool create)
 		{
 			PlayCountFrame pcnt;
-			foreach (Frame frame in tag) {
+			foreach (Frame frame in tag)
+			{
 				pcnt = frame as PlayCountFrame;
-				
+
 				if (pcnt != null)
 					return pcnt;
 			}
-			
+
 			if (!create)
 				return null;
-			
-			pcnt = new PlayCountFrame ();
-			tag.AddFrame (pcnt);
+
+			pcnt = new PlayCountFrame();
+			tag.AddFrame(pcnt);
 			return pcnt;
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
 		#region Protected Methods
-		
+
 		/// <summary>
 		///    Populates the values in the current instance by parsing
 		///    its field data in a specified version.
@@ -310,11 +305,11 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    field data is encoded in.
 		/// </param>
-		protected override void ParseFields (ByteVector data, byte version)
+		protected override void ParseFields(ByteVector data, byte version)
 		{
-			play_count = data.ToULong ();
+			play_count = data.ToULong();
 		}
-		
+
 		/// <summary>
 		///    Renders the values in the current instance into field
 		///    data for a specified version.
@@ -327,21 +322,20 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered field data.
 		/// </returns>
-		protected override ByteVector RenderFields (byte version)
+		protected override ByteVector RenderFields(byte version)
 		{
-			ByteVector data = ByteVector.FromULong (play_count);
-			while (data.Count > 4 && data [0] == 0)
-				data.RemoveAt (0);
-			
+			ByteVector data = ByteVector.FromULong(play_count);
+			while (data.Count > 4 && data[0] == 0)
+				data.RemoveAt(0);
+
 			return data;
 		}
-		
-#endregion
-		
-		
-		
-#region ICloneable
-		
+
+		#endregion
+
+
+		#region ICloneable
+
 		/// <summary>
 		///    Creates a deep copy of the current instance.
 		/// </summary>
@@ -349,13 +343,13 @@ namespace TagLib.Id3v2 {
 		///    A new <see cref="Frame" /> object identical to the
 		///    current instance.
 		/// </returns>
-		public override Frame Clone ()
+		public override Frame Clone()
 		{
-			PlayCountFrame frame = new PlayCountFrame ();
+			PlayCountFrame frame = new PlayCountFrame();
 			frame.play_count = play_count;
 			return frame;
 		}
-		
-#endregion
+
+		#endregion
 	}
 }

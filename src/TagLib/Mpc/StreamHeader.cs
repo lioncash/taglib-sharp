@@ -26,8 +26,10 @@
 //
 
 using System;
+using System.Globalization;
 
-namespace TagLib.MusePack {
+namespace TagLib.MusePack
+{
 	/// <summary>
 	///    This struct implements <see cref="IAudioCodec" /> to provide
 	///    support for reading MusePack audio properties.
@@ -35,8 +37,9 @@ namespace TagLib.MusePack {
 	public struct StreamHeader : IAudioCodec
 	{
 		#region Constants
-		
-		private static ushort [] sftable = {44100, 48000, 37800, 32000};
+
+		// Sample frequency table
+		private static readonly ushort[] sftable = {44100, 48000, 37800, 32000};
 		
 		#endregion
 		
@@ -93,7 +96,7 @@ namespace TagLib.MusePack {
 		
 		
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="StreamHeader" /> for a specified header block and
@@ -115,43 +118,42 @@ namespace TagLib.MusePack {
 		///    cref="FileIdentifier" /> or is less than <see cref="Size"
 		///    /> bytes long.
 		/// </exception>
-		public StreamHeader (ByteVector data, long streamLength)
+		public StreamHeader(ByteVector data, long streamLength)
 		{
 			if (data == null)
-				throw new ArgumentNullException ("data");
-			
-			if (!data.StartsWith (FileIdentifier))
-				throw new CorruptFileException (
-					"Data does not begin with identifier.");
-			
+				throw new ArgumentNullException("data");
+
+			if (!data.StartsWith(FileIdentifier))
+				throw new CorruptFileException("Data does not begin with identifier.");
+
 			if (data.Count < Size)
-				throw new CorruptFileException (
-					"Insufficient data in stream header");
-			
+				throw new CorruptFileException("Insufficient data in stream header");
+
 			stream_length = streamLength;
-			version = data [3] & 15;
-			
-			if (version >= 7) {
-				frames = data.Mid (4, 4).ToUInt (false);
-				uint flags = data.Mid (8, 4).ToUInt (false);
-				sample_rate = sftable [(int) (((flags >> 17) &
-					1) * 2 + ((flags >> 16) & 1))];
+			version = data[3] & 15;
+
+			if (version >= 7)
+			{
+				frames = data.Mid(4, 4).ToUInt(false);
+				uint flags = data.Mid(8, 4).ToUInt(false);
+				sample_rate = sftable[(int) (((flags >> 17) & 1)*2 + ((flags >> 16) & 1))];
 				header_data = 0;
-			} else {
-				header_data = data.Mid (0, 4).ToUInt (false);
+			}
+			else
+			{
+				header_data = data.Mid(0, 4).ToUInt(false);
 				version = (int) ((header_data >> 11) & 0x03ff);
 				sample_rate = 44100;
-				frames = data.Mid (4,
-					version >= 5 ? 4 : 2).ToUInt (false);
+				frames = data.Mid(4, version >= 5 ? 4 : 2).ToUInt(false);
 			}
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the duration of the media represented by the current
 		///    instance.
@@ -160,18 +162,20 @@ namespace TagLib.MusePack {
 		///    A <see cref="TimeSpan" /> containing the duration of the
 		///    media represented by the current instance.
 		/// </value>
-		
-		public TimeSpan Duration {
-			get {
+
+		public TimeSpan Duration
+		{
+			get
+			{
 				if (sample_rate <= 0 && stream_length <= 0)
 					return TimeSpan.Zero;
-				
-				return TimeSpan.FromSeconds (
-					(double) (frames * 1152 - 576) /
+
+				return TimeSpan.FromSeconds(
+					(double) (frames*1152 - 576)/
 					(double) sample_rate + 0.5);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the types of media represented by the current
 		///    instance.
@@ -179,10 +183,11 @@ namespace TagLib.MusePack {
 		/// <value>
 		///    Always <see cref="TagLib.MediaTypes.Audio" />.
 		/// </value>
-		public MediaTypes MediaTypes {
-			get {return MediaTypes.Audio;}
+		public MediaTypes MediaTypes
+		{
+			get { return MediaTypes.Audio; }
 		}
-		
+
 		/// <summary>
 		///    Gets a text description of the media represented by the
 		///    current instance.
@@ -191,12 +196,11 @@ namespace TagLib.MusePack {
 		///    A <see cref="string" /> object containing a description
 		///    of the media represented by the current instance.
 		/// </value>
-		public string Description {
-			get {return string.Format (
-				System.Globalization.CultureInfo.InvariantCulture,
-				"MusePack Version {0} Audio", Version);}
+		public string Description
+		{
+			get { return string.Format(CultureInfo.InvariantCulture, "MusePack Version {0} Audio", Version); }
 		}
-		
+
 		/// <summary>
 		///    Gets the bitrate of the audio represented by the current
 		///    instance.
@@ -205,17 +209,19 @@ namespace TagLib.MusePack {
 		///    A <see cref="int" /> value containing a bitrate of the
 		///    audio represented by the current instance.
 		/// </value>
-		public int AudioBitrate {
-			get {
+		public int AudioBitrate
+		{
+			get
+			{
 				if (header_data != 0)
 					return (int) ((header_data >> 23) & 0x01ff);
-				
-				return (int) (Duration > TimeSpan.Zero ?
-					((stream_length * 8L) /
-					Duration.TotalSeconds) / 1000 : 0);
+
+				return (int) (Duration > TimeSpan.Zero
+					? ((stream_length*8L) / Duration.TotalSeconds)/1000
+					: 0);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the sample rate of the audio represented by the
 		///    current instance.
@@ -224,10 +230,11 @@ namespace TagLib.MusePack {
 		///    A <see cref="int" /> value containing the sample rate of
 		///    the audio represented by the current instance.
 		/// </value>
-		public int AudioSampleRate {
-			get {return sample_rate;}
+		public int AudioSampleRate
+		{
+			get { return sample_rate; }
 		}
-		
+
 		/// <summary>
 		///    Gets the number of channels in the audio represented by
 		///    the current instance.
@@ -237,10 +244,11 @@ namespace TagLib.MusePack {
 		///    channels in the audio represented by the current
 		///    instance.
 		/// </value>
-		public int AudioChannels {
-			get {return 2;}
+		public int AudioChannels
+		{
+			get { return 2; }
 		}
-		
+
 		/// <summary>
 		///    Gets the WavPack version of the audio represented by the
 		///    current instance.
@@ -249,16 +257,17 @@ namespace TagLib.MusePack {
 		///    A <see cref="int" /> value containing the WavPack version
 		///    of the audio represented by the current instance.
 		/// </value>
-		public int Version {
-			get {return version;}
+		public int Version
+		{
+			get { return version; }
 		}
-		
+
 		#endregion
 		
 		
 		
 		#region IEquatable
-		
+
 		/// <summary>
 		///    Generates a hash code for the current instance.
 		/// </summary>
@@ -266,14 +275,15 @@ namespace TagLib.MusePack {
 		///    A <see cref="int" /> value containing the hash code for
 		///    the current instance.
 		/// </returns>
-		public override int GetHashCode ()
+		public override int GetHashCode()
 		{
-			unchecked {
+			unchecked
+			{
 				return (int) (header_data ^ sample_rate ^
-					frames ^ version);
+				              frames ^ version);
 			}
 		}
-		
+
 		/// <summary>
 		///    Checks whether or not the current instance is equal to
 		///    another object.
@@ -287,14 +297,14 @@ namespace TagLib.MusePack {
 		///    current instance is equal to <paramref name="other" />.
 		/// </returns>
 		/// <seealso cref="M:System.IEquatable`1.Equals" />
-		public override bool Equals (object other)
+		public override bool Equals(object other)
 		{
 			if (!(other is StreamHeader))
 				return false;
-			
-			return Equals ((StreamHeader) other);
+
+			return Equals((StreamHeader) other);
 		}
-		
+
 		/// <summary>
 		///    Checks whether or not the current instance is equal to
 		///    another instance of <see cref="StreamHeader" />.
@@ -308,14 +318,14 @@ namespace TagLib.MusePack {
 		///    current instance is equal to <paramref name="other" />.
 		/// </returns>
 		/// <seealso cref="M:System.IEquatable`1.Equals" />
-		public bool Equals (StreamHeader other)
+		public bool Equals(StreamHeader other)
 		{
 			return header_data == other.header_data &&
-				sample_rate == other.sample_rate &&
-				version == other.version &&
-				frames == other.frames;
+			       sample_rate == other.sample_rate &&
+			       version == other.version &&
+			       frames == other.frames;
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not two instances of <see
 		///    cref="StreamHeader" /> are equal to eachother.
@@ -331,12 +341,11 @@ namespace TagLib.MusePack {
 		///    equal to <paramref name="second" />. Otherwise, <see
 		///    langword="false" />.
 		/// </returns>
-		public static bool operator == (StreamHeader first,
-		                                StreamHeader second)
+		public static bool operator ==(StreamHeader first, StreamHeader second)
 		{
-			return first.Equals (second);
+			return first.Equals(second);
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not two instances of <see
 		///    cref="StreamHeader" /> differ.
@@ -352,12 +361,11 @@ namespace TagLib.MusePack {
 		///    unequal to <paramref name="second" />. Otherwise, <see
 		///    langword="false" />.
 		/// </returns>
-		public static bool operator != (StreamHeader first,
-		                                StreamHeader second)
+		public static bool operator !=(StreamHeader first, StreamHeader second)
 		{
-			return !first.Equals (second);
+			return !first.Equals(second);
 		}
-		
+
 		#endregion
 	}
 }

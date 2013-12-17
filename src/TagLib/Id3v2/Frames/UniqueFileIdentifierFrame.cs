@@ -25,7 +25,6 @@
 // USA
 //
 
-using System.Collections;
 using System;
 
 namespace TagLib.Id3v2
@@ -36,7 +35,7 @@ namespace TagLib.Id3v2
 	/// </summary>
 	public class UniqueFileIdentifierFrame : Frame
 	{
-#region Private Fields
+		#region Private Fields
 		
 		/// <summary>
 		///    Contains the owner string.
@@ -48,12 +47,11 @@ namespace TagLib.Id3v2
 		/// </summary>
 		private ByteVector identifier = null;
 		
-#endregion
-      
-      
-      
-#region Constructors
-		
+		#endregion
+
+
+		#region Constructors
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="UniqueFileIdentifierFrame" /> with a specified
@@ -76,17 +74,16 @@ namespace TagLib.Id3v2
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="owner" /> is <see langword="null" />.
 		/// </exception>
-		public UniqueFileIdentifierFrame (string owner,
-		                                  ByteVector identifier)
-			: base (FrameType.UFID, 4)
+		public UniqueFileIdentifierFrame(string owner, ByteVector identifier)
+			: base(FrameType.UFID, 4)
 		{
 			if (owner == null)
-				throw new ArgumentNullException ("owner");
-			
+				throw new ArgumentNullException("owner");
+
 			this.owner = owner;
 			this.identifier = identifier;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="UniqueFileIdentifierFrame" /> with a specified
@@ -105,11 +102,11 @@ namespace TagLib.Id3v2
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="owner" /> is <see langword="null" />.
 		/// </exception>
-		public UniqueFileIdentifierFrame (string owner)
-			: this (owner, null)
+		public UniqueFileIdentifierFrame(string owner)
+			: this(owner, null)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="UniqueFileIdentifierFrame" /> by reading its raw
@@ -123,12 +120,12 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    raw frame is encoded in.
 		/// </param>
-		public UniqueFileIdentifierFrame (ByteVector data, byte version)
-			: base (data, version)
+		public UniqueFileIdentifierFrame(ByteVector data, byte version)
+			: base(data, version)
 		{
-			SetData (data, 0, version, true);
+			SetData(data, 0, version, true);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="UniqueFileIdentifierFrame" /> by reading its raw
@@ -150,21 +147,17 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    raw frame is encoded in.
 		/// </param>
-		protected internal UniqueFileIdentifierFrame (ByteVector data,
-		                                              int offset,
-		                                              FrameHeader header,
-		                                              byte version)
+		protected internal UniqueFileIdentifierFrame(ByteVector data, int offset, FrameHeader header, byte version)
 			: base(header)
 		{
-			SetData (data, offset, version, false);
+			SetData(data, offset, version, false);
 		}
-		
-#endregion
-		
-		
-		
-#region Public Properties
-		
+
+		#endregion
+
+
+		#region Public Properties
+
 		/// <summary>
 		///    Gets and sets the owner of the current instance.
 		/// </summary>
@@ -176,8 +169,9 @@ namespace TagLib.Id3v2
 		///    There should only be one frame with a matching owner per
 		///    tag.
 		/// </remarks>
-		public string Owner {
-			get {return owner;}
+		public string Owner
+		{
+			get { return owner; }
 		}
 
 		/// <summary>
@@ -188,17 +182,17 @@ namespace TagLib.Id3v2
 		///    A <see cref="ByteVector" /> object containiner the unique
 		///    file identifier frame.
 		/// </value>
-		public ByteVector Identifier {
-			get {return identifier;}
-			set {identifier = value;}
+		public ByteVector Identifier
+		{
+			get { return identifier; }
+			set { identifier = value; }
 		}
-		
-#endregion
-		
-		
-		
-#region Public Static Methods
-		
+
+		#endregion
+
+
+		#region Public Static Methods
+
 		/// <summary>
 		///    Gets a specified unique file identifer frame from the
 		///    specified tag, optionally creating it if it does not
@@ -220,36 +214,34 @@ namespace TagLib.Id3v2
 		///    if a match wasn't found and <paramref name="create" /> is
 		///    <see langword="false" />.
 		/// </returns>
-		public static UniqueFileIdentifierFrame Get (Tag tag,
-		                                             string owner,
-		                                             bool create)
+		public static UniqueFileIdentifierFrame Get(Tag tag, string owner, bool create)
 		{
 			UniqueFileIdentifierFrame ufid;
-			
-			foreach (Frame frame in tag.GetFrames (FrameType.UFID)) {
+
+			foreach (Frame frame in tag.GetFrames(FrameType.UFID))
+			{
 				ufid = frame as UniqueFileIdentifierFrame;
-				
+
 				if (ufid == null)
 					continue;
-				
+
 				if (ufid.Owner == owner)
 					return ufid;
 			}
-			
+
 			if (!create)
 				return null;
-			
-			ufid = new UniqueFileIdentifierFrame (owner, null);
-			tag.AddFrame (ufid);
+
+			ufid = new UniqueFileIdentifierFrame(owner, null);
+			tag.AddFrame(ufid);
 			return ufid;
 		}
-		
-#endregion
-		
-		
-		
-#region Protected Methods
-		
+
+		#endregion
+
+
+		#region Protected Methods
+
 		/// <summary>
 		///    Populates the values in the current instance by parsing
 		///    its field data in a specified version.
@@ -262,19 +254,17 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    field data is encoded in.
 		/// </param>
-		protected override void ParseFields (ByteVector data,
-		                                     byte version)
+		protected override void ParseFields(ByteVector data, byte version)
 		{
-			ByteVectorCollection fields =
-				ByteVectorCollection.Split (data, (byte) 0);
-			
+			ByteVectorCollection fields = ByteVectorCollection.Split(data, (byte) 0);
+
 			if (fields.Count != 2)
 				return;
-			
-			owner = fields [0].ToString (StringType.Latin1);
-			identifier = fields [1];
+
+			owner = fields[0].ToString(StringType.Latin1);
+			identifier = fields[1];
 		}
-		
+
 		/// <summary>
 		///    Renders the values in the current instance into field
 		///    data for a specified version.
@@ -287,23 +277,22 @@ namespace TagLib.Id3v2
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered field data.
 		/// </returns>
-		protected override ByteVector RenderFields (byte version)
+		protected override ByteVector RenderFields(byte version)
 		{
-			ByteVector data = new ByteVector ();
-			
-			data.Add (ByteVector.FromString (owner, StringType.Latin1));
-			data.Add (ByteVector.TextDelimiter (StringType.Latin1));
-			data.Add (identifier);
-			
+			ByteVector data = new ByteVector();
+
+			data.Add(ByteVector.FromString(owner, StringType.Latin1));
+			data.Add(ByteVector.TextDelimiter(StringType.Latin1));
+			data.Add(identifier);
+
 			return data;
 		}
-		
-#endregion
-		
-		
-		
-#region ICloneable
-		
+
+		#endregion
+
+
+		#region ICloneable
+
 		/// <summary>
 		///    Creates a deep copy of the current instance.
 		/// </summary>
@@ -311,15 +300,15 @@ namespace TagLib.Id3v2
 		///    A new <see cref="Frame" /> object identical to the
 		///    current instance.
 		/// </returns>
-		public override Frame Clone ()
+		public override Frame Clone()
 		{
-			UniqueFileIdentifierFrame frame =
-				new UniqueFileIdentifierFrame (owner);
+			UniqueFileIdentifierFrame frame = new UniqueFileIdentifierFrame(owner);
 			if (identifier != null)
-				frame.identifier = new ByteVector (identifier);
+				frame.identifier = new ByteVector(identifier);
+
 			return frame;
 		}
-		
-#endregion
+
+		#endregion
 	}
 }

@@ -21,8 +21,6 @@
 // USA
 //
 
-using System;
-
 namespace TagLib.Id3v2
 {
 	/// <summary>
@@ -35,7 +33,7 @@ namespace TagLib.Id3v2
 	/// </remarks>
 	public class TermsOfUseFrame : Frame
 	{
-#region Private Fields
+		#region Private Fields
 		
 		/// <summary>
 		///    Contains the text encoding to use when rendering the
@@ -54,12 +52,11 @@ namespace TagLib.Id3v2
 		/// </summary>
 		private string text = null;
 		
-#endregion
-		
-		
-		
-#region Constructors
-		
+		#endregion
+
+
+		#region Constructors
+
 		/// <summary>
 		///    Constructs and intializes a new instance of <see
 		///    cref="TermsOfUseFrame" /> with a specified language and
@@ -78,13 +75,13 @@ namespace TagLib.Id3v2
 		///    the tag. Consider using <see cref="Get" /> for more
 		///    integrated frame creation.
 		/// </remarks>
-		public TermsOfUseFrame (string language, StringType encoding)
-			: base (FrameType.USER, 4)
+		public TermsOfUseFrame(string language, StringType encoding)
+			: base(FrameType.USER, 4)
 		{
 			this.encoding = encoding;
 			this.language = language;
 		}
-		
+
 		/// <summary>
 		///    Constructs and intializes a new instance of <see
 		///    cref="TermsOfUseFrame" /> with a specified language.
@@ -98,12 +95,12 @@ namespace TagLib.Id3v2
 		///    the tag. Consider using <see cref="Get" /> for more
 		///    integrated frame creation.
 		/// </remarks>
-		public TermsOfUseFrame (string language)
-			: base (FrameType.USER, 4)
+		public TermsOfUseFrame(string language)
+			: base(FrameType.USER, 4)
 		{
 			this.language = language;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="TermsOfUseFrame" /> by reading its raw data in a
@@ -117,12 +114,12 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    raw frame is encoded in.
 		/// </param>
-		public TermsOfUseFrame (ByteVector data, byte version)
-			: base (data, version)
+		public TermsOfUseFrame(ByteVector data, byte version)
+			: base(data, version)
 		{
-			SetData (data, 0, version, true);
+			SetData(data, 0, version, true);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="TermsOfUseFrame" /> by reading its raw data in a
@@ -144,20 +141,17 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    raw frame is encoded in.
 		/// </param>
-		protected internal TermsOfUseFrame (ByteVector data, int offset,
-		                                    FrameHeader header,
-		                                    byte version)
-			: base (header)
+		protected internal TermsOfUseFrame(ByteVector data, int offset, FrameHeader header, byte version)
+			: base(header)
 		{
-			SetData (data, offset, version, false);
+			SetData(data, offset, version, false);
 		}
-		
-#endregion
-		
-		
-		
-#region Public Properties
-		
+
+		#endregion
+
+
+		#region Public Properties
+
 		/// <summary>
 		///    Gets and sets the text encoding to use when storing the
 		///    current instance.
@@ -172,11 +166,12 @@ namespace TagLib.Id3v2
 		///    langword="true" /> or the render version does not support
 		///    it.
 		/// </remarks>
-		public StringType TextEncoding {
-			get {return encoding;}
-			set {encoding = value;}
+		public StringType TextEncoding
+		{
+			get { return encoding; }
+			set { encoding = value; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the ISO-639-2 language code stored in the
 		///    current instance.
@@ -189,14 +184,18 @@ namespace TagLib.Id3v2
 		///    There should only be one file with a matching 
 		///    ISO-639-2 language code per tag.
 		/// </remarks>
-		public string Language {
-			get {
+		public string Language
+		{
+			get
+			{
 				return (language != null && language.Length > 2)
-					? language.Substring (0, 3) : "XXX";
+					? language.Substring(0, 3)
+					: "XXX";
 			}
-			set {language = value;}
+
+			set { language = value; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the terms of use stored in the current
 		///    instance.
@@ -205,34 +204,33 @@ namespace TagLib.Id3v2
 		///    A <see cref="string" /> object containing the terms of
 		///    use.
 		/// </value>
-		public string Text {
-			get {return text;}
-			set {text = value;}
+		public string Text
+		{
+			get { return text; }
+			set { text = value; }
 		}
-		
-#endregion
-		
-		
-		
-#region Public Methods
-		
+
+		#endregion
+
+
+		#region Public Methods
+
 		/// <summary>
 		///    Gets a string representation of the current instance.
 		/// </summary>
 		/// <returns>
 		///    A <see cref="string" /> containing the terms of use.
 		/// </returns>
-		public override string ToString ()
+		public override string ToString()
 		{
 			return text;
 		}
-		
-#endregion
-		
-		
-		
-#region Public Static Methods
-		
+
+		#endregion
+
+
+		#region Public Static Methods
+
 		/// <summary>
 		///    Gets a specified terms of use frame from the specified
 		///    tag, optionally creating it if it does not exist.
@@ -254,25 +252,24 @@ namespace TagLib.Id3v2
 		///    wasn't found and <paramref name="create" /> is <see
 		///    langword="false" />.
 		/// </returns>
-		public static TermsOfUseFrame Get (Tag tag, string language,
-		                                   bool create)
+		public static TermsOfUseFrame Get(Tag tag, string language, bool create)
 		{
-			foreach (Frame f in tag.GetFrames (FrameType.USER)) {
+			foreach (Frame f in tag.GetFrames(FrameType.USER))
+			{
 				TermsOfUseFrame cf = f as TermsOfUseFrame;
-				
-				if (cf != null && (language == null ||
-					language == cf.Language))
+
+				if (cf != null && (language == null || language == cf.Language))
 					return cf;
 			}
-			
+
 			if (!create)
 				return null;
-			
-			TermsOfUseFrame frame = new TermsOfUseFrame (language);
-			tag.AddFrame (frame);
+
+			TermsOfUseFrame frame = new TermsOfUseFrame(language);
+			tag.AddFrame(frame);
 			return frame;
 		}
-		
+
 		/// <summary>
 		///    Gets a specified terms of use frame from the specified
 		///    tag, trying to to match the language but accepting one
@@ -290,31 +287,30 @@ namespace TagLib.Id3v2
 		///    matching frame, or <see langword="null" /> if a match
 		///    wasn't found.
 		/// </returns>
-		public static TermsOfUseFrame GetPreferred (Tag tag,
-		                                            string language)
+		public static TermsOfUseFrame GetPreferred(Tag tag, string language)
 		{
 			TermsOfUseFrame best = null;
-			foreach (Frame f in tag.GetFrames (FrameType.USER)) {
+			foreach (Frame f in tag.GetFrames(FrameType.USER))
+			{
 				TermsOfUseFrame cf = f as TermsOfUseFrame;
 				if (cf == null)
 					continue;
-				
+
 				if (cf.Language == language)
 					return cf;
-				
+
 				if (best == null)
 					best = cf;
 			}
-			
+
 			return best;
 		}
-		
-#endregion
-		
-		
-		
-#region Protected Methods
-		
+
+		#endregion
+
+
+		#region Protected Methods
+
 		/// <summary>
 		///    Populates the values in the current instance by parsing
 		///    its field data in a specified version.
@@ -327,18 +323,16 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    field data is encoded in.
 		/// </param>
-		protected override void ParseFields (ByteVector data,
-		                                     byte version)
+		protected override void ParseFields(ByteVector data, byte version)
 		{
 			if (data.Count < 4)
-				throw new CorruptFileException (
-					"Not enough bytes in field.");
-			
-			encoding = (StringType) data [0];
-			language = data.ToString (StringType.Latin1, 1, 3);
-			text = data.ToString (encoding, 4, data.Count - 4);
+				throw new CorruptFileException("Not enough bytes in field.");
+
+			encoding = (StringType) data[0];
+			language = data.ToString(StringType.Latin1, 1, 3);
+			text = data.ToString(encoding, 4, data.Count - 4);
 		}
-		
+
 		/// <summary>
 		///    Renders the values in the current instance into field
 		///    data for a specified version.
@@ -351,26 +345,23 @@ namespace TagLib.Id3v2
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered field data.
 		/// </returns>
-		protected override ByteVector RenderFields (byte version)
+		protected override ByteVector RenderFields(byte version)
 		{
-			StringType encoding = CorrectEncoding (TextEncoding,
-				version);
-			ByteVector v = new ByteVector ();
-			
-			v.Add ((byte) encoding);
-			v.Add (ByteVector.FromString (Language,
-				StringType.Latin1));
-			v.Add (ByteVector.FromString (text, encoding));
-			
+			StringType encoding = CorrectEncoding(TextEncoding, version);
+			ByteVector v = new ByteVector();
+
+			v.Add((byte) encoding);
+			v.Add(ByteVector.FromString(Language, StringType.Latin1));
+			v.Add(ByteVector.FromString(text, encoding));
+
 			return v;
 		}
-		
-#endregion
-		
-		
-		
-#region ICloneable
-		
+
+		#endregion
+
+
+		#region ICloneable
+
 		/// <summary>
 		///    Creates a deep copy of the current instance.
 		/// </summary>
@@ -378,13 +369,13 @@ namespace TagLib.Id3v2
 		///    A new <see cref="Frame" /> object identical to the
 		///    current instance.
 		/// </returns>
-		public override Frame Clone ()
+		public override Frame Clone()
 		{
-			TermsOfUseFrame frame = new TermsOfUseFrame (language, encoding);
+			TermsOfUseFrame frame = new TermsOfUseFrame(language, encoding);
 			frame.text = text;
 			return frame;
 		}
-		
-#endregion
+
+		#endregion
 	}
 }

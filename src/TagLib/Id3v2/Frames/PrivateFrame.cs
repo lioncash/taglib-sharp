@@ -21,10 +21,10 @@
 // USA
 //
 
-using System.Collections;
 using System;
 
-namespace TagLib.Id3v2 {	
+namespace TagLib.Id3v2
+{
 	/// <summary>
 	///    This class extends <see cref="Frame" />, implementing support for
 	///    ID3v2 Private (PRIV) Frames.
@@ -47,24 +47,24 @@ namespace TagLib.Id3v2 {
 	///
 	/// public static class DbUtil
 	/// {
-	/// 	public static void StoreDatabaseEntry (Tag tag, ISerializable dbEntry)
-	/// 	{
-	/// 		StringWriter data = new StringWriter (new StringBuilder ());
-	/// 		XmlSerializer serializer = new XmlSerializer (dbEntry.GetType ());
-	/// 		serializer.Serialize (data, dbEntry);
-	/// 		PrivateFrame frame = PrivateFrame.Get (tag, "org.MyProgram.DatabaseEntry", true);
-	/// 		frame.PrivateData = Encoding.UTF8.GetBytes (data.ToString ());
-	/// 	}
-	/// 	
-	/// 	public static object GetDatabaseEntry (Tag tag, Type type)
-	/// 	{
-	/// 		PrivateFrame frame = PrivateFrame.Get (tag, "org.MyProgram.DatabaseEntry", false);
-	/// 		if (frame == null)
-	/// 			return null;
-	/// 	
-	/// 		XmlSerializer serializer = new XmlSerializer (type);
-	/// 		return serializer.Deserialize (new MemoryStream (frame.PrivateData));
-	/// 	}
+	///     public static void StoreDatabaseEntry (Tag tag, ISerializable dbEntry)
+	///     {
+	///         StringWriter data = new StringWriter (new StringBuilder ());
+	///         XmlSerializer serializer = new XmlSerializer (dbEntry.GetType ());
+	///         serializer.Serialize (data, dbEntry);
+	///         PrivateFrame frame = PrivateFrame.Get (tag, "org.MyProgram.DatabaseEntry", true);
+	///         frame.PrivateData = Encoding.UTF8.GetBytes (data.ToString ());
+	///     }
+	///
+	///     public static object GetDatabaseEntry (Tag tag, Type type)
+	///     {
+	///         PrivateFrame frame = PrivateFrame.Get (tag, "org.MyProgram.DatabaseEntry", false);
+	///         if (frame == null)
+	///             return null;
+	///
+	///         XmlSerializer serializer = new XmlSerializer (type);
+	///         return serializer.Deserialize (new MemoryStream (frame.PrivateData));
+	///     }
 	/// }
 	///    </code>
 	///    <code lang="C++">
@@ -82,24 +82,24 @@ namespace TagLib.Id3v2 {
 	/// public ref class DbUtil abstract sealed
 	/// {
 	/// public:
-	/// 	static void StoreDatabaseEntry (Tag^ tag, ISerializable^ dbEntry)
-	/// 	{
-	/// 		StringWriter^ data = gcnew StringWriter (gcnew StringBuilder);
-	/// 		XmlSerializer serializer = gcnew XmlSerializer (dbEntry->GetType ());
-	/// 		serializer->Serialize (data, dbEntry);
-	/// 		PrivateFrame frame = PrivateFrame::Get (tag, L"org.MyProgram.DatabaseEntry", true);
-	/// 		frame.PrivateData = Encoding::UTF8->GetBytes (data->ToString ());
-	/// 	}
-	/// 	
-	/// 	static Object^ GetDatabaseEntry (Tag^ tag, Type^ type)
-	/// 	{
-	/// 		PrivateFrame^ frame = PrivateFrame::Get (tag, L"org.MyProgram.DatabaseEntry", false);
-	/// 		if (frame == null)
-	/// 			return null;
-	/// 	
-	/// 		XmlSerializer serializer = gcnew XmlSerializer (type);
-	/// 		return serializer->Deserialize (gcnew MemoryStream (frame->PrivateData));
-	/// 	}
+	///     static void StoreDatabaseEntry (Tag^ tag, ISerializable^ dbEntry)
+	///     {
+	///         StringWriter^ data = gcnew StringWriter (gcnew StringBuilder);
+	///         XmlSerializer serializer = gcnew XmlSerializer (dbEntry->GetType ());
+	///         serializer->Serialize (data, dbEntry);
+	///         PrivateFrame frame = PrivateFrame::Get (tag, L"org.MyProgram.DatabaseEntry", true);
+	///         frame.PrivateData = Encoding::UTF8->GetBytes (data->ToString ());
+	///     }
+	///
+	///     static Object^ GetDatabaseEntry (Tag^ tag, Type^ type)
+	///     {
+	///         PrivateFrame^ frame = PrivateFrame::Get (tag, L"org.MyProgram.DatabaseEntry", false);
+	///         if (frame == null)
+	///             return null;
+	///
+	///         XmlSerializer serializer = gcnew XmlSerializer (type);
+	///         return serializer->Deserialize (gcnew MemoryStream (frame->PrivateData));
+	///     }
 	/// }
 	///    </code>
 	///    <code lang="VB">
@@ -111,21 +111,21 @@ namespace TagLib.Id3v2 {
 	/// Imports TagLib.Id3v2
 	///
 	/// Public Shared Class DbUtil
-	/// 	Public Shared Sub StoreDatabaseEntry (tag As Tag, dbEntry As ISerializable)
-	/// 		Dim data As New StringWriter (New StringBuilder ())
-	/// 		Dim serializer As New XmlSerializer (dbEntry.GetType ())
-	/// 		serializer.Serialize (data, dbEntry)
-	/// 		Dim frame As PrivateFrame = PrivateFrame.Get (tag, "org.MyProgram.DatabaseEntry", True)
-	/// 		frame.PrivateData = Encoding.UTF8.GetBytes (data.ToString ())
-	/// 	End Sub
-	/// 	
-	/// 	Public Shared Sub GetDatabaseEntry (tag As Tag, type As Type)
-	/// 		Dim frame As PrivateFrame = PrivateFrame.Get (tag, "org.MyProgram.DatabaseEntry", False)
-	/// 		If frame Is Nothing Then Return Nothing
-	/// 	
-	/// 		Dim serializer As XmlSerializer = New XmlSerializer (type)
-	/// 		Return serializer.Deserialize (New MemoryStream (frame.PrivateData))
-	/// 	End Sub
+	///     Public Shared Sub StoreDatabaseEntry (tag As Tag, dbEntry As ISerializable)
+	///         Dim data As New StringWriter (New StringBuilder ())
+	///         Dim serializer As New XmlSerializer (dbEntry.GetType ())
+	///         serializer.Serialize (data, dbEntry)
+	///         Dim frame As PrivateFrame = PrivateFrame.Get (tag, "org.MyProgram.DatabaseEntry", True)
+	///         frame.PrivateData = Encoding.UTF8.GetBytes (data.ToString ())
+	///     End Sub
+	///
+	///     Public Shared Sub GetDatabaseEntry (tag As Tag, type As Type)
+	///         Dim frame As PrivateFrame = PrivateFrame.Get (tag, "org.MyProgram.DatabaseEntry", False)
+	///         If frame Is Nothing Then Return Nothing
+	///
+	///         Dim serializer As XmlSerializer = New XmlSerializer (type)
+	///         Return serializer.Deserialize (New MemoryStream (frame.PrivateData))
+	///     End Sub
 	/// End Class
 	///    </code>
 	///    <code lang="Boo">
@@ -137,20 +137,20 @@ namespace TagLib.Id3v2 {
 	/// import TagLib.Id3v2
 	/// 
 	/// public static class DbUtil:
-	/// 	static def StoreDatabaseEntry (tag as Tag, dbEntry as ISerializable):
-	/// 		data as StringWriter = StringWriter (StringBuilder ())
-	/// 		serializer as XmlSerializer = XmlSerializer (dbEntry.GetType ())
-	/// 		serializer.Serialize (data, dbEntry)
-	/// 		frame as PrivateFrame = PrivateFrame.Get (tag, "org.MyProgram.DatabaseEntry", true)
-	/// 		frame.PrivateData = Encoding.UTF8.GetBytes (data.ToString ())
-	///	
-	/// 	static def GetDatabaseEntry (tag As Tag, type As Type):
-	/// 		frame as PrivateFrame = PrivateFrame.Get (tag, "org.MyProgram.DatabaseEntry", false)
-	/// 		if frame == null:
-	///			return null
-	/// 		
-	/// 		serializer as XmlSerializer = XmlSerializer (type)
-	/// 		return serializer.Deserialize (MemoryStream (frame.PrivateData))
+	///     static def StoreDatabaseEntry (tag as Tag, dbEntry as ISerializable):
+	///         data as StringWriter = StringWriter (StringBuilder ())
+	///         serializer as XmlSerializer = XmlSerializer (dbEntry.GetType ())
+	///         serializer.Serialize (data, dbEntry)
+	///         frame as PrivateFrame = PrivateFrame.Get (tag, "org.MyProgram.DatabaseEntry", true)
+	///         frame.PrivateData = Encoding.UTF8.GetBytes (data.ToString ())
+	///
+	///     static def GetDatabaseEntry (tag As Tag, type As Type):
+	///         frame as PrivateFrame = PrivateFrame.Get (tag, "org.MyProgram.DatabaseEntry", false)
+	///         if frame == null:
+	///             return null
+	///
+	///         serializer as XmlSerializer = XmlSerializer (type)
+	///         return serializer.Deserialize (MemoryStream (frame.PrivateData))
 	///    </code>
 	/// </example>
 	public class PrivateFrame : Frame
@@ -160,19 +160,18 @@ namespace TagLib.Id3v2 {
 		/// <summary>
 		///    Contains the owner of the current instance.
 		/// </summary>
-		private string owner = null;
+		private string owner;
 		
 		/// <summary>
 		///    Contains private data stored in the current instance.
 		/// </summary>
-		private ByteVector data  = null;
+		private ByteVector data;
 		
 		#endregion
-		
-		
-		
+
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="PrivateFrame" /> for a specified owner and data.
@@ -190,13 +189,12 @@ namespace TagLib.Id3v2 {
 		///    the tag. Consider using <see cref="Get" /> for more
 		///    integrated frame creation.
 		/// </remarks>
-		public PrivateFrame (string owner, ByteVector data)
-			: base (FrameType.PRIV, 4)
+		public PrivateFrame(string owner, ByteVector data) : base(FrameType.PRIV, 4)
 		{
 			this.owner = owner;
-			this.data  = data;
+			this.data = data;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="PrivateFrame" /> without data for a specified
@@ -211,10 +209,10 @@ namespace TagLib.Id3v2 {
 		///    the tag. Consider using <see cref="Get" /> for more
 		///    integrated frame creation.
 		/// </remarks>
-		public PrivateFrame (string owner) : this (owner, null)
+		public PrivateFrame(string owner) : this(owner, null)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="PrivateFrame" /> by reading its raw data in a
@@ -228,12 +226,11 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    raw frame is encoded in.
 		/// </param>
-		public PrivateFrame (ByteVector data, byte version)
-			: base (data, version)
+		public PrivateFrame(ByteVector data, byte version) : base(data, version)
 		{
-			SetData (data, 0, version, true);
+			SetData(data, 0, version, true);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="PrivateFrame" /> by reading its raw data in a
@@ -255,19 +252,16 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    raw frame is encoded in.
 		/// </param>
-		protected internal PrivateFrame (ByteVector data, int offset,
-		                                 FrameHeader header,
-		                                 byte version) : base(header)
+		protected internal PrivateFrame(ByteVector data, int offset, FrameHeader header, byte version) : base(header)
 		{
-			SetData (data, offset, version, false);
+			SetData(data, offset, version, false);
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the owner of the current instance.
 		/// </summary>
@@ -279,10 +273,11 @@ namespace TagLib.Id3v2 {
 		///    There should only be one frame with a given owner per
 		///    tag.
 		/// </remarks>
-		public string Owner {
-			get {return owner;}
+		public string Owner
+		{
+			get { return owner; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the private data stored in the current
 		///    instance.
@@ -291,17 +286,17 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="ByteVector" /> containing the private data
 		///    stored in the current instance.
 		/// </value>
-		public ByteVector PrivateData {
-			get {return data;}
-			set {data = value;}
+		public ByteVector PrivateData
+		{
+			get { return data; }
+			set { data = value; }
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
 		#region Public Static Methods
-		
+
 		/// <summary>
 		///    Gets a specified private frame from the specified tag,
 		///    optionally creating it if it does not exist.
@@ -322,31 +317,30 @@ namespace TagLib.Id3v2 {
 		///    wasn't found and <paramref name="create" /> is <see
 		///    langword="false" />.
 		/// </returns>
-		public static PrivateFrame Get (Tag tag, string owner,
-		                                bool create)
+		public static PrivateFrame Get(Tag tag, string owner, bool create)
 		{
 			PrivateFrame priv;
-			
-			foreach (Frame frame in tag.GetFrames (FrameType.PRIV)) {
+
+			foreach (Frame frame in tag.GetFrames(FrameType.PRIV))
+			{
 				priv = frame as PrivateFrame;
 				if (priv != null && priv.Owner == owner)
 					return priv;
 			}
-			
+
 			if (!create)
 				return null;
-			
-			priv = new PrivateFrame (owner);
-			tag.AddFrame (priv);
+
+			priv = new PrivateFrame(owner);
+			tag.AddFrame(priv);
 			return priv;
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
 		#region Protected Methods
-		
+
 		/// <summary>
 		///    Populates the values in the current instance by parsing
 		///    its field data in a specified version.
@@ -359,23 +353,23 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    field data is encoded in.
 		/// </param>
-		protected override void ParseFields (ByteVector data, byte version)
+		protected override void ParseFields(ByteVector data, byte version)
 		{
 			if (data.Count < 1)
-				throw new CorruptFileException (
-					"A private frame must contain at least 1 byte.");
-			
-			ByteVectorCollection l = ByteVectorCollection.Split (
+				throw new CorruptFileException("A private frame must contain at least 1 byte.");
+
+			ByteVectorCollection l = ByteVectorCollection.Split(
 				data,
-				ByteVector.TextDelimiter (StringType.Latin1),
+				ByteVector.TextDelimiter(StringType.Latin1),
 				1, 2);
-			
-			if (l.Count == 2) {
-				this.owner = l [0].ToString (StringType.Latin1);
-				this.data  = l [1];
+
+			if (l.Count == 2)
+			{
+				this.owner = l[0].ToString(StringType.Latin1);
+				this.data = l[1];
 			}
 		}
-		
+
 		/// <summary>
 		///    Renders the values in the current instance into field
 		///    data for a specified version.
@@ -407,11 +401,10 @@ namespace TagLib.Id3v2 {
 		}
 		
 #endregion
-		
-		
-		
-#region ICloneable
-		
+
+
+		#region ICloneable
+
 		/// <summary>
 		///    Creates a deep copy of the current instance.
 		/// </summary>
@@ -419,14 +412,14 @@ namespace TagLib.Id3v2 {
 		///    A new <see cref="Frame" /> object identical to the
 		///    current instance.
 		/// </returns>
-		public override Frame Clone ()
+		public override Frame Clone()
 		{
-			PrivateFrame frame = new PrivateFrame (owner);
+			PrivateFrame frame = new PrivateFrame(owner);
 			if (data != null)
-				frame.data = new ByteVector (data);
+				frame.data = new ByteVector(data);
 			return frame;
 		}
-		
-#endregion
+
+		#endregion
 	}
 }

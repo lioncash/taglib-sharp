@@ -30,7 +30,6 @@ namespace TagLib.IFD.Tags
 	/// </summary>
 	public enum NikonLensData3EntryTag : ushort
 	{
-
 		/// <summary>
 		///    Version. (Hex: 0X0000)
 		/// </summary>
@@ -100,6 +99,5 @@ namespace TagLib.IFD.Tags
 		///    Effective max aperture. (Hex: 0X0013)
 		/// </summary>
 		EffectiveMaxAperture                                = 19,
-
 	}
 }

@@ -34,7 +34,6 @@ namespace TagLib.IFD.Tags
 	/// </summary>
 	public enum NikonPreviewMakerNoteEntryTag : ushort
 	{
-
 		/// <summary>
 		///     Compression scheme used on the image data. (Hex: 0x0103)
 		///     http://www.awaresystems.be/imaging/tiff/tifftags/compression.html

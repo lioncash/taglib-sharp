@@ -84,16 +84,13 @@ namespace TagLib.Id3v2
 		///   </code>
 		/// </example>
 		/// <seealso cref="AddFrameCreator" />
-		public delegate Frame FrameCreator (ByteVector data, int offset,
-		                                    FrameHeader header,
-		                                    byte version);
+		public delegate Frame FrameCreator (ByteVector data, int offset, FrameHeader header, byte version);
 		
 		/// <summary>
 		///    Contains registered frame creators.
 		/// </summary>
-		private static List<FrameCreator> frame_creators =
-			new List<FrameCreator> ();
-		
+		private static List<FrameCreator> frame_creators = new List<FrameCreator> ();
+
 		/// <summary>
 		///    Creates a <see cref="Frame" /> object by reading it from
 		///    raw ID3v2 frame data.
@@ -124,134 +121,118 @@ namespace TagLib.Id3v2
 		///    The frame contained in the raw data could not be
 		///    converted to ID3v2 or uses encryption or compression.
 		/// </exception>
-		public static Frame CreateFrame (ByteVector data,
-		                                 ref int offset, byte version, bool alreadyUnsynched)
+		public static Frame CreateFrame(ByteVector data, ref int offset, byte version, bool alreadyUnsynched)
 		{
 			int position = offset;
-			
-			FrameHeader header = new FrameHeader (data.Mid (position,
-				(int) FrameHeader.Size (version)), version);
-			
-			offset += (int) (header.FrameSize + FrameHeader.Size (
-				version));
-			
+
+			FrameHeader header = new FrameHeader(data.Mid(position, (int) FrameHeader.Size(version)), version);
+
+			offset += (int) (header.FrameSize + FrameHeader.Size(version));
+
 			if (header.FrameId == null)
-				throw new System.NotImplementedException ();
-			
-			foreach (byte b in header.FrameId) {
+				throw new System.NotImplementedException();
+
+			foreach (byte b in header.FrameId)
+			{
 				char c = (char) b;
-					if ((c < 'A' || c > 'Z') &&
-						(c < '0' || c > '9'))
-						return null;
+				if ((c < 'A' || c > 'Z') &&
+				    (c < '0' || c > '9'))
+					return null;
 			}
 
-            if (alreadyUnsynched) {
-                // Mark the frame as not Unsynchronozed because the entire
-                // tag has already been Unsynchronized
-                header.Flags &= ~FrameFlags.Unsynchronisation;
-            }
-			
+			if (alreadyUnsynched)
+			{
+				// Mark the frame as not Unsynchronozed because the entire
+				// tag has already been Unsynchronized
+				header.Flags &= ~FrameFlags.Unsynchronisation;
+			}
+
 			// Windows Media Player may create zero byte frames.
 			// Just send them off as unknown and delete them.
-			if (header.FrameSize == 0) {
+			if (header.FrameSize == 0)
+			{
 				header.Flags |= FrameFlags.TagAlterPreservation;
-				return new UnknownFrame (data, position, header,
-					version);
+				return new UnknownFrame(data, position, header, version);
 			}
-			
+
 			// TODO: Support Compression.
 			if ((header.Flags & FrameFlags.Compression) != 0)
-				throw new System.NotImplementedException ();
-			
+				throw new System.NotImplementedException();
+
 			// TODO: Support Encryption.
 			if ((header.Flags & FrameFlags.Encryption) != 0)
-				throw new System.NotImplementedException ();
-			
-			foreach (FrameCreator creator in frame_creators) {
-				Frame frame = creator (data, position, header,
-					version);
-				
+				throw new System.NotImplementedException();
+
+			foreach (FrameCreator creator in frame_creators)
+			{
+				Frame frame = creator(data, position, header, version);
+
 				if (frame != null)
 					return frame;
 			}
-			
+
 			// This is where things get necissarily nasty.  Here we
 			// determine which Frame subclass (or if none is found
 			// simply an Frame) based on the frame ID. Since there
 			// are a lot of possibilities, that means a lot of if
 			// blocks.
-			
+
 			// Text Identification (frames 4.2)
 			if (header.FrameId == FrameType.TXXX)
-				return new UserTextInformationFrame (data,
-					position, header, version);
-			
-			if (header.FrameId [0] == (byte) 'T')
-				return new TextInformationFrame (data, position,
-					header, version);
-			
+				return new UserTextInformationFrame(data, position, header, version);
+
+			if (header.FrameId[0] == (byte) 'T')
+				return new TextInformationFrame(data, position, header, version);
+
 			// Unique File Identifier (frames 4.1)
 			if (header.FrameId == FrameType.UFID)
-				return new UniqueFileIdentifierFrame (data,
-					position, header, version);
-			
+				return new UniqueFileIdentifierFrame(data, position, header, version);
+
 			// Music CD Identifier (frames 4.5)
 			if (header.FrameId == FrameType.MCDI)
-				return new MusicCdIdentifierFrame (data,
-					position, header, version);
-			
+				return new MusicCdIdentifierFrame(data, position, header, version);
+
 			// Unsynchronized Lyrics (frames 4.8)
 			if (header.FrameId == FrameType.USLT)
-				return new UnsynchronisedLyricsFrame (data,
-					position, header, version);
-			
+				return new UnsynchronisedLyricsFrame(data, position, header, version);
+
 			// Synchronized Lyrics (frames 4.9)
 			if (header.FrameId == FrameType.SYLT)
-				return new SynchronisedLyricsFrame (data,
-					position, header, version);
-			
+				return new SynchronisedLyricsFrame(data, position, header, version);
+
 			// Comments (frames 4.10)
 			if (header.FrameId == FrameType.COMM)
-				return new CommentsFrame (data, position,
-					header, version);
-			
+				return new CommentsFrame(data, position, header, version);
+
 			// Relative Volume Adjustment (frames 4.11)
 			if (header.FrameId == FrameType.RVA2)
-				return new RelativeVolumeFrame (data, position,
-					header, version);
-			
+				return new RelativeVolumeFrame(data, position, header, version);
+
 			// Attached Picture (frames 4.14)
 			if (header.FrameId == FrameType.APIC)
-				return new AttachedPictureFrame (data, position,
-					header, version);
-			
+				return new AttachedPictureFrame(data, position, header, version);
+
 			// General Encapsulated Object (frames 4.15)
-			if(header.FrameId == FrameType.GEOB)
-				return new GeneralEncapsulatedObjectFrame (data,
-					position, header, version);
-			
+			if (header.FrameId == FrameType.GEOB)
+				return new GeneralEncapsulatedObjectFrame(data, position, header, version);
+
 			// Play Count (frames 4.16)
-			if(header.FrameId == FrameType.PCNT)
-				return new PlayCountFrame (data, position,
-					header, version);
-			
+			if (header.FrameId == FrameType.PCNT)
+				return new PlayCountFrame(data, position, header, version);
+
 			// Play Count (frames 4.17)
-			if(header.FrameId == FrameType.POPM)
-				return new PopularimeterFrame (data, position,
-					header, version);
-			
+			if (header.FrameId == FrameType.POPM)
+				return new PopularimeterFrame(data, position, header, version);
+
 			// Terms of Use (frames 4.22)
-			if(header.FrameId == FrameType.USER)
-				return new TermsOfUseFrame (data, position,
-					header, version);
-			
+			if (header.FrameId == FrameType.USER)
+				return new TermsOfUseFrame(data, position, header, version);
+
 			// Private (frames 4.27)
 			if (header.FrameId == FrameType.PRIV)
-				return new PrivateFrame (data, position, header,
-					version);
-			
-			return new UnknownFrame (data, position, header,
-				version);
+				return new PrivateFrame(data, position, header, version);
+
+			return new UnknownFrame(data, position, header, version);
 		}
 
 		/// <summary>
@@ -271,13 +252,12 @@ namespace TagLib.Id3v2
 		/// <exception cref="System.ArgumentNullException">
 		///    <paramref name="creator" /> is <see langword="null" />.
 		/// </exception>
-		public static void AddFrameCreator (FrameCreator creator)
+		public static void AddFrameCreator(FrameCreator creator)
 		{
 			if (creator == null)
-				throw new System.ArgumentNullException (
-					"creator");
-			
-			frame_creators.Insert (0, creator);
+				throw new System.ArgumentNullException("creator");
+
+			frame_creators.Insert(0, creator);
 		}
 	}
 }

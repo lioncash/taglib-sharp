@@ -30,7 +30,6 @@ namespace TagLib.IFD.Tags
 	/// </summary>
 	public enum NikonVibrationReductionEntryTag : ushort
 	{
-
 		/// <summary>
 		///    Version. (Hex: 0X0000)
 		/// </summary>
@@ -40,6 +39,5 @@ namespace TagLib.IFD.Tags
 		///    Vibration reduction. (Hex: 0X0004)
 		/// </summary>
 		VibrationReduction                                  = 4,
-
 	}
 }

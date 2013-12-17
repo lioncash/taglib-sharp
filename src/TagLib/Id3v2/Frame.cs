@@ -27,7 +27,8 @@
 
 using System;
 
-namespace TagLib.Id3v2 {
+namespace TagLib.Id3v2
+{
 	/// <summary>
 	///    This abstract class provides a basic framework for representing
 	///    ID3v2.4 frames.
@@ -52,9 +53,8 @@ namespace TagLib.Id3v2 {
 		private byte encryption_id;
 		
 		#endregion
-		
-		
-		
+
+
 		#region Constructors
 		
 		/// <summary>
@@ -104,9 +104,8 @@ namespace TagLib.Id3v2 {
 		}
 		
 		#endregion
-		
-		
-		
+
+
 		#region Public Properties
 		
 		/// <summary>
@@ -211,9 +210,8 @@ namespace TagLib.Id3v2 {
 		}
 		
 		#endregion
-		
-		
-		
+
+
 		#region Public Methods
 		
 		/// <summary>
@@ -294,9 +292,8 @@ namespace TagLib.Id3v2 {
 		}
 		
 		#endregion
-		
-		
-		
+
+
 		#region Public Static Methods
 		
 		/// <summary>
@@ -317,11 +314,10 @@ namespace TagLib.Id3v2 {
 		}
 		
 		#endregion
-		
-		
-		
+
+
 		#region Protected Methods
-		
+
 		/// <summary>
 		///    Converts an encoding to be a supported encoding for a
 		///    specified tag version.
@@ -340,16 +336,16 @@ namespace TagLib.Id3v2 {
 		///    cref="Tag.ForceDefaultEncoding" /> and what is supported
 		///    by <paramref name="version" />.
 		/// </returns>
-		protected static StringType CorrectEncoding (StringType type,
-		                                             byte version)
+		protected static StringType CorrectEncoding(StringType type, byte version)
 		{
 			if (Tag.ForceDefaultEncoding)
 				type = Tag.DefaultEncoding;
-			
-			return (version < 4 && type == StringType.UTF8) ?
-				StringType.UTF16 : type;
+
+			return (version < 4 && type == StringType.UTF8)
+				? StringType.UTF16
+				: type;
 		}
-		
+
 		/// <summary>
 		///    Populates the current instance by reading the raw frame
 		///    from disk, optionally reading the header.
@@ -370,15 +366,14 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="bool" /> value indicating whether or not to
 		///    read the header into current instance.
 		/// </param>
-		protected void SetData (ByteVector data, int offset,
-		                        byte version, bool readHeader)
+		protected void SetData(ByteVector data, int offset, byte version, bool readHeader)
 		{
 			if (readHeader)
-				header = new FrameHeader (data, version);
-			ParseFields (FieldData (data, offset, version),
-				version);
+				header = new FrameHeader(data, version);
+
+			ParseFields(FieldData(data, offset, version), version);
 		}
-		
+
 		/// <summary>
 		///    Populates the values in the current instance by parsing
 		///    its field data in a specified version.
@@ -391,9 +386,8 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    field data is encoded in.
 		/// </param>
-		protected abstract void ParseFields (ByteVector data,
-		                                     byte version);
-		
+		protected abstract void ParseFields(ByteVector data, byte version);
+
 		/// <summary>
 		///    Renders the values in the current instance into field
 		///    data for a specified version.
@@ -406,8 +400,8 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="ByteVector" /> object containing the
 		///    rendered field data.
 		/// </returns>
-		protected abstract ByteVector RenderFields (byte version);
-		
+		protected abstract ByteVector RenderFields(byte version);
+
 		/// <summary>
 		///    Extracts the field data from the raw data portion of an
 		///    ID3v2 frame.
@@ -435,58 +429,58 @@ namespace TagLib.Id3v2 {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="frameData" /> is <see langword="null" />.
 		/// </exception>
-		protected ByteVector FieldData (ByteVector frameData,
-		                                int offset, byte version)
+		protected ByteVector FieldData(ByteVector frameData, int offset, byte version)
 		{
 			if (frameData == null)
-				throw new ArgumentNullException ("frameData");
-			
-			int data_offset = offset + (int) FrameHeader.Size (version);
+				throw new ArgumentNullException("frameData");
+
+			int data_offset = offset + (int) FrameHeader.Size(version);
 			int data_length = (int) Size;
 
-			if ((Flags & (FrameFlags.Compression |
-				FrameFlags.DataLengthIndicator)) != 0) {
+			if ((Flags & (FrameFlags.Compression |  FrameFlags.DataLengthIndicator)) != 0)
+			{
 				data_offset += 4;
 				data_length -= 4;
 			}
-			
-			if ((Flags & FrameFlags.GroupingIdentity) != 0) {
+
+			if ((Flags & FrameFlags.GroupingIdentity) != 0)
+			{
 				if (frameData.Count >= data_offset)
-					throw new TagLib.CorruptFileException (
-						"Frame data incomplete.");
-				group_id = frameData [data_offset++];
-				data_length--;
-			}
-			
-			if ((Flags & FrameFlags.Encryption) != 0) {
-				if (frameData.Count >= data_offset)
-					throw new TagLib.CorruptFileException (
-						"Frame data incomplete.");
-				encryption_id = frameData [data_offset++];
+					throw new TagLib.CorruptFileException("Frame data incomplete.");
+
+				group_id = frameData[data_offset++];
 				data_length--;
 			}
 
-			data_length = Math.Min (data_length, frameData.Count - data_offset);
-			if (data_length < 0 )
-				throw new CorruptFileException (
-					"Frame size less than zero.");
-			
-			ByteVector data = frameData.Mid (data_offset,
-				data_length);
+			if ((Flags & FrameFlags.Encryption) != 0)
+			{
+				if (frameData.Count >= data_offset)
+					throw new TagLib.CorruptFileException("Frame data incomplete.");
 
-            if ((Flags & FrameFlags.Unsynchronisation) != 0) {
-                int before_length = data.Count;
-				SynchData.ResynchByteVector (data);
-                data_length -= (data.Count - before_length);
-            }
-			
+				encryption_id = frameData[data_offset++];
+				data_length--;
+			}
+
+			data_length = Math.Min(data_length, frameData.Count - data_offset);
+			if (data_length < 0)
+				throw new CorruptFileException("Frame size less than zero.");
+
+			ByteVector data = frameData.Mid(data_offset, data_length);
+
+			if ((Flags & FrameFlags.Unsynchronisation) != 0)
+			{
+				int before_length = data.Count;
+				SynchData.ResynchByteVector(data);
+				data_length -= (data.Count - before_length);
+			}
+
 			// FIXME: Implement encryption.
 			if ((Flags & FrameFlags.Encryption) != 0)
-				throw new NotImplementedException ();
-			
+				throw new NotImplementedException();
+
 			// FIXME: Implement compression.
 			if ((Flags & FrameFlags.Compression) != 0)
-				throw new NotImplementedException ();
+				throw new NotImplementedException();
 			/*
 			if(d->header->compression()) {
 				ByteVector data(frameDataLength);
@@ -498,16 +492,15 @@ namespace TagLib.Id3v2 {
 				return data;
 			}
 			*/
-			
+
 			return data;
 		}
-		
-#endregion
-		
-		
-		
-#region ICloneable
-		
+
+		#endregion
+
+
+		#region ICloneable
+
 		/// <summary>
 		///    Creates a deep copy of the current instance.
 		/// </summary>
@@ -522,18 +515,18 @@ namespace TagLib.Id3v2 {
 		///    frame. As such, this method should be overridden by
 		///    child classes.
 		/// </remarks>
-		public virtual Frame Clone ()
+		public virtual Frame Clone()
 		{
 			int index = 0;
-			return FrameFactory.CreateFrame (Render (4), ref index,
+			return FrameFactory.CreateFrame(Render(4), ref index,
 				4, false);
 		}
-		
-		object ICloneable.Clone ()
+
+		object ICloneable.Clone()
 		{
-			return Clone ();
+			return Clone();
 		}
-		
-#endregion
+
+		#endregion
 	}
 }

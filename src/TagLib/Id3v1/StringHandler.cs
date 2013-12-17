@@ -25,7 +25,6 @@
 // USA
 //
 
-using System.Collections;
 using System;
 
 namespace TagLib.Id3v1
@@ -48,16 +47,16 @@ namespace TagLib.Id3v1
 		///    A <see cref="string"/> object containing the converted
 		///    text.
 		/// </returns>
-		public virtual string Parse (ByteVector data)
+		public virtual string Parse(ByteVector data)
 		{
 			if (data == null)
-				throw new ArgumentNullException ("data");
-			
-			string output = data.ToString (StringType.Latin1).Trim ();
-			int i = output.IndexOf ('\0');
-			return (i >= 0) ? output.Substring (0, i) : output;
+				throw new ArgumentNullException("data");
+
+			string output = data.ToString(StringType.Latin1).Trim();
+			int i = output.IndexOf('\0');
+			return (i >= 0) ? output.Substring(0, i) : output;
 		}
-		
+
 		/// <summary>
 		///    Converts a <see cref="string" /> object to raw ID3v1 text
 		///    data.
@@ -69,9 +68,9 @@ namespace TagLib.Id3v1
 		///    A <see cref="ByteVector"/> containing the raw ID3v1 text
 		///    data.
 		/// </returns>
-		public virtual ByteVector Render (string text)
+		public virtual ByteVector Render(string text)
 		{
-			return ByteVector.FromString (text, StringType.Latin1);
+			return ByteVector.FromString(text, StringType.Latin1);
 		}
 	}
 }

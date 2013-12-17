@@ -32,7 +32,6 @@ namespace TagLib.IFD.Tags
 	/// </summary>
 	public enum GPSEntryTag : ushort
 	{
-
 		/// <summary>
 		///     Indicates the version of GPSInfoIFD. (Hex: 0x0000)
 		///     http://www.awaresystems.be/imaging/tiff/tifftags/privateifd/gps/gpsversionid.html

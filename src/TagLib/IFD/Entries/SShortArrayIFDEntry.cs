@@ -30,8 +30,7 @@ namespace TagLib.IFD.Entries
 	/// </summary>
 	public class SShortArrayIFDEntry : ArrayIFDEntry<short>
 	{
-
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Construcor.
@@ -48,9 +47,9 @@ namespace TagLib.IFD.Entries
 			Values = values;
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Renders the current instance to a <see cref="ByteVector"/>
@@ -71,19 +70,18 @@ namespace TagLib.IFD.Entries
 		/// <returns>
 		///    A <see cref="ByteVector"/> with the rendered data.
 		/// </returns>
-		public override ByteVector Render (bool is_bigendian, uint offset, out ushort type, out uint count)
+		public override ByteVector Render(bool is_bigendian, uint offset, out ushort type, out uint count)
 		{
 			type = (ushort) IFDEntryType.SShort;
 			count = (uint) Values.Length;
 
-			ByteVector data = new ByteVector ();
+			ByteVector data = new ByteVector();
 			foreach (ushort value in Values)
-				data.Add (ByteVector.FromUShort ((ushort) value, is_bigendian));
+				data.Add(ByteVector.FromUShort((ushort) value, is_bigendian));
 
 			return data;
 		}
 
-#endregion
-
+		#endregion
 	}
 }

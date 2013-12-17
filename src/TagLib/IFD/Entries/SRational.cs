@@ -33,7 +33,7 @@ namespace TagLib.IFD.Entries
 	/// </summary>
 	public struct SRational : IFormattable
 	{
-#region Private Fields
+		#region Private Fields
 
 		/// <summary>
 		///    The numerator of the rational value
@@ -45,9 +45,9 @@ namespace TagLib.IFD.Entries
 		/// </summary>
 		private int denominator;
 
-#endregion
+		#endregion
 
-#region Constructor
+		#region Constructor
 
 		/// <summary>
 		///    Creates a new Rational value
@@ -60,17 +60,17 @@ namespace TagLib.IFD.Entries
 		///    A <see cref="System.Int32"/> with the denominator of the
 		///    rational value. It must be not 0.
 		/// </param>
-		public SRational (int numerator, int denominator)
+		public SRational(int numerator, int denominator)
 		{
 			if (denominator == 0)
-				throw new ArgumentException ("denominator");
+				throw new ArgumentException("denominator");
 			this.numerator = numerator;
 			this.denominator = denominator;
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Returns a rational value with reduced nominator and denominator
@@ -78,19 +78,20 @@ namespace TagLib.IFD.Entries
 		/// <returns>
 		///    A <see cref="SRational"/>
 		/// </returns>
-		public SRational Reduce ()
+		public SRational Reduce()
 		{
-			int den_sign = Math.Sign (Denominator);
-			int gcd = Math.Abs (Denominator);
-			int b = Math.Abs (Numerator);
+			int den_sign = Math.Sign(Denominator);
+			int gcd = Math.Abs(Denominator);
+			int b = Math.Abs(Numerator);
 
-			while (b != 0) {
-				int tmp = gcd % b;
+			while (b != 0)
+			{
+				int tmp = gcd%b;
 				gcd = b;
 				b = tmp;
 			}
 
-			return new SRational (den_sign * (Numerator / gcd), Math.Abs (Denominator) / gcd);
+			return new SRational(den_sign*(Numerator/gcd), Math.Abs(Denominator)/gcd);
 		}
 
 		/// <summary>
@@ -105,11 +106,12 @@ namespace TagLib.IFD.Entries
 		/// <returns>
 		///    A <see cref="System.String"/> formated according to the given parameter
 		/// </returns>
-		public string ToString (string format, IFormatProvider provider) {
+		public string ToString(string format, IFormatProvider provider)
+		{
 
-			SRational reduced = Reduce ();
+			SRational reduced = Reduce();
 
-			return String.Format ("{0}/{1}", reduced.Numerator, reduced.Denominator);
+			return String.Format("{0}/{1}", reduced.Numerator, reduced.Denominator);
 		}
 
 		/// <summary>
@@ -118,19 +120,20 @@ namespace TagLib.IFD.Entries
 		/// <returns>
 		///    A <see cref="System.String"/> with the current value.
 		/// </returns>
-		public override string ToString ()
+		public override string ToString()
 		{
-			return String.Format ("{0}", this);
+			return String.Format("{0}", this);
 		}
 
-#endregion
+		#endregion
 
-#region Public Properties
+		#region Public Properties
 
 		/// <value>
 		///    The numerator of the rational value
 		/// </value>
-		public int Numerator {
+		public int Numerator
+		{
 			get { return numerator; }
 			set { numerator = value; }
 		}
@@ -141,19 +144,21 @@ namespace TagLib.IFD.Entries
 		/// <remarks>
 		///    Cannot be 0.
 		/// </remarks>
-		public int Denominator {
+		public int Denominator
+		{
 			get { return denominator; }
-			set {
+			set
+			{
 				if (value == 0)
-					throw new ArgumentException ("denominator");
+					throw new ArgumentException("denominator");
 
 				denominator = value;
 			}
 		}
 
-#endregion
+		#endregion
 
-#region Public Static Methods
+		#region Public Static Methods
 
 		/// <summary>
 		///    Cast the <see cref="Rational"/> value to a <see cref="System.Double"/>.
@@ -164,12 +169,11 @@ namespace TagLib.IFD.Entries
 		/// <returns>
 		///    A <see cref="System.Double"/> with the double.
 		/// </returns>
-		public static implicit operator double (SRational rat)
+		public static implicit operator double(SRational rat)
 		{
-			return (double) rat.Numerator / (double) rat.Denominator;
+			return (double) rat.Numerator/(double) rat.Denominator;
 		}
 
-#endregion
-
+		#endregion
 	}
 }
