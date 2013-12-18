@@ -1112,7 +1112,7 @@ namespace TagLib
 		#region Conversions
 
 		/// <summary>
-		///    Converts an first four bytes of the current instance to
+		///    Converts the first four bytes of the current instance to
 		///    a <see cref="int" /> value.
 		/// </summary>
 		/// <param name="mostSignificantByteFirst">
@@ -1169,7 +1169,7 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Converts an first four bytes of the current instance to
+		///    Converts the first four bytes of the current instance to
 		///    a <see cref="int" /> value using big-endian format.
 		/// </summary>
 		/// <returns>
@@ -1182,7 +1182,7 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Converts an first four bytes of the current instance to
+		///    Converts the first four bytes of the current instance to
 		///    a <see cref="uint" /> value.
 		/// </summary>
 		/// <param name="mostSignificantByteFirst">
@@ -1210,7 +1210,7 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Converts an first four bytes of the current instance to
+		///    Converts four bytes of the current instance to
 		///    a <see cref="uint" /> value.
 		/// </summary>
 		/// <param name="off">Offset in the data to start at.</param>
@@ -1239,7 +1239,7 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Converts an first four bytes of the current instance to
+		///    Converts the first four bytes of the current instance to
 		///    a <see cref="uint" /> value using big-endian format.
 		/// </summary>
 		/// <returns>
@@ -1252,7 +1252,7 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Converts an first two bytes of the current instance to a
+		///    Converts the first two bytes of the current instance to a
 		///    <see cref="ushort" /> value.
 		/// </summary>
 		/// <param name="mostSignificantByteFirst">
@@ -1279,7 +1279,7 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Converts an first two bytes of the current instance to a
+		///    Converts two bytes of the current instance to a
 		///    <see cref="ushort" /> value.
 		/// </summary>
 		/// <param name="off">Offset in the data to start at.</param>
@@ -1307,7 +1307,7 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Converts an first two bytes of the current instance to
+		///    Converts the first two bytes of the current instance to
 		///    a <see cref="ushort" /> value using big-endian format.
 		/// </summary>
 		/// <returns>
@@ -1320,7 +1320,7 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Converts an first eight bytes of the current instance to
+		///    Converts the first eight bytes of the current instance to
 		///    a <see cref="ulong" /> value.
 		/// </summary>
 		/// <param name="mostSignificantByteFirst">
@@ -1346,7 +1346,7 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Converts an first eight bytes of the current instance to
+		///    Converts eight bytes of the current instance to
 		///    a <see cref="ulong" /> value.
 		/// </summary>
 		/// <param name="off">Offset in the data to start at.</param>
@@ -1373,7 +1373,7 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Converts an first eight bytes of the current instance to
+		///    Converts the first eight bytes of the current instance to
 		///    a <see cref="ulong" /> value using big-endian format.
 		/// </summary>
 		/// <returns>
@@ -1386,7 +1386,7 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Converts an first four bytes of the current instance to
+		///    Converts the first four bytes of the current instance to
 		///    a <see cref="float" /> value.
 		/// </summary>
 		/// <param name="mostSignificantByteFirst">
@@ -1412,7 +1412,7 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Converts an first four bytes of the current instance to
+		///    Converts the first four bytes of the current instance to
 		///    a <see cref="float" /> value using big-endian format.
 		/// </summary>
 		/// <returns>
@@ -1425,7 +1425,7 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Converts an first eight bytes of the current instance to
+		///    Converts the first eight bytes of the current instance to
 		///    a <see cref="double" /> value.
 		/// </summary>
 		/// <param name="mostSignificantByteFirst">
@@ -1451,7 +1451,7 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Converts an first eight bytes of the current instance to
+		///    Converts the first eight bytes of the current instance to
 		///    a <see cref="double" /> value using big-endian format.
 		/// </summary>
 		/// <returns>
