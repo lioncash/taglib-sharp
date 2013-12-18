@@ -1161,7 +1161,7 @@ namespace TagLib
 
 			for (int i = off; i <= last; i++)
 			{
-				int offset = mostSignificantByteFirst ? last - i : i;
+				int offset = mostSignificantByteFirst ? last-i : i-off;
 				ret |= (int)this[i] << (offset * 8);
 			}
 
