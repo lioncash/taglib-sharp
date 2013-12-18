@@ -677,7 +677,9 @@ namespace TagLib
 
 			byte[] buffer = new byte[length];
 
-			int count = 0, read = 0, needed = length;
+			int count = 0;
+			int read = 0;
+			int needed = length;
 
 			do
 			{

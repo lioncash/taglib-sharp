@@ -213,24 +213,21 @@ namespace TagLib.Ape
 				throw new ArgumentNullException("data");
 			
 			if (!data.StartsWith(FileIdentifier))
-				throw new CorruptFileException(
-					"Data does not begin with identifier.");
+				throw new CorruptFileException("Data does not begin with identifier.");
 			
 			if (data.Count < Size)
-				throw new CorruptFileException(
-					"Insufficient data in stream header");
+				throw new CorruptFileException("Insufficient data in stream header");
 			
-			stream_length = streamLength;
-			version = data.Mid (4, 2).ToUShort(false);
-			compression_level = (CompressionLevel) data.Mid(52, 2)
-				.ToUShort(false);
-			// format_flags = data.Mid(54, 2).ToUShort(false);
-			blocks_per_frame = data.Mid(56, 4).ToUInt(false);
-			final_frame_blocks = data.Mid(60, 4).ToUInt(false);
-			total_frames = data.Mid(64, 4).ToUInt(false);
-			bits_per_sample = data.Mid(68, 2).ToUShort(false);
-			channels = data.Mid(70, 2).ToUShort(false);
-			sample_rate = data.Mid(72, 4).ToUInt(false);
+			stream_length      = streamLength;
+			version            = data.ToUShort(4, false);
+			compression_level  = (CompressionLevel) data.ToUShort(52, false);
+			// format_flags    = data.ToUShort(54, false);
+			blocks_per_frame   = data.ToUInt(56, false);
+			final_frame_blocks = data.ToUInt(60, false);
+			total_frames       = data.ToUInt(64, false);
+			bits_per_sample    = data.ToUShort(false);
+			channels           = data.ToUShort(70, false);
+			sample_rate        = data.ToUInt(72, false);
 		}
 		
 		#endregion

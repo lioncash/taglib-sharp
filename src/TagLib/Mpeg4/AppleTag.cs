@@ -848,7 +848,7 @@ namespace TagLib.Mpeg4
 				foreach (AppleDataBox box in DataBoxes (BoxType.Trkn))
 				{
 					if (box.Flags == (int) AppleDataBox.FlagType.ContainsData && box.Data.Count >= 4)
-						return box.Data.Mid(2, 2).ToUShort();
+						return box.Data.ToUShort(2, true);
 				}
 				
 				return 0;
@@ -891,7 +891,7 @@ namespace TagLib.Mpeg4
 				foreach (AppleDataBox box in DataBoxes (BoxType.Trkn))
 				{
 					if (box.Flags == (int) AppleDataBox.FlagType.ContainsData && box.Data.Count >= 6)
-						return box.Data.Mid (4, 2).ToUShort ();
+						return box.Data.ToUShort(4, true);
 				}
 				
 				return 0;
@@ -933,7 +933,7 @@ namespace TagLib.Mpeg4
 				foreach (AppleDataBox box in DataBoxes (BoxType.Disk))
 				{
 					if (box.Flags == (int) AppleDataBox.FlagType.ContainsData &&  box.Data.Count >= 4)
-						return box.Data.Mid(2, 2).ToUShort();
+						return box.Data.ToUShort(2, true);
 				}
 				
 				return 0;
@@ -975,7 +975,7 @@ namespace TagLib.Mpeg4
 				foreach (AppleDataBox box in DataBoxes(BoxType.Disk))
 				{
 					if (box.Flags == (int) AppleDataBox.FlagType.ContainsData && box.Data.Count >= 6)
-						return box.Data.Mid(4, 2).ToUShort();
+						return box.Data.ToUShort(4, true);
 				}
 
 				return 0;

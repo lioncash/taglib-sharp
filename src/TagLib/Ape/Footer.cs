@@ -138,10 +138,10 @@ namespace TagLib.Ape
 			if (!data.StartsWith(FileIdentifier))
 				throw new CorruptFileException("Provided data does not start with File Identifier");
 
-			version = data.Mid(8, 4).ToUInt(false);
-			tag_size = data.Mid(12, 4).ToUInt(false);
-			item_count = data.Mid(16, 4).ToUInt(false);
-			flags = (FooterFlags) data.Mid(20, 4).ToUInt(false);
+			version = data.ToUInt(8, false);
+			tag_size = data.ToUInt(12, false);
+			item_count = data.ToUInt(16, false);
+			flags = (FooterFlags) data.ToUInt(20, false);
 		}
 
 		#endregion

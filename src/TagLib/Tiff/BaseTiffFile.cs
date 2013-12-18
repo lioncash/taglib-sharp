@@ -142,10 +142,10 @@ namespace TagLib.Tiff
 				throw new CorruptFileException("Unknown Byte Order");
 			}
 
-			if (header.Mid(2, 2).ToUShort(IsBigEndian) != Magic)
+			if (header.ToUShort(2, IsBigEndian) != Magic)
 				throw new CorruptFileException(String.Format("TIFF Magic ({0}) expected", Magic));
 
-			uint first_ifd_offset = header.Mid(4, 4).ToUInt(IsBigEndian);
+			uint first_ifd_offset = header.ToUInt(4, IsBigEndian);
 
 			return first_ifd_offset;
 		}

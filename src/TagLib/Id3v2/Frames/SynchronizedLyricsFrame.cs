@@ -559,7 +559,7 @@ namespace TagLib.Id3v2
 				if (offset + 4 > data.Count)
 					break;
 
-				l.Add(new SynchedText(data.Mid(offset, 4).ToUInt(), text));
+				l.Add(new SynchedText(data.ToUInt(offset, true), text));
 				offset += 4;
 			}
 

@@ -381,22 +381,22 @@ namespace TagLib.Riff
 			if (offset + 56 > data.Count)
 				throw new CorruptFileException("Expected 56 bytes.");
 			
-			type                  = data.Mid(offset,      4);
-			handler               = data.Mid(offset +  4, 4);
-			flags                 = data.Mid(offset +  8, 4).ToUInt(false);
-			priority              = data.Mid(offset + 12, 4).ToUInt(false);
-			initial_frames        = data.Mid(offset + 16, 4).ToUInt(false);
-			scale                 = data.Mid(offset + 20, 4).ToUInt(false);
-			rate                  = data.Mid(offset + 24, 4).ToUInt(false);
-			start                 = data.Mid(offset + 28, 4).ToUInt(false);
-			length                = data.Mid(offset + 32, 4).ToUInt(false);
-			suggested_buffer_size = data.Mid(offset + 36, 4).ToUInt(false);
-			quality               = data.Mid(offset + 40, 4).ToUInt(false);
-			sample_size           = data.Mid(offset + 44, 4).ToUInt(false);
-			left                  = data.Mid(offset + 48, 2).ToUShort(false);
-			top                   = data.Mid(offset + 50, 2).ToUShort(false);
-			right                 = data.Mid(offset + 52, 2).ToUShort(false);
-			bottom                = data.Mid(offset + 54, 2).ToUShort(false);
+			type                  = data.Mid(offset,         4);
+			handler               = data.Mid(offset    +  4, 4);
+			flags                 = data.ToUInt(offset +  8, false);
+			priority              = data.ToUInt(offset + 12, false);
+			initial_frames        = data.ToUInt(offset + 16, false);
+			scale                 = data.ToUInt(offset + 20, false);
+			rate                  = data.ToUInt(offset + 24, false);
+			start                 = data.ToUInt(offset + 28, false);
+			length                = data.ToUInt(offset + 32, false);
+			suggested_buffer_size = data.ToUInt(offset + 36, false);
+			quality               = data.ToUInt(offset + 40, false);
+			sample_size           = data.ToUInt(offset + 44, false);
+			left                  = data.ToUShort(offset + 48, false);
+			top                   = data.ToUShort(offset + 50, false);
+			right                 = data.ToUShort(offset + 52, false);
+			bottom                = data.ToUShort(offset + 54, false);
 		}
 
 		/// <summary>

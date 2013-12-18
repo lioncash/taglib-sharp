@@ -125,11 +125,11 @@ namespace TagLib.Mpeg
 			// Size starts at Position 10
 			int position = 10;
 
-			size = data.Mid(position, 4).ToUInt();
+			size = data.ToUInt(position, true);
 			position += 4;
 
 			// The number of Frames are found at Posistion 14
-			frames = data.Mid(position, 4).ToUInt();
+			frames = data.ToUInt(position, true);
 			position += 4;
 			
 			present = true;

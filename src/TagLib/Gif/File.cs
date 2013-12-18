@@ -344,8 +344,8 @@ namespace TagLib.Gif
 					String.Format("Only GIF versions 87a and 89a are currently supported, but not: {0}", read_version));
 
 			// Read Image Size (little endian)
-			width = data.Mid(6, 2).ToUShort(false);
-			height = data.Mid(8, 2).ToUShort(false);
+			width = data.ToUShort(6, false);
+			height = data.ToUShort(8, false);
 
 			// Skip optional global color table
 			SkipColorTable(data[10]);

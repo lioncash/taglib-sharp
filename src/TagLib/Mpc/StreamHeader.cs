@@ -134,17 +134,19 @@ namespace TagLib.MusePack
 
 			if (version >= 7)
 			{
-				frames = data.Mid(4, 4).ToUInt(false);
-				uint flags = data.Mid(8, 4).ToUInt(false);
+				frames = data.ToUInt(4, false);
+				uint flags = data.ToUInt(8, false);
 				sample_rate = sftable[(int) (((flags >> 17) & 1)*2 + ((flags >> 16) & 1))];
 				header_data = 0;
 			}
 			else
 			{
-				header_data = data.Mid(0, 4).ToUInt(false);
+				header_data = data.ToUInt(0, false);
 				version = (int) ((header_data >> 11) & 0x03ff);
 				sample_rate = 44100;
-				frames = data.Mid(4, version >= 5 ? 4 : 2).ToUInt(false);
+
+				int frameLen = (version >= 5) ? 4 : 2;
+				frames = data.ToUInt(4, frameLen, false);
 			}
 		}
 

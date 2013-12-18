@@ -248,7 +248,7 @@ namespace TagLib.Tiff.Cr2
 			if (major_version != 2 || minor_version != 0)
 				throw new UnsupportedFormatException("Only major version 2 and minor version 0 are supported");
 
-			uint raw_ifd_offset = header.Mid(4, 4).ToUInt(IsBigEndian);
+			uint raw_ifd_offset = header.ToUInt(4, IsBigEndian);
 
 			return raw_ifd_offset;
 		}

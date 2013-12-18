@@ -125,17 +125,15 @@ namespace TagLib.WavPack
 				throw new ArgumentNullException ("data");
 			
 			if (!data.StartsWith (FileIdentifier))
-				throw new CorruptFileException (
-					"Data does not begin with identifier.");
+				throw new CorruptFileException ("Data does not begin with identifier.");
 			
 			if (data.Count < Size)
-				throw new CorruptFileException (
-					"Insufficient data in stream header");
+				throw new CorruptFileException ("Insufficient data in stream header");
 			
 			stream_length = streamLength;
-			version = data.Mid (8, 2).ToUShort (false);
-			flags = data.Mid (24, 4).ToUInt (false);
-			samples = data.Mid (12, 4).ToUInt (false);
+			version = data.ToUShort(8, false);
+			samples = data.ToUInt(12, false);
+			flags   = data.ToUInt(24, false);
 		}
 		
 		#endregion

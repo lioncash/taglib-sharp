@@ -333,24 +333,28 @@ namespace TagLib.Ogg.Codecs
 			public int fps_denominator;
 			public int keyframe_granule_shift;
 
+			/// <summary>
+			/// Constructor
+			/// </summary>
+			/// <param name="data">HeaderPacket data</param>
 			public HeaderPacket(ByteVector data)
 			{
 				major_version = data[7];
 				minor_version = data[8];
 				revision_version = data[9];
-				// width = data.Mid (10, 2).ToShort () << 4;
-				// height = data.Mid (12, 2).ToShort () << 4;
-				width = (int) data.Mid(14, 3).ToUInt(); // Frame Width.
-				height = (int) data.Mid(17, 3).ToUInt(); // Frame Height.
+				// width = data.ToUShort(10, true) << 4;
+				// height = data.ToUShort(12, true) << 4;
+				width = (int) data.ToUInt(14, 3, true); // Frame Width.
+				height = (int) data.ToUInt(17, 3, true); // Frame Height.
 				// Offset X.
 				// Offset Y.
-				fps_numerator = (int) data.Mid(22, 4).ToUInt();
-				fps_denominator = (int) data.Mid(26, 4).ToUInt();
+				fps_numerator = (int) data.ToUInt(22, true);
+				fps_denominator = (int) data.ToUInt(26, true);
 				// Aspect Numerator.
 				// Aspect Denominator.
 				// Colorspace.
 				// Target bitrate.
-				ushort last_bits = data.Mid(40, 2).ToUShort();
+				ushort last_bits = data.ToUShort(40, true);
 				keyframe_granule_shift = (last_bits >> 5) & 0x1F;
 			}
 

@@ -583,7 +583,7 @@ namespace TagLib.Riff {
 			while (offset + 8 < data.Count)
 			{
 				ByteVector id = data.Mid(offset, 4);
-				int length = (int) data.Mid(offset + 4, 4).ToUInt(false);
+				int length = (int) data.ToUInt(offset + 4, false);
 
 				if (!ContainsKey(id))
 					Add(id, new ByteVectorCollection());

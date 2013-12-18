@@ -150,17 +150,17 @@ namespace TagLib.Riff
 			if (offset < 0)
 				throw new ArgumentOutOfRangeException("offset");
 			
-			size               = data.Mid(offset +  0, 4).ToUInt(false);
-			width              = data.Mid(offset +  4, 4).ToUInt(false);
-			height             = data.Mid(offset +  8, 4).ToUInt(false);
-			planes             = data.Mid(offset + 12, 2).ToUShort(false);
-			bit_count          = data.Mid(offset + 14, 2).ToUShort(false);
+			size               = data.ToUInt(offset + 0, false);
+			width              = data.ToUInt(offset + 4, false);
+			height             = data.ToUInt(offset + 8, false);
+			planes             = data.ToUShort(offset + 12, false);
+			bit_count          = data.ToUShort(offset + 14, false);
 			compression_id     = data.Mid(offset + 16, 4);
-			size_of_image      = data.Mid(offset + 20, 4).ToUInt(false);
-			x_pixels_per_meter = data.Mid(offset + 24, 4).ToUInt(false);
-			y_pixels_per_meter = data.Mid(offset + 28, 4).ToUInt(false);
-			colors_used        = data.Mid(offset + 32, 4).ToUInt(false);
-			colors_important   = data.Mid(offset + 36, 4).ToUInt(false);
+			size_of_image      = data.ToUInt(offset + 20, false);
+			x_pixels_per_meter = data.ToUInt(offset + 24, false);
+			y_pixels_per_meter = data.ToUInt(offset + 28, false);
+			colors_used        = data.ToUInt(offset + 32, false);
+			colors_important   = data.ToUInt(offset + 36, false);
 		}
 		
 		#endregion

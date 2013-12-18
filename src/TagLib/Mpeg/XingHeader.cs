@@ -126,7 +126,7 @@ namespace TagLib.Mpeg
 
 			if ((data[7] & 0x01) != 0)
 			{
-				frames = data.Mid(position, 4).ToUInt();
+				frames = data.ToUInt(position, true);
 				position += 4;
 			}
 			else
@@ -136,7 +136,7 @@ namespace TagLib.Mpeg
 
 			if ((data[7] & 0x02) != 0)
 			{
-				size = data.Mid(position, 4).ToUInt();
+				size = data.ToUInt(position, true);
 				position += 4;
 			}
 			else

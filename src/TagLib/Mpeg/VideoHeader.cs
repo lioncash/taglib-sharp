@@ -103,10 +103,10 @@ namespace TagLib.Mpeg
 			if (data.Count < 7)
 				throw new CorruptFileException("Insufficient data in header.");
 
-			width = data.Mid(0, 2).ToUShort() >> 4;
-			height = data.Mid(1, 2).ToUShort() & 0x0FFF;
+			width = data.ToUShort(0, true) >> 4;
+			height = data.ToUShort(1, true) & 0x0FFF;
 			frame_rate_index = data[3] & 0x0F;
-			bitrate = (int) ((data.Mid(4, 3).ToUInt() >> 6) & 0x3FFFF);
+			bitrate = (int) ((data.ToUInt(4, 3, true) >> 6) & 0x3FFFF);
 		}
 		
 		#endregion

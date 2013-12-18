@@ -25,7 +25,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace TagLib.Mpeg4 {
+namespace TagLib.Mpeg4
+{
 	/// <summary>
 	///    This class provides methods for reading important information
 	///    from an MPEG-4 file.

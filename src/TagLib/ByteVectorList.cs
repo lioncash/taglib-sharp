@@ -201,14 +201,12 @@ namespace TagLib
 				offset != -1 && (max < 1 || max > list.Count + 1);
 				offset = vector.Find(pattern, offset + pattern.Count, byteAlign))
 			{
-				list.Add(vector.Mid(previous_offset,
-					offset - previous_offset));
+				list.Add(vector.Mid(previous_offset, offset - previous_offset));
 				previous_offset = offset + pattern.Count;
 			}
 
 			if (previous_offset < vector.Count)
-				list.Add(vector.Mid(previous_offset,
-					vector.Count - previous_offset));
+				list.Add(vector.Mid(previous_offset, vector.Count - previous_offset));
 
 			return list;
 		}

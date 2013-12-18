@@ -225,8 +225,7 @@ namespace TagLib.Id3v2
 		/// </param>
 		protected override void ParseFields(ByteVector data, byte version)
 		{
-			ByteVector delim = ByteVector.TextDelimiter(
-				StringType.Latin1);
+			ByteVector delim = ByteVector.TextDelimiter(StringType.Latin1);
 
 			int index = data.Find(delim);
 			if (index < 0)
@@ -236,7 +235,7 @@ namespace TagLib.Id3v2
 
 			user = data.ToString(StringType.Latin1, 0, index);
 			rating = data[index + 1];
-			play_count = data.Mid(index + 2).ToULong();
+			play_count = data.ToULong(index + 2, true);
 		}
 
 		/// <summary>

@@ -31,6 +31,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace TagLib
@@ -1128,7 +1129,7 @@ namespace TagLib
 		public int ToInt(bool mostSignificantByteFirst)
 		{
 			int ret = 0;
-			int last = Count > 4 ? 3 : Count - 1;
+			int last = (Count > 4) ? 3 : (Count - 1);
 
 			for (int i = 0; i <= last; i++)
 			{
@@ -1197,16 +1198,7 @@ namespace TagLib
 		/// </returns>
 		public uint ToUInt(bool mostSignificantByteFirst)
 		{
-			uint sum = 0;
-			int last = (Count > 4) ? 3 : Count - 1;
-
-			for (int i = 0; i <= last; i++)
-			{
-				int shift = mostSignificantByteFirst ? last-i : i;
-				sum |= (uint) this[i] << (shift*8);
-			}
-
-			return sum;
+			return ToUInt(0, mostSignificantByteFirst);
 		}
 
 		/// <summary>
@@ -1226,6 +1218,10 @@ namespace TagLib
 		/// </returns>
 		public uint ToUInt(int offset, bool mostSignificantByteFirst)
 		{
+			// If we ould go out of bounds, just get what is left.
+			if (offset + sizeof(uint) > Count)
+				return ToUInt(offset, Count - offset, mostSignificantByteFirst);
+
 			uint sum = 0;
 			int last = (Count > 4) ? 3 : (Count - 1);
 
@@ -1265,7 +1261,7 @@ namespace TagLib
 			uint sum = 0;
 			for (int i = 0; i < length; i++)
 			{
-				int shift = mostSignificantByteFirst ? length-1 : i;
+				int shift = mostSignificantByteFirst ? length-1-i : i;
 				sum |= (uint)this[offset+i] << (shift*8);
 			}
 
@@ -1301,15 +1297,7 @@ namespace TagLib
 		/// </returns>
 		public ushort ToUShort(bool mostSignificantByteFirst)
 		{
-			ushort sum = 0;
-			int last = (Count > 2) ? 1 : Count - 1;
-			for (int i = 0; i <= last; i++)
-			{
-				int shift = mostSignificantByteFirst ? last-i : i;
-				sum |= (ushort) (this[i] << (shift*8));
-			}
-
-			return sum;
+			return ToUShort(0, mostSignificantByteFirst);
 		}
 
 		/// <summary>
@@ -1329,12 +1317,50 @@ namespace TagLib
 		/// </returns>
 		public ushort ToUShort(int offset, bool mostSignificantByteFirst)
 		{
+			// If we ould go out of bounds, just get what is left.
+			if (offset + sizeof(ushort) > Count)
+				return ToUShort(offset, Count - offset, mostSignificantByteFirst);
+
 			ushort sum = 0;
 			int last = (Count > 2) ? 1 : (Count - 1);
 			for (int i = 0; i <= last; i++)
 			{
 				int shift = mostSignificantByteFirst ? last-i : i;
 				sum |= (ushort)(this[offset+i] << (shift*8));
+			}
+
+			return sum;
+		}
+
+		/// <summary>
+		///    Converts length bytes of the current instance to a
+		///    <see cref="ushort" /> value.
+		/// </summary>
+		/// <param name="offset">Offset in the data to start at.</param>
+		/// <param name="length">Number of bytes to read.</param>
+		/// <param name="mostSignificantByteFirst">
+		///    <see langword="true" /> if the most significant byte
+		///    appears first (big endian format), or <see
+		///    langword="false" /> if the least significant byte appears
+		///    first (little endian format).
+		/// </param>
+		/// <returns>
+		///    A <see cref="ushort"/> value containing the value read
+		///    from the current instance.
+		/// </returns>
+		public ushort ToUShort(int offset, int length, bool mostSignificantByteFirst)
+		{
+			// No data to convert
+			if (offset > Count)
+				return 0;
+
+			//length = Math.Min(length, Count - offset);
+
+			ushort sum = 0;
+			for (int i = 0; i < length; i++)
+			{
+				int shift = mostSignificantByteFirst ? length-1-i : i;
+				sum |= (ushort)(this[offset + i] << (shift * 8));
 			}
 
 			return sum;
@@ -1369,14 +1395,7 @@ namespace TagLib
 		/// </returns>
 		public ulong ToULong(bool mostSignificantByteFirst)
 		{
-			ulong sum = 0;
-			int last = (Count > 8) ? 7 : Count - 1;
-			for (int i = 0; i <= last; i++)
-			{
-				int shift = mostSignificantByteFirst ? last-i : i;
-				sum |= (ulong) this[i] << (shift*8);
-			}
-			return sum;
+			return ToULong(0, mostSignificantByteFirst);
 		}
 
 		/// <summary>
@@ -1396,6 +1415,10 @@ namespace TagLib
 		/// </returns>
 		public ulong ToULong(int offset, bool mostSignificantByteFirst)
 		{
+			// If we ould go out of bounds, just get what is left.
+			if (offset + sizeof(ulong) > Count)
+				return ToULong(offset, Count - offset, mostSignificantByteFirst);
+
 			ulong sum = 0;
 			int last = (Count > 8) ? 7 : (Count - 1);
 			for (int i = 0; i <= last; i++)
@@ -1403,6 +1426,40 @@ namespace TagLib
 				int shift = mostSignificantByteFirst ? last-i : i;
 				sum |= (ulong)this[offset+i] << (shift*8);
 			}
+			return sum;
+		}
+
+		/// <summary>
+		///    Converts length bytes of the current instance to
+		///    a <see cref="ulong" /> value.
+		/// </summary>
+		/// <param name="offset">Offset in the data to start at.</param>
+		/// <param name="length">Number of bytes to read</param>
+		/// <param name="mostSignificantByteFirst">
+		///    <see langword="true" /> if the most significant byte
+		///    appears first (big endian format), or <see
+		///    langword="false" /> if the least significant byte appears
+		///    first (little endian format).
+		/// </param>
+		/// <returns>
+		///    A <see cref="ulong"/> value containing the value read
+		///    from the current instance.
+		/// </returns>
+		public ulong ToULong(int offset, int length, bool mostSignificantByteFirst)
+		{
+			// No data to convert
+			if (offset > Count)
+				return 0;
+
+			length = Math.Min(length, Count - offset);
+
+			ulong sum = 0;
+			for (int i = 0; i < length; i++)
+			{
+				int shift = mostSignificantByteFirst ? length-1-i : i;
+				sum |= (ulong)this[offset+i] << (shift*8);
+			}
+
 			return sum;
 		}
 

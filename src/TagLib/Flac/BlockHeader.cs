@@ -118,7 +118,7 @@ namespace TagLib.Flac
 
 			block_type = (BlockType) (data[0] & 0x7f);
 			is_last_block = (data[0] & 0x80) != 0;
-			block_size = data.Mid(1, 3).ToUInt();
+			block_size = data.ToUInt(1, 3, true);
 		}
 
 		/// <summary>

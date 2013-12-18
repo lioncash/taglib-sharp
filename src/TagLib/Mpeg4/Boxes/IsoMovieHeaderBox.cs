@@ -109,13 +109,13 @@ namespace TagLib.Mpeg4
 				// Read version one (large integers).
 				data = file.ReadBlock(Math.Min(28, bytes_remaining));
 				if (data.Count >= 8)
-					creation_time = data.Mid(0, 8).ToULong();
+					creation_time = data.ToULong(0, true);
 				if (data.Count >= 16)
-					modification_time = data.Mid(8, 8).ToULong();
+					modification_time = data.ToULong(8, true);
 				if (data.Count >= 20)
-					timescale = data.Mid(16, 4).ToUInt();
+					timescale = data.ToUInt(16, true);
 				if (data.Count >= 28)
-					duration = data.Mid(20, 8).ToULong();
+					duration = data.ToULong(20, true);
 				bytes_remaining -= 28;
 			}
 			else
@@ -123,28 +123,28 @@ namespace TagLib.Mpeg4
 				// Read version zero (normal integers).
 				data = file.ReadBlock(Math.Min(16, bytes_remaining));
 				if (data.Count >= 4)
-					creation_time = data.Mid(0, 4).ToUInt();
+					creation_time = data.ToUInt(0, true);
 				if (data.Count >= 8)
-					modification_time = data.Mid(4, 4).ToUInt();
+					modification_time = data.ToUInt(4, true);
 				if (data.Count >= 12)
-					timescale = data.Mid(8, 4).ToUInt();
+					timescale = data.ToUInt(8, true);
 				if (data.Count >= 16)
-					duration = data.Mid(12, 4).ToUInt();
+					duration = data.ToUInt(12, true);
 				bytes_remaining -= 16;
 			}
 
 			data = file.ReadBlock(Math.Min(6, bytes_remaining));
 			if (data.Count >= 4)
-				rate = data.Mid(0, 4).ToUInt();
+				rate = data.ToUInt(0, true);
 			if (data.Count >= 6)
-				volume = data.Mid(4, 2).ToUShort();
+				volume = data.ToUShort(4, true);
 			file.Seek(file.Tell + 70);
 			bytes_remaining -= 76;
 
 			data = file.ReadBlock(Math.Min(4, bytes_remaining));
 
 			if (data.Count >= 4)
-				next_track_id = data.Mid(0, 4).ToUInt();
+				next_track_id = data.ToUInt(0, true);
 		}
 
 		#endregion

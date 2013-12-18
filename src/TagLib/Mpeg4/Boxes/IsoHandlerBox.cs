@@ -133,7 +133,8 @@ namespace TagLib.Mpeg4
 		///    rendered version of the data contained in the current
 		///    instance.
 		/// </value>
-		public override ByteVector Data {
+		public override ByteVector Data
+		{
 			get
 			{
 				ByteVector output = new ByteVector(4);

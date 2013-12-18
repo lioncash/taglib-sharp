@@ -456,20 +456,16 @@ namespace TagLib.Id3v2
 			if (pos < 0)
 				return;
 
-			identification = data.ToString(StringType.Latin1, 0,
-				pos++);
+			identification = data.ToString(StringType.Latin1, 0, pos++);
 
 			// Each channel is at least 4 bytes.
-
 			while (pos <= data.Count - 4)
 			{
 				int type = data[pos++];
 
 				unchecked
 				{
-					channels[type].VolumeAdjustmentIndex =
-						(short) data.Mid(pos,
-							2).ToUShort();
+					channels[type].VolumeAdjustmentIndex = (short) data.ToUShort(pos, true);
 				}
 				pos += 2;
 
@@ -478,8 +474,7 @@ namespace TagLib.Id3v2
 				if (data.Count < pos + bytes)
 					break;
 
-				channels[type].PeakVolumeIndex = data.Mid(pos,
-					bytes).ToULong();
+				channels[type].PeakVolumeIndex = data.ToULong(pos, bytes, true);
 				pos += bytes;
 			}
 		}
@@ -499,8 +494,7 @@ namespace TagLib.Id3v2
 		protected override ByteVector RenderFields(byte version)
 		{
 			ByteVector data = new ByteVector();
-			data.Add(ByteVector.FromString(identification,
-				StringType.Latin1));
+			data.Add(ByteVector.FromString(identification, StringType.Latin1));
 			data.Add(ByteVector.TextDelimiter(StringType.Latin1));
 
 			for (byte i = 0; i < 9; i ++)
@@ -512,15 +506,13 @@ namespace TagLib.Id3v2
 				unchecked
 				{
 					data.Add(ByteVector.FromUShort(
-						(ushort) channels[i]
-							.VolumeAdjustmentIndex));
+						(ushort) channels[i].VolumeAdjustmentIndex));
 				}
 
 				byte bits = 0;
 
 				for (byte j = 0; j < 64; j ++)
-					if ((channels[i].PeakVolumeIndex &
-					     (1UL << j)) != 0)
+					if ((channels[i].PeakVolumeIndex & (1UL << j)) != 0)
 						bits = (byte) (j + 1);
 
 				data.Add(bits);
@@ -548,10 +540,10 @@ namespace TagLib.Id3v2
 		/// </returns>
 		public override Frame Clone()
 		{
-			RelativeVolumeFrame frame =
-				new RelativeVolumeFrame(identification);
+			RelativeVolumeFrame frame = new RelativeVolumeFrame(identification);
 			for (int i = 0; i < 9; i ++)
 				frame.channels[i] = channels[i];
+
 			return frame;
 		}
 

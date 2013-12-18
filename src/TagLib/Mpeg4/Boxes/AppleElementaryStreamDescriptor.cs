@@ -124,7 +124,7 @@ namespace TagLib.Mpeg4
 				if (ReadLength(box_data, ref offset) < 20)
 					throw new CorruptFileException("Insufficient data present.");
 
-				es_id = box_data.Mid(offset, 2).ToUShort();
+				es_id = box_data.ToUShort(offset, true);
 				offset += 2;
 				stream_priority = box_data[offset ++];
 			}
@@ -133,7 +133,7 @@ namespace TagLib.Mpeg4
 				// The tag wasn't found, so the next two byte
 				// are the ID, and after that, business as
 				// usual.
-				es_id = box_data.Mid(offset, 2).ToUShort();
+				es_id = box_data.ToUShort(offset, true);
 				offset += 2;
 			}
 
@@ -150,11 +150,11 @@ namespace TagLib.Mpeg4
 			// Read a lot of good info.
 			object_type_id = box_data[offset ++];
 			stream_type = box_data[offset ++];
-			buffer_size_db = box_data.Mid(offset, 3).ToUInt();
+			buffer_size_db = box_data.ToUInt(offset, 3, true);
 			offset += 3;
-			max_bitrate = box_data.Mid(offset, 4).ToUInt();
+			max_bitrate = box_data.ToUInt(offset, true);
 			offset += 4;
-			average_bitrate = box_data.Mid(offset, 4).ToUInt();
+			average_bitrate = box_data.ToUInt(offset, true);
 			offset += 4;
 
 			// Verify that the next data is the Decoder Specific

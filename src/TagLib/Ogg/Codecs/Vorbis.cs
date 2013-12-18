@@ -332,12 +332,12 @@ namespace TagLib.Ogg.Codecs
 
 			public HeaderPacket(ByteVector data)
 			{
-				vorbis_version = data.Mid(7, 4).ToUInt(false);
+				vorbis_version = data.ToUInt(7, false);
 				channels = data[11];
-				sample_rate = data.Mid(12, 4).ToUInt(false);
-				bitrate_maximum = data.Mid(16, 4).ToUInt(false);
-				bitrate_nominal = data.Mid(20, 4).ToUInt(false);
-				bitrate_minimum = data.Mid(24, 4).ToUInt(false);
+				sample_rate = data.ToUInt(12, false);
+				bitrate_maximum = data.ToUInt(16, false);
+				bitrate_nominal = data.ToUInt(20, false);
+				bitrate_minimum = data.ToUInt(24, false);
 			}
 		}
 	}

@@ -130,19 +130,18 @@ namespace TagLib.Aiff
 
 
 			if (!data.StartsWith(FileIdentifier))
-				throw new CorruptFileException(
-					"Data does not begin with identifier.");
+				throw new CorruptFileException("Data does not begin with identifier.");
 
 			stream_length = streamLength;
 
 			// The first 8 bytes contain the Common chunk identifier "COMM"
 			// And the size of the common chunk, which is always 18
-			channels = data.Mid(8, 2).ToUShort(true);
-			total_frames = data.Mid(10, 4).ToULong(true);
-			bits_per_sample = data.Mid(14, 2).ToUShort(true);
+			channels = data.ToUShort(8, true);
+			total_frames = data.ToULong(10, 4, true);
+			bits_per_sample = data.ToUShort(14, true);
 
 			ByteVector sample_rate_indicator = data.Mid(17, 1);
-			ulong sample_rate_tmp = data.Mid(18, 2).ToULong(true);
+			ulong sample_rate_tmp = data.ToULong(18, 2, true);
 			sample_rate = 44100; // Set 44100 as default sample rate
 
 			// The following are combinations that iTunes 8 encodes to.
@@ -272,8 +271,7 @@ namespace TagLib.Aiff
 				if (d <= TimeSpan.Zero)
 					return 0;
 
-				return (int) ((stream_length*8L)/
-				              d.TotalSeconds)/1000;
+				return (int) ((stream_length*8L) / d.TotalSeconds)/1000;
 			}
 		}
 

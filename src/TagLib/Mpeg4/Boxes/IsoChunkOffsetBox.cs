@@ -74,10 +74,10 @@ namespace TagLib.Mpeg4
 		{
 			ByteVector box_data = file.ReadBlock(DataSize);
 
-			offsets = new uint[(int) box_data.Mid(0, 4).ToUInt()];
+			offsets = new uint[(int) box_data.ToUInt(0, true)];
 
 			for (int i = 0; i < offsets.Length; i ++)
-				offsets[i] = box_data.Mid(4 + i*4, 4).ToUInt();
+				offsets[i] = box_data.ToUInt(4+i*4, true);
 		}
 
 		#endregion

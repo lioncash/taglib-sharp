@@ -299,11 +299,11 @@ namespace TagLib.IFD
 
 			for (int i = 0; i < entry_count; i++)
 			{
-				ByteVector entry_data = entry_datas.Mid(i*12, 12);
+				ByteVector entry_data  = entry_datas.Mid(i*12, 12);
 
-				ushort entry_tag = entry_data.Mid(0, 2).ToUShort(is_bigendian);
-				ushort type = entry_data.Mid(2, 2).ToUShort(is_bigendian);
-				uint value_count = entry_data.Mid(4, 4).ToUInt(is_bigendian);
+				ushort entry_tag = entry_data.ToUShort(0, is_bigendian);
+				ushort type = entry_data.ToUShort(2, is_bigendian);
+				uint value_count = entry_data.ToUInt(4, is_bigendian);
 				ByteVector offset_data = entry_data.Mid(8, 4);
 
 				IFDEntry entry = CreateIFDEntry(entry_tag, type, value_count, base_offset, offset_data, max_offset);
@@ -354,8 +354,7 @@ namespace TagLib.IFD
 		/// <returns>
 		///    A <see cref="IFDEntry"/> with the given parameter.
 		/// </returns>
-		private IFDEntry CreateIFDEntry(ushort tag, ushort type, uint count, long base_offset, ByteVector offset_data,
-			uint max_offset)
+		private IFDEntry CreateIFDEntry(ushort tag, ushort type, uint count, long base_offset, ByteVector offset_data, uint max_offset)
 		{
 			uint offset = offset_data.ToUInt(is_bigendian);
 
@@ -388,10 +387,10 @@ namespace TagLib.IFD
 					return new SByteIFDEntry(tag, (sbyte) offset_data[0]);
 
 				if (type == (ushort) IFDEntryType.Short)
-					return new ShortIFDEntry(tag, offset_data.Mid(0, 2).ToUShort(is_bigendian));
+					return new ShortIFDEntry(tag, offset_data.ToUShort(0, is_bigendian));
 
 				if (type == (ushort) IFDEntryType.SShort)
-					return new SShortIFDEntry(tag, (short) offset_data.Mid(0, 2).ToUShort(is_bigendian));
+					return new SShortIFDEntry(tag, (short) offset_data.ToUShort(0, is_bigendian));
 
 				if (type == (ushort) IFDEntryType.Long)
 					return new LongIFDEntry(tag, offset_data.ToUInt(is_bigendian));
@@ -405,10 +404,9 @@ namespace TagLib.IFD
 			{
 				if (type == (ushort) IFDEntryType.Short)
 				{
-					ushort[] data = new ushort[]
-					{
-						offset_data.Mid(0, 2).ToUShort(is_bigendian),
-						offset_data.Mid(2, 2).ToUShort(is_bigendian)
+					ushort[] data =  {
+						offset_data.ToUShort(0, is_bigendian),
+						offset_data.ToUShort(2, is_bigendian)
 					};
 
 					return new ShortArrayIFDEntry(tag, data);
@@ -416,10 +414,9 @@ namespace TagLib.IFD
 
 				if (type == (ushort) IFDEntryType.SShort)
 				{
-					short[] data = new short[]
-					{
-						(short) offset_data.Mid(0, 2).ToUShort(is_bigendian),
-						(short) offset_data.Mid(2, 2).ToUShort(is_bigendian)
+					short[] data = {
+						(short) offset_data.ToUShort(0, is_bigendian),
+						(short) offset_data.ToUShort(2, is_bigendian)
 					};
 
 					return new SShortArrayIFDEntry(tag, data);
@@ -646,18 +643,19 @@ namespace TagLib.IFD
 		/// <returns>
 		///    A <see cref="SRational"/> value created by the read values.
 		/// </returns>
-		private SRational ReadSRational ()
+		private SRational ReadSRational()
 		{
-			int numerator = ReadInt ();
-			int denominator = ReadInt ();
+			int numerator = ReadInt();
+			int denominator = ReadInt();
 
 			// correct illegal value
-			if (denominator == 0) {
+			if (denominator == 0)
+			{
 				numerator = 0;
 				denominator = 1;
 			}
 
-			return new SRational (numerator, denominator);
+			return new SRational(numerator, denominator);
 		}
 
 		/// <summary>
@@ -672,6 +670,7 @@ namespace TagLib.IFD
 			ushort[] data = new ushort[count];
 			for (int i = 0; i < count; i++)
 				data[i] = ReadUShort();
+
 			return data;
 		}
 
@@ -687,6 +686,7 @@ namespace TagLib.IFD
 			short[] data = new short[count];
 			for (int i = 0; i < count; i++)
 				data[i] = ReadShort();
+
 			return data;
 		}
 
@@ -702,6 +702,7 @@ namespace TagLib.IFD
 			int[] data = new int[count];
 			for (int i = 0; i < count; i++)
 				data[i] = ReadInt();
+
 			return data;
 		}
 
@@ -717,6 +718,7 @@ namespace TagLib.IFD
 			uint[] data = new uint[count];
 			for (int i = 0; i < count; i++)
 				data[i] = ReadUInt();
+
 			return data;
 		}
 
@@ -909,7 +911,7 @@ namespace TagLib.IFD
 				if (endian_bytes.ToString() == "II" || endian_bytes.ToString() == "MM")
 				{
 					bool makernote_endian = endian_bytes.ToString().Equals("MM");
-					ushort magic = header.Mid(12, 2).ToUShort(is_bigendian);
+					ushort magic = header.ToUShort(12, is_bigendian);
 
 					if (magic == 42)
 					{

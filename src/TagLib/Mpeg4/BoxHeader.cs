@@ -123,7 +123,7 @@ namespace TagLib.Mpeg4
 				throw new CorruptFileException("Not enough data in box header.");
 
 			header_size = 8;
-			box_size = data.Mid(offset, 4).ToUInt();
+			box_size = data.ToUInt(offset, true);
 			box_type = data.Mid(offset + 4, 4);
 
 			// If the size is 1, that just tells us we have a
@@ -135,7 +135,7 @@ namespace TagLib.Mpeg4
 					throw new CorruptFileException("Not enough data in box header.");
 
 				header_size += 8;
-				box_size = data.Mid(offset, 8).ToULong();
+				box_size = data.ToULong(offset, true);
 				offset += 8;
 			}
 

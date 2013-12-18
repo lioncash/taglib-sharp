@@ -86,8 +86,8 @@ namespace TagLib.Flac
 				throw new CorruptFileException("Not enough data in FLAC header.");
 
 			this.stream_length = streamLength;
-			this.flags = data.Mid(10, 4).ToUInt(true);
-			low_length = data.Mid(14, 4).ToUInt(true);
+			this.flags = data.ToUInt(10, true);
+			low_length = data.ToUInt(14, true);
 		}
 
 		#endregion

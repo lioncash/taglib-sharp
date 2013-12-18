@@ -160,8 +160,7 @@ namespace TagLib.Id3v2
 			{
 				case 2:
 					// Set the frame ID -- the first three bytes
-					frame_id = ConvertId(data.Mid(0, 3), version,
-						false);
+					frame_id = ConvertId(data.Mid(0, 3), version, false);
 
 					// If the full header information was not passed
 					// in, do not continue to the steps to parse the
@@ -169,13 +168,12 @@ namespace TagLib.Id3v2
 					if (data.Count < 6)
 						return;
 
-					frame_size = data.Mid(3, 3).ToUInt();
+					frame_size = data.ToUInt(3, 3, true);
 					return;
 
 				case 3:
 					// Set the frame ID -- the first four bytes
-					frame_id = ConvertId(data.Mid(0, 4), version,
-						false);
+					frame_id = ConvertId(data.Mid(0, 4), version, false);
 
 					// If the full header information was not passed
 					// in, do not continue to the steps to parse the
@@ -184,7 +182,7 @@ namespace TagLib.Id3v2
 						return;
 
 					// Store the flags internally as version 2.4.
-					frame_size = data.Mid(4, 4).ToUInt();
+					frame_size = data.ToUInt(4, true);
 					flags = (FrameFlags) (
 						((data[8] << 7) & 0x7000) |
 						((data[9] >> 4) & 0x000C) |
@@ -203,7 +201,7 @@ namespace TagLib.Id3v2
 						return;
 
 					frame_size = SynchData.ToUInt(data.Mid(4, 4));
-					flags = (FrameFlags) data.Mid(8, 2).ToUShort();
+					flags = (FrameFlags) data.ToUShort(8, true);
 
 					return;
 

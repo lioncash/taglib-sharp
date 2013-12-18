@@ -103,34 +103,34 @@ namespace TagLib.Flac
 				throw new CorruptFileException("Data must be at least 32 bytes long");
 
 			int pos = 0;
-			type = (PictureType) data.Mid(pos, 4).ToUInt();
+			type = (PictureType) data.ToUInt(pos, true);
 			pos += 4;
 
-			int mimetype_length = (int) data.Mid(pos, 4).ToUInt();
+			int mimetype_length = (int) data.ToUInt(pos, true);
 			pos += 4;
 
 			mime_type = data.ToString(StringType.Latin1, pos, mimetype_length);
 			pos += mimetype_length;
 
-			int description_length = (int) data.Mid(pos, 4).ToUInt();
+			int description_length = (int) data.ToUInt(pos, true);
 			pos += 4;
 
 			description = data.ToString(StringType.UTF8, pos, description_length);
 			pos += description_length;
 
-			width = (int) data.Mid(pos, 4).ToUInt();
+			width = (int) data.ToUInt(pos, true);
 			pos += 4;
 
-			height = (int) data.Mid(pos, 4).ToUInt();
+			height = (int) data.ToUInt(pos, true);
 			pos += 4;
 
-			color_depth = (int) data.Mid(pos, 4).ToUInt();
+			color_depth = (int) data.ToUInt(pos, true);
 			pos += 4;
 
-			indexed_colors = (int) data.Mid(pos, 4).ToUInt();
+			indexed_colors = (int) data.ToUInt(pos, true);
 			pos += 4;
 
-			int data_length = (int) data.Mid(pos, 4).ToUInt();
+			int data_length = (int) data.ToUInt(pos, true);
 			pos += 4;
 
 			picture_data = data.Mid(pos, data_length);

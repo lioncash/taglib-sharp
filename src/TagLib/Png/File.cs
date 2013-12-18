@@ -515,8 +515,8 @@ namespace TagLib.Png
 
 			// The PNG specification limits the size of 4-byte unsigned integers to 2^31-1.
 			// That allows us to safely cast them to an signed integer.
-			uint width = data.Mid(0, 4).ToUInt(true);
-			uint height = data.Mid(4, 4).ToUInt(true);
+			uint width = data.ToUInt(0, true);
+			uint height = data.ToUInt(4, true);
 
 			if (width > Int32.MaxValue || height > Int32.MaxValue)
 				throw new CorruptFileException("PNG limits width and heigth to 2^31-1");

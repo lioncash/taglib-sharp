@@ -398,7 +398,7 @@ namespace TagLib.Asf
 
 			// Get the picture size:
 
-			int size = (int) data.Mid(offset, 4).ToUInt(false);
+			int size = (int) data.ToUInt(offset, false);
 			offset += 4;
 
 			// Get the mime-type:

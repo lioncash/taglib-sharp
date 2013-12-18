@@ -352,7 +352,7 @@ namespace TagLib.Ogg
 			// The first thing in the comment data is the vendor ID
 			// length, followed by a UTF8 string with the vendor ID.
 			int pos = 0;
-			int vendor_length = (int) data.Mid(pos, 4).ToUInt(false);
+			int vendor_length = (int) data.ToUInt(pos, false);
 			pos += 4;
 
 			vendor_id = data.ToString(StringType.UTF8, pos, vendor_length);
@@ -360,7 +360,7 @@ namespace TagLib.Ogg
 
 			// Next the number of fields in the comment vector.
 
-			int comment_fields = (int) data.Mid(pos, 4).ToUInt(false);
+			int comment_fields = (int) data.ToUInt(pos, false);
 			pos += 4;
 
 			for (int i = 0; i < comment_fields; i++)
@@ -369,7 +369,7 @@ namespace TagLib.Ogg
 				// "KEY=value" in a UTF8 string and has 4 bytes
 				// before the text starts that gives the length.
 
-				int comment_length = (int) data.Mid(pos, 4).ToUInt(false);
+				int comment_length = (int) data.ToUInt(pos,false);
 				pos += 4;
 
 				string comment = data.ToString(StringType.UTF8, pos, comment_length);

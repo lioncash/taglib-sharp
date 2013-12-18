@@ -77,7 +77,7 @@ namespace TagLib.Mpeg4
 			file.Seek(base.DataPosition);
 			ByteVector header_data = file.ReadBlock(4);
 			version = header_data[0];
-			flags = header_data.Mid(1, 3).ToUInt();
+			flags = header_data.ToUInt(1, 3, true);
 		}
 
 		/// <summary>

@@ -232,15 +232,15 @@ namespace TagLib.Riff
 			if (offset + 40 > data.Count)
 				throw new CorruptFileException("Expected 40 bytes.");
 			
-			microseconds_per_frame = data.Mid(offset,      4).ToUInt(false);
-			max_bytes_per_second   = data.Mid(offset +  4, 4).ToUInt(false);
-			flags                  = data.Mid(offset + 12, 4).ToUInt(false);
-			total_frames           = data.Mid(offset + 16, 4).ToUInt(false);
-			initial_frames         = data.Mid(offset + 20, 4).ToUInt(false);
-			streams                = data.Mid(offset + 24, 4).ToUInt(false);
-			suggested_buffer_size  = data.Mid(offset + 28, 4).ToUInt(false);
-			width                  = data.Mid(offset + 32, 4).ToUInt(false);
-			height                 = data.Mid(offset + 36, 4).ToUInt(false);
+			microseconds_per_frame = data.ToUInt(offset,      false);
+			max_bytes_per_second   = data.ToUInt(offset +  4, false);
+			flags                  = data.ToUInt(offset + 12, false);
+			total_frames           = data.ToUInt(offset + 16, false);
+			initial_frames         = data.ToUInt(offset + 20, false);
+			streams                = data.ToUInt(offset + 24, false);
+			suggested_buffer_size  = data.ToUInt(offset + 28, false);
+			width                  = data.ToUInt(offset + 32, false);
+			height                 = data.ToUInt(offset + 36, false);
 		}
 
 		/// <summary>

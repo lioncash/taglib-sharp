@@ -54,7 +54,7 @@ namespace TagLib.IIM
 				// skip over segment marker
 				i += IPTC_IIM_SEGMENT.Length;
 
-				int len = Data.Mid(i + 1).ToUShort();
+				int len = Data.ToUShort(i + 1, true);
 
 				// ENHANCE: enhance encoding used for string conversion. Unfortunately this is
 				// not detectable from IIM data.

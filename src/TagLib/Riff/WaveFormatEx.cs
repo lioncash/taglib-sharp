@@ -117,14 +117,11 @@ namespace TagLib.Riff
 			if (offset + 16 > data.Count)
 				throw new CorruptFileException("Expected 16 bytes.");
 
-			format_tag = data.Mid(offset, 2).ToUShort(false);
-			channels = data.Mid(offset + 2, 2).ToUShort(false);
-			samples_per_second = data.Mid(offset + 4, 4)
-				.ToUInt(false);
-			average_bytes_per_second = data.Mid(offset + 8, 4)
-				.ToUInt(false);
-			bits_per_sample = data.Mid(offset + 14, 2)
-				.ToUShort(false);
+			format_tag               = data.ToUShort(offset +  0, false);
+			channels                 = data.ToUShort(offset +  2, false);
+			samples_per_second       = data.ToUInt(offset   +  4, false);
+			average_bytes_per_second = data.ToUInt(offset   +  8, false);
+			bits_per_sample          = data.ToUShort(offset + 14, false);
 		}
 
 		#endregion

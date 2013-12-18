@@ -484,11 +484,11 @@ namespace TagLib.Jpeg
 				{
 					bool is_bigendian = data.Mid(6, 2).ToString().Equals("MM");
 
-					ushort magic = data.Mid(8, 2).ToUShort(is_bigendian);
+					ushort magic = data.ToUShort(8, is_bigendian);
 					if (magic != 42)
 						throw new Exception(String.Format("Invalid TIFF magic: {0}", magic));
 
-					uint ifd_offset = data.Mid(10, 4).ToUInt(is_bigendian);
+					uint ifd_offset = data.ToUInt(10, is_bigendian);
 
 					var exif = new IFDTag();
 					var reader = new IFDReader(this, is_bigendian, exif.Structure, position + 6, ifd_offset, (uint) (length - 6));
@@ -558,7 +558,7 @@ namespace TagLib.Jpeg
 				return;
 
 			// PS6 introduced a new header with variable length text
-			var headerInfoLen = data.Mid(iptc_iim_length, 1).ToUShort();
+			var headerInfoLen = data.ToUShort(iptc_iim_length, 1, true);
 			int lenToSkip;
 			if (headerInfoLen > 0)
 			{

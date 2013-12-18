@@ -74,12 +74,11 @@ namespace TagLib.Mpeg4
 			: base(header, file, handler)
 		{
 			ByteVector box_data = file.ReadBlock (DataSize);
-			
-			offsets = new ulong [(int)
-				box_data.Mid (0, 4).ToUInt ()];
-			
+
+			offsets = new ulong[(int) box_data.ToUInt(0, true)];
+
 			for (int i = 0; i < offsets.Length; i ++)
-				offsets [i] = box_data.Mid (4 + i * 8, 8).ToULong ();
+				offsets[i] = box_data.ToULong(4+i*8, true);
 		}
 		
 		#endregion

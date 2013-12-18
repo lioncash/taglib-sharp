@@ -484,8 +484,8 @@ namespace TagLib.Ape
 			if (data.Count < offset + 11)
 				throw new CorruptFileException("Not enough data for APE Item");
 
-			uint value_length = data.Mid(offset, 4).ToUInt(false);
-			uint flags = data.Mid(offset + 4, 4).ToUInt(false);
+			uint value_length = data.ToUInt(offset + 0, false);
+			uint flags        = data.ToUInt(offset + 4, false);
 
 			ReadOnly = (flags & 1) == 1;
 			Type = (ItemType) ((flags >> 1) & 3);

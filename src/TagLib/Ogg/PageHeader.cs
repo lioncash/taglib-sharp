@@ -189,9 +189,9 @@ namespace TagLib.Ogg
 
 			version = data[4];
 			this.flags = (PageFlags) data[5];
-			absolute_granular_position = data.Mid(6, 8).ToULong(false);
-			stream_serial_number = data.Mid(14, 4).ToUInt(false);
-			page_sequence_number = data.Mid(18, 4).ToUInt(false);
+			absolute_granular_position = data.ToULong(6, false);
+			stream_serial_number = data.ToUInt(14, false);
+			page_sequence_number = data.ToUInt(18, false);
 
 			// Byte number 27 is the number of page segments, which
 			// is the only variable length portion of the page
