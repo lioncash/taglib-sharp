@@ -108,7 +108,7 @@ namespace TagLib.MusePack
 		/// </param>
 		/// <param name="streamLength">
 		///    A <see cref="long" /> value containing the length of the
-		///    MusePAck stream in bytes.
+		///    MusePack stream in bytes.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="data" /> is <see langword="null" />.
@@ -164,7 +164,6 @@ namespace TagLib.MusePack
 		///    A <see cref="TimeSpan" /> containing the duration of the
 		///    media represented by the current instance.
 		/// </value>
-
 		public TimeSpan Duration
 		{
 			get

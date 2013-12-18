@@ -25,7 +25,7 @@
     <Execution>
       <Execution clr-version="Net_2_0" />
     </Execution>
-    <DefineConstants>HAVE_SHARPZIPLIB</DefineConstants>
+    <DefineConstants>DEBUG;HAVE_SHARPZIPLIB</DefineConstants>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -64,6 +64,8 @@
     <Compile Include="TagLib\StringList.cs" />
     <Compile Include="TagLib\SupportedMimeType.cs" />
     <Compile Include="TagLib\Tag.cs" />
+    <Compile Include="TagLib\TrueAudio\File.cs" />
+    <Compile Include="TagLib\TrueAudio\StreamHeader.cs" />
     <Compile Include="TagLib\UnsupportedFormatException.cs" />
     <Compile Include="TagLib\Aac\AudioHeader.cs" />
     <Compile Include="TagLib\Aac\BitStream.cs" />
