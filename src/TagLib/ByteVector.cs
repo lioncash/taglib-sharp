@@ -1231,7 +1231,7 @@ namespace TagLib
 
 			for (int i = off; i <= last; i++)
 			{
-				int offset = mostSignificantByteFirst ? last - i : i;
+				int offset = mostSignificantByteFirst ? last-i : i-off;
 				sum |= (uint)this[i] << (offset * 8);
 			}
 
@@ -1299,7 +1299,7 @@ namespace TagLib
 			int last = (Count > 2) ? off+1 : off+(Count - 1);
 			for (int i = off; i <= last; i++)
 			{
-				int offset = mostSignificantByteFirst ? last - i : i;
+				int offset = mostSignificantByteFirst ? last-off : i-off;
 				sum |= (ushort)(this[i] << (offset * 8));
 			}
 
@@ -1366,7 +1366,7 @@ namespace TagLib
 			int last = (Count > 8) ? off+7 : off+(Count - 1);
 			for (int i = off; i <= last; i++)
 			{
-				int offset = mostSignificantByteFirst ? last - i : i;
+				int offset = mostSignificantByteFirst ? last - i : i-off;
 				sum |= (ulong)this[i] << (offset * 8);
 			}
 			return sum;
