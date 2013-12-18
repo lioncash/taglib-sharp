@@ -56,7 +56,7 @@ namespace TagLib.Id3v2
 
 
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Frame" /> by reading the raw header encoded in the
@@ -77,19 +77,19 @@ namespace TagLib.Id3v2
 		///    <paramref name="data" /> does not contain a complete
 		///    identifier.
 		/// </exception>
-		protected Frame (ByteVector data, byte version)
+		protected Frame(ByteVector data, byte version)
 		{
 			if (data == null)
-				throw new ArgumentNullException ("data");
-			
+				throw new ArgumentNullException("data");
+
 			if (data.Count < ((version < 3) ? 3 : 4))
-				throw new ArgumentException (
+				throw new ArgumentException(
 					"Data contains an incomplete identifier.",
 					"data");
-			
-			header = new FrameHeader (data, version);
+
+			header = new FrameHeader(data, version);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Frame" /> with a specified header.
@@ -98,16 +98,16 @@ namespace TagLib.Id3v2
 		///    A <see cref="FrameHeader" /> value containing the header
 		///    to use for the new instance.
 		/// </param>
-		protected Frame (FrameHeader header)
+		protected Frame(FrameHeader header)
 		{
 			this.header = header;
 		}
-		
+
 		#endregion
 
 
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the frame ID for the current instance.
 		/// </summary>
@@ -115,10 +115,11 @@ namespace TagLib.Id3v2
 		///    A <see cref="ReadOnlyByteVector" /> object containing the
 		///    four-byte ID3v2.4 frame header for the current instance.
 		/// </value>
-		public ReadOnlyByteVector FrameId {
-			get {return header.FrameId;}
+		public ReadOnlyByteVector FrameId
+		{
+			get { return header.FrameId; }
 		}
-		
+
 		/// <summary>
 		///    Gets the size of the current instance as it was last
 		///    stored on disk.
@@ -127,10 +128,11 @@ namespace TagLib.Id3v2
 		///    A <see cref="uint" /> value containing the size of the
 		///    current instance as it was last stored on disk.
 		/// </value>
-		public uint Size {
-			get {return header.FrameSize;}
+		public uint Size
+		{
+			get { return header.FrameSize; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the frame flags applied to the current
 		///    instance.
@@ -146,11 +148,12 @@ namespace TagLib.Id3v2
 		///    cref="FrameFlags.Compression" />, <see cref="Render" />
 		///    will throw a <see cref="NotImplementedException" />.
 		/// </remarks>
-		public FrameFlags Flags {
-			get {return header.Flags;}
-			set {header.Flags = value;}
+		public FrameFlags Flags
+		{
+			get { return header.Flags; }
+			set { header.Flags = value; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the grouping ID applied to the current
 		///    instance.
@@ -164,21 +167,29 @@ namespace TagLib.Id3v2
 		///    any other value will unset the grouping identity and set
 		///    the value to -1.
 		/// </remarks>
-		public short GroupId {
-			get {
-				return (Flags & FrameFlags.GroupingIdentity)
-					!= 0 ? group_id : (short) -1;
+		public short GroupId
+		{
+			get
+			{
+				return (Flags & FrameFlags.GroupingIdentity) != 0
+					? group_id
+					: (short) -1;
 			}
-			set {
-				if (value >= 0x00 && value <= 0xFF) {
+
+			set
+			{
+				if (value >= 0x00 && value <= 0xFF)
+				{
 					group_id = (byte) value;
 					Flags |= FrameFlags.GroupingIdentity;
-				} else {
+				}
+				else
+				{
 					Flags &= ~FrameFlags.GroupingIdentity;
 				}
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the encryption ID applied to the current
 		///    instance.
@@ -194,26 +205,29 @@ namespace TagLib.Id3v2
 		///    <para>If set, <see cref="Render" /> will throw a <see
 		///    cref="NotImplementedException" />.</para>
 		/// </remarks>
-		public short EncryptionId {
-			get {
-				return (Flags & FrameFlags.Encryption) != 0 ?
-					encryption_id : (short) -1;
-			}
-			set {
-				if (value >= 0x00 && value <= 0xFF) {
+		public short EncryptionId
+		{
+			get { return (Flags & FrameFlags.Encryption) != 0 ? encryption_id : (short) -1; }
+
+			set
+			{
+				if (value >= 0x00 && value <= 0xFF)
+				{
 					encryption_id = (byte) value;
 					Flags |= FrameFlags.Encryption;
-				} else {
+				}
+				else
+				{
 					Flags &= ~FrameFlags.Encryption;
 				}
 			}
 		}
-		
+
 		#endregion
 
 
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Renders the current instance, encoded in a specified
 		///    ID3v2 version.
@@ -232,70 +246,66 @@ namespace TagLib.Id3v2
 		///    feature, such as encryption or compression, which is not
 		///    yet implemented in the library.
 		/// </exception>
-		public virtual ByteVector Render (byte version)
+		public virtual ByteVector Render(byte version)
 		{
 			// Remove flags that are not supported by older versions
 			// of ID3v2.
 			if (version < 4)
 				Flags &= ~(FrameFlags.DataLengthIndicator |
-					FrameFlags.Unsynchronisation);
-			
+				           FrameFlags.Unsynchronisation);
+
 			if (version < 3)
 				Flags &= ~(FrameFlags.Compression |
-					FrameFlags.Encryption |
-					FrameFlags.FileAlterPreservation |
-					FrameFlags.GroupingIdentity |
-					FrameFlags.ReadOnly |
-					FrameFlags.TagAlterPreservation);
-			
-			ByteVector field_data = RenderFields (version);
-			
+				           FrameFlags.Encryption |
+				           FrameFlags.FileAlterPreservation |
+				           FrameFlags.GroupingIdentity |
+				           FrameFlags.ReadOnly |
+				           FrameFlags.TagAlterPreservation);
+
+			ByteVector field_data = RenderFields(version);
+
 			// If we don't have any content, don't render anything.
 			// This will cause the frame to not be rendered.
 			if (field_data.Count == 0)
-				return new ByteVector ();
-			
-			ByteVector front_data = new ByteVector ();
-			
-			if ((Flags & (FrameFlags.Compression |
-				FrameFlags.DataLengthIndicator)) != 0)
-				front_data.Add (ByteVector.FromUInt ((uint)
-					field_data.Count));
-			
+				return new ByteVector();
+
+			ByteVector front_data = new ByteVector();
+
+			if ((Flags & (FrameFlags.Compression | FrameFlags.DataLengthIndicator)) != 0)
+				front_data.Add(ByteVector.FromUInt((uint) field_data.Count));
+
 			if ((Flags & FrameFlags.GroupingIdentity) != 0)
-				front_data.Add (group_id);
-			
+				front_data.Add(group_id);
+
 			if ((Flags & FrameFlags.Encryption) != 0)
-				front_data.Add (encryption_id);
-			
+				front_data.Add(encryption_id);
+
 			// FIXME: Implement compression.
 			if ((Flags & FrameFlags.Compression) != 0)
-				throw new NotImplementedException (
-					"Compression not yet supported");
-			
+				throw new NotImplementedException("Compression not yet supported");
+
 			// FIXME: Implement encryption.
 			if ((Flags & FrameFlags.Encryption) != 0)
-				throw new NotImplementedException (
-					"Encryption not yet supported");
-			
+				throw new NotImplementedException("Encryption not yet supported");
+
 			if ((Flags & FrameFlags.Unsynchronisation) != 0)
-				SynchData.UnsynchByteVector (field_data);
-			
+				SynchData.UnsynchByteVector(field_data);
+
 			if (front_data.Count > 0)
-				field_data.Insert (0, front_data);
-			
+				field_data.Insert(0, front_data);
+
 			header.FrameSize = (uint) field_data.Count;
-			ByteVector header_data = header.Render (version);
-			header_data.Add (field_data);
-			
+			ByteVector header_data = header.Render(version);
+			header_data.Add(field_data);
+
 			return header_data;
 		}
-		
+
 		#endregion
 
 
 		#region Public Static Methods
-		
+
 		/// <summary>
 		///    Gets the text delimiter for a specified encoding.
 		/// </summary>
@@ -308,11 +318,11 @@ namespace TagLib.Id3v2
 		///    delimiter for the specified encoding.
 		/// </returns>
 		[Obsolete("Use ByteVector.TextDelimiter.")]
-		public static ByteVector TextDelimiter (StringType type)
+		public static ByteVector TextDelimiter(StringType type)
 		{
-			return ByteVector.TextDelimiter (type);
+			return ByteVector.TextDelimiter(type);
 		}
-		
+
 		#endregion
 
 

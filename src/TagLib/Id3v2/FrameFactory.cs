@@ -74,10 +74,10 @@ namespace TagLib.Id3v2
 		///    <code lang="C#">
 		/// public Frame Creator (TagLib.ByteVector data, TagLib.Id3v2.FrameHeader header)
 		/// {
-		/// 	if (header.FrameId == "RVRB")
-		/// 		return new ReverbFrame (data, header);
-		/// 	else
-		/// 		return null;
+		///     if (header.FrameId == "RVRB")
+		///         return new ReverbFrame (data, header);
+		///     else
+		///         return null;
 		/// }
 		/// ...
 		/// TagLib.Id3v2.FrameFactor.AddFrameCreator (ReverbFrame.Creator);

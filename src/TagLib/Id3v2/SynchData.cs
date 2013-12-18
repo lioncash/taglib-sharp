@@ -66,8 +66,7 @@ namespace TagLib.Id3v2
 			int last = data.Count > 4 ? 3 : data.Count - 1;
 
 			for (int i = 0; i <= last; i++)
-				sum |= (uint) (data[i] & 0x7f)
-				       << ((last - i)*7);
+				sum |= (uint) (data[i] & 0x7f) << ((last - i)*7);
 
 			return sum;
 		}
