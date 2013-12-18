@@ -1132,8 +1132,8 @@ namespace TagLib
 
 			for (int i = 0; i <= last; i++)
 			{
-				int offset = mostSignificantByteFirst ? last - i : i;
-				ret |= (int) this[i] << (offset*8);
+				int shift = mostSignificantByteFirst ? last-i : i;
+				ret |= (int) this[i] << (shift*8);
 			}
 
 			return ret;
@@ -1143,7 +1143,7 @@ namespace TagLib
 		///    Converts four bytes of the current instance to
 		///    an <see cref="int" /> value.
 		/// </summary>
-		/// <param name="off">Offset in the data to start at.</param>
+		/// <param name="offset">Offset in the data to start at.</param>
 		/// <param name="mostSignificantByteFirst">
 		///    <see langword="true" /> if the most significant byte
 		///    appears first (big endian format), or <see
@@ -1154,15 +1154,15 @@ namespace TagLib
 		///    An <see cref="int"/> value containing the value read from
 		///    the current instance.
 		/// </returns>
-		public int ToInt(int off, bool mostSignificantByteFirst)
+		public int ToInt(int offset, bool mostSignificantByteFirst)
 		{
 			int ret = 0;
-			int last = (Count > 4) ? off+3 : off+(Count - 1);
+			int last = (Count > 4) ? 3 : (Count - 1);
 
-			for (int i = off; i <= last; i++)
+			for (int i = 0; i <= last; i++)
 			{
-				int offset = mostSignificantByteFirst ? last-i : i-off;
-				ret |= (int)this[i] << (offset * 8);
+				int shift = mostSignificantByteFirst ? last-i : i;
+				ret |= (int)this[offset+i] << (shift*8);
 			}
 
 			return ret;
@@ -1202,8 +1202,8 @@ namespace TagLib
 
 			for (int i = 0; i <= last; i++)
 			{
-				int offset = mostSignificantByteFirst ? last - i : i;
-				sum |= (uint) this[i] << (offset*8);
+				int shift = mostSignificantByteFirst ? last-i : i;
+				sum |= (uint) this[i] << (shift*8);
 			}
 
 			return sum;
@@ -1213,7 +1213,7 @@ namespace TagLib
 		///    Converts four bytes of the current instance to
 		///    a <see cref="uint" /> value.
 		/// </summary>
-		/// <param name="off">Offset in the data to start at.</param>
+		/// <param name="offset">Offset in the data to start at.</param>
 		/// <param name="mostSignificantByteFirst">
 		///    <see langword="true" /> if the most significant byte
 		///    appears first (big endian format), or <see
@@ -1224,15 +1224,49 @@ namespace TagLib
 		///    A <see cref="uint"/> value containing the value read from
 		///    the current instance.
 		/// </returns>
-		public uint ToUInt(int off, bool mostSignificantByteFirst)
+		public uint ToUInt(int offset, bool mostSignificantByteFirst)
 		{
 			uint sum = 0;
-			int last = (Count > 4) ? off+3 : off+(Count - 1);
+			int last = (Count > 4) ? 3 : (Count - 1);
 
-			for (int i = off; i <= last; i++)
+			for (int i = 0; i <= last; i++)
 			{
-				int offset = mostSignificantByteFirst ? last-i : i-off;
-				sum |= (uint)this[i] << (offset * 8);
+				int shift = mostSignificantByteFirst ? last-i : i;
+				sum |= (uint)this[offset+i] << (shift*8);
+			}
+
+			return sum;
+		}
+
+		/// <summary>
+		///    Converts four bytes of the current instance to
+		///    a <see cref="uint" /> value.
+		/// </summary>
+		/// <param name="offset">Offset in the data to start at.</param>
+		/// <param name="length">Number of bytes to read</param>
+		/// <param name="mostSignificantByteFirst">
+		///    <see langword="true" /> if the most significant byte
+		///    appears first (big endian format), or <see
+		///    langword="false" /> if the least significant byte appears
+		///    first (little endian format).
+		/// </param>
+		/// <returns>
+		///    A <see cref="uint"/> value containing the value read from
+		///    the current instance.
+		/// </returns>
+		public uint ToUInt(int offset, int length, bool mostSignificantByteFirst)
+		{
+			// No data to convert
+			if (offset > Count)
+				return 0;
+
+			length = Math.Min(length, Count-offset);
+
+			uint sum = 0;
+			for (int i = 0; i < length; i++)
+			{
+				int shift = mostSignificantByteFirst ? length-1 : i;
+				sum |= (uint)this[offset+i] << (shift*8);
 			}
 
 			return sum;
@@ -1271,8 +1305,8 @@ namespace TagLib
 			int last = (Count > 2) ? 1 : Count - 1;
 			for (int i = 0; i <= last; i++)
 			{
-				int offset = mostSignificantByteFirst ? last - i : i;
-				sum |= (ushort) (this[i] << (offset*8));
+				int shift = mostSignificantByteFirst ? last-i : i;
+				sum |= (ushort) (this[i] << (shift*8));
 			}
 
 			return sum;
@@ -1282,7 +1316,7 @@ namespace TagLib
 		///    Converts two bytes of the current instance to a
 		///    <see cref="ushort" /> value.
 		/// </summary>
-		/// <param name="off">Offset in the data to start at.</param>
+		/// <param name="offset">Offset in the data to start at.</param>
 		/// <param name="mostSignificantByteFirst">
 		///    <see langword="true" /> if the most significant byte
 		///    appears first (big endian format), or <see
@@ -1293,14 +1327,14 @@ namespace TagLib
 		///    A <see cref="ushort"/> value containing the value read
 		///    from the current instance.
 		/// </returns>
-		public ushort ToUShort(int off, bool mostSignificantByteFirst)
+		public ushort ToUShort(int offset, bool mostSignificantByteFirst)
 		{
 			ushort sum = 0;
-			int last = (Count > 2) ? off+1 : off+(Count - 1);
-			for (int i = off; i <= last; i++)
+			int last = (Count > 2) ? 1 : (Count - 1);
+			for (int i = 0; i <= last; i++)
 			{
-				int offset = mostSignificantByteFirst ? last-off : i-off;
-				sum |= (ushort)(this[i] << (offset * 8));
+				int shift = mostSignificantByteFirst ? last-i : i;
+				sum |= (ushort)(this[offset+i] << (shift*8));
 			}
 
 			return sum;
@@ -1339,8 +1373,8 @@ namespace TagLib
 			int last = (Count > 8) ? 7 : Count - 1;
 			for (int i = 0; i <= last; i++)
 			{
-				int offset = mostSignificantByteFirst ? last - i : i;
-				sum |= (ulong) this[i] << (offset*8);
+				int shift = mostSignificantByteFirst ? last-i : i;
+				sum |= (ulong) this[i] << (shift*8);
 			}
 			return sum;
 		}
@@ -1349,7 +1383,7 @@ namespace TagLib
 		///    Converts eight bytes of the current instance to
 		///    a <see cref="ulong" /> value.
 		/// </summary>
-		/// <param name="off">Offset in the data to start at.</param>
+		/// <param name="offset">Offset in the data to start at.</param>
 		/// <param name="mostSignificantByteFirst">
 		///    <see langword="true" /> if the most significant byte
 		///    appears first (big endian format), or <see
@@ -1360,14 +1394,14 @@ namespace TagLib
 		///    A <see cref="ulong"/> value containing the value read
 		///    from the current instance.
 		/// </returns>
-		public ulong ToULong(int off, bool mostSignificantByteFirst)
+		public ulong ToULong(int offset, bool mostSignificantByteFirst)
 		{
 			ulong sum = 0;
-			int last = (Count > 8) ? off+7 : off+(Count - 1);
-			for (int i = off; i <= last; i++)
+			int last = (Count > 8) ? 7 : (Count - 1);
+			for (int i = 0; i <= last; i++)
 			{
-				int offset = mostSignificantByteFirst ? last - i : i-off;
-				sum |= (ulong)this[i] << (offset * 8);
+				int shift = mostSignificantByteFirst ? last-i : i;
+				sum |= (ulong)this[offset+i] << (shift*8);
 			}
 			return sum;
 		}
@@ -1501,8 +1535,7 @@ namespace TagLib
 						   ? Mid(offset, 2)
 						   : null;
 
-			string s = StringTypeToEncoding(type, bom)
-				.GetString(Data, offset, count);
+			string s = StringTypeToEncoding(type, bom).GetString(Data, offset, count);
 
 			// UTF16 BOM
 			if (s.Length != 0 && (s[0] == 0xfffe || s[0] == 0xfeff))
