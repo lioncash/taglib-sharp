@@ -36,6 +36,6 @@ namespace TagLib.Xmp
 		/// <param name="node">
 		///    The <see cref="XmpNode" /> that is being visited.
 		/// </param>
-		void Visit (XmpNode node);
+		void Visit(XmpNode node);
 	}
 }

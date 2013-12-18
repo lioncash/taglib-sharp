@@ -34,7 +34,7 @@ namespace TagLib.Xmp
 	public class XmpNode
 	{
 
-#region Private Fields
+		#region Private Fields
 
 		/// <value>
 		///    The children of the current node
@@ -51,9 +51,9 @@ namespace TagLib.Xmp
 		/// </value>
 		private string name;
 
-#endregion
+		#endregion
 
-#region Properties
+		#region Properties
 
 		/// <value>
 		///    The namespace the current instance belongs to
@@ -63,14 +63,17 @@ namespace TagLib.Xmp
 		/// <value>
 		///    The name of the current node instance
 		/// </value>
-		public string Name {
+		public string Name
+		{
 			get { return name; }
-			internal set {
+
+			internal set
+			{
 				if (name != null)
-					throw new Exception ("Cannot change named node");
+					throw new Exception("Cannot change named node");
 
 				if (value == null)
-					throw new ArgumentException ("value");
+					throw new ArgumentException("value");
 
 				name = value;
 			}
@@ -90,14 +93,18 @@ namespace TagLib.Xmp
 		/// <value>
 		///    The number of qualifiers of the current instance
 		/// </value>
-		public int QualifierCount {
-			get {
+		public int QualifierCount
+		{
+			get
+			{
 				if (qualifiers == null)
 					return 0;
 				int count = 0;
-				foreach (var collection in qualifiers.Values) {
+				foreach (var collection in qualifiers.Values)
+				{
 					count += collection == null ? 0 : collection.Count;
 				}
+
 				return count;
 			}
 		}
@@ -105,14 +112,15 @@ namespace TagLib.Xmp
 		/// <value>
 		///    The children of the current instance.
 		/// </value>
-		public List<XmpNode> Children {
+		public List<XmpNode> Children
+		{
 			// TODO: do not return a list, because it can be modified elsewhere
-			get { return children ?? new List<XmpNode> (); }
+			get { return children ?? new List<XmpNode>(); }
 		}
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		/// <summary>
 		///    Constructor.
@@ -123,13 +131,13 @@ namespace TagLib.Xmp
 		/// <param name="name">
 		///    A <see cref="System.String"/> with the name of the new instance.
 		/// </param>
-		public XmpNode (string ns, string name)
+		public XmpNode(string ns, string name)
 		{
 			// Namespaces in XMP need to end with / or #. Broken files are known
 			// to be floating around (we have one with MicrosoftPhoto in our tree).
 			// Correcting below.
-			if (ns != String.Empty && ns != XmpTag.XML_NS && !ns.EndsWith ("/") && !ns.EndsWith ("#"))
-				ns = String.Format ("{0}/", ns);
+			if (ns != String.Empty && ns != XmpTag.XML_NS && !ns.EndsWith("/") && !ns.EndsWith("#"))
+				ns = String.Format("{0}/", ns);
 
 			Namespace = ns;
 			Name = name;
@@ -149,14 +157,14 @@ namespace TagLib.Xmp
 		/// <param name="value">
 		///    A <see cref="System.String"/> with the txt value of the new instance.
 		/// </param>
-		public XmpNode (string ns, string name, string value) : this (ns, name)
+		public XmpNode(string ns, string name, string value) : this(ns, name)
 		{
 			Value = value;
 		}
 
-#endregion
+		#endregion
 
-#region Public Methods
+		#region Public Methods
 
 		/// <summary>
 		///    Adds a node as child of the current node
@@ -164,15 +172,15 @@ namespace TagLib.Xmp
 		/// <param name="node">
 		///    A <see cref="XmpNode"/> to be add as child
 		/// </param>
-		public void AddChild (XmpNode node)
+		public void AddChild(XmpNode node)
 		{
 			if (node == null || node == this)
-				throw new ArgumentException ("node");
+				throw new ArgumentException("node");
 
 			if (children == null)
-				children = new List<XmpNode> ();
+				children = new List<XmpNode>();
 
-			children.Add (node);
+			children.Add(node);
 		}
 
 		/// <summary>
@@ -181,12 +189,12 @@ namespace TagLib.Xmp
 		/// <param name="node">
 		///    A <see cref="XmpNode"/> to remove as child
 		/// </param>
-		public void RemoveChild (XmpNode node)
+		public void RemoveChild(XmpNode node)
 		{
 			if (children == null)
 				return;
 
-			children.Remove (node);
+			children.Remove(node);
 		}
 
 		/// <summary>
@@ -201,12 +209,14 @@ namespace TagLib.Xmp
 		/// <returns>
 		///    A <see cref="XmpNode"/> with the given name and namespace.
 		/// </returns>
-		public XmpNode GetChild (string ns, string name)
+		public XmpNode GetChild(string ns, string name)
 		{
-			foreach (var node in children) {
-				if (node.Namespace.Equals (ns) && node.Name.Equals (name))
+			foreach (var node in children)
+			{
+				if (node.Namespace.Equals(ns) && node.Name.Equals(name))
 					return node;
 			}
+
 			return null;
 		}
 
@@ -216,18 +226,18 @@ namespace TagLib.Xmp
 		/// <param name="node">
 		///    A <see cref="XmpNode"/> to add as qualifier
 		/// </param>
-		public void AddQualifier (XmpNode node)
+		public void AddQualifier(XmpNode node)
 		{
 			if (node == null || node == this)
-				throw new ArgumentException ("node");
+				throw new ArgumentException("node");
 
 			if (qualifiers == null)
-				qualifiers = new Dictionary<string, Dictionary<string, XmpNode>> ();
+				qualifiers = new Dictionary<string, Dictionary<string, XmpNode>>();
 
-			if (!qualifiers.ContainsKey (node.Namespace))
-				qualifiers [node.Namespace] = new Dictionary<string, XmpNode> ();
+			if (!qualifiers.ContainsKey(node.Namespace))
+				qualifiers[node.Namespace] = new Dictionary<string, XmpNode>();
 
-			qualifiers [node.Namespace][node.Name] = node;
+			qualifiers[node.Namespace][node.Name] = node;
 		}
 
 		/// <summary>
@@ -243,23 +253,24 @@ namespace TagLib.Xmp
 		/// <returns>
 		///    A <see cref="XmpNode"/> with the qualifier
 		/// </returns>
-		public XmpNode GetQualifier (string ns, string name)
+		public XmpNode GetQualifier(string ns, string name)
 		{
 			if (qualifiers == null)
 				return null;
-			if (!qualifiers.ContainsKey (ns))
+			if (!qualifiers.ContainsKey(ns))
 				return null;
-			if (!qualifiers [ns].ContainsKey (name))
+			if (!qualifiers[ns].ContainsKey(name))
 				return null;
-			return qualifiers [ns][name];
+
+			return qualifiers[ns][name];
 		}
 
 		/// <summary>
 		///    Print a debug output of the node.
 		/// </summary>
-		public void Dump ()
+		public void Dump()
 		{
-			Dump ("");
+			Dump("");
 		}
 
 		/// <summary>
@@ -268,15 +279,17 @@ namespace TagLib.Xmp
 		/// <param name="visitor">
 		///    A <see cref="XmpNodeVisitor"/> to access the node and the children.
 		/// </param>
-		public void Accept (XmpNodeVisitor visitor)
+		public void Accept(XmpNodeVisitor visitor)
 		{
-			visitor.Visit (this);
+			visitor.Visit(this);
 
 			// TODO: what is with the qualifiers ?
 			// either add them to be also visited, or add a comment
-			if (children != null) {
-				foreach (XmpNode child in children) {
-					child.Accept (visitor);
+			if (children != null)
+			{
+				foreach (XmpNode child in children)
+				{
+					child.Accept(visitor);
 				}
 			}
 		}
@@ -288,144 +301,164 @@ namespace TagLib.Xmp
 		/// <param name="parent">
 		///    A <see cref="XmlNode"/> to render the current instance as child of.
 		/// </param>
-		public void RenderInto (XmlNode parent)
+		public void RenderInto(XmlNode parent)
 		{
-			if (IsRootNode) {
-				AddAllChildrenTo (parent);
-
-			} else if (IsReallySimpleType && parent.Attributes.GetNamedItem (XmpTag.PARSE_TYPE_URI, XmpTag.RDF_NS) == null) {
+			if (IsRootNode)
+			{
+				AddAllChildrenTo(parent);
+			}
+			else if (IsReallySimpleType && parent.Attributes.GetNamedItem(XmpTag.PARSE_TYPE_URI, XmpTag.RDF_NS) == null)
+			{
 				// Simple values can be added as attributes of the parent node. Not allowed when the parent has an rdf:parseType.
-				XmlAttribute attr = XmpTag.CreateAttribute (parent.OwnerDocument, Name, Namespace);
+				XmlAttribute attr = XmpTag.CreateAttribute(parent.OwnerDocument, Name, Namespace);
 				attr.Value = Value;
-				parent.Attributes.Append (attr);
-
-			} else if (Type == XmpNodeType.Simple || Type == XmpNodeType.Struct) {
-				var node = XmpTag.CreateNode (parent.OwnerDocument, Name, Namespace);
+				parent.Attributes.Append(attr);
+			}
+			else if (Type == XmpNodeType.Simple || Type == XmpNodeType.Struct)
+			{
+				var node = XmpTag.CreateNode(parent.OwnerDocument, Name, Namespace);
 				node.InnerText = Value;
 
-				if (Type == XmpNodeType.Struct) {
+				if (Type == XmpNodeType.Struct)
+				{
 					// Structured types are always handled as a parseType=Resource node. This way, IsReallySimpleType will
 					// not match for child nodes, which makes sure they are added as extra nodes to this node. Does the
 					// trick well, unit tests that prove this are in XmpSpecTest.
-					XmlAttribute attr = XmpTag.CreateAttribute (parent.OwnerDocument, XmpTag.PARSE_TYPE_URI, XmpTag.RDF_NS);
+					XmlAttribute attr = XmpTag.CreateAttribute(parent.OwnerDocument, XmpTag.PARSE_TYPE_URI, XmpTag.RDF_NS);
 					attr.Value = "Resource";
-					node.Attributes.Append (attr);
+					node.Attributes.Append(attr);
 				}
 
-				AddAllQualifiersTo (node);
-				AddAllChildrenTo (node);
-				parent.AppendChild (node);
-
-			} else if (Type == XmpNodeType.Bag) {
-				var node = XmpTag.CreateNode (parent.OwnerDocument, Name, Namespace);
+				AddAllQualifiersTo(node);
+				AddAllChildrenTo(node);
+				parent.AppendChild(node);
+			}
+			else if (Type == XmpNodeType.Bag)
+			{
+				var node = XmpTag.CreateNode(parent.OwnerDocument, Name, Namespace);
 				// TODO: Add all qualifiers.
 				if (QualifierCount > 0)
-					throw new NotImplementedException ();
-				var bag = XmpTag.CreateNode (parent.OwnerDocument, XmpTag.BAG_URI, XmpTag.RDF_NS);
+					throw new NotImplementedException();
+				var bag = XmpTag.CreateNode(parent.OwnerDocument, XmpTag.BAG_URI, XmpTag.RDF_NS);
 				foreach (var child in Children)
-					child.RenderInto (bag);
-				node.AppendChild (bag);
-				parent.AppendChild (node);
-
-			} else if (Type == XmpNodeType.Alt) {
-				var node = XmpTag.CreateNode (parent.OwnerDocument, Name, Namespace);
+					child.RenderInto(bag);
+				node.AppendChild(bag);
+				parent.AppendChild(node);
+			}
+			else if (Type == XmpNodeType.Alt)
+			{
+				var node = XmpTag.CreateNode(parent.OwnerDocument, Name, Namespace);
 				// TODO: Add all qualifiers.
 				if (QualifierCount > 0)
-					throw new NotImplementedException ();
-				var bag = XmpTag.CreateNode (parent.OwnerDocument, XmpTag.ALT_URI, XmpTag.RDF_NS);
+					throw new NotImplementedException();
+				var bag = XmpTag.CreateNode(parent.OwnerDocument, XmpTag.ALT_URI, XmpTag.RDF_NS);
 				foreach (var child in Children)
-					child.RenderInto (bag);
-				node.AppendChild (bag);
-				parent.AppendChild (node);
-
-			} else if (Type == XmpNodeType.Seq) {
-				var node = XmpTag.CreateNode (parent.OwnerDocument, Name, Namespace);
+					child.RenderInto(bag);
+				node.AppendChild(bag);
+				parent.AppendChild(node);
+			}
+			else if (Type == XmpNodeType.Seq)
+			{
+				var node = XmpTag.CreateNode(parent.OwnerDocument, Name, Namespace);
 				// TODO: Add all qualifiers.
 				if (QualifierCount > 0)
-					throw new NotImplementedException ();
-				var bag = XmpTag.CreateNode (parent.OwnerDocument, XmpTag.SEQ_URI, XmpTag.RDF_NS);
+					throw new NotImplementedException();
+				var bag = XmpTag.CreateNode(parent.OwnerDocument, XmpTag.SEQ_URI, XmpTag.RDF_NS);
 				foreach (var child in Children)
-					child.RenderInto (bag);
-				node.AppendChild (bag);
-				parent.AppendChild (node);
-
-			} else {
+					child.RenderInto(bag);
+				node.AppendChild(bag);
+				parent.AppendChild(node);
+			}
+			else
+			{
 				// Probably some combination of things we don't fully cover yet.
-				Dump ();
-				throw new NotImplementedException ();
+				Dump();
+				throw new NotImplementedException();
 			}
 		}
 
 
-#endregion
+		#endregion
 
-#region Internal Methods
+		#region Internal Methods
 
-		internal void Dump (string prefix) {
-			Console.WriteLine ("{0}{1}{2} ({4}) = \"{3}\"", prefix, Namespace, Name, Value, Type);
-			if (qualifiers != null) {
-				Console.WriteLine ("{0}Qualifiers:", prefix);
+		internal void Dump(string prefix)
+		{
+			Console.WriteLine("{0}{1}{2} ({4}) = \"{3}\"", prefix, Namespace, Name, Value, Type);
+			if (qualifiers != null)
+			{
+				Console.WriteLine("{0}Qualifiers:", prefix);
 
-				foreach (string ns in qualifiers.Keys) {
-					foreach (string name in qualifiers [ns].Keys) {
-						qualifiers [ns][name].Dump (prefix+"  ->  ");
+				foreach (string ns in qualifiers.Keys)
+				{
+					foreach (string name in qualifiers[ns].Keys)
+					{
+						qualifiers[ns][name].Dump(prefix + "  ->  ");
 					}
 				}
 			}
-			if (children != null) {
-				Console.WriteLine ("{0}Children:", prefix);
 
-				foreach (XmpNode child in children) {
-					child.Dump (prefix+"  ->  ");
+			if (children != null)
+			{
+				Console.WriteLine("{0}Children:", prefix);
+
+				foreach (XmpNode child in children)
+				{
+					child.Dump(prefix + "  ->  ");
 				}
 			}
 		}
 
-#endregion
+		#endregion
 
-#region Private Methods
+		#region Private Methods
 
 		/// <summary>
 		///    Is this a node that we can transform into an attribute of the
 		///    parent node? Yes if it has no qualifiers or children, nor is
 		///    it part of a list.
 		/// </summary>
-		private bool IsReallySimpleType {
-			get {
+		private bool IsReallySimpleType
+		{
+			get
+			{
 				return Type == XmpNodeType.Simple && (children == null || children.Count == 0)
-					&& QualifierCount == 0 && (Name != XmpTag.LI_URI || Namespace != XmpTag.RDF_NS);
+				       && QualifierCount == 0 && (Name != XmpTag.LI_URI || Namespace != XmpTag.RDF_NS);
 			}
 		}
 
 		/// <summary>
 		///    Is this the root node of the tree?
 		/// </summary>
-		private bool IsRootNode {
+		private bool IsRootNode
+		{
 			get { return Name == String.Empty && Namespace == String.Empty; }
 		}
 
-		private void AddAllQualifiersTo (XmlNode xml)
+		private void AddAllQualifiersTo(XmlNode xml)
 		{
 			if (qualifiers == null)
 				return;
-			foreach (var collection in qualifiers.Values) {
-				foreach (XmpNode node in collection.Values) {
-					XmlAttribute attr = XmpTag.CreateAttribute (xml.OwnerDocument, node.Name, node.Namespace);
+
+			foreach (var collection in qualifiers.Values)
+			{
+				foreach (XmpNode node in collection.Values)
+				{
+					XmlAttribute attr = XmpTag.CreateAttribute(xml.OwnerDocument, node.Name, node.Namespace);
 					attr.Value = node.Value;
-					xml.Attributes.Append (attr);
+					xml.Attributes.Append(attr);
 				}
 			}
 		}
 
-		private void AddAllChildrenTo (XmlNode parent)
+		private void AddAllChildrenTo(XmlNode parent)
 		{
 			if (children == null)
 				return;
 			foreach (var child in children)
-				child.RenderInto (parent);
+				child.RenderInto(parent);
 		}
-#endregion
 
-
+		#endregion
 	}
 }
