@@ -699,6 +699,31 @@ namespace TagLib.Ogg
 		}
 
 		/// <summary>
+		///    Gets and sets the name of the organization producing the track. (i.e. record label).
+		/// </summary>
+		/// <value>
+		///    A <see cref="string"/> value indicating the organization that produced this track.
+		/// </value>
+		public override string Organization
+		{
+			get { return GetFirstField("ORGANIZATION"); }
+			set { SetField("ORGANIZATION", value); }
+		}
+
+		/// <summary>
+		///    Gtes and sets the location this track was recorded.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string"/> value containing the location that
+		///    this track was recorded at.
+		/// </value>
+		public override string Location
+		{
+			get { return GetFirstField("LOCATION"); }
+			set { SetField("LOCATION", value); }
+		}
+
+		/// <summary>
 		///    Gets and sets the year that the media represented by the
 		///    current instance was recorded.
 		/// </summary>
@@ -862,6 +887,8 @@ namespace TagLib.Ogg
 			set { SetField("DISCTOTAL", value); }
 		}
 
+
+
 		/// <summary>
 		///    Gets and sets the lyrics or script of the media
 		///    represented by the current instance.
@@ -959,6 +986,18 @@ namespace TagLib.Ogg
 		{
 			get { return GetFirstField("COPYRIGHT"); }
 			set { SetField("COPYRIGHT", value); }
+		}
+
+		/// <summary>
+		///    Gets and sets the license comment.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> value indicating the license in this comment.
+		/// </value>
+		public override string License
+		{
+			get { return GetFirstField("LICENSE"); }
+			set { SetField("LICENSE", value); }
 		}
 
 		/// <summary>
