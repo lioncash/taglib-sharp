@@ -669,6 +669,73 @@ namespace TagLib
 		}
 
 		/// <summary>
+		///    License information, eg, 'All Rights Reserved', 'Any Use Permitted', a URL to a license, etc.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string"/> object containing the licensing
+		///    information for the media represented by the current instance
+		///    or <see langword="null"/> if no value is present.
+		/// </value>
+		/// <remarks>
+		///    <para>This field should be used for storing licensing
+		///    information. It may be useful to show this information
+		///    somewhere in the program while the media is
+		///    playing.</para>
+		///    <para>Players should not support editing this field, but
+		///    media creation tools should definitely allow
+		///    modification.</para>
+		/// </remarks>
+		public virtual string License
+		{
+			get { return null; }
+			set { }
+		}
+
+		/// <summary>
+		///    Name of the organization producing the track (i.e. the 'record label')
+		/// </summary>
+		/// <value>
+		///    a <see cref="string"/> object containing the name
+		///    of the organization that produced this track or
+		///    <see langword="null"/> if no value is present.
+		/// </value>
+		public virtual string Organization
+		{
+			get { return null; }
+			set { }
+		}
+
+		/// <summary>
+		///    Gets and sets the location where the track was recorded.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string"/> object containing the location where the
+		///    track was recorded, or <see langword="null"/> if no value is present.
+		/// </value>
+		public virtual string Location
+		{
+			get { return null; }
+			set { }
+		}
+
+		/// <summary>
+		///    Gets and sets the International Standard Recording Code for the track
+		/// </summary>
+		/// <value>
+		///    A <see cref="string"/> object containing the ISRC for the track.
+		/// </value>
+		/// <remarks>
+		///    <para>Players should not support editing this field, but
+		///    media creation tools should definitely allow
+		///    modification.</para>
+		/// </remarks>
+		public virtual string ISRC
+		{
+			get { return null; }
+			set { }
+		}
+
+		/// <summary>
 		///    Gets and sets the MusicBrainz Artist ID of the media represented by
 		///    the current instance.
 		/// </summary>
