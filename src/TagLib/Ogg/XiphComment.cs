@@ -1163,23 +1163,8 @@ namespace TagLib.Ogg
 
 				for (int i = 0; i < covers.Length; i++)
 				{
-					byte[] pic = Convert.FromBase64String(covers[i]);
-					ByteVector bv = new ByteVector(pic);
-
-					// TODO: Break into own getter/setter
-					// NOTE: Commented out lines ARE valid.
-					//       They're just there as a lookup for when I make them into getters.
-					//int coverType   = bv.ToInt(0, true);
-					int mimeLength  = bv.ToInt(4, true);
-					int descriptionLength = bv.ToInt(8+mimeLength, true);
-					//int widthInPix       = bv.ToInt(12+mimeLength+descriptionLength, true);
-					//int heightInPix      = bv.ToInt(16+mimeLength+descriptionLength, true);
-					//int colorDepthBpp    = bv.ToInt(20+mimeLength+descriptionLength, true);
-					//int numColorsUsed    = bv.ToInt(24+mimeLength+descriptionLength, true);
-					int lenOfPictureData = bv.ToInt(28+mimeLength+descriptionLength, true);
-
-					// Make a slice to just the image data
-					pictures[i] = new Picture(bv.Slice(32 + mimeLength + descriptionLength, lenOfPictureData));
+					ByteVector pic = new ByteVector(Convert.FromBase64String(covers[i]));
+					pictures[i] = new Flac.Picture(pic);
 				}
 
 				return pictures;
