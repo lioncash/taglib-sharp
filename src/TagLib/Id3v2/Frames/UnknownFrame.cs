@@ -34,12 +34,12 @@ namespace TagLib.Id3v2
 	public class UnknownFrame : Frame
 	{
 		#region Private Properties
-		
+
 		/// <summary>
 		///    Contains the field data.
 		/// </summary>
 		private ByteVector field_data = null;
-		
+
 		#endregion
 
 
@@ -140,7 +140,7 @@ namespace TagLib.Id3v2
 
 
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Gets a string representation of the current instance.
 		/// </summary>
@@ -152,12 +152,12 @@ namespace TagLib.Id3v2
 		{
 			return base.ToString ();
 		}
-		
+
 		#endregion
 
 
 		#region Protected Methods
-		
+
 		/// <summary>
 		///    Populates the values in the current instance by parsing
 		///    its field data in a specified version.

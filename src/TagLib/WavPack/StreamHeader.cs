@@ -38,53 +38,53 @@ namespace TagLib.WavPack
 	public struct StreamHeader : IAudioCodec, ILosslessAudioCodec, IEquatable<StreamHeader>
 	{
 		#region Constants
-		
+
 		private static readonly uint [] sample_rates = new uint [] {
 			6000, 8000, 9600, 11025, 12000, 16000, 22050, 24000,
 			32000, 44100, 48000, 64000, 88200, 96000, 192000};
-		
+
 		private const int  BYTES_STORED = 3;
 		private const int  MONO_FLAG    = 4;
 		private const int  SHIFT_LSB   = 13;
 		private const long SHIFT_MASK  = (0x1fL << SHIFT_LSB);
 		private const int  SRATE_LSB   = 23;
 		private const long SRATE_MASK  = (0xfL << SRATE_LSB);
-		
+
 		#endregion
 
 
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the number of bytes in the stream.
 		/// </summary>
 		private long stream_length;
-		
+
 		/// <summary>
 		///    Contains the WavPack version.
 		/// </summary>
 		private ushort version;
-		
+
 		/// <summary>
 		///    Contains the flags.
 		/// </summary>
 		private uint flags;
-		
+
 		/// <summary>
 		///    Contains the sample count.
 		/// </summary>
 		private uint samples;
-		
+
 		#endregion
 
 
 		#region Public Static Fields
-		
+
 		/// <summary>
 		///    The size of a WavPack header.
 		/// </summary>
 		public const uint Size = 32;
-		
+
 		/// <summary>
 		///    The identifier used to recognize a WavPack file.
 		/// </summary>
@@ -92,12 +92,12 @@ namespace TagLib.WavPack
 		///    "wvpk"
 		/// </value>
 		public static readonly ReadOnlyByteVector FileIdentifier = "wvpk";
-		
+
 		#endregion
 
 
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="StreamHeader" /> for a specified header block and
@@ -123,19 +123,19 @@ namespace TagLib.WavPack
 		{
 			if (data == null)
 				throw new ArgumentNullException ("data");
-			
+
 			if (!data.StartsWith (FileIdentifier))
 				throw new CorruptFileException ("Data does not begin with identifier.");
-			
+
 			if (data.Count < Size)
 				throw new CorruptFileException ("Insufficient data in stream header");
-			
+
 			stream_length = streamLength;
 			version = data.ToUShort(8, false);
 			samples = data.ToUInt(12, false);
 			flags   = data.ToUInt(24, false);
 		}
-		
+
 		#endregion
 
 
@@ -255,12 +255,12 @@ namespace TagLib.WavPack
 		{
 			get { return (int) (((flags & BYTES_STORED) + 1) * 8 - ((flags & SHIFT_MASK) >> SHIFT_LSB)); }
 		}
-		
+
 		#endregion
 
 
 		#region IEquatable
-		
+
 		/// <summary>
 		///    Generates a hash code for the current instance.
 		/// </summary>
@@ -275,7 +275,7 @@ namespace TagLib.WavPack
 				return (int) (flags ^ samples ^ version);
 			}
 		}
-		
+
 		/// <summary>
 		///    Checks whether or not the current instance is equal to
 		///    another object.
@@ -293,7 +293,7 @@ namespace TagLib.WavPack
 		{
 			if (!(other is StreamHeader))
 				return false;
-			
+
 			return Equals ((StreamHeader) other);
 		}
 

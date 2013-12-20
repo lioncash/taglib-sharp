@@ -40,76 +40,76 @@ namespace TagLib.Ogg
 		///    The page is a normal page.
 		/// </summary>
 		None = 0,
-		
+
 		/// <summary>
 		///    The first packet of the page is continued from the
 		///    previous page.
 		/// </summary>
 		FirstPacketContinued = 1,
-		
+
 		/// <summary>
 		///    The page is the first page of the stream.
 		/// </summary>
 		FirstPageOfStream = 2,
-		
+
 		/// <summary>
 		///    The page is the last page of the stream.
 		/// </summary>
 		LastPageOfStream = 4
 	}
-	
+
 	/// <summary>
 	///    This structure provides a representation of an Ogg page header.
 	/// </summary>
 	public struct PageHeader
 	{
 		#region Private Propertis
-		
+
 		/// <summary>
 		///    Contains the sizes of the packets contained in the
 		///    current instance.
 		/// </summary>
 		private List<int> packet_sizes;
-		
+
 		/// <summary>
 		///    Contains the OGG version.
 		/// </summary>
 		private byte version;
-		
+
 		/// <summary>
 		///    Contains the page flags.
 		/// </summary>
 		private PageFlags flags;
-		
+
 		/// <summary>
 		///    Contains the page absolute granular postion.
 		/// </summary>
 		private ulong absolute_granular_position;
-		
+
 		/// <summary>
 		///    Contains the stream serial number of the page.
 		/// </summary>
 		private uint stream_serial_number;
-		
+
 		/// <summary>
 		///    Contains the page sequence number.
 		/// </summary>
 		private uint page_sequence_number;
-		
+
 		/// <summary>
 		///    Contains the header size on disk.
 		/// </summary>
 		private uint size;
-		
+
 		/// <summary>
 		///    Contains the data size on disk.
 		/// </summary>
 		private uint data_size;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -263,9 +263,9 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -362,9 +362,9 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -393,9 +393,9 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Properties
 
 		/// <summary>
@@ -438,9 +438,9 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region IEquatable
 
 		/// <summary>

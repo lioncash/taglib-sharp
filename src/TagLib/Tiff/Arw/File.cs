@@ -25,7 +25,6 @@ using System;
 
 namespace TagLib.Tiff.Arw
 {
-
 	/// <summary>
 	///    This class extends <see cref="TagLib.Tiff.File" /> to provide tagging
 	///    for ARW image files.
@@ -35,7 +34,6 @@ namespace TagLib.Tiff.Arw
 	[SupportedMimeType("image/x-sony-arw")]
 	public class File : TagLib.Tiff.File
 	{
-
 		#region Public Properties
 
 		/// <summary>

@@ -33,29 +33,29 @@ namespace TagLib.Ogg
 	public class Bitstream
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the last packet of the previous page in case it
 		///    is continued in the next frame.
 		/// </summary>
 		private ByteVector previous_packet;
-		
+
 		/// <summary>
 		///    Contains the index of the next packet to be processed.
 		/// </summary>
 		private int packet_index;
-		
+
 		/// <summary>
 		///    Contains the codec object used to process pages.
 		/// </summary>
 		private Codec codec;
-		
+
 		/// <summary>
 		///    Contains the absolute granular position of the first
 		///    page.
 		/// </summary>
 		private long first_absolute_granular_position;
-		
+
 		#endregion
 
 
@@ -199,7 +199,7 @@ namespace TagLib.Ogg
 
 
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Sents a packet to the codec processor to read it.
 		/// </summary>
@@ -217,7 +217,7 @@ namespace TagLib.Ogg
 		{
 			return codec.ReadPacket (packet, packet_index++);
 		}
-		
+
 		#endregion
 	}
 }

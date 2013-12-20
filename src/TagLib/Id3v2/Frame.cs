@@ -36,22 +36,22 @@ namespace TagLib.Id3v2
 	public abstract class Frame : ICloneable
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the frame's header.
 		/// </summary>
 		private FrameHeader header;
-		
+
 		/// <summary>
 		///    Contains the frame's grouping ID.
 		/// </summary>
 		private byte group_id;
-		
+
 		/// <summary>
 		///    Contains the frame's encryption ID.
 		/// </summary>
 		private byte encryption_id;
-		
+
 		#endregion
 
 

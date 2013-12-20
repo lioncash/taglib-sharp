@@ -6,7 +6,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -34,50 +34,50 @@ namespace TagLib.Asf
 	public class DescriptionRecord
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the data type.
 		/// </summary>
 		private DataType type = DataType.Unicode;
-		
+
 		/// <summary>
 		///    Contains the language list index.
 		/// </summary>
 		private ushort lang_list_index = 0;
-		
+
 		/// <summary>
 		///    Contains the stream number.
 		/// </summary>
 		private ushort stream_number = 0;
-		
+
 		/// <summary>
 		///    Contains the record name.
 		/// </summary>
 		private string name = null;
-		
+
 		/// <summary>
 		///    Contains the string value.
 		/// </summary>
 		private string strValue = null;
-		
+
 		/// <summary>
 		///    Contains the byte value.
 		/// </summary>
 		private ByteVector byteValue = null;
-		
+
 		/// <summary>
 		///    Contains the long value.
 		/// </summary>
 		private ulong longValue = 0;
-		
+
 		/// <summary>
 		///    Contains the GUID value.
 		/// </summary>
 		private System.Guid guidValue = System.Guid.Empty;
-		
+
 		#endregion
-		
-		
+
+
 		#region Constructors
 
 		/// <summary>
@@ -318,8 +318,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -373,8 +373,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -542,8 +542,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region Protected Methods
 
 		/// <summary>

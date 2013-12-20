@@ -8,7 +8,7 @@
 //   Entagged#
 //
 // Copyright (C) 2005-2006 Novell, Inc.
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -58,7 +58,7 @@ namespace TagLib {
 	///    <code lang="C++">
 	/// #using &lt;System.dll>
 	/// #using &lt;taglib-sharp.dll>
-	/// 
+	///
 	/// using System;
 	/// using TagLib;
 	///

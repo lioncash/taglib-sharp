@@ -34,24 +34,24 @@ namespace TagLib.Id3v2
 	public class TermsOfUseFrame : Frame
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the text encoding to use when rendering the
 		///    current instance.
 		/// </summary>
 		private StringType encoding = Tag.DefaultEncoding;
-		
+
 		/// <summary>
 		///    Contains the ISO-639-2 language code of the current
 		///    instance.
 		/// </summary>
 		private string language = null;
-		
+
 		/// <summary>
 		///    Contains the text in the current instance.
 		/// </summary>
 		private string text = null;
-		
+
 		#endregion
 
 
@@ -181,7 +181,7 @@ namespace TagLib.Id3v2
 		///    code stored in the current instance.
 		/// </value>
 		/// <remarks>
-		///    There should only be one file with a matching 
+		///    There should only be one file with a matching
 		///    ISO-639-2 language code per tag.
 		/// </remarks>
 		public string Language

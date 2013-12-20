@@ -29,7 +29,6 @@ namespace TagLib.Png
 	/// </summary>
 	public class Codec : Image.Codec
 	{
-
 		/// <summary>
 		///    Gets a text description of the media represented by the
 		///    current instance.

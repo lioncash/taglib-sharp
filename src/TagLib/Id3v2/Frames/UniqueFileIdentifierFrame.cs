@@ -36,17 +36,17 @@ namespace TagLib.Id3v2
 	public class UniqueFileIdentifierFrame : Frame
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the owner string.
 		/// </summary>
 		private string owner = null;
-		
+
 		/// <summary>
 		///    Contains the identifier data.
 		/// </summary>
 		private ByteVector identifier = null;
-		
+
 		#endregion
 
 

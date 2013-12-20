@@ -42,51 +42,51 @@ namespace TagLib.Id3v2
 		///    The header contains no flags.
 		/// </summary>
 		None = 0,
-		
+
 		/// <summary>
 		///    Indicates that the frame is to be deleted if the tag is
 		///    altered.
 		/// </summary>
 		TagAlterPreservation = 0x4000,
-		
+
 		/// <summary>
 		///    Indicates that the frame is to be deleted if the file is
 		///    altered.
 		/// </summary>
 		FileAlterPreservation = 0x2000,
-		
+
 		/// <summary>
 		///    Indicates that the frame is read-only and should not be
 		///    altered.
 		/// </summary>
 		ReadOnly = 0x1000,
-		
+
 		/// <summary>
 		///    Indicates that the frame has a grouping identity.
 		/// </summary>
 		GroupingIdentity = 0x0040,
-		
+
 		/// <summary>
 		///    Indicates that the frame data is compressed.
 		/// </summary>
 		Compression = 0x0008,
-		
+
 		/// <summary>
 		///    Indicates that the frame data is encrypted.
 		/// </summary>
 		Encryption = 0x0004,
-		
+
 		/// <summary>
 		///    Indicates that the frame data has been unsynchronized.
 		/// </summary>
 		Unsynchronisation = 0x0002,
-		
+
 		/// <summary>
 		///    Indicates that the frame has a data length indicator.
 		/// </summary>
 		DataLengthIndicator = 0x0001
 	}
-	
+
 	/// <summary>
 	///    This structure provides a representation of an ID3v2 frame header
 	///    which can be read from and written to disk.
@@ -94,22 +94,22 @@ namespace TagLib.Id3v2
 	public struct FrameHeader
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains frame's ID.
 		/// </summary>
 		private ReadOnlyByteVector frame_id;
-		
+
 		/// <summary>
 		///    Contains frame's size.
 		/// </summary>
 		private uint frame_size;
-		
+
 		/// <summary>
 		///    Contains frame's flags.
 		/// </summary>
 		private FrameFlags flags;
-		
+
 		#endregion
 
 
@@ -131,7 +131,7 @@ namespace TagLib.Id3v2
 		/// </param>
 		/// <remarks>
 		///    If the data size is smaller than the size of a full
-		///    header, the data is just treated as a frame identifier 
+		///    header, the data is just treated as a frame identifier
 		///    and the remaining values are zeroed.
 		/// </remarks>
 		/// <exception cref="ArgumentNullException">
@@ -465,14 +465,14 @@ namespace TagLib.Id3v2
 			{ "WXX", "WXXX" },
 			{ "XRV", "RVA2" }
 		};
-		
+
 		private static readonly ReadOnlyByteVector [,] version3_frames =
 		{
 			{ "TORY", "TDOR" },
 			{ "TYER", "TDRC" },
 			{ "XRVA", "RVA2" }
 		};
-		
+
 		#endregion
 	}
 }

@@ -37,33 +37,33 @@ namespace TagLib.Audible
 	public class File : TagLib.File
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///   Contains the tags for the file.
 		/// </summary>
 		private TagLib.Tag tag;
-		
+
 		/// <summary>
 		///    Contains the media properties.
 		/// </summary>
 		private Properties properties = new Properties();
-		
+
 		#endregion
-		
+
 		#region Public Static Fields
-		
+
 		/// <summary>
 		///    The offset to the tag block.
 		/// </summary>
 		public const short TagBlockOffset = 0xBD;
-		
+
 		/// <summary>
 		///    The offset to the end of tag pointer.
 		/// </summary>
 		public const short OffsetToEndTagPointer = 0x38;
 
 		#endregion
-		
+
 		#region Constructors
 
 		/// <summary>
@@ -171,7 +171,7 @@ namespace TagLib.Audible
 		}
 
 		#endregion
-		
+
 		#region Public Methods
 
 		/// <summary>
@@ -232,9 +232,9 @@ namespace TagLib.Audible
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -265,6 +265,6 @@ namespace TagLib.Audible
 		}
 
 		#endregion
-		
+
 	}
 }

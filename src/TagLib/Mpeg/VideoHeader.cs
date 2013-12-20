@@ -5,7 +5,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -32,7 +32,7 @@ namespace TagLib.Mpeg
 	public struct VideoHeader : IVideoCodec
 	{
 		#region Private Static Fields
-		
+
 		/// <summary>
 		///    Contains frame rate values.
 		/// </summary>
@@ -40,11 +40,11 @@ namespace TagLib.Mpeg
 			0, 24000d/1001d, 24, 25, 30000d/1001d, 30, 50,
 			60000d/1001d, 60
 		};
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Fields
 
 		/// <summary>
@@ -67,13 +67,13 @@ namespace TagLib.Mpeg
 		///    Contains the video bitrate.
 		/// </summary>
 		private int bitrate;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="VideoHeader" /> by reading it from a specified
@@ -96,7 +96,7 @@ namespace TagLib.Mpeg
 		{
 			if (file == null)
 				throw new ArgumentNullException("file");
-			
+
 			file.Seek (position);
 			ByteVector data = file.ReadBlock (7);
 
@@ -108,13 +108,13 @@ namespace TagLib.Mpeg
 			frame_rate_index = data[3] & 0x0F;
 			bitrate = (int) ((data.ToUInt(4, 3, true) >> 6) & 0x3FFFF);
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the duration of the media represented by the current
 		///    instance.
@@ -126,7 +126,7 @@ namespace TagLib.Mpeg
 		{
 			get { return TimeSpan.Zero; }
 		}
-		
+
 		/// <summary>
 		///    Gets the types of media represented by the current
 		///    instance.
@@ -138,7 +138,7 @@ namespace TagLib.Mpeg
 		{
 			get { return MediaTypes.Video; }
 		}
-		
+
 		/// <summary>
 		///    Gets a text description of the media represented by the
 		///    current instance.
@@ -151,7 +151,7 @@ namespace TagLib.Mpeg
 		{
 			get { return "MPEG Video"; }
 		}
-		
+
 		/// <summary>
 		///    Gets the width of the video represented by the current
 		///    instance.
@@ -164,7 +164,7 @@ namespace TagLib.Mpeg
 		{
 			get { return width; }
 		}
-		
+
 		/// <summary>
 		///    Gets the height of the video represented by the current
 		///    instance.
@@ -177,7 +177,7 @@ namespace TagLib.Mpeg
 		{
 			get { return height; }
 		}
-		
+
 		/// <summary>
 		///    Gets the frame rate of the video represented by the
 		///    current instance.
@@ -193,7 +193,7 @@ namespace TagLib.Mpeg
 				return frame_rate_index < 9 ? frame_rates[frame_rate_index] : 0;
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the bitrate of the video represented by the current
 		///    instance.
@@ -206,7 +206,7 @@ namespace TagLib.Mpeg
 		{
 			get { return bitrate; }
 		}
-		
+
 		#endregion
 	}
 }

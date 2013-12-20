@@ -5,7 +5,7 @@
 // http://www.hydrogenaudio.org/forums/lofiversion/index.php/t21617.html
 //
 // Copyright (C) 2009 Patrick Dehne
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -42,18 +42,18 @@ namespace TagLib.Aac
 	public class File : TagLib.NonContainer.File
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the first audio header.
 		/// </summary>
 		private AudioHeader first_header;
-		
+
 		#endregion
 
 
 
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified path in the local
@@ -74,7 +74,7 @@ namespace TagLib.Aac
 		public File (string path, ReadStyle propertiesStyle) : base (path, propertiesStyle)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified path in the local
@@ -90,7 +90,7 @@ namespace TagLib.Aac
 		public File (string path) : base (path)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified file abstraction and
@@ -112,7 +112,7 @@ namespace TagLib.Aac
 		public File (File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base (abstraction, propertiesStyle)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified file abstraction with
@@ -129,7 +129,7 @@ namespace TagLib.Aac
 		public File (File.IFileAbstraction abstraction) : base (abstraction)
 		{
 		}
-		
+
 		#endregion
 
 

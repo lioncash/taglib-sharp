@@ -46,24 +46,24 @@ namespace TagLib.Ogg
 		///    Contains the comment fields.
 		/// </summary>
 		private Dictionary<string, string[]> field_list = new Dictionary<string, string[]>();
-		
+
 		/// <summary>
 		///    Contains the ventor ID.
 		/// </summary>
 		private string vendor_id;
-		
+
 		/// <summary>
 		///    Contains the field identifier to use for <see
 		///    cref="Comment" />.
 		/// </summary>
 		private string comment_field = "DESCRIPTION";
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="XiphComment" /> with no contents.
@@ -93,9 +93,9 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -289,9 +289,9 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -327,9 +327,9 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Protected Methods
 
 		/// <summary>
@@ -398,9 +398,9 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region IEnumerable
 
 		/// <summary>
@@ -422,9 +422,9 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region TagLib.Tag
 
 		/// <summary>
@@ -461,7 +461,7 @@ namespace TagLib.Ogg
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the sort name of 
+		///    A <see cref="string" /> containing the sort name of
 		///    the Track Title of the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -503,7 +503,7 @@ namespace TagLib.Ogg
 		///    A <see cref="string[]" /> containing the sort names for
 		///    the performers or artists who performed in the media
 		///    described by the current instance, or an empty array if
-		///    no value is present. 
+		///    no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "ARTISTSORT" field.
@@ -534,7 +534,7 @@ namespace TagLib.Ogg
 		{
 			get
 			{
-				// First try to get AlbumArtist, if that comment is not present try: 
+				// First try to get AlbumArtist, if that comment is not present try:
 				// ENSEMBLE: set by TAG & RENAME
 				// ALBUM ARTIST: set by The GodFather
 				string[] value = GetField("ALBUMARTIST");
@@ -636,7 +636,7 @@ namespace TagLib.Ogg
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the sort name of 
+		///    A <see cref="string" /> containing the sort name of
 		///    the Album Title of the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -1253,7 +1253,7 @@ namespace TagLib.Ogg
 		///    per the ReplayGain specification.
 		/// </value>
 		/// <remarks>
-		///    This property is implemented using the 
+		///    This property is implemented using the
 		///    "REPLAYGAIN_TRACK_GAIN" field. Set the value to double.NaN
 		///    to clear the field.
 		/// </remarks>
@@ -1302,7 +1302,7 @@ namespace TagLib.Ogg
 		///    ReplayGain specification.
 		/// </value>
 		/// <remarks>
-		///    This property is implemented using the 
+		///    This property is implemented using the
 		///    "REPLAYGAIN_TRACK_PEAK" field. Set the value to double.NaN
 		///    to clear the field.
 		/// </remarks>
@@ -1342,7 +1342,7 @@ namespace TagLib.Ogg
 		///    per the ReplayGain specification.
 		/// </value>
 		/// <remarks>
-		///    This property is implemented using the 
+		///    This property is implemented using the
 		///    "REPLAYGAIN_ALBUM_GAIN" field. Set the value to double.NaN
 		///    to clear the field.
 		/// </remarks>
@@ -1391,7 +1391,7 @@ namespace TagLib.Ogg
 		///    ReplayGain specification.
 		/// </value>
 		/// <remarks>
-		///    This property is implemented using the 
+		///    This property is implemented using the
 		///    "REPLAYGAIN_ALBUM_PEAK" field. Set the value to double.NaN
 		///    to clear the field.
 		/// </remarks>

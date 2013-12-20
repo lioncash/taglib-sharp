@@ -43,52 +43,52 @@ namespace TagLib.Id3v2
 	public class Tag : TagLib.Tag, IEnumerable<Frame>, ICloneable
 	{
 		#region Private Static Fields
-		
+
 		/// <summary>
 		///    Contains the language to use for language specific
 		///    fields.
 		/// </summary>
 		private static string language = CultureInfo.CurrentCulture.ThreeLetterISOLanguageName;
-		
+
 		/// <summary>
 		///    Contains the field to use for new tags.
 		/// </summary>
 		private static byte default_version = 3;
-		
+
 		/// <summary>
 		///    Indicates whether or not all tags should be saved in
 		///    <see cref="default_version" />.
 		/// </summary>
 		private static bool force_default_version = false;
-		
+
 		/// <summary>
 		///    Specifies the default string type to use for new frames.
 		/// </summary>
 		private static StringType default_string_type = StringType.UTF8;
-		
+
 		/// <summary>
 		///    Specifies whether or not all frames shoudl be saved in
 		///    <see cref="default_string_type" />.
 		/// </summary>
 		private static bool force_default_string_type = false;
-		
+
 		/// <summary>
 		///    Specifies whether or not numeric genres should be used
 		///    when available.
 		/// </summary>
 		private static bool use_numeric_genres = true;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Fields
 
 		/// <summary>
 		///    Contains the tag's header.
 		/// </summary>
 		private Header header = new Header();
-		
+
 		/// <summary>
 		///    Contains the tag's extended header.
 		/// </summary>
@@ -98,11 +98,11 @@ namespace TagLib.Id3v2
 		///    Contains the tag's frames.
 		/// </summary>
 		private List<Frame> frame_list = new List<Frame>();
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -183,9 +183,9 @@ namespace TagLib.Id3v2
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -417,14 +417,14 @@ namespace TagLib.Id3v2
 		{
 			if (ident == null)
 				throw new ArgumentNullException ("ident");
-			
+
 			if (ident.Count != 4)
 				throw new ArgumentException (
 					"Identifier must be four bytes long.",
 					"ident");
-			
+
 			bool empty = true;
-			
+
 			if (text != null)
 			{
 				for (int i = 0; empty && i < text.Length; i ++)
@@ -433,15 +433,15 @@ namespace TagLib.Id3v2
 						empty = false;
 				}
 			}
-			
+
 			if (empty)
 			{
 				RemoveFrames (ident);
 				return;
 			}
-			
+
 			TextInformationFrame frame = TextInformationFrame.Get (this, ident, true);
-			
+
 			frame.Text = text;
 			frame.TextEncoding = DefaultEncoding;
 		}
@@ -610,11 +610,11 @@ namespace TagLib.Id3v2
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets and sets the header flags applied to the current
 		///    instance.
@@ -628,7 +628,7 @@ namespace TagLib.Id3v2
 			get { return header.Flags; }
 			set { header.Flags = value; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the ID3v2 version of the current instance.
 		/// </summary>
@@ -650,17 +650,17 @@ namespace TagLib.Id3v2
 			{
 				if (value < 2 || value > 4)
 					throw new ArgumentOutOfRangeException("value", "Version must be 2, 3, or 4");
-				
+
 				header.MajorVersion = value;
 			}
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Static Properties
-		
+
 		/// <summary>
 		///    Gets and sets the ISO-639-2 language code to use when
 		///    searching for and storing language specific values.
@@ -679,7 +679,7 @@ namespace TagLib.Id3v2
 			get { return language; }
 			set { language = (value == null || value.Length < 3) ? "   " : value.Substring (0,3); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the the default version to use when
 		///    creating new tags.
@@ -703,11 +703,11 @@ namespace TagLib.Id3v2
 			{
 				if (value < 2 || value > 4)
 					throw new ArgumentOutOfRangeException ("value", "Version must be 2, 3, or 4");
-				
+
 				default_version = value;
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets and sets whether or not to save all tags in the
 		///    default version rather than their original version.
@@ -774,9 +774,9 @@ namespace TagLib.Id3v2
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Protected Methods
 
 		/// <summary>
@@ -843,10 +843,10 @@ namespace TagLib.Id3v2
 			bool fullTagUnsynch =  (header.MajorVersion < 4) && ((header.Flags & HeaderFlags.Unsynchronisation) != 0);
 			if (fullTagUnsynch)
 				SynchData.ResynchByteVector (data);
-			
+
 			int frame_data_position = 0;
 			int frame_data_length = data.Count;
-			
+
 			// Check for the extended header.
 
 			if ((header.Flags & HeaderFlags.ExtendedHeader) != 0)
@@ -867,10 +867,10 @@ namespace TagLib.Id3v2
 			TextInformationFrame tyer = null;
 			TextInformationFrame tdat = null;
 			TextInformationFrame time = null;
-			
+
 			while (frame_data_position < frame_data_length - FrameHeader.Size (header.MajorVersion))
 			{
-				
+
 				// If the next data is position is 0, assume
 				// that we've hit the padding portion of the
 				// frame data.
@@ -902,17 +902,17 @@ namespace TagLib.Id3v2
 				// Only add frames that contain data.
 				if (frame.Size == 0)
 					continue;
-				
+
 				AddFrame (frame);
-				
+
 				// If the tag is version 4, no post-processing
 				// is needed.
 				if (header.MajorVersion == 4)
 					continue;
-					
+
 				// Load up the first instance of each, for
 				// post-processing.
-				
+
 				if (tdrc == null && frame.FrameId.Equals (FrameType.TDRC))
 				{
 					tdrc = frame as TextInformationFrame;
@@ -973,13 +973,13 @@ namespace TagLib.Id3v2
 
 			tdrc.Text = new string [] { tdrc_text.ToString () };
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Methods
-		
+
 		// TODO: These should become public some day.
 
 		/// <summary>
@@ -1023,7 +1023,7 @@ namespace TagLib.Id3v2
 			var frame = TextInformationFrame.Get (this, ident, false);
 			return (frame == null) ? new string [0] : frame.Text;
 		}
-		
+
 		/// <summary>
 		///    Gets an integer value from a "/" delimited list in a
 		///    specified Text Information Frame.
@@ -1043,19 +1043,19 @@ namespace TagLib.Id3v2
 		private uint GetTextAsUInt32(ByteVector ident, int index)
 		{
 			string text = GetTextAsString(ident);
-			
+
 			if (text == null)
 				return 0;
-			
+
 			string [] values = text.Split(new char [] {'/'}, index + 2);
-			
+
 			if (values.Length < index + 1)
 				return 0;
-			
+
 			uint result;
 			if (uint.TryParse(values [index], out result))
 				return result;
-			
+
 			return 0;
 		}
 
@@ -1135,7 +1135,7 @@ namespace TagLib.Id3v2
 		{
 			//Get the UFID frame, frame will be null if nonexistant
 			var frame = UniqueFileIdentifierFrame.Get(this, owner, false);
-			
+
 			//If the frame existed: frame.Identifier is a bytevector, get a string
 			string result = (frame == null) ? null : frame.Identifier.ToString();
 			return string.IsNullOrEmpty(result) ? null : result;
@@ -1185,23 +1185,23 @@ namespace TagLib.Id3v2
 					else
 						continue;
 				}
-				
+
 				Frame tmp = frame_list [i];
 				frame_list [i] = swapping;
 				swapping = tmp;
-				
+
 				if (swapping == frame)
 					return;
 			}
-			
+
 			if (swapping != null)
 				frame_list.Add (swapping);
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region IEnumerable
 
 		/// <summary>
@@ -1222,9 +1222,9 @@ namespace TagLib.Id3v2
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region TagLib.Tag
 
 		/// <summary>
@@ -1264,7 +1264,7 @@ namespace TagLib.Id3v2
 		/// <value>
 		///    A <see cref="string" /> containing the sort names for
 		///    the Title of the media described by the current instance,
-		///    or null if no value is present. 
+		///    or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "TSOT" Text
@@ -1304,7 +1304,7 @@ namespace TagLib.Id3v2
 		///    A <see cref="string[]" /> containing the sort names for
 		///    the performers or artists who performed in the media
 		///    described by the current instance, or an empty array if
-		///    no value is present. 
+		///    no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "TSOP" Text
@@ -1317,7 +1317,7 @@ namespace TagLib.Id3v2
 		}
 
 		/// <summary>
-		///    Gets and sets the sort names of the band or artist who is 
+		///    Gets and sets the sort names of the band or artist who is
 		///    credited in the creation of the entire album or collection
 		///    containing the media described by the current instance.
 		/// </summary>
@@ -1325,7 +1325,7 @@ namespace TagLib.Id3v2
 		///    A <see cref="string[]" /> containing the sort names for
 		///    the performers or artists who performed in the media
 		///    described by the current instance, or an empty array if
-		///    no value is present. 
+		///    no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "TSO2" Text
@@ -1384,7 +1384,7 @@ namespace TagLib.Id3v2
 		///    A <see cref="string[]" /> containing the sort names for
 		///    the performers or artists who performed in the media
 		///    described by the current instance, or an empty array if
-		///    no value is present. 
+		///    no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "TSOC" Text
@@ -1421,7 +1421,7 @@ namespace TagLib.Id3v2
 		/// <value>
 		///    A <see cref="string" /> containing the sort names for
 		///    the Title in the media described by the current instance,
-		///    or null if no value is present. 
+		///    or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "TSOA" Text
@@ -1458,23 +1458,23 @@ namespace TagLib.Id3v2
 			set
 			{
 				CommentsFrame frame;
-				
+
 				if (string.IsNullOrEmpty(value))
 				{
 					while ((frame = CommentsFrame.GetPreferred(this, string.Empty, Language)) != null)
 						RemoveFrame (frame);
-					
+
 					return;
 				}
-				
+
 				frame = CommentsFrame.Get(this, String.Empty,Language, true);
-				
+
 				frame.Text = value;
 				frame.TextEncoding = DefaultEncoding;
 				MakeFirstOfType (frame);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the genres of the media represented by the
 		///    current instance.
@@ -1493,17 +1493,17 @@ namespace TagLib.Id3v2
 			get
 			{
 				string[] text = GetTextAsArray(FrameType.TCON);
-				
+
 				if (text.Length == 0)
 					return text;
 
 				List<string> list = new List<string>();
-				
+
 				foreach (string genre in text)
 				{
 					if (string.IsNullOrEmpty(genre))
 						continue;
-					
+
 					// The string may just be a genre
 					// number.
 
@@ -1525,11 +1525,11 @@ namespace TagLib.Id3v2
 					SetTextFrame(FrameType.TCON, value);
 					return;
 				}
-				
+
 				// Clone the array so changes made won't effect
 				// the passed array.
 				value = (string[]) value.Clone();
-				
+
 				for (int i = 0; i < value.Length; i++)
 				{
 					int index = TagLib.Genres.AudioToIndex(value[i]);
@@ -1541,7 +1541,7 @@ namespace TagLib.Id3v2
 				SetTextFrame(FrameType.TCON, value);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the year that the media represented by the
 		///    current instance was recorded.
@@ -1561,14 +1561,14 @@ namespace TagLib.Id3v2
 			get
 			{
 				string text = GetTextAsString(FrameType.TDRC);
-				
+
 				if (text == null || text.Length < 4)
 					return 0;
-				
+
 				uint value;
 				if (uint.TryParse(text.Substring (0, 4), out value))
 					return value;
-				
+
 				return 0;
 			}
 
@@ -1792,8 +1792,8 @@ namespace TagLib.Id3v2
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ArtistID for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    ArtistID for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "TXXX:MusicBrainz Artist Id" frame.
@@ -1810,8 +1810,8 @@ namespace TagLib.Id3v2
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseID for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    ReleaseID for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "TXXX:MusicBrainz Album Id" frame.
@@ -1828,8 +1828,8 @@ namespace TagLib.Id3v2
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseArtistID for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    ReleaseArtistID for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "TXXX:MusicBrainz Album Artist Id" frame.
@@ -1846,8 +1846,8 @@ namespace TagLib.Id3v2
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    TrackID for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    TrackID for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "UFID:http://musicbrainz.org" frame.
@@ -1864,8 +1864,8 @@ namespace TagLib.Id3v2
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    DiscID for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    DiscID for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "TXXX:MusicBrainz Disc Id" frame.
@@ -1882,8 +1882,8 @@ namespace TagLib.Id3v2
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicIP PUID
-		///    for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "TXXX:MusicIP PUID" frame.
@@ -1900,8 +1900,8 @@ namespace TagLib.Id3v2
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the Amazon Id
-		///    for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "TXXX:ASIN" frame.
@@ -1918,8 +1918,8 @@ namespace TagLib.Id3v2
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseStatus for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    ReleaseStatus for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "TXXX:MusicBrainz Album Status" frame.
@@ -1936,8 +1936,8 @@ namespace TagLib.Id3v2
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseType for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    ReleaseType for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "TXXX:MusicBrainz Album Type" frame.
@@ -1954,8 +1954,8 @@ namespace TagLib.Id3v2
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseCountry for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    ReleaseCountry for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "TXXX:MusicBrainz Album Release Country" frame.
@@ -2305,9 +2305,9 @@ namespace TagLib.Id3v2
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region ICloneable
 
 		/// <summary>

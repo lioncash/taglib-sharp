@@ -9,7 +9,7 @@
 //
 // Copyright (C) 2006 Novell, Inc.
 // Copyright (C) 2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -56,12 +56,12 @@ namespace TagLib
 		///    objects.
 		/// </summary>
 		private static List<SupportedMimeType> mimetypes = new List<SupportedMimeType> ();
-		
+
 		/// <summary>
 		///    Contains the mime-type.
 		/// </summary>
 		private string mimetype;
-		
+
 		/// <summary>
 		///    Contains the extension.
 		/// </summary>

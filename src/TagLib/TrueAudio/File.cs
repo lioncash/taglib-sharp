@@ -4,7 +4,7 @@ namespace TagLib.TrueAudio
 {
 	/// <summary>
 	/// This class extends <see cref="TagLib.File"/> to
-	/// provide tagging and properties support for 
+	/// provide tagging and properties support for
 	/// TrueAudio files.
 	/// </summary>
 	[SupportedMimeType("taglib/tta", "tta")]

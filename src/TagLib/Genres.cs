@@ -11,7 +11,7 @@
 //
 // Copyright (C) 2005-2007 Brian Nickel
 // Copyright (C) 2002 Scott Wheeler (Original Implementation)
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -189,7 +189,7 @@ namespace TagLib
 			"Jpop",
 			"Synthpop"
 		};
-		
+
 		/// <summary>
 		///    Contains a list of DivX audio generes.
 		/// </summary>

@@ -6,7 +6,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -33,46 +33,46 @@ namespace TagLib.Mpeg4
 	public class IsoMovieHeaderBox : FullBox
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the creation time of the movie.
 		/// </summary>
 		private ulong creation_time;
-		
+
 		/// <summary>
 		///    Contains the modification time of the movie.
 		/// </summary>
 		private ulong modification_time;
-		
+
 		/// <summary>
 		///    Contains the timescale.
 		/// </summary>
 		private uint timescale;
-		
+
 		/// <summary>
 		///    Contains the duration.
 		/// </summary>
 		private ulong  duration;
-		
+
 		/// <summary>
 		///    Contains the rate.
 		/// </summary>
 		private uint rate;
-		
+
 		/// <summary>
 		///    Contains the volume.
 		/// </summary>
 		private ushort volume;
-		
+
 		/// <summary>
 		///    Contains the next track ID.
 		/// </summary>
 		private uint next_track_id;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -148,9 +148,9 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>

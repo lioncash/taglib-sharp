@@ -26,7 +26,7 @@
 //
 
 using System.Collections.Generic;
- 
+
 namespace TagLib.Id3v2
 {
 	/// <summary>
@@ -85,7 +85,7 @@ namespace TagLib.Id3v2
 		/// </example>
 		/// <seealso cref="AddFrameCreator" />
 		public delegate Frame FrameCreator (ByteVector data, int offset, FrameHeader header, byte version);
-		
+
 		/// <summary>
 		///    Contains registered frame creators.
 		/// </summary>

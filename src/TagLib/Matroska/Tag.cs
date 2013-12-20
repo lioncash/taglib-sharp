@@ -84,7 +84,7 @@ namespace TagLib.Matroska
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the sort name of 
+		///    A <see cref="string" /> containing the sort name of
 		///    the Track Title of the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -127,7 +127,7 @@ namespace TagLib.Matroska
 		///    A <see cref="string[]" /> containing the sort names for
 		///    the performers or artists who performed in the media
 		///    described by the current instance, or an empty array if
-		///    no value is present. 
+		///    no value is present.
 		/// </value>
 		public override string [] PerformersSort
 		{
@@ -227,7 +227,7 @@ namespace TagLib.Matroska
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the sort name of 
+		///    A <see cref="string" /> containing the sort name of
 		///    the Album Title of the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -480,7 +480,7 @@ namespace TagLib.Matroska
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicBrainz 
+		///    A <see cref="string" /> containing the MusicBrainz
 		///    ArtistID for the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -495,7 +495,7 @@ namespace TagLib.Matroska
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicBrainz 
+		///    A <see cref="string" /> containing the MusicBrainz
 		///    ReleaseID for the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -510,7 +510,7 @@ namespace TagLib.Matroska
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicBrainz 
+		///    A <see cref="string" /> containing the MusicBrainz
 		///    ReleaseArtistID for the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -525,7 +525,7 @@ namespace TagLib.Matroska
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicBrainz 
+		///    A <see cref="string" /> containing the MusicBrainz
 		///    TrackID for the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -540,7 +540,7 @@ namespace TagLib.Matroska
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicBrainz 
+		///    A <see cref="string" /> containing the MusicBrainz
 		///    DiscID for the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -555,7 +555,7 @@ namespace TagLib.Matroska
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicIPPUID 
+		///    A <see cref="string" /> containing the MusicIPPUID
 		///    for the media described by the current instance or
 		///    null if no value is present.
 		/// </value>
@@ -570,9 +570,9 @@ namespace TagLib.Matroska
 		//    the media described by the current instance.
 		// </summary>
 		// <value>
-		//    A <see cref="string" /> containing the AmazonID 
+		//    A <see cref="string" /> containing the AmazonID
 		//    for the media described by the current instance or
-		//    null if no value is present.  
+		//    null if no value is present.
 		// </value>
 		// <remarks>
 		//    A definition on where to store the ASIN for
@@ -588,7 +588,7 @@ namespace TagLib.Matroska
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicBrainz 
+		///    A <see cref="string" /> containing the MusicBrainz
 		///    ReleaseStatus for the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -603,7 +603,7 @@ namespace TagLib.Matroska
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicBrainz 
+		///    A <see cref="string" /> containing the MusicBrainz
 		///    ReleaseType for the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -618,7 +618,7 @@ namespace TagLib.Matroska
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicBrainz 
+		///    A <see cref="string" /> containing the MusicBrainz
 		///    ReleaseCountry for the media described by the current
 		///    instance or null if no value is present.
 		/// </value>

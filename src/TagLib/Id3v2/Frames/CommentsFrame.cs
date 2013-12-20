@@ -9,7 +9,7 @@
 //
 // Copyright (C) 2005-2007 Brian Nickel
 // Copyright (C) 2002,2003 Scott Wheeler (Original Implementation)
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -45,34 +45,34 @@ namespace TagLib.Id3v2
 	public class CommentsFrame : Frame
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the text encoding to use when rendering the
 		///    current instance.
 		/// </summary>
 		private StringType encoding = Tag.DefaultEncoding;
-		
+
 		/// <summary>
 		///    Contains the ISO-639-2 language code of the current
 		///    instance.
 		/// </summary>
 		private string language = null;
-		
+
 		/// <summary>
 		///    Contains the description of the current instance.
 		/// </summary>
 		private string description = null;
-		
+
 		/// <summary>
 		///    Contains the comment text of the current instance.
 		/// </summary>
 		private string text = null;
-		
+
 		#endregion
 
 
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="CommentsFrame" /> with a specified description,

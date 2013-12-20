@@ -5,7 +5,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -35,38 +35,38 @@ namespace TagLib.Flac
 		///    The block contains stream information.
 		/// </summary>
 		StreamInfo = 0,
-		
+
 		/// <summary>
 		///    The block contains padding.
 		/// </summary>
 		Padding,
-		
+
 		/// <summary>
 		///    The block contains application data.
 		/// </summary>
 		Application,
-		
+
 		/// <summary>
 		///    The block contains seek table.
 		/// </summary>
 		SeekTable,
-		
+
 		/// <summary>
 		///    The block contains a Xipp comment.
 		/// </summary>
 		XiphComment,
-		
+
 		/// <summary>
 		///    The block contains a cue sheet.
 		/// </summary>
 		CueSheet,
-		
+
 		/// <summary>
 		///    The block contains a picture.
 		/// </summary>
 		Picture
 	}
-	
+
 	/// <summary>
 	///    This structure provides a representation of a Flac metadata block
 	///    header structure.
@@ -77,17 +77,17 @@ namespace TagLib.Flac
 		///    Contains the block type.
 		/// </summary>
 		private BlockType block_type;
-		
+
 		/// <summary>
 		///    Indicates whether or not this is the last metadata block.
 		/// </summary>
 		private bool is_last_block;
-		
+
 		/// <summary>
 		///    Contains the block size.
 		/// </summary>
 		private uint block_size;
-		
+
 		/// <summary>
 		///    The size of a block header.
 		/// </summary>

@@ -35,7 +35,7 @@ namespace TagLib.Riff
 		///    Contains the stream header.
 		/// </summary>
 		private AviStreamHeader header;
-		
+
 		/// <summary>
 		///    Contains the stream codec information.
 		/// </summary>
@@ -150,7 +150,7 @@ namespace TagLib.Riff
 			return stream;
 		}
 	}
-	
+
 	/// <summary>
 	///    This class extends <see cref="AviStream" /> to provide support
 	///    for reading audio stream data.
@@ -195,7 +195,7 @@ namespace TagLib.Riff
 				Codec = new WaveFormatEx(data, start);
 		}
 	}
-	
+
 	/// <summary>
 	///    This class extends <see cref="AviStream" /> to provide support
 	///    for reading video stream data.
@@ -239,7 +239,7 @@ namespace TagLib.Riff
 				Codec = new BitmapInfoHeader(data, start);
 		}
 	}
-	
+
 	/// <summary>
 	///    This structure provides a representation of a Microsoft
 	///    AviStreamHeader structure, minus the first 8 bytes.
@@ -250,77 +250,77 @@ namespace TagLib.Riff
 		///    Contains the stream type.
 		/// </summary>
 		private ByteVector type;
-		
+
 		/// <summary>
 		///    Contains the stream handler.
 		/// </summary>
 		private ByteVector handler;
-		
+
 		/// <summary>
 		///    Contains the flags.
 		/// </summary>
 		private uint flags;
-		
+
 		/// <summary>
 		///    Contains the priority.
 		/// </summary>
 		private uint priority;
-		
+
 		/// <summary>
 		///    Contains the initial frame count.
 		/// </summary>
 		private uint initial_frames;
-		
+
 		/// <summary>
 		///    Contains the scale.
 		/// </summary>
 		private uint scale;
-		
+
 		/// <summary>
 		///    Contains the rate.
 		/// </summary>
 		private uint rate;
-		
+
 		/// <summary>
 		///    Contains the start delay.
 		/// </summary>
 		private uint start;
-		
+
 		/// <summary>
 		///    Contains the stream length.
 		/// </summary>
 		private uint length;
-		
+
 		/// <summary>
 		///    Contains the suggested buffer size.
 		/// </summary>
 		private uint suggested_buffer_size;
-		
+
 		/// <summary>
 		///    Contains the quality (between 0 and 10,000).
 		/// </summary>
 		private uint quality;
-		
+
 		/// <summary>
 		///    Contains the sample size.
 		/// </summary>
 		private uint sample_size;
-		
+
 		/// <summary>
 		///    Contains the position for the left side of the video.
 		/// </summary>
 		private ushort left;
-		
+
 		/// <summary>
 		///    Contains the position for the top side of the video.
 		/// </summary>
 		private ushort top;
-		
+
 		/// <summary>
 		///    Contains the position for the right side of the video.
 		/// </summary>
 		private ushort right;
-		
+
 		/// <summary>
 		///    Contains the position for the bottom side of the video.
 		/// </summary>
@@ -374,13 +374,13 @@ namespace TagLib.Riff
 		{
 			if (data == null)
 				throw new ArgumentNullException("data");
-			
+
 			if (offset < 0)
 				throw new ArgumentOutOfRangeException("offset");
-			
+
 			if (offset + 56 > data.Count)
 				throw new CorruptFileException("Expected 56 bytes.");
-			
+
 			type                  = data.Mid(offset,         4);
 			handler               = data.Mid(offset    +  4, 4);
 			flags                 = data.ToUInt(offset +  8, false);

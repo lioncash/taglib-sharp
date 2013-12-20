@@ -78,7 +78,7 @@ namespace TagLib.Ogg
 		///    </code>
 		/// </example>
 		public delegate Codec CodecProvider(ByteVector packet);
-		
+
 		#endregion
 
 
@@ -88,7 +88,7 @@ namespace TagLib.Ogg
 		///    Contains registered codec providers.
 		/// </summary>
 		private static List<CodecProvider> providers = new List<CodecProvider>();
-		
+
 		#endregion
 
 
@@ -138,7 +138,7 @@ namespace TagLib.Ogg
 		}
 
 		/// <summary>
-		///    Adds a codec 
+		///    Adds a codec
 		/// </summary>
 		/// <param name="provider">
 		/// A <see cref="CodecProvider"/>
@@ -158,7 +158,7 @@ namespace TagLib.Ogg
 
 
 		#region Private Properties
-		
+
 		/// <summary>
 		///    Gets a text description of the media represented by the
 		///    current instance.
@@ -168,7 +168,7 @@ namespace TagLib.Ogg
 		///    of the media represented by the current instance.
 		/// </value>
 		public abstract string Description { get; }
-		
+
 		/// <summary>
 		///    Gets the types of media represented by the current
 		///    instance.
@@ -178,7 +178,7 @@ namespace TagLib.Ogg
 		///    the types of media represented by the current instance.
 		/// </value>
 		public abstract MediaTypes MediaTypes { get; }
-		
+
 		/// <summary>
 		///    Gets the raw Xiph comment data contained in the codec.
 		/// </summary>

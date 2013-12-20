@@ -5,7 +5,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2007 Brian Nickel
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,7 +42,7 @@ namespace TagLib.Id3v2
 	///    <code lang="C#">
 	/// using TagLib;
 	/// using TagLib.Id3v2;
-	/// 
+	///
 	/// public static class LookupUtil
 	/// {
 	///     public static ByteVector GetCdIdentifier (string filename)
@@ -67,7 +67,7 @@ namespace TagLib.Id3v2
 	/// using System;
 	/// using TagLib;
 	/// using TagLib::Id3v2;
-	/// 
+	///
 	/// public ref class LookupUtil abstract sealed
 	/// {
 	/// public:
@@ -89,7 +89,7 @@ namespace TagLib.Id3v2
 	///    <code lang="VB">
 	/// Imports TagLib
 	/// Imports TagLib.Id3v2
-	/// 
+	///
 	/// Public Shared Class LookupUtil
 	///     Public Shared Sub GetCdIdentifier (filename As String) As TagLib.ByteVector
 	///         Dim file As File = File.Create (filename, ReadStyle.None)
@@ -106,7 +106,7 @@ namespace TagLib.Id3v2
 	///    <code lang="Boo">
 	/// import TagLib
 	/// import TagLib.Id3v2
-	/// 
+	///
 	/// public static class LookupUtil:
 	///     static def GetCdIdentifier (filename as string) as TagLib.ByteVector:
 	///         file as File = File.Create (filename, ReadStyle.None)
@@ -193,7 +193,7 @@ namespace TagLib.Id3v2
 		{
 			SetData (data, offset, version, false);
 		}
-		
+
 		#endregion
 
 

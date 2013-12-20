@@ -29,7 +29,6 @@ using TagLib.IFD.Tags;
 
 namespace TagLib.Tiff.Cr2
 {
-
 	/// <summary>
 	///    This class extends <see cref="TagLib.Tiff.BaseTiffFile" /> to provide tagging
 	///    for CR2 image files.

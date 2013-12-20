@@ -6,7 +6,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2007 Brian Nickel
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -45,7 +45,7 @@ namespace TagLib.NonContainer
 	public class StartTag : CombinedTag
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the file to operate on.
 		/// </summary>
@@ -56,11 +56,11 @@ namespace TagLib.NonContainer
 		///    hold all applicable indicators.
 		/// </summary>
 		private int read_size = (int) Math.Max(Ape.Footer.Size, Id3v2.Header.Size);
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -83,9 +83,9 @@ namespace TagLib.NonContainer
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -106,9 +106,9 @@ namespace TagLib.NonContainer
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -248,9 +248,9 @@ namespace TagLib.NonContainer
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Methods
 
 		/// <summary>

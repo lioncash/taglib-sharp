@@ -5,7 +5,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -89,10 +89,10 @@ namespace TagLib.Mpeg4
 					}
 				}
 			}
-			
+
 			// Standard items...
 			ByteVector type = header.BoxType;
-			
+
 			if (type == BoxType.Mvhd)
 				return new IsoMovieHeaderBox (header, file, handler);
 			else if (type == BoxType.Stbl)
@@ -119,13 +119,13 @@ namespace TagLib.Mpeg4
 				return new IsoFreeSpaceBox (header, file, handler);
 			else if (type == BoxType.Mean || type == BoxType.Name)
 				return new AppleAdditionalInfoBox (header, file, handler);
-			
+
 			// If we still don't have a tag, and we're inside an
 			// ItemListBox, load the box as an AnnotationBox
 			// (Apple tag item).
 			if (parent.BoxType == BoxType.Ilst)
 				return new AppleAnnotationBox (header, file, handler);
-			
+
 			// Nothing good. Go generic.
 			return new UnknownBox (header, file, handler);
 		}

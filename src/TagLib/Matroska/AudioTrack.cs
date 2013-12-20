@@ -45,9 +45,9 @@ namespace TagLib.Matroska
 		#region Constructors
 
 		/// <summary>
-		///  Construct a <see cref="AudioTrack" /> reading information from 
+		///  Construct a <see cref="AudioTrack" /> reading information from
 		///  provided file data.
-		/// Parsing will be done reading from _file at position references by 
+		/// Parsing will be done reading from _file at position references by
 		/// parent element's data section.
 		/// </summary>
 		/// <param name="_file"><see cref="File" /> instance to read from.</param>

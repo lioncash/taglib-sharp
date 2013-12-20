@@ -27,7 +27,8 @@ using System.Runtime.InteropServices;
 using System.Globalization;
 using System.Runtime.Serialization;
 
-namespace TagLib.Riff {
+namespace TagLib.Riff
+{
 	/// <summary>
 	///    This class extends <see
 	///    cref="T:System.Collections.Generic.Dictionary`2" /> to provide
@@ -38,7 +39,7 @@ namespace TagLib.Riff {
 	public class List : Dictionary <ByteVector,ByteVectorCollection>
 	{
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="List" /> with no contents.
@@ -46,7 +47,7 @@ namespace TagLib.Riff {
 		public List()
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="List" /> by reading the contents of a raw RIFF
@@ -60,7 +61,7 @@ namespace TagLib.Riff {
 		{
 			if (data == null)
 				throw new ArgumentNullException ("data");
-			
+
 			Parse (data);
 		}
 
@@ -127,9 +128,9 @@ namespace TagLib.Riff {
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -563,9 +564,9 @@ namespace TagLib.Riff {
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Methods
 
 		/// <summary>

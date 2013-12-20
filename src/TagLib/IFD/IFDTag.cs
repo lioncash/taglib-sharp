@@ -275,7 +275,7 @@ namespace TagLib.IFD
 		{
 			get
 			{
-				return ExifIFD.GetDateTimeValue(0, (ushort) ExifEntryTag.DateTimeOriginal); 
+				return ExifIFD.GetDateTimeValue(0, (ushort) ExifEntryTag.DateTimeOriginal);
 			}
 
 			set

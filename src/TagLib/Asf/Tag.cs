@@ -6,7 +6,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2005-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -52,10 +52,10 @@ namespace TagLib.Asf
 		///    Contains the metadata library object.
 		/// </summary>
 		private MetadataLibraryObject metadata_library = new MetadataLibraryObject();
-		
+
 		#endregion
-		
-		
+
+
 		#region Constructors
 
 		/// <summary>
@@ -98,8 +98,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -145,8 +145,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -367,8 +367,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region Private Static Methods
 
 		/// <summary>
@@ -469,8 +469,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region IEnumerable
 
 		/// <summary>
@@ -492,8 +492,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region TagLib.Tag
 
 		/// <summary>
@@ -531,7 +531,7 @@ namespace TagLib.Asf
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the sort name of 
+		///    A <see cref="string" /> containing the sort name of
 		///    the Track Title of the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -545,7 +545,7 @@ namespace TagLib.Asf
 			get { return GetDescriptorString ("WM/TitleSortOrder"); }
 			set { SetDescriptorString (value, "WM/TitleSortOrder"); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the performers or artists who performed in
 		///    the media described by the current instance.
@@ -565,7 +565,7 @@ namespace TagLib.Asf
 			get {return SplitAndClean (description.Author);}
 			set {description.Author = string.Join ("; ", value);}
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the sort names of the performers or artists
 		///    who performed in the media described by the current instance.
@@ -574,7 +574,7 @@ namespace TagLib.Asf
 		///    A <see cref="string[]" /> containing the sort names for
 		///    the performers or artists who performed in the media
 		///    described by the current instance, or an empty array if
-		///    no value is present. 
+		///    no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "WM/ArtistSortOrder" field.
@@ -584,7 +584,7 @@ namespace TagLib.Asf
 			get { return GetDescriptorStrings ("WM/ArtistSortOrder"); }
 			set { SetDescriptorStrings (value, "WM/ArtistSortOrder"); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the band or artist who is credited in the
 		///    creation of the entire album or collection containing the
@@ -605,7 +605,7 @@ namespace TagLib.Asf
 			get { return GetDescriptorStrings ("WM/AlbumArtist", "AlbumArtist"); }
 			set { SetDescriptorStrings (value, "WM/AlbumArtist", "AlbumArtist"); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the sort names for the band or artist who
 		///    is credited in the creation of the entire album or
@@ -629,7 +629,7 @@ namespace TagLib.Asf
 			get { return GetDescriptorStrings ("WM/AlbumArtistSortOrder"); }
 			set { SetDescriptorStrings (value, "WM/AlbumArtistSortOrder"); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the composers of the media represented by
 		///    the current instance.
@@ -648,7 +648,7 @@ namespace TagLib.Asf
 			get { return GetDescriptorStrings ("WM/Composer", "Composer"); }
 			set { SetDescriptorStrings (value, "WM/Composer", "Composer"); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the album of the media represented by the
 		///    current instance.
@@ -667,13 +667,13 @@ namespace TagLib.Asf
 			get { return GetDescriptorString ("WM/AlbumTitle", "Album"); }
 			set { SetDescriptorString (value, "WM/AlbumTitle", "Album"); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the sort names for the Album Title of
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the sort name of 
+		///    A <see cref="string" /> containing the sort name of
 		///    the Album Title of the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -893,7 +893,7 @@ namespace TagLib.Asf
 					return 0;
 
 				return uint.TryParse(texts[0], NumberStyles.Integer,CultureInfo.InvariantCulture, out value)
-					? value 
+					? value
 					: 0;
 			}
 			set
@@ -1086,7 +1086,7 @@ namespace TagLib.Asf
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicBrainz 
+		///    A <see cref="string" /> containing the MusicBrainz
 		///    ArtistID for the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -1106,7 +1106,7 @@ namespace TagLib.Asf
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicBrainz 
+		///    A <see cref="string" /> containing the MusicBrainz
 		///    ReleaseID for the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -1126,7 +1126,7 @@ namespace TagLib.Asf
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicBrainz 
+		///    A <see cref="string" /> containing the MusicBrainz
 		///    ReleaseArtistID for the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -1146,7 +1146,7 @@ namespace TagLib.Asf
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicBrainz 
+		///    A <see cref="string" /> containing the MusicBrainz
 		///    TrackID for the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -1166,7 +1166,7 @@ namespace TagLib.Asf
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicBrainz 
+		///    A <see cref="string" /> containing the MusicBrainz
 		///    DiscID for the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -1186,7 +1186,7 @@ namespace TagLib.Asf
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicIPPUID 
+		///    A <see cref="string" /> containing the MusicIPPUID
 		///    for the media described by the current instance or
 		///    null if no value is present.
 		/// </value>
@@ -1206,9 +1206,9 @@ namespace TagLib.Asf
 		//    the media described by the current instance.
 		// </summary>
 		// <value>
-		//    A <see cref="string" /> containing the AmazonID 
+		//    A <see cref="string" /> containing the AmazonID
 		//    for the media described by the current instance or
-		//    null if no value is present.  
+		//    null if no value is present.
 		// </value>
 		// <remarks>
 		//    A definition on where to store the ASIN for
@@ -1225,7 +1225,7 @@ namespace TagLib.Asf
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicBrainz 
+		///    A <see cref="string" /> containing the MusicBrainz
 		///    ReleaseStatus for the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -1245,7 +1245,7 @@ namespace TagLib.Asf
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicBrainz 
+		///    A <see cref="string" /> containing the MusicBrainz
 		///    ReleaseType for the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
@@ -1265,7 +1265,7 @@ namespace TagLib.Asf
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the MusicBrainz 
+		///    A <see cref="string" /> containing the MusicBrainz
 		///    ReleaseCountry for the media described by the current
 		///    instance or null if no value is present.
 		/// </value>

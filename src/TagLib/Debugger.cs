@@ -5,7 +5,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -86,10 +86,10 @@ namespace TagLib
 					Console.Write (c);
 					return;
 				}
-			
+
 			Console.Write (".");
 		}
-		
+
 		private const string allowed = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`~!@#$%^&*()_+-={}[];:'\",.<>?/\\|";
 		private static Dictionary <object, Dictionary <object, DebugTimeData>> debug_times = new Dictionary <object, Dictionary <object, DebugTimeData>> ();
 

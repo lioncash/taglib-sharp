@@ -23,7 +23,8 @@
 
 using System;
 
-namespace TagLib.Riff {
+namespace TagLib.Riff
+{
 	/// <summary>
 	///    This class extends <see cref="ListTag" /> to provide support for
 	///    reading and writing MovieID tags.
@@ -106,15 +107,16 @@ namespace TagLib.Riff {
 
 
 		#region TagLib.Tag
-		
+
 		/// <summary>
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
 		/// <value>
 		///    Always <see cref="TagLib.TagTypes.MovieId" />.
 		/// </value>
-		public override TagTypes TagTypes {
-			get {return TagTypes.MovieId;}
+		public override TagTypes TagTypes
+		{
+			get { return TagTypes.MovieId; }
 		}
 
 		/// <summary>

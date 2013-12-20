@@ -39,20 +39,20 @@ namespace TagLib.Asf
 	public class File : TagLib.File
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the file's tag.
 		/// </summary>
 		private Asf.Tag asf_tag = null;
-		
+
 		/// <summary>
 		///    Contains the file's properties.
 		/// </summary>
 		private Properties properties = null;
-		
+
 		#endregion
-		
-		
+
+
 		#region Constructors
 
 		/// <summary>
@@ -134,8 +134,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -166,8 +166,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -385,8 +385,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region Private Methods
 
 		/// <summary>

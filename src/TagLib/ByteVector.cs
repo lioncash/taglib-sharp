@@ -51,28 +51,28 @@ namespace TagLib
 		///    The string is to be Latin-1 encoded.
 		/// </summary>
 		Latin1 = 0,
-		
+
 		/// <summary>
 		///    The string is to be UTF-16 encoded.
 		/// </summary>
 		UTF16 = 1,
-		
+
 		/// <summary>
 		///    The string is to be UTF-16BE encoded.
 		/// </summary>
 		UTF16BE = 2,
-		
+
 		/// <summary>
 		///    The string is to be UTF-8 encoded.
 		/// </summary>
 		UTF8 = 3,
-		
+
 		/// <summary>
 		///    The string is to be UTF-16LE encoded.
 		/// </summary>
 		UTF16LE = 4
 	}
-	
+
 	/// <summary>
 	///    This class represents and performs operations on variable length
 	///    list of <see cref="byte" /> elements.
@@ -80,7 +80,7 @@ namespace TagLib
 	public class ByteVector : IList<byte>, IComparable<ByteVector>
 	{
 		#region Private Static Fields
-		
+
 		/// <summary>
 		///    Contains values to use in CRC calculation.
 		/// </summary>
@@ -150,23 +150,23 @@ namespace TagLib
 			0xafb010b1, 0xab710d06, 0xa6322bdf, 0xa2f33668,
 			0xbcb4666d, 0xb8757bda, 0xb5365d03, 0xb1f740b4
 		};
-		
+
 		/// <summary>
 		///    Specifies whether or not to use a broken Latin-1
 		///    behavior.
 		/// </summary>
 		private static bool use_broken_latin1 = false;
-		
+
 		/// <summary>
 		///    Contains a one byte text delimiter.
 		/// </summary>
 		private static readonly ReadOnlyByteVector td1 = new ReadOnlyByteVector (1);
-		
+
 		/// <summary>
 		///    Contains a two byte text delimiter.
 		/// </summary>
 		private static readonly ReadOnlyByteVector td2 = new ReadOnlyByteVector (2);
-		
+
 		/// <summary>
 		///    Contains the last generic UTF-16 encoding read.
 		/// </summary>
@@ -177,17 +177,17 @@ namespace TagLib
 		///    the second string.
 		/// </remarks>
 		private static Encoding last_utf16_encoding = Encoding.Unicode;
-		
+
 		#endregion
 
 
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the internal byte list.
 		/// </summary>
 		private List<byte> data = new List<byte>();
-		
+
 		#endregion
 
 
@@ -579,7 +579,7 @@ namespace TagLib
 		{
 			return Find(pattern, offset, 1);
 		}
-		
+
 		/// <summary>
 		///    Finds the first occurance of a pattern in the current
 		///    instance.
@@ -757,7 +757,7 @@ namespace TagLib
 				patternLength = pattern.Count;
 			}
 
-			// do some sanity checking -- all of these things are 
+			// do some sanity checking -- all of these things are
 			// needed for the search to be valid
 			if (patternLength > this.data.Count ||
 			    offset >= this.data.Count ||
@@ -2468,7 +2468,7 @@ namespace TagLib
 
 
 		#region Utilities
-		
+
 		/// <summary>
 		///    Gets the text delimiter for nil separated string lists of
 		///    a specified encoding.
@@ -2705,7 +2705,7 @@ namespace TagLib
 		{
 			if (IsReadOnly)
 				throw new NotSupportedException ("Cannot edit readonly objects.");
-		
+
 			this.data.Add(item);
 		}
 

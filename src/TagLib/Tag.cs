@@ -10,7 +10,7 @@
 //
 // Copyright (C) 2005-2007 Brian Nickel
 // Copyright (C) 2003 Scott Wheeler
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -40,57 +40,57 @@ namespace TagLib
 		///    No tag types.
 		/// </summary>
 		None         = 0x00000000,
-		
+
 		/// <summary>
 		///    Xiph's Vorbis Comment
 		/// </summary>
 		Xiph         = 0x00000001,
-		
+
 		/// <summary>
 		///    ID3v1 Tag
 		/// </summary>
 		Id3v1        = 0x00000002,
-		
+
 		/// <summary>
 		///    ID3v2 Tag
 		/// </summary>
 		Id3v2        = 0x00000004,
-		
+
 		/// <summary>
 		///    APE Tag
 		/// </summary>
 		Ape          = 0x00000008,
-		
+
 		/// <summary>
 		///    Apple's ILST Tag Format
 		/// </summary>
 		Apple        = 0x00000010,
-		
+
 		/// <summary>
 		///    ASF Tag
 		/// </summary>
 		Asf          = 0x00000020,
-		
+
 		/// <summary>
 		///    Standard RIFF INFO List Tag
 		/// </summary>
 		RiffInfo     = 0x00000040,
-		
+
 		/// <summary>
 		///    RIFF Movie ID List Tag
 		/// </summary>
 		MovieId      = 0x00000080,
-		
+
 		/// <summary>
 		///    DivX Tag
 		/// </summary>
 		DivX         = 0x00000100,
-		
+
 		/// <summary>
 		///    FLAC Metadata Blocks Tag
 		/// </summary>
 		FlacMetadata = 0x00000200,
-		
+
 		/// <summary>
 		///    TIFF IFD Tag
 		/// </summary>
@@ -125,13 +125,13 @@ namespace TagLib
 		///    Audible Metadata Blocks Tag
 		/// </summary>
 		AudibleMetadata = 0x00000400,
-		
+
 		/// <summary>
 		///    All tag types.
 		/// </summary>
 		AllTags      = 0xFFFFFFFF
 	}
-	
+
 	/// <summary>
 	///    This abstract class provides generic access to standard tag
 	///    features. All tag types will extend this class.
@@ -183,7 +183,7 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Gets and sets the sort name for the title of the media 
+		///    Gets and sets the sort name for the title of the media
 		///    described by the current instance.
 		/// </summary>
 		/// <value>
@@ -237,7 +237,7 @@ namespace TagLib
 		///    A <see cref="string[]" /> containing the sort names for
 		///    the performers or artists who performed in the media
 		///    described by the current instance, or an empty array if
-		///    no value is present. 
+		///    no value is present.
 		/// </value>
 		/// <remarks>
 		///    <para>This is used to provide more control over how tracks
@@ -337,12 +337,12 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Gets and sets the sort names for the composers of the 
+		///    Gets and sets the sort names for the composers of the
 		///    media represented by the current instance.
 		/// </summary>
 		/// <value>
 		///    A <see cref="string[]" /> containing the sort names
-		///    for the composers of the media represented by the 
+		///    for the composers of the media represented by the
 		///    current instance or an empty array if no value is present.
 		/// </value>
 		/// <remarks>
@@ -377,7 +377,7 @@ namespace TagLib
 		///    disc.</para>
 		///    <para>For example, "Rubber Soul" (an album by the
 		///    Beatles), "The Sopranos: Complete First Season" (a boxed
-		///    set of TV episodes), or "Back To The Future Trilogy" (a 
+		///    set of TV episodes), or "Back To The Future Trilogy" (a
 		///    boxed set of movies).</para>
 		/// </remarks>
 		public virtual string Album
@@ -387,12 +387,12 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Gets and sets the sort names for the Album Title of the 
+		///    Gets and sets the sort names for the Album Title of the
 		///    media represented by the current instance.
 		/// </summary>
 		/// <value>
 		///    A <see cref="string[]" /> containing the sort names
-		///    for the Album Title of the media represented by the 
+		///    for the Album Title of the media represented by the
 		///    current instance or an empty array if no value is present.
 		/// </value>
 		/// <remarks>
@@ -855,9 +855,9 @@ namespace TagLib
 		/// </value>
 		/// <remarks>
 		///    <para>This field represents the MusicBrainz ReleaseCountry, that describes
-		///    the country in which an album was released.  Note that the ReleaseCountry 
-		///    of an album is not necessarily the country in which it was produced. The 
-		///    label itself will typically be more relevant. eg, a release on "Foo Records UK" 
+		///    the country in which an album was released.  Note that the ReleaseCountry
+		///    of an album is not necessarily the country in which it was produced. The
+		///    label itself will typically be more relevant. eg, a release on "Foo Records UK"
 		///    that has "Made in Austria" printed on it, will likely be a UK release.</para>
 		/// </remarks>
 		public virtual string MusicBrainzReleaseCountry

@@ -6,7 +6,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -37,38 +37,38 @@ namespace TagLib.Asf
 		///    The descriptor contains Unicode (UTF-16LE) text.
 		/// </summary>
 		Unicode = 0,
-		
+
 		/// <summary>
 		///    The descriptor contains binary data.
 		/// </summary>
 		Bytes = 1,
-		
+
 		/// <summary>
 		///    The descriptor contains a boolean value.
 		/// </summary>
 		Bool = 2,
-		
+
 		/// <summary>
 		///    The descriptor contains a 4-byte DWORD value.
 		/// </summary>
 		DWord = 3,
-		
+
 		/// <summary>
 		///    The descriptor contains a 8-byte QWORD value.
 		/// </summary>
 		QWord = 4,
-		
+
 		/// <summary>
 		///    The descriptor contains a 2-byte WORD value.
 		/// </summary>
 		Word = 5,
-		
+
 		/// <summary>
 		///    The descriptor contains a 16-byte GUID value.
 		/// </summary>
 		Guid = 6
 	}
-	
+
 	/// <summary>
 	///    This class provides a representation of an ASF Content
 	///    Descriptor to be used in combination with <see
@@ -77,35 +77,35 @@ namespace TagLib.Asf
 	public class ContentDescriptor
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the data type.
 		/// </summary>
 		private DataType type = DataType.Unicode;
-		
+
 		/// <summary>
 		///    Contains the descriptor name.
 		/// </summary>
 		private string name = null;
-		
+
 		/// <summary>
 		///    Contains the string value.
 		/// </summary>
 		private string strValue = null;
-		
+
 		/// <summary>
 		///    Contains the byte value.
 		/// </summary>
 		private ByteVector byteValue = null;
-		
+
 		/// <summary>
 		///    Contains the long value.
 		/// </summary>
 		private ulong longValue = 0;
-		
+
 		#endregion
-		
-		
+
+
 		#region Constructors
 
 		/// <summary>
@@ -256,8 +256,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -285,8 +285,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -436,8 +436,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region Protected Methods
 
 		/// <summary>

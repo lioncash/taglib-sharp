@@ -31,7 +31,6 @@ namespace TagLib.Tiff.Rw2
 	/// </summary>
 	public class IFDReader : TagLib.IFD.IFDReader
 	{
-
 		#region Constructors
 
 		/// <summary>

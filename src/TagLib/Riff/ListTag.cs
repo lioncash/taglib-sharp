@@ -37,13 +37,13 @@ namespace TagLib.Riff
 		///    Contains the <see cref="List" /> object.
 		/// </summary>
 		private List fields;
-		
+
 		#endregion
 
 
 
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="ListTag" /> with no contents.

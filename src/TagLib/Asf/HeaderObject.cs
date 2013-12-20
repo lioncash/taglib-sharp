@@ -6,7 +6,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -35,20 +35,20 @@ namespace TagLib.Asf
 	public class HeaderObject : Object
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the reserved header data.
 		/// </summary>
 		private ByteVector reserved;
-		
+
 		/// <summary>
 		///    Contains the child objects.
 		/// </summary>
 		private List<Object> children;
-		
+
 		#endregion
-		
-		
+
+
 		#region Constructors
 
 		/// <summary>
@@ -93,8 +93,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -191,7 +191,7 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
+
 
 		#region Public Methods
 

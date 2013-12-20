@@ -6,7 +6,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -38,51 +38,51 @@ namespace TagLib.Mpeg4
 	public class AppleElementaryStreamDescriptor : FullBox
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the stream ID.
 		/// </summary>
 		private ushort es_id;
-		
+
 		/// <summary>
 		///    Contains the stream priority.
 		/// </summary>
 		private byte stream_priority;
-		
+
 		/// <summary>
 		///    Contains the object type ID.
 		/// </summary>
 		private byte object_type_id;
-		
+
 		/// <summary>
 		///    Contains the stream type.
 		/// </summary>
 		private byte stream_type;
-		
+
 		/// <summary>
 		///    Contains the bugger size.
 		/// </summary>
 		private uint buffer_size_db;
-		
+
 		/// <summary>
 		///    Contains the maximum bitrate.
 		/// </summary>
 		private uint max_bitrate;
-		
+
 		/// <summary>
 		///    Contains the average bitrate.
 		/// </summary>
 		private uint average_bitrate;
-		
+
 		/// <summary>
 		///    Contains the decoder config.
 		/// </summary>
 		private ByteVector decoder_config;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -168,9 +168,9 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -279,9 +279,9 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Methods
 
 		/// <summary>

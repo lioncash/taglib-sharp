@@ -33,34 +33,34 @@ namespace TagLib.Ogg.Codecs
 	public class Theora : Codec, IVideoCodec
 	{
 		#region Private Static Fields
-		
+
 		/// <summary>
 		///    Contains the file identifier.
 		/// </summary>
 		private static readonly ByteVector id = "theora";
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the header packet.
 		/// </summary>
 		private HeaderPacket header;
-		
+
 		/// <summary>
 		///    Contains the comment data.
 		/// </summary>
 		private ByteVector comment_data;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Theora" />.
@@ -68,11 +68,11 @@ namespace TagLib.Ogg.Codecs
 		private Theora()
 		{
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -187,9 +187,9 @@ namespace TagLib.Ogg.Codecs
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -262,11 +262,11 @@ namespace TagLib.Ogg.Codecs
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Static Methods
-		
+
 		/// <summary>
 		///    Implements the <see cref="Codec.CodecProvider" /> delegate to
 		///    provide support for recognizing a Theora stream from the
@@ -285,13 +285,13 @@ namespace TagLib.Ogg.Codecs
 		{
 			return (PacketType (packet) == 0x80) ? new Theora () : null;
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Static Methods
-		
+
 		/// <summary>
 		///    Gets the packet type for a specified Theora packet.
 		/// </summary>
@@ -307,18 +307,18 @@ namespace TagLib.Ogg.Codecs
 		{
 			if (packet.Count <= id.Count || packet [0] < 0x80)
 				return -1;
-			
+
 			for (int i = 0; i < id.Count; i ++)
 			{
 				if (packet [i + 1] != id [i])
 					return -1;
 			}
-			
+
 			return packet [0];
 		}
-		
+
 		#endregion
-		
+
 		/// <summary>
 		///    This structure represents a Theora header packet.
 		/// </summary>

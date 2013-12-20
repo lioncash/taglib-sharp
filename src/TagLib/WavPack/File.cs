@@ -45,16 +45,16 @@ namespace TagLib.WavPack
 	public class File : TagLib.NonContainer.File
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the block with the audio header.
 		/// </summary>
 		private ByteVector header_block = null;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -134,9 +134,9 @@ namespace TagLib.WavPack
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -188,9 +188,9 @@ namespace TagLib.WavPack
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Protected Methods
 
 		/// <summary>

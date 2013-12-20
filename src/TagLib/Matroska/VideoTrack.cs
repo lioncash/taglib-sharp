@@ -73,7 +73,7 @@ namespace TagLib.Matroska
 		/// <summary>
 		/// Constructs a <see cref="VideoTrack" /> parsing from provided
 		/// file data.
-		/// Parsing will be done reading from _file at position references by 
+		/// Parsing will be done reading from _file at position references by
 		/// parent element's data section.
 		/// </summary>
 		/// <param name="_file"><see cref="File" /> instance to read from.</param>

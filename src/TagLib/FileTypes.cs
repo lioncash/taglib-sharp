@@ -6,7 +6,7 @@
 //   Aaron Bockover (abockover@novell.com)
 //
 // Copyright (C) 2006 Novell, Inc.
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -46,7 +46,7 @@ namespace TagLib
 		///    cref="File" /> subclasses that support them.
 		/// </summary>
 		private static Dictionary<string, Type> file_types;
-		
+
 		/// <summary>
 		///    Contains a static array of file types contained in the
 		///    TagLib# assembly.
@@ -86,7 +86,7 @@ namespace TagLib
 			typeof(TagLib.TrueAudio.File),
 			typeof(TagLib.WavPack.File)
 		};
-		
+
 		/// <summary>
 		///    Constructs and initializes the <see cref="FileTypes" />
 		///    class by registering the default types.

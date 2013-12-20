@@ -33,23 +33,23 @@ namespace TagLib.Ogg
 	public class GroupedComment : Tag
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains a mapping between stream serial numbers and
 		///    comments.
 		/// </summary>
 		private Dictionary<uint, XiphComment> comment_hash;
-		
+
 		/// <summary>
 		///    Contains comments in the order they are added.
 		/// </summary>
 		private List<XiphComment> tags;
-		
+
 		#endregion
 
 
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="GroupedComment" /> with now contents.
@@ -205,7 +205,7 @@ namespace TagLib.Ogg
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the sort name
-		///    for the track title of the media described by the current 
+		///    for the track title of the media described by the current
 		///    instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -292,7 +292,7 @@ namespace TagLib.Ogg
 		///    A <see cref="string[]" /> containing the sort names for
 		///    the performers or artists who performed in the media
 		///    described by the current instance, or an empty array if
-		///    no value is present. 
+		///    no value is present.
 		/// </value>
 		/// <remarks>
 		///    <para>When getting the value, the child comments are
@@ -1052,7 +1052,7 @@ namespace TagLib.Ogg
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ArtistID for the media described by the 
+		///    ArtistID for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1093,7 +1093,7 @@ namespace TagLib.Ogg
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseID for the media described by the 
+		///    ReleaseID for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1134,7 +1134,7 @@ namespace TagLib.Ogg
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseArtistID for the media described by the 
+		///    ReleaseArtistID for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1175,7 +1175,7 @@ namespace TagLib.Ogg
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    TrackID for the media described by the 
+		///    TrackID for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1216,7 +1216,7 @@ namespace TagLib.Ogg
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    DiscID for the media described by the 
+		///    DiscID for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1257,7 +1257,7 @@ namespace TagLib.Ogg
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicIP PUID
-		///    for the media described by the 
+		///    for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1298,7 +1298,7 @@ namespace TagLib.Ogg
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the Amazon ID
-		///    for the media described by the 
+		///    for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1339,7 +1339,7 @@ namespace TagLib.Ogg
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    Release Status for the media described by the 
+		///    Release Status for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1380,7 +1380,7 @@ namespace TagLib.Ogg
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    Release Type for the media described by the 
+		///    Release Type for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1421,7 +1421,7 @@ namespace TagLib.Ogg
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    Release Country for the media described by the 
+		///    Release Country for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>

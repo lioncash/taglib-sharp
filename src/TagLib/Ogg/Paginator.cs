@@ -43,17 +43,17 @@ namespace TagLib.Ogg
 		///    Contains the packets to paginate.
 		/// </summary>
 		private ByteVectorCollection packets = new ByteVectorCollection();
-		
+
 		/// <summary>
 		///    Contains the first page header.
 		/// </summary>
 		private PageHeader? first_page_header;
-		
+
 		/// <summary>
 		///    Contains the codec to use.
 		/// </summary>
 		private Codec codec;
-		
+
 		/// <summary>
 		///    contains the number of pages read.
 		/// </summary>

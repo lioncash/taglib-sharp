@@ -6,7 +6,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -34,12 +34,12 @@ namespace TagLib.Asf
 	public class PaddingObject : Object
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the size of the current instance.
 		/// </summary>
 		private ulong size;
-		
+
 		#endregion
 
 

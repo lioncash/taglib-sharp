@@ -6,7 +6,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -34,17 +34,17 @@ namespace TagLib.Mpeg4
 	public class FileParser
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the file to read from.
 		/// </summary>
 		private TagLib.File file;
-		
+
 		/// <summary>
 		///    Contains the first header found in the file.
 		/// </summary>
 		private BoxHeader first_header;
-		
+
 		/// <summary>
 		///    Contains the ISO movie header box.
 		/// </summary>
@@ -76,23 +76,23 @@ namespace TagLib.Mpeg4
 		///    Contains the "stsd" boxes found in the file.
 		/// </summary>
 		private List<Box> stsd_boxes = new List<Box>();
-		
+
 		/// <summary>
 		///    Contains the position at which the "mdat" box starts.
 		/// </summary>
 		private long mdat_start = -1;
-		
+
 		/// <summary>
 		///    Contains the position at which the "mdat" box ends.
 		/// </summary>
 		private long mdat_end = -1;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="FileParser" /> for a specified file.
@@ -119,13 +119,13 @@ namespace TagLib.Mpeg4
 			if (first_header.BoxType != "ftyp")
 				throw new CorruptFileException("File does not start with 'ftyp' box.");
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the movie header box read by the current instance.
 		/// </summary>
@@ -141,7 +141,7 @@ namespace TagLib.Mpeg4
 		{
 			get { return mvhd_box; }
 		}
-		
+
 		/// <summary>
 		///    Gets all user data boxes read by the current instance.
 		/// </summary>
@@ -158,7 +158,7 @@ namespace TagLib.Mpeg4
 		{
 			get { return udta_boxes.ToArray(); }
 		}
-		
+
 		public IsoUserDataBox UserDataBox
 		{
 			get { return UserDataBoxes.Length == 0 ? null : UserDataBoxes[0]; }
@@ -184,7 +184,7 @@ namespace TagLib.Mpeg4
 					foreach (Box sub in box.Children)
 					{
 						IsoAudioSampleEntry entry = sub as IsoAudioSampleEntry;
-						
+
 						if (entry != null)
 							return entry;
 					}
@@ -193,7 +193,7 @@ namespace TagLib.Mpeg4
 				return null;
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the visual sample entry read by the current
 		///    instance.
@@ -224,7 +224,7 @@ namespace TagLib.Mpeg4
 				return null;
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets the box headers for the first "<c>moov</c>" box and
 		///    all parent boxes up to the top of the file as read by the
@@ -244,7 +244,7 @@ namespace TagLib.Mpeg4
 		{
 			get { return moov_tree; }
 		}
-		
+
 		/// <summary>
 		///    Gets the box headers for the first "<c>udta</c>" box and
 		///    all parent boxes up to the top of the file as read by the
@@ -264,7 +264,7 @@ namespace TagLib.Mpeg4
 		{
 			get { return udta_tree; }
 		}
-		
+
 		/// <summary>
 		///    Gets all chunk offset boxes read by the current instance.
 		/// </summary>
@@ -283,7 +283,7 @@ namespace TagLib.Mpeg4
 		{
 			get { return stco_boxes.ToArray(); }
 		}
-		
+
 		/// <summary>
 		///    Gets the position at which the "<c>mdat</c>" box starts.
 		/// </summary>
@@ -300,7 +300,7 @@ namespace TagLib.Mpeg4
 		{
 			get { return mdat_start; }
 		}
-		
+
 		/// <summary>
 		///    Gets the position at which the "<c>mdat</c>" box ends.
 		/// </summary>
@@ -317,13 +317,13 @@ namespace TagLib.Mpeg4
 		{
 			get { return mdat_end; }
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Parses the file referenced by the current instance,
 		///    searching for box headers that will be useful in saving
@@ -341,7 +341,7 @@ namespace TagLib.Mpeg4
 				file.MarkAsCorrupt(e.Message);
 			}
 		}
-		
+
 		/// <summary>
 		///    Parses the file referenced by the current instance,
 		///    searching for tags.
@@ -358,7 +358,7 @@ namespace TagLib.Mpeg4
 				file.MarkAsCorrupt(e.Message);
 			}
 		}
-		
+
 		/// <summary>
 		///    Parses the file referenced by the current instance,
 		///    searching for tags and properties.
@@ -375,7 +375,7 @@ namespace TagLib.Mpeg4
 				file.MarkAsCorrupt(e.Message);
 			}
 		}
-		
+
 		/// <summary>
 		///    Parses the file referenced by the current instance,
 		///    searching for chunk offset boxes.
@@ -392,13 +392,13 @@ namespace TagLib.Mpeg4
 				file.MarkAsCorrupt(e.Message);
 			}
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Methods
-		
+
 		/// <summary>
 		///    Parses boxes for a specified range, looking for headers.
 		/// </summary>
@@ -417,11 +417,11 @@ namespace TagLib.Mpeg4
 		private void ParseBoxHeaders(long start, long end, List<BoxHeader> parents)
 		{
 			BoxHeader header;
-			
+
 			for (long position = start; position < end; position += header.TotalBoxSize)
 			{
 				header = new BoxHeader(file, position);
-				
+
 				if (moov_tree == null && header.BoxType == BoxType.Moov)
 				{
 					List<BoxHeader> new_parents = AddParent(parents, header);
@@ -453,7 +453,7 @@ namespace TagLib.Mpeg4
 					mdat_start = position;
 					mdat_end = position + header.TotalBoxSize;
 				}
-				
+
 				if (header.TotalBoxSize == 0)
 					break;
 			}
@@ -478,7 +478,7 @@ namespace TagLib.Mpeg4
 			for (long position = start; position < end; position += header.TotalBoxSize)
 			{
 				header = new BoxHeader(file, position);
-				
+
 				if (header.BoxType == BoxType.Moov)
 				{
 					ParseTag(header.HeaderSize + position,
@@ -509,7 +509,7 @@ namespace TagLib.Mpeg4
 					mdat_start = position;
 					mdat_end = position + header.TotalBoxSize;
 				}
-				
+
 				if (header.TotalBoxSize == 0)
 					break;
 			}
@@ -535,12 +535,12 @@ namespace TagLib.Mpeg4
 		private void ParseTagAndProperties(long start, long end, IsoHandlerBox handler, List<BoxHeader> parents)
 		{
 			BoxHeader header;
-			
+
 			for (long position = start; position < end; position += header.TotalBoxSize)
 			{
 				header = new BoxHeader(file, position);
 				ByteVector type = header.BoxType;
-				
+
 				if (type == BoxType.Moov)
 				{
 					ParseTagAndProperties(header.HeaderSize + position,
@@ -583,12 +583,12 @@ namespace TagLib.Mpeg4
 					mdat_start = position;
 					mdat_end = position + header.TotalBoxSize;
 				}
-				
+
 				if (header.TotalBoxSize == 0)
 					break;
 			}
 		}
-		
+
 		/// <summary>
 		///    Parses boxes for a specified range, looking for chunk
 		///    offset boxes.
@@ -604,11 +604,11 @@ namespace TagLib.Mpeg4
 		private void ParseChunkOffsets(long start, long end)
 		{
 			BoxHeader header;
-			
+
 			for (long position = start; position < end; position += header.TotalBoxSize)
 			{
 				header = new BoxHeader(file, position);
-				
+
 				if (header.BoxType == BoxType.Moov)
 				{
 					ParseChunkOffsets(
@@ -634,12 +634,12 @@ namespace TagLib.Mpeg4
 					mdat_start = position;
 					mdat_end = position + header.TotalBoxSize;
 				}
-				
+
 				if (header.TotalBoxSize == 0)
 					break;
 			}
 		}
-		
+
 		/// <summary>
 		///    Resets all internal fields.
 		/// </summary>
@@ -654,11 +654,11 @@ namespace TagLib.Mpeg4
 			mdat_start = -1;
 			mdat_end = -1;
 		}
-		
+
 		#endregion
-		
+
 		#region Private Static Methods
-		
+
 		/// <summary>
 		///    Adds a parent to the end of an existing list of parents.
 		/// </summary>
@@ -681,7 +681,7 @@ namespace TagLib.Mpeg4
 			boxes.Add(current);
 			return boxes;
 		}
-		
+
 		#endregion
 	}
 }

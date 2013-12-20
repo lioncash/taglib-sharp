@@ -36,29 +36,29 @@ namespace TagLib.Id3v2
 	public class UnsynchronisedLyricsFrame : Frame
 	{
 		#region Private Properties
-		
+
 		/// <summary>
 		///    Contains the text encoding to use when rendering the
 		///    current instance.
 		/// </summary>
 		private StringType encoding = Tag.DefaultEncoding;
-		
+
 		/// <summary>
 		///    Contains the ISO-639-2 language code of the current
 		///    instance.
 		/// </summary>
 		private string language = null;
-		
+
 		/// <summary>
 		///    Contains the description of the current instance.
 		/// </summary>
 		private string description = null;
-		
+
 		/// <summary>
 		///    Contains the lyrics text of the current instance.
 		/// </summary>
 		private string text = null;
-		
+
 		#endregion
 
 
@@ -283,7 +283,7 @@ namespace TagLib.Id3v2
 
 
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Gets a string representation of the current instance.
 		/// </summary>
@@ -294,7 +294,7 @@ namespace TagLib.Id3v2
 		{
 			return Text;
 		}
-		
+
 		#endregion
 
 

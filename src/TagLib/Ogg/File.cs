@@ -51,17 +51,17 @@ namespace TagLib.Ogg
 	public class File : TagLib.File
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///   Contains the tags for the file.
 		/// </summary>
 		private GroupedComment tag;
-		
+
 		/// <summary>
 		///    Contains the media properties.
 		/// </summary>
 		private Properties properties;
-		
+
 		#endregion
 
 
@@ -241,7 +241,7 @@ namespace TagLib.Ogg
 				!= TagLib.TagTypes.None)
 				tag.Clear ();
 		}
-		
+
 		/// <summary>
 		///    Gets a tag of a specified type from the current instance,
 		///    optionally creating a new tag if possible.
@@ -267,10 +267,10 @@ namespace TagLib.Ogg
 				foreach (XiphComment comment in tag.Comments)
 					return comment;
 			}
-			
+
 			return null;
 		}
-		
+
 		#endregion
 
 

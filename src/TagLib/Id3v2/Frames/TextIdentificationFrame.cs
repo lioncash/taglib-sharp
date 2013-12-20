@@ -10,7 +10,7 @@
 //
 // Copyright (C) 2005-2007 Brian Nickel
 // Copyright (C) 2002,2003 Scott Wheeler (Original Implementation)
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -45,7 +45,7 @@ namespace TagLib.Id3v2
 	///    <para>The following table contains types and descriptions as
 	///    found in the ID3 2.4.0 native frames specification. (Copyright
 	///    (C) Martin Nilsson 2000.)</para>
-	///    
+	///
 	///    <list type="table">
 	///       <listheader>
 	///          <term>ID</term>
@@ -373,17 +373,17 @@ namespace TagLib.Id3v2
 	public class TextInformationFrame : Frame
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the encoding to use for the text.
 		/// </summary>
 		private StringType encoding = Id3v2.Tag.DefaultEncoding;
-		
+
 		/// <summary>
 		///    Contains the text fields.
 		/// </summary>
 		private string [] text_fields = new string [0];
-		
+
 		/// <summary>
 		///    Contains the raw data from the frame, or <see
 		///    langword="null" /> if it has been processed.
@@ -394,12 +394,12 @@ namespace TagLib.Id3v2
 		///    unnecessary conversion.
 		/// </remarks>
 		private ByteVector raw_data = null;
-		
+
 		/// <summary>
 		///    Contains the ID3v2 version of <see cref="raw_data" />.
 		/// </summary>
 		private byte raw_version = 0;
-		
+
 		#endregion
 
 
@@ -1019,9 +1019,9 @@ namespace TagLib.Id3v2
 
 		#endregion
 	}
-	
-	
-	
+
+
+
 	/// <summary>
 	///    This class extends <see cref="TextInformationFrame" /> to provide
 	///    support for ID3v2 User Text Information (TXXX) Frames.
@@ -1203,7 +1203,7 @@ namespace TagLib.Id3v2
 
 
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Gets a string representation of the current instance.
 		/// </summary>
@@ -1217,7 +1217,7 @@ namespace TagLib.Id3v2
 				.Append ("] ")
 				.Append (base.ToString ()).ToString ();
 		}
-		
+
 		#endregion
 
 

@@ -10,7 +10,7 @@
 //
 // Copyright (C) 2005-2007 Brian Nickel
 // Copyright (C) 2003 by Ismael Orenstein (Original Implementation)
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -37,22 +37,22 @@ namespace TagLib.Mpeg
 	public struct XingHeader
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the frame count.
 		/// </summary>
 		private uint frames;
-		
+
 		/// <summary>
 		///    Contains the stream size.
 		/// </summary>
 		private uint size;
-		
+
 		/// <summary>
 		///    Indicates that a physical Xing header is present.
 		/// </summary>
 		private bool present;
-		
+
 		#endregion
 
 
@@ -71,13 +71,13 @@ namespace TagLib.Mpeg
 		///    An empty and unset Xing header.
 		/// </summary>
 		public static readonly XingHeader Unknown = new XingHeader(0, 0);
-		
+
 		#endregion
 
 
 
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="XingHeader" /> with a specified frame count and
@@ -97,7 +97,7 @@ namespace TagLib.Mpeg
 			this.size = size;
 			this.present = false;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="XingHeader" /> by reading its raw contents.
@@ -117,11 +117,11 @@ namespace TagLib.Mpeg
 		{
 			if (data == null)
 				throw new ArgumentNullException("data");
-			
+
 			// Check to see if a valid Xing header is available.
 			if (!data.StartsWith(FileIdentifier))
 				throw new CorruptFileException("Not a valid Xing header");
-			
+
 			int position = 8;
 
 			if ((data[7] & 0x01) != 0)
@@ -143,16 +143,16 @@ namespace TagLib.Mpeg
 			{
 				size = 0;
 			}
-			
+
 			present = true;
 		}
-		
+
 		#endregion
 
 
 
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets the total number of frames in the file, as indicated
 		///    by the current instance.
@@ -165,7 +165,7 @@ namespace TagLib.Mpeg
 		{
 			get { return frames; }
 		}
-		
+
 		/// <summary>
 		///    Gets the total size of the file, as indicated by the
 		///    current instance.
@@ -178,7 +178,7 @@ namespace TagLib.Mpeg
 		{
 			get { return size; }
 		}
-		
+
 		/// <summary>
 		///    Gets whether or not a physical Xing header is present in
 		///    the file.
@@ -191,13 +191,13 @@ namespace TagLib.Mpeg
 		{
 			get { return present; }
 		}
-		
+
 		#endregion
 
 
 
 		#region Public Static Methods
-		
+
 		/// <summary>
 		///    Gets the offset at which a Xing header would appear in an
 		///    MPEG audio packet based on the version and channel mode.
@@ -223,7 +223,7 @@ namespace TagLib.Mpeg
 			else
 				return single_channel ? 0x0D : 0x15;
 		}
-		
+
 		#endregion
 	}
 }

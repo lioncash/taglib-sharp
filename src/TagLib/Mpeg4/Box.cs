@@ -5,7 +5,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -33,28 +33,28 @@ namespace TagLib.Mpeg4
 	public class Box
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the box header.
 		/// </summary>
 		private BoxHeader header;
-		
+
 		/// <summary>
 		///    Contains the box's handler, if applicable.
 		/// </summary>
 		private IsoHandlerBox handler;
-		
+
 		/// <summary>
 		///    Contains the position of the box data.
 		/// </summary>
 		private long data_position;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Box" /> with a specified header and handler.
@@ -74,7 +74,7 @@ namespace TagLib.Mpeg4
 			this.data_position = header.Position + header.HeaderSize;
 			this.handler = handler;
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Box" /> with a specified header.
@@ -86,7 +86,7 @@ namespace TagLib.Mpeg4
 		protected Box(BoxHeader header) : this(header, null)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Box" /> with a specified box type.
@@ -98,11 +98,11 @@ namespace TagLib.Mpeg4
 		protected Box(ByteVector type) : this(new BoxHeader (type))
 		{
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -170,11 +170,11 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Renders the current instance, including its children, to
 		///    a new <see cref="ByteVector" /> object.
@@ -231,11 +231,11 @@ namespace TagLib.Mpeg4
 		{
 			if (Children == null)
 				return null;
-			
+
 			foreach (Box box in Children)
 				if (box.GetType () == type)
 					return box;
-			
+
 			return null;
 		}
 		*/
@@ -290,20 +290,20 @@ namespace TagLib.Mpeg4
 		{
 			if (Children == null)
 				return null;
-			
+
 			foreach (Box box in Children)
 			{
 				if (box.GetType() == type)
 					return box;
 			}
-			
+
 			foreach (Box box in Children)
 			{
 				Box child_box = box.GetChildRecursively(type);
 				if (child_box != null)
 					return child_box;
 			}
-			
+
 			return null;
 		}
 		*/
@@ -342,10 +342,10 @@ namespace TagLib.Mpeg4
 		public void RemoveChild(System.Type type)
 		{
 			ICollection<Box> children = Children as ICollection<Box>;
-			
+
 			if (children == null)
 				return;
-			
+
 			foreach (Box b in new List<Box>(children))
 			{
 				if (b.GetType() == type)
@@ -413,9 +413,9 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Protected Properties
 
 		/// <summary>
@@ -443,7 +443,7 @@ namespace TagLib.Mpeg4
 		{
 			get { return data_position; }
 		}
-		
+
 		/// <summary>
 		///    Gets the header of the current instance.
 		/// </summary>
@@ -455,11 +455,11 @@ namespace TagLib.Mpeg4
 		{
 			get { return header; }
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Protected Methods
 
 		/// <summary>
@@ -579,19 +579,19 @@ namespace TagLib.Mpeg4
 
 			// Adjust the header's data size to match the content.
 			header.DataSize = topData.Count + output.Count;
-			
+
 			// Render the full box.
 			output.Insert(0, topData);
 			output.Insert(0, header.Render());
-			
+
 			return output;
 		}
-		
+
 		#endregion
 
 		/*
 		#region Internal Methods
-		
+
 		/// <summary>
 		///    Dumps the child tree of the current instance to the
 		///    console.
@@ -605,14 +605,14 @@ namespace TagLib.Mpeg4
 				Console.WriteLine ("{0}{1} {2}", start, BoxType.ToString(), (this as AppleDataBox).Text);
 			else
 				Console.WriteLine ("{0}{1}", start, BoxType.ToString());
-			
+
 			if (Children != null)
 			{
 				foreach (Box child in Children)
 					child.DumpTree (start + "   ");
 			}
 		}
-		
+
 		#endregion
 		*/
 	}

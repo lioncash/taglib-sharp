@@ -35,20 +35,20 @@ namespace TagLib.Id3v2
 		///    The timestamp is of unknown format.
 		/// </summary>
 		Unknown              = 0x00,
-		
+
 		/// <summary>
 		///    The timestamp represents the number of MPEG frames since
 		///    the beginning of the audio stream.
 		/// </summary>
 		AbsoluteMpegFrames   = 0x01,
-		
+
 		/// <summary>
 		///    The timestamp represents the number of milliseconds since
 		///    the beginning of the audio stream.
 		/// </summary>
 		AbsoluteMilliseconds = 0x02
 	}
-	
+
 	/// <summary>
 	///    Specifies the type of text contained in a <see
 	///    cref="SynchronisedLyricsFrame" />.
@@ -59,49 +59,49 @@ namespace TagLib.Id3v2
 		///    The text is some other type of text.
 		/// </summary>
 		Other             = 0x00,
-		
+
 		/// <summary>
 		///    The text contains lyrical data.
 		/// </summary>
 		Lyrics            = 0x01,
-		
+
 		/// <summary>
 		///    The text contains a transcription.
 		/// </summary>
 		TextTranscription = 0x02,
-		
+
 		/// <summary>
 		///    The text lists the movements in the piece.
 		/// </summary>
 		Movement          = 0x03,
-		
+
 		/// <summary>
 		///    The text describes events that occur.
 		/// </summary>
 		Events            = 0x04,
-		
+
 		/// <summary>
 		///    The text contains chord changes that occur in the music.
 		/// </summary>
 		Chord             = 0x05,
-		
+
 		/// <summary>
 		///    The text contains trivia or "pop up" information about
 		///    the media.
 		/// </summary>
 		Trivia            = 0x06,
-		
+
 		/// <summary>
 		///    The text contains URL's for relevant webpages.
 		/// </summary>
 		WebpageUrls       = 0x07,
-		
+
 		/// <summary>
 		///     The text contains URL's for relevant images.
 		/// </summary>
 		ImageUrls         = 0x08
 	}
-	
+
 	/// <summary>
 	///    This class extends <see cref="Frame" />, implementing support for
 	///    ID3v2 Synchronised Lyrics and Text (SYLT) Frames.
@@ -109,43 +109,43 @@ namespace TagLib.Id3v2
 	public class SynchronisedLyricsFrame : Frame
 	{
 		#region Private Properties
-		
+
 		/// <summary>
 		///    Contains the text encoding to use when rendering the
 		///    current instance.
 		/// </summary>
 		private StringType encoding = Tag.DefaultEncoding;
-		
+
 		/// <summary>
 		///    Contains the ISO-639-2 language code.
 		/// </summary>
 		private string language = null;
-		
+
 		/// <summary>
 		///    Contains the description.
 		/// </summary>
 		private string description = null;
-		
+
 		/// <summary>
 		///    Contains the timestamp format.
 		/// </summary>
 		private TimestampFormat timestamp_format =
 			TimestampFormat.Unknown;
-		
+
 		/// <summary>
 		///    Contains the text type.
 		/// </summary>
 		private SynchedTextType lyrics_type = SynchedTextType.Other;
-		
+
 		/// <summary>
 		///    Contains the text.
 		/// </summary>
 		private SynchedText [] text = new SynchedText [0];
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -623,8 +623,8 @@ namespace TagLib.Id3v2
 
 		#endregion
 	}
-	
-	
+
+
 	/// <summary>
 	///    This structure contains a single entry in a <see
 	///    cref="SynchronisedLyricsFrame" /> object.
@@ -635,7 +635,7 @@ namespace TagLib.Id3v2
 		///    Contains the time offset.
 		/// </summary>
 		private long time;
-		
+
 		/// <summary>
 		///    Contains the text.
 		/// </summary>

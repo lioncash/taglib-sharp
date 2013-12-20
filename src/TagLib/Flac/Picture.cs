@@ -5,7 +5,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -32,47 +32,47 @@ namespace TagLib.Flac
 	public class Picture : IPicture
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the picture type.
 		/// </summary>
 		private PictureType type;
-		
+
 		/// <summary>
 		///    Contains the mime-type.
 		/// </summary>
 		private string mime_type;
-		
+
 		/// <summary>
 		///    Contains the description.
 		/// </summary>
 		private string description;
-		
+
 		/// <summary>
 		///    Contains the width.
 		/// </summary>
 		private int width = 0;
-		
+
 		/// <summary>
 		///    Contains the height.
 		/// </summary>
 		private int height = 0;
-		
+
 		/// <summary>
 		///    Contains the color depth.
 		/// </summary>
 		private int color_depth = 0;
-		
+
 		/// <summary>
 		///    Contains the number of indexed colors.
 		/// </summary>
 		private int indexed_colors = 0;
-		
+
 		/// <summary>
 		///    Contains the picture data.
 		/// </summary>
 		private ByteVector picture_data;
-		
+
 		#endregion
 
 

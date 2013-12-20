@@ -25,7 +25,6 @@ using System;
 
 namespace TagLib.Tiff.Pef
 {
-
 	/// <summary>
 	///    This class extends <see cref="TagLib.Tiff.BaseTiffFile" /> to provide tagging
 	///    for PEF image files.
@@ -35,7 +34,6 @@ namespace TagLib.Tiff.Pef
 	[SupportedMimeType("image/x-pentax-pef")]
 	public class File : TagLib.Tiff.File
 	{
-
 		#region Public Properties
 
 		/// <summary>

@@ -9,7 +9,7 @@
 //
 // Copyright (C) 2006-2007 Brian Nickel
 // Copyright (C) 2003 Allan Sandfeld Jensen (Original Implementation)
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -36,26 +36,26 @@ namespace TagLib.Flac
 	public struct StreamHeader : IAudioCodec, ILosslessAudioCodec
 	{
 		#region Private Properties
-		
+
 		/// <summary>
 		///    Contains the flags.
 		/// </summary>
 		private uint flags;
-		
+
 		/// <summary>
 		///    Contains the low portion of the length.
 		/// </summary>
 		private uint low_length;
-		
+
 		/// <summary>
 		///    Contains the stream length.
 		/// </summary>
 		private long stream_length;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -91,9 +91,9 @@ namespace TagLib.Flac
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -212,9 +212,9 @@ namespace TagLib.Flac
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Properties
 
 		/// <summary>

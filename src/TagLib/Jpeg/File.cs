@@ -34,7 +34,6 @@ using TagLib.Xmp;
 
 namespace TagLib.Jpeg
 {
-
 	/// <summary>
 	///    This class extends <see cref="TagLib.Image.ImageBlockFile" /> to provide tagging
 	///    and properties support for Jpeg files.

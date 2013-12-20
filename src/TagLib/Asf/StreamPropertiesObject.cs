@@ -6,7 +6,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -34,45 +34,45 @@ namespace TagLib.Asf
 	public class StreamPropertiesObject : Object
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the stream type GUID.
 		/// </summary>
 		private System.Guid stream_type;
-		
+
 		/// <summary>
 		///    Contains the error correction type GUID.
 		/// </summary>
 		private System.Guid error_correction_type;
-		
+
 		/// <summary>
 		///    Contains the time offset of the stream.
 		/// </summary>
 		private ulong time_offset;
-		
+
 		/// <summary>
 		///    Contains the stream flags.
 		/// </summary>
 		private ushort flags;
-		
+
 		/// <summary>
 		///    Contains the reserved data.
 		/// </summary>
 		private uint reserved;
-		
+
 		/// <summary>
 		///    Contains the type specific data.
 		/// </summary>
 		private ByteVector type_specific_data;
-		
+
 		/// <summary>
 		///    Contains the error correction data.
 		/// </summary>
 		private ByteVector error_correction_data;
-		
+
 		#endregion
-		
-		
+
+
 		#region Constructors
 
 		/// <summary>
@@ -121,8 +121,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -234,8 +234,8 @@ namespace TagLib.Asf
 		}
 
 		#endregion
-		
-		
+
+
 		#region Public Methods
 
 		/// <summary>

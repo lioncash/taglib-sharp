@@ -25,7 +25,6 @@ using System;
 
 namespace TagLib.Tiff.Nef
 {
-
 	/// <summary>
 	///    This class extends <see cref="TagLib.Tiff.File" /> to provide tagging
 	///    for NEF image files.
@@ -35,7 +34,6 @@ namespace TagLib.Tiff.Nef
 	[SupportedMimeType("image/x-nikon-nef")]
 	public class File : TagLib.Tiff.File
 	{
-
 		#region Public Properties
 
 		/// <summary>

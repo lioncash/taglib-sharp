@@ -10,7 +10,7 @@
 //
 // Copyright (C) 2005-2007 Brian Nickel
 // Copyright (C) 2004 Allan Sandfeld Jensen (Original Implementation)
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -41,7 +41,7 @@ namespace TagLib.Ape
 	public class Tag : TagLib.Tag, IEnumerable<string>
 	{
 		#region Private Static Fields
-		
+
 		/// <summary>
 		///    Contains names of picture fields, indexed to correspond
 		///    to their picture item names.
@@ -71,9 +71,9 @@ namespace TagLib.Ape
 		};
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Fields
 
 		/// <summary>
@@ -85,13 +85,13 @@ namespace TagLib.Ape
 		///    Contains the items in the tag.
 		/// </summary>
 		private List<Item> items = new List<Item>();
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Static Properties
-		
+
 		/// <summary>
 		///    Specifies the identifier used find an APEv2 tag in a
 		///    file.
@@ -101,11 +101,11 @@ namespace TagLib.Ape
 		/// </value>
 		[Obsolete("Use Footer.FileIdentifer")]
 		public static readonly ReadOnlyByteVector FileIdentifier = Footer.FileIdentifier;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -191,9 +191,9 @@ namespace TagLib.Ape
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -221,9 +221,9 @@ namespace TagLib.Ape
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -563,9 +563,9 @@ namespace TagLib.Ape
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Protected Methods
 
 		/// <summary>
@@ -649,9 +649,9 @@ namespace TagLib.Ape
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Methods
 
 		/// <summary>
@@ -753,9 +753,9 @@ namespace TagLib.Ape
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region IEnumerable
 
 		/// <summary>
@@ -784,9 +784,9 @@ namespace TagLib.Ape
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region TagLib.Tag
 
 		/// <summary>
@@ -825,7 +825,7 @@ namespace TagLib.Ape
 		/// <value>
 		///    A <see cref="string" /> containing the sort names for
 		///    the Title of the media described by the current instance,
-		///    or null if no value is present. 
+		///    or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "TitleSort" item.
@@ -863,7 +863,7 @@ namespace TagLib.Ape
 		///    A <see cref="string" /> array containing the sort names for
 		///    the performers or artists who performed in the media
 		///    described by the current instance, or an empty array if
-		///    no value is present. 
+		///    no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "ArtistSort" field.
@@ -994,7 +994,7 @@ namespace TagLib.Ape
 		///    the media described by the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string" /> containing the sort name of 
+		///    A <see cref="string" /> containing the sort name of
 		///    the Album Title of the media described by the current
 		///    instance or null if no value is present.
 		/// </value>

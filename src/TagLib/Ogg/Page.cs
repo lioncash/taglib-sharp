@@ -36,21 +36,21 @@ namespace TagLib.Ogg
 	public class Page
 	{
 		#region Private Properties
-		
+
 		/// <summary>
 		///    Contains the page header.
 		/// </summary>
 		private PageHeader header;
-		
+
 		/// <summary>
 		///    Contains the packets.
 		/// </summary>
 		private ByteVectorCollection packets;
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -131,9 +131,9 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -165,9 +165,9 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -208,9 +208,9 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Static Methods
 
 		/// <summary>

@@ -1,5 +1,5 @@
 //
-// File.cs: Provides tagging and properties support for Apple's AIFF 
+// File.cs: Provides tagging and properties support for Apple's AIFF
 // files.
 //
 // Author:
@@ -271,7 +271,7 @@ namespace TagLib.Aiff
 				if (data.Count - length != 0 &&
 				    tag_start <= aiff_size)
 				{
-					// Depending, if a Tag has been added or removed, 
+					// Depending, if a Tag has been added or removed,
 					// the length needs to be adjusted
 					if (tag == null)
 					{
@@ -422,7 +422,7 @@ namespace TagLib.Aiff
 
 			// Now we search for the ID3 chunk.
 			// Normally it appears after the Sound data chunk. But as the order of
-			// chunks is free, it might be the case that the ID3 chunk appears before 
+			// chunks is free, it might be the case that the ID3 chunk appears before
 			// the sound data chunk.
 			// So we search first for the Sound data chunk and see, if an ID3 chunk appears before
 			long id3_chunk_pos = -1;

@@ -9,7 +9,7 @@
 //
 // Copyright (C) 2005-2007 Brian Nickel
 // Copyright (C) 2004 Scott Wheeler (Original Implementation)
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -39,42 +39,42 @@ namespace TagLib.Id3v2
 		///    The channel data is for some other speaker.
 		/// </summary>
 		Other = 0x00,
-		
+
 		/// <summary>
 		///    The channel data is for the master volume.
 		/// </summary>
 		MasterVolume = 0x01,
-		
+
 		/// <summary>
 		///    The channel data is for the front right speaker.
 		/// </summary>
 		FrontRight = 0x02,
-		
+
 		/// <summary>
 		///    The channel data is for the front left speaker.
 		/// </summary>
 		FrontLeft = 0x03,
-		
+
 		/// <summary>
 		///    The channel data is for the back right speaker.
 		/// </summary>
 		BackRight = 0x04,
-		
+
 		/// <summary>
 		///    The channel data is for the back left speaker.
 		/// </summary>
 		BackLeft = 0x05,
-		
+
 		/// <summary>
 		///    The channel data is for the front center speaker.
 		/// </summary>
 		FrontCentre = 0x06,
-		
+
 		/// <summary>
 		///    The channel data is for the back center speaker.
 		/// </summary>
 		BackCentre = 0x07,
-		
+
 		/// <summary>
 		///    The channel data is for the subwoofer.
 		/// </summary>
@@ -88,7 +88,7 @@ namespace TagLib.Id3v2
 	public class RelativeVolumeFrame : Frame
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the frame identification.
 		/// </summary>
@@ -98,7 +98,7 @@ namespace TagLib.Id3v2
 		///    Contains the channel data.
 		/// </summary>
 		private ChannelData[] channels = new ChannelData[9];
-		
+
 		#endregion
 
 
@@ -551,17 +551,17 @@ namespace TagLib.Id3v2
 
 
 		#region Private Static Methods
-		
+
 		private static int BitsToBytes (int i)
 		{
 			return i % 8 == 0 ? i / 8 : (i - i % 8) / 8 + 1;
 		}
-		
+
 		#endregion
 
 
 		#region Structs
-		
+
 		private struct ChannelData
 		{
 			public short VolumeAdjustmentIndex;
@@ -584,7 +584,7 @@ namespace TagLib.Id3v2
 				set { PeakVolumeIndex = (ulong) (value*512.0); }
 			}
 		}
-		
+
 		#endregion
 	}
 }

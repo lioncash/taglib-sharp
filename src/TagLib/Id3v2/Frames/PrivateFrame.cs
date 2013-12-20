@@ -5,7 +5,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2005-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -71,14 +71,14 @@ namespace TagLib.Id3v2
 	/// #using &lt;System.dll>
 	/// #using &lt;System.Xml.dll>
 	/// #using &lt;taglib-sharp.dll>
-	/// 
+	///
 	/// using System;
 	/// using System::IO;
 	/// using System::Runtime::Serialization;
 	/// using System::Text;
 	/// using System::Xml::Serialization;
 	/// using TagLib::Id3v2;
-	/// 
+	///
 	/// public ref class DbUtil abstract sealed
 	/// {
 	/// public:
@@ -135,7 +135,7 @@ namespace TagLib.Id3v2
 	/// import System.Text
 	/// import System.Xml.Serialization
 	/// import TagLib.Id3v2
-	/// 
+	///
 	/// public static class DbUtil:
 	///     static def StoreDatabaseEntry (tag as Tag, dbEntry as ISerializable):
 	///         data as StringWriter = StringWriter (StringBuilder ())
@@ -156,17 +156,17 @@ namespace TagLib.Id3v2
 	public class PrivateFrame : Frame
 	{
 		#region Private Properties
-		
+
 		/// <summary>
 		///    Contains the owner of the current instance.
 		/// </summary>
 		private string owner;
-		
+
 		/// <summary>
 		///    Contains private data stored in the current instance.
 		/// </summary>
 		private ByteVector data;
-		
+
 		#endregion
 
 
@@ -390,16 +390,16 @@ namespace TagLib.Id3v2
 		{
 			if (version < 3)
 				throw new NotImplementedException ();
-			
+
 			ByteVector v = new ByteVector ();
-			
+
 			v.Add (ByteVector.FromString (owner, StringType.Latin1));
 			v.Add (ByteVector.TextDelimiter (StringType.Latin1));
 			v.Add (data);
-			
+
 			return v;
 		}
-		
+
 #endregion
 
 

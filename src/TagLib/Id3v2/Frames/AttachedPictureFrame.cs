@@ -9,7 +9,7 @@
 //
 // Copyright (C) 2005-2007 Brian Nickel
 // Copyright (C) 2004 Scott Wheeler (Original Implementation)
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -48,32 +48,32 @@ namespace TagLib.Id3v2
 	public class AttachedPictureFrame : Frame, IPicture
 	{
 		#region Private Properties
-		
+
 		/// <summary>
 		///    Contains the text encoding to use when rendering.
 		/// </summary>
 		private StringType text_encoding = Tag.DefaultEncoding;
-		
+
 		/// <summary>
 		///    Contains the mime type of <see cref="data" />.
 		/// </summary>
 		private string mime_type = null;
-		
+
 		/// <summary>
 		///    Contains the type of picture.
 		/// </summary>
 		private PictureType type = PictureType.Other;
-		
+
 		/// <summary>
 		///    Contains the description.
 		/// </summary>
 		private string description = null;
-		
+
 		/// <summary>
 		///    Contains the picture data.
 		/// </summary>
 		private ByteVector data = null;
-		
+
 		/// <summary>
 		///    Contains the raw field data of the current instance as
 		///    sent to <see cref="ParseFields" /> or <see
@@ -87,13 +87,13 @@ namespace TagLib.Id3v2
 		///    needed. This speeds up the file read time significantly.
 		/// </remarks>
 		private ByteVector raw_data = null;
-		
+
 		/// <summary>
 		///    Contains the ID3v2 version <see cref="raw_data" /> is
 		///    stored in.
 		/// </summary>
 		private byte raw_version = 0;
-		
+
 		#endregion
 
 
@@ -179,7 +179,7 @@ namespace TagLib.Id3v2
 		{
 			if (picture == null)
 				throw new ArgumentNullException ("picture");
-			
+
 			mime_type   = picture.MimeType;
 			type        = picture.Type;
 			description = picture.Description;
@@ -230,7 +230,7 @@ namespace TagLib.Id3v2
 		{
 			SetData (data, offset, version, false);
 		}
-		
+
 		#endregion
 
 

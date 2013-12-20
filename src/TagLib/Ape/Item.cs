@@ -10,7 +10,7 @@
 //
 // Copyright (C) 2005-2007 Brian Nickel
 // Copyright (C) 2004 by Allan Sandfeld Jensen (Original Implementation)
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -40,19 +40,19 @@ namespace TagLib.Ape
 		///    The item contains Unicode text.
 		/// </summary>
 		Text = 0,
-		
+
 		/// <summary>
 		///    The item contains binary data.
 		/// </summary>
 		Binary = 1,
-		
+
 		/// <summary>
 		///    The item contains a locator (file path/URL) for external
 		///    information.
 		/// </summary>
 		Locator = 2
 	}
-	
+
 	/// <summary>
 	///    This class provides a representation of an APEv2 tag item which
 	///    can be read from and written to disk.
@@ -60,41 +60,41 @@ namespace TagLib.Ape
 	public class Item : ICloneable
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the type of data stored in the item.
 		/// </summary>
 		private ItemType type = ItemType.Text;
-		
+
 		/// <summary>
 		///    Contains the item key.
 		/// </summary>
 		private string key = null;
-		
+
 		/// <summary>
 		///    Contains the item value.
 		/// </summary>
 		private ReadOnlyByteVector data = null;
-		
+
 		/// <summary>
 		///    Contains the item text.
 		/// </summary>
 		private string [] text = null;
-		
+
 		/// <summary>
 		///    Indicates whether or not the item is read only.
 		/// </summary>
 		private bool read_only = false;
-		
+
 		/// <summary>
 		///    Contains the size of the item on disk.
 		/// </summary>
 		private int size_on_disk;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>

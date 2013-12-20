@@ -439,7 +439,7 @@ namespace TagLib.Matroska
 		private void ReadSimpleTag(EBMLElement element)
 		{
 			ulong i = 0;
-#pragma warning disable 219 // Assigned, never read	
+#pragma warning disable 219 // Assigned, never read
 			string tag_name = null, tag_language = null, tag_string = null;
 #pragma warning restore 219
 

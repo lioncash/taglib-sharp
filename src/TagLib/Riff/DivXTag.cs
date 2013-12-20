@@ -36,48 +36,48 @@ namespace TagLib.Riff
 	public class DivXTag : TagLib.Tag
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the title.
 		/// </summary>
 		private string title;
-		
+
 		/// <summary>
 		///    Contains the semicolon separated performers.
 		/// </summary>
 		private string artist;
-		
+
 		/// <summary>
 		///    Contains the 4 digit year.
 		/// </summary>
 		private string year;
-		
+
 		/// <summary>
 		///    Contains a comment on track.
 		/// </summary>
 		private string comment;
-		
+
 		/// <summary>
 		///    Contains the genre index.
 		/// </summary>
 		private string genre;
-		
+
 		/// <summary>
 		///    Contains the extra 6 bytes at the end of the tag.
 		/// </summary>
 		private ByteVector extra_data;
-		
+
 		#endregion
 
 
 
 		#region Public Static Fields
-		
+
 		/// <summary>
 		///    The size of a DivX tag.
 		/// </summary>
 		public const uint Size = 128;
-		
+
 		/// <summary>
 		///    The identifier used to recognize a DivX tags.
 		/// </summary>
@@ -91,7 +91,7 @@ namespace TagLib.Riff
 
 
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="DivXTag" /> with no contents.
@@ -184,7 +184,7 @@ namespace TagLib.Riff
 
 
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Renders the current instance as a raw DivX tag.
 		/// </summary>
@@ -204,13 +204,13 @@ namespace TagLib.Riff
 			data.Add(FileIdentifier);
 			return data;
 		}
-		
+
 		#endregion
 
 
 
 		#region Private Methods
-		
+
 		/// <summary>
 		///    Populates the current instance by parsing the contents of
 		///    a raw DivX tag.
@@ -287,7 +287,7 @@ namespace TagLib.Riff
 			get { return string.IsNullOrEmpty (artist) ? new string [0] : artist.Split (';'); }
 			set { artist = value != null ? string.Join (";", value) : string.Empty; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets a user comment on the media represented by
 		///    the current instance.
@@ -307,7 +307,7 @@ namespace TagLib.Riff
 			get { return string.IsNullOrEmpty (comment) ? null : comment; }
 			set { comment = value != null ? value.Trim () : String.Empty; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the genres of the media represented by the
 		///    current instance.
@@ -328,7 +328,7 @@ namespace TagLib.Riff
 			get
 			{
 				string genre_name = TagLib.Genres.IndexToVideo(genre);
-				
+
 				return (genre_name != null) ? new string[] {genre_name} : new string [0];
 			}
 

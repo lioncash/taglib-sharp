@@ -6,7 +6,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2007 Brian Nickel
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -60,21 +60,21 @@ namespace TagLib.NonContainer
 	public abstract class File : TagLib.File
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the tags.
 		/// </summary>
 		private TagLib.NonContainer.Tag tag;
-		
+
 		/// <summary>
 		///    Contains the media properties.
 		/// </summary>
 		private Properties properties;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -156,9 +156,9 @@ namespace TagLib.NonContainer
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -189,9 +189,9 @@ namespace TagLib.NonContainer
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -232,9 +232,9 @@ namespace TagLib.NonContainer
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Protected Properties
 
 		/// <summary>
@@ -264,9 +264,9 @@ namespace TagLib.NonContainer
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Protected Methods
 
 		/// <summary>
@@ -351,11 +351,11 @@ namespace TagLib.NonContainer
 		///    processing on already read data.
 		/// </remarks>
 		protected abstract Properties ReadProperties(long start, long end, ReadStyle propertiesStyle);
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Methods
 
 		/// <summary>

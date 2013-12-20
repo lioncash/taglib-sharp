@@ -7,7 +7,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -42,7 +42,7 @@ namespace TagLib.Asf
 		///    Contains the content descriptors.
 		/// </summary>
 		private List<ContentDescriptor> descriptors = new List<ContentDescriptor>();
-		
+
 		#endregion
 
 
@@ -245,7 +245,7 @@ namespace TagLib.Asf
 
 
 		#region IEnumerable
-		
+
 		/// <summary>
 		///    Gets an enumerator for enumerating through the content
 		///    descriptors.
@@ -258,7 +258,7 @@ namespace TagLib.Asf
 		{
 			return descriptors.GetEnumerator ();
 		}
-		
+
 		IEnumerator IEnumerable.GetEnumerator ()
 		{
 			return descriptors.GetEnumerator ();

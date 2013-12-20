@@ -5,7 +5,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -32,7 +32,7 @@ namespace TagLib.Mpeg4
 	public class AppleDataBox : FullBox
 	{
 		#region Enums
-		
+
 		/// <summary>
 		///    Specifies the type of data contained in a box.
 		/// </summary>
@@ -42,43 +42,43 @@ namespace TagLib.Mpeg4
 			///    The box contains UTF-8 text.
 			/// </summary>
 			ContainsText = 0x01,
-			
+
 			/// <summary>
 			///    The box contains binary data.
 			/// </summary>
 			ContainsData = 0x00,
-			
+
 			/// <summary>
 			///    The box contains data for a tempo box.
 			/// </summary>
 			ForTempo = 0x15,
-			
+
 			/// <summary>
 			///    The box contains a raw JPEG image.
 			/// </summary>
 			ContainsJpegData = 0x0D,
-			
+
 			/// <summary>
 			///    The box contains a raw PNG image.
 			/// </summary>
 			ContainsPngData = 0x0E
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the box data.
 		/// </summary>
 		private ByteVector data;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -124,9 +124,9 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>

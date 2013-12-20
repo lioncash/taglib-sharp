@@ -10,7 +10,7 @@
 //
 // Copyright (C) 2006,2007 Brian Nickel
 // Copyright (C) 2003 Scott Wheeler (Original Implementation)
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -51,12 +51,12 @@ namespace TagLib
 		///    Contains the duration.
 		/// </summary>
 		private TimeSpan duration = TimeSpan.Zero;
-		
+
 		#endregion
-		
-		
+
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Properties" /> with no codecs or duration.
@@ -112,8 +112,8 @@ namespace TagLib
 		}
 
 		#endregion
-		
-		
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -130,8 +130,8 @@ namespace TagLib
 		}
 
 		#endregion
-		
-		
+
+
 		#region ICodec
 
 		/// <summary>
@@ -217,8 +217,8 @@ namespace TagLib
 		}
 
 		#endregion
-		
-		
+
+
 		#region IAudioCodec
 
 		/// <summary>
@@ -346,8 +346,8 @@ namespace TagLib
 		}
 
 		#endregion
-		
-		
+
+
 		#region IVideoCodec
 
 		/// <summary>

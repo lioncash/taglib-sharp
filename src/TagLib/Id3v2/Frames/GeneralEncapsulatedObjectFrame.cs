@@ -9,7 +9,7 @@
 //
 // Copyright (C) 2007 Brian Nickel
 // Copyright (C) 2007 Scott Wheeler (Original Implementation)
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -42,33 +42,33 @@ namespace TagLib.Id3v2
 	public class GeneralEncapsulatedObjectFrame : Frame
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the text encoding to use when rendering the
 		///    current instance.
 		/// </summary>
 		private StringType encoding = Tag.DefaultEncoding;
-		
+
 		/// <summary>
 		///    Contains the mime type of <see cref="data" />.
 		/// </summary>
 		private string mime_type = null;
-		
+
 		/// <summary>
 		///    Contains the original file name.
 		/// </summary>
 		string file_name = null;
-		
+
 		/// <summary>
 		///    Contains the description.
 		/// </summary>
 		private string description = null;
-		
+
 		/// <summary>
 		///    Contains the data.
 		/// </summary>
 		private ByteVector data = null;
-		
+
 		#endregion
 
 

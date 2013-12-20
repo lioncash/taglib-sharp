@@ -11,7 +11,7 @@
 // Copyright (C) 2005-2007 Brian Nickel
 // Copyright (C) 2004 Allan Sandfeld Jensen (Original Implementation)
 // copyright (C) 2002, 2003 Scott Wheeler (Original Implementation)
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -32,7 +32,7 @@ using System;
 namespace TagLib.Ape
 {
 	#region Enums
-	
+
 	/// <summary>
 	///    Indicates the flags applied to a <see cref="Footer" /> object.
 	/// </summary>
@@ -43,18 +43,18 @@ namespace TagLib.Ape
 		///    The tag lacks a footer object.
 		/// </summary>
 		FooterAbsent  = 0x40000000,
-		
+
 		/// <summary>
 		///    The footer is actually a header.
 		/// </summary>
 		IsHeader      = 0x20000000,
-		
+
 		/// <summary>
 		///    The tag contains a header.
 		/// </summary>
 		HeaderPresent = 0x80000000
 	}
-	
+
 	#endregion
 
 
@@ -65,38 +65,38 @@ namespace TagLib.Ape
 	public struct Footer : IEquatable<Footer>
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the APE tag version.
 		/// </summary>
 		private uint version;
-		
+
 		/// <summary>
 		///    Contains the footer flags.
 		/// </summary>
 		private FooterFlags flags;
-		
+
 		/// <summary>
 		///    Contains the number of items in the tag.
 		/// </summary>
 		private uint item_count;
-		
+
 		/// <summary>
 		///    Contains the tag size including the footer but excluding
 		///    the header.
 		/// </summary>
 		private uint tag_size;
-		
+
 		#endregion
 
 
 		#region Public Static Fields
-		
+
 		/// <summary>
 		///    Specifies the size of an APEv2 footer.
 		/// </summary>
 		public const uint Size = 32;
-		
+
 		/// <summary>
 		///    Specifies the identifier used find an APEv2 footer in a
 		///    file.
@@ -105,7 +105,7 @@ namespace TagLib.Ape
 		///    "<c>APETAGEX</c>"
 		/// </value>
 		public static readonly ReadOnlyByteVector FileIdentifier = "APETAGEX";
-		
+
 		#endregion
 
 

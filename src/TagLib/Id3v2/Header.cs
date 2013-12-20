@@ -39,29 +39,29 @@ namespace TagLib.Id3v2
 		///    The header contains no flags.
 		/// </summary>
 		None = 0,
-		
+
 		/// <summary>
 		///    The tag described by the header has been unsynchronized.
 		/// </summary>
 		Unsynchronisation = 0x80,
-		
+
 		/// <summary>
 		///    The tag described by the header has contains an extended
 		///    header.
 		/// </summary>
 		ExtendedHeader = 0x40,
-		
+
 		/// <summary>
 		///    The tag described by the header is experimental.
 		/// </summary>
 		ExperimentalIndicator = 0x20,
-		
+
 		/// <summary>
 		///    The tag described by the header contains a footer.
 		/// </summary>
 		FooterPresent = 0x10
 	}
-	
+
 	/// <summary>
 	///    This structure provides a representation of an ID3v2 tag header
 	///    which can be read from and written to disk.

@@ -45,43 +45,43 @@ namespace TagLib.Riff
 	public class File : TagLib.File
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///  Contains all the tags of the file.
 		/// </summary>
 		private CombinedTag tag = new CombinedTag ();
-		
+
 		/// <summary>
 		///  Contains the INFO tag.
 		/// </summary>
 		private InfoTag info_tag = null;
-		
+
 		/// <summary>
 		///  Contains the MovieID tag.
 		/// </summary>
 		private MovieIdTag mid_tag = null;
-		
+
 		/// <summary>
 		///  Contains the DivX tag.
 		/// </summary>
 		private DivXTag divx_tag = null;
-		
+
 		/// <summary>
 		///  Contains the Id3v2 tag.
 		/// </summary>
 		private Id3v2.Tag id32_tag = null;
-		
+
 		/// <summary>
 		///  Contains the media properties.
 		/// </summary>
 		private Properties properties = null;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Static Fields
-		
+
 		/// <summary>
 		///    The identifier used to recognize a RIFF files.
 		/// </summary>
@@ -89,11 +89,11 @@ namespace TagLib.Riff
 		///    "RIFF"
 		/// </value>
 		public static readonly ReadOnlyByteVector FileIdentifier = "RIFF";
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Constructors
 
 		/// <summary>
@@ -194,9 +194,9 @@ namespace TagLib.Riff
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -227,9 +227,9 @@ namespace TagLib.Riff
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -418,9 +418,9 @@ namespace TagLib.Riff
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Methods
 
 		/// <summary>

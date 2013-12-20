@@ -125,7 +125,7 @@ namespace TagLib.Riff
 			get { return codecs.ToArray(); }
 		}
 	}
-	
+
 	/// <summary>
 	///    This structure provides a representation of a Microsoft
 	///    AviMainHeader structure, minus the first 8 bytes.
@@ -151,27 +151,27 @@ namespace TagLib.Riff
 		///    Contains the total number of frames.
 		/// </summary>
 		uint total_frames;
-		
+
 		/// <summary>
 		///    Contains the number of initial frames.
 		/// </summary>
 		uint initial_frames;
-		
+
 		/// <summary>
 		///    Contains the number of streams.
 		/// </summary>
 		uint streams;
-		
+
 		/// <summary>
 		///    Contains the suggested buffer size.
 		/// </summary>
 		uint suggested_buffer_size;
-		
+
 		/// <summary>
 		///    Contains the video width.
 		/// </summary>
 		uint width;
-		
+
 		/// <summary>
 		///    Contains the video height.
 		/// </summary>
@@ -225,13 +225,13 @@ namespace TagLib.Riff
 		{
 			if (data == null)
 				throw new ArgumentNullException("data");
-			
+
 			if (offset < 0)
 				throw new ArgumentOutOfRangeException("offset");
-			
+
 			if (offset + 40 > data.Count)
 				throw new CorruptFileException("Expected 40 bytes.");
-			
+
 			microseconds_per_frame = data.ToUInt(offset,      false);
 			max_bytes_per_second   = data.ToUInt(offset +  4, false);
 			flags                  = data.ToUInt(offset + 12, false);

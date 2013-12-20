@@ -46,16 +46,16 @@ namespace TagLib.Ape
 	public class File : TagLib.NonContainer.File
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the block with the audio header.
 		/// </summary>
 		private ByteVector header_block;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -135,9 +135,9 @@ namespace TagLib.Ape
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -189,9 +189,9 @@ namespace TagLib.Ape
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Protected Methods
 
 		/// <summary>

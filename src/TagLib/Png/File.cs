@@ -29,7 +29,6 @@ using TagLib.Xmp;
 
 namespace TagLib.Png
 {
-
 	/// <summary>
 	///    This class extends <see cref="TagLib.Image.ImageBlockFile" /> to provide tagging
 	///    for PNG image files.

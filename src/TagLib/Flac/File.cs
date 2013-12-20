@@ -49,31 +49,31 @@ namespace TagLib.Flac
 	public class File : TagLib.NonContainer.File
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the Flac metadata tag.
 		/// </summary>
 		private Metadata metadata;
-		
+
 		/// <summary>
 		///    Contains the combination of all file tags.
 		/// </summary>
 		private CombinedTag tag;
-		
+
 		/// <summary>
 		///    Contains the Flac header block.
 		/// </summary>
 		private ByteVector header_block;
-		
+
 		/// <summary>
 		///    Contains the stream start position.
 		/// </summary>
 		private long stream_start = 0;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -153,9 +153,9 @@ namespace TagLib.Flac
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -172,9 +172,9 @@ namespace TagLib.Flac
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -213,7 +213,7 @@ namespace TagLib.Flac
 						new_blocks.Add(block);
 				}
 
-				new_blocks.Add(new Block(BlockType.XiphComment, 
+				new_blocks.Add(new Block(BlockType.XiphComment,
 					(GetTag(TagTypes.Xiph, true) as Ogg.XiphComment).Render(false)));
 
 				foreach (IPicture picture in metadata.Pictures)
@@ -332,9 +332,9 @@ namespace TagLib.Flac
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Protected Methods
 
 		/// <summary>
@@ -422,11 +422,11 @@ namespace TagLib.Flac
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Methods
-		
+
 		/// <summary>
 		///    Indicates whether or not the block types passed into
 		///    <see cref="ReadBlocks" /> are to be white-listed or
@@ -439,7 +439,7 @@ namespace TagLib.Flac
 			///    returned.
 			/// </summary>
 			Blacklist,
-			
+
 			/// <summary>
 			///    Only those block types provides should be
 			///    returned.
@@ -519,9 +519,9 @@ namespace TagLib.Flac
 
 		#endregion
 	}
-	
-	
-	
+
+
+
 	/// <summary>
 	///    This class extends <see cref="CombinedTag" /> to provide support
 	///    for reading and writing FLAC metadata boxes.

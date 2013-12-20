@@ -5,7 +5,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -35,24 +35,24 @@ namespace TagLib.Mpeg4
 	public class AppleTag : TagLib.Tag, IEnumerable<Box>
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the ISO meta box in which that tag will be
 		///    stored.
 		/// </summary>
 		private IsoMetaBox meta_box;
-		
+
 		/// <summary>
 		///    Contains the ILST box which holds all the values.
 		/// </summary>
 		private AppleItemListBox ilst_box;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="AppleTag" /> for a specified ISO user data box.
@@ -65,26 +65,26 @@ namespace TagLib.Mpeg4
 		{
 			if (box == null)
 				throw new ArgumentNullException ("box");
-			
+
 			meta_box = box.GetChild (BoxType.Meta) as IsoMetaBox;
 			if (meta_box == null) {
 				meta_box = new IsoMetaBox ("mdir", null);
 				box.AddChild (meta_box);
 			}
-			
+
 			ilst_box = meta_box.GetChild (BoxType.Ilst)
 				as AppleItemListBox;
-			
+
 			if (ilst_box == null) {
 				ilst_box = new AppleItemListBox ();
 				meta_box.AddChild (ilst_box);
 			}
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -116,9 +116,9 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -404,7 +404,7 @@ namespace TagLib.Mpeg4
 		{
 			ilst_box.RemoveChild (FixId (type));
 		}
-		
+
 		/// <summary>
 		///    Detaches the internal "ilst" box from its parent element.
 		/// </summary>
@@ -538,9 +538,9 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Internal Methods
 
 		/// <summary>
@@ -573,11 +573,11 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region IEnumerable<Box>
-		
+
 		/// <summary>
 		///    Gets an enumerator for enumerating through the tag's data
 		///    boxes.
@@ -590,18 +590,18 @@ namespace TagLib.Mpeg4
 		{
 			return ilst_box.Children.GetEnumerator();
 		}
-		
+
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return ilst_box.Children.GetEnumerator();
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region TagLib.Tag
-		
+
 		/// <summary>
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
@@ -612,7 +612,7 @@ namespace TagLib.Mpeg4
 		{
 			get { return TagTypes.Apple; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the title for the media described by the
 		///    current instance.
@@ -635,7 +635,7 @@ namespace TagLib.Mpeg4
 
 			set { SetText(BoxType.Nam, value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the performers or artists who performed in
 		///    the media described by the current instance.
@@ -654,7 +654,7 @@ namespace TagLib.Mpeg4
 			get { return GetText(BoxType.Art); }
 			set { SetText(BoxType.Art, value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the band or artist who is credited in the
 		///    creation of the entire album or collection containing the
@@ -674,7 +674,7 @@ namespace TagLib.Mpeg4
 			get { return GetText(BoxType.Aart); }
 			set { SetText(BoxType.Aart, value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the composers of the media represented by
 		///    the current instance.
@@ -692,7 +692,7 @@ namespace TagLib.Mpeg4
 			get { return GetText(BoxType.Wrt); }
 			set { SetText(BoxType.Wrt, value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the album of the media represented by the
 		///    current instance.
@@ -715,7 +715,7 @@ namespace TagLib.Mpeg4
 
 			set { SetText(BoxType.Alb, value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets a user comment on the media represented by
 		///    the current instance.
@@ -738,7 +738,7 @@ namespace TagLib.Mpeg4
 
 			set { SetText(BoxType.Cmt, value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the genres of the media represented by the
 		///    current instance.
@@ -759,12 +759,12 @@ namespace TagLib.Mpeg4
 				string[] text = GetText(BoxType.Gen);
 				if (text.Length > 0)
 					return text;
-				
+
 				foreach (AppleDataBox box in DataBoxes (BoxType.Gnre))
 				{
 					if (box.Flags != (int) AppleDataBox.FlagType.ContainsData)
 						continue;
-					
+
 					// iTunes stores genre's in the GNRE box
 					// as (ID3# + 1).
 
@@ -773,14 +773,14 @@ namespace TagLib.Mpeg4
 						continue;
 
 					string str = TagLib.Genres.IndexToAudio((byte) (index - 1));
-					
+
 					if (str == null)
 						continue;
 
 					text = new string[] {str};
 					break;
 				}
-				
+
 				return text;
 			}
 
@@ -790,7 +790,7 @@ namespace TagLib.Mpeg4
 				SetText(BoxType.Gen, value);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the year that the media represented by the
 		///    current instance was recorded.
@@ -828,7 +828,7 @@ namespace TagLib.Mpeg4
 					SetText(BoxType.Day, value.ToString(CultureInfo.InvariantCulture));
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the position of the media represented by
 		///    the current instance in its containing album.
@@ -850,7 +850,7 @@ namespace TagLib.Mpeg4
 					if (box.Flags == (int) AppleDataBox.FlagType.ContainsData && box.Data.Count >= 4)
 						return box.Data.ToUShort(2, true);
 				}
-				
+
 				return 0;
 			}
 
@@ -871,7 +871,7 @@ namespace TagLib.Mpeg4
 				SetData(BoxType.Trkn, v, (int) AppleDataBox.FlagType.ContainsData);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the number of tracks in the album
 		///    containing the media represented by the current instance.
@@ -893,7 +893,7 @@ namespace TagLib.Mpeg4
 					if (box.Flags == (int) AppleDataBox.FlagType.ContainsData && box.Data.Count >= 6)
 						return box.Data.ToUShort(4, true);
 				}
-				
+
 				return 0;
 			}
 
@@ -913,7 +913,7 @@ namespace TagLib.Mpeg4
 				SetData(BoxType.Trkn, v, (int) AppleDataBox.FlagType.ContainsData);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the number of the disc containing the media
 		///    represented by the current instance in the boxed set.
@@ -935,7 +935,7 @@ namespace TagLib.Mpeg4
 					if (box.Flags == (int) AppleDataBox.FlagType.ContainsData &&  box.Data.Count >= 4)
 						return box.Data.ToUShort(2, true);
 				}
-				
+
 				return 0;
 			}
 			set
@@ -955,7 +955,7 @@ namespace TagLib.Mpeg4
 				SetData(BoxType.Disk, v, (int) AppleDataBox.FlagType.ContainsData);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the number of discs in the boxed set
 		///    containing the media represented by the current instance.
@@ -997,7 +997,7 @@ namespace TagLib.Mpeg4
 				SetData(BoxType.Disk, v, (int) AppleDataBox.FlagType.ContainsData);
 			}
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the lyrics or script of the media
 		///    represented by the current instance.
@@ -1024,7 +1024,7 @@ namespace TagLib.Mpeg4
 
 			set { SetText (BoxType.Lyr, value); }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the grouping on the album which the media
 		///    in the current instance belongs to.
@@ -1045,7 +1045,7 @@ namespace TagLib.Mpeg4
 				{
 					return box.Text;
 				}
-				
+
 				return null;
 			}
 
@@ -1174,7 +1174,7 @@ namespace TagLib.Mpeg4
 		///    A <see cref="string[]" /> containing the sort names for
 		///    the performers or artists who performed in the media
 		///    described by the current instance, or an empty array if
-		///    no value is present. 
+		///    no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "soar" box type.
@@ -1194,7 +1194,7 @@ namespace TagLib.Mpeg4
 		/// <value>
 		///    A <see cref="string[]" /> containing the sort names for
 		///    the Composers in the media described by the current instance,
-		///    or an empty array if no value is present. 
+		///    or an empty array if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "soar" box type.
@@ -1214,7 +1214,7 @@ namespace TagLib.Mpeg4
 		/// <value>
 		///    A <see cref="string" /> containing the sort names for
 		///    the Album Title in the media described by the current
-		///    instance, or null if no value is present. 
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "soal" box type.
@@ -1238,8 +1238,8 @@ namespace TagLib.Mpeg4
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the sort names for
-		///    the Track Title in the media described by the current 
-		///    instance, or null if no value is present. 
+		///    the Track Title in the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "sonm" box type.
@@ -1262,8 +1262,8 @@ namespace TagLib.Mpeg4
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ArtistID for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    ArtistID for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "dash"/"----" box type.
@@ -1280,8 +1280,8 @@ namespace TagLib.Mpeg4
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseID for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    ReleaseID for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "dash"/"----" box type.
@@ -1298,8 +1298,8 @@ namespace TagLib.Mpeg4
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseArtistID for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    ReleaseArtistID for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "dash"/"----" box type.
@@ -1316,8 +1316,8 @@ namespace TagLib.Mpeg4
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    TrackID for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    TrackID for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "dash"/"----" box type.
@@ -1334,8 +1334,8 @@ namespace TagLib.Mpeg4
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    DiscID for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    DiscID for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "dash"/"----" box type.
@@ -1352,8 +1352,8 @@ namespace TagLib.Mpeg4
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicIP Puid
-		///    for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "dash"/"----" box type.
@@ -1370,8 +1370,8 @@ namespace TagLib.Mpeg4
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the AmazonID
-		///    for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "dash"/"----" box type.
@@ -1388,8 +1388,8 @@ namespace TagLib.Mpeg4
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseStatus for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    ReleaseStatus for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "dash"/"----" box type.
@@ -1406,8 +1406,8 @@ namespace TagLib.Mpeg4
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseType for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    ReleaseType for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "dash"/"----" box type.
@@ -1424,8 +1424,8 @@ namespace TagLib.Mpeg4
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseCountry for the media described by the current 
-		///    instance, or null if no value is present. 
+		///    ReleaseCountry for the media described by the current
+		///    instance, or null if no value is present.
 		/// </value>
 		/// <remarks>
 		///    This property is implemented using the "dash"/"----" box type.

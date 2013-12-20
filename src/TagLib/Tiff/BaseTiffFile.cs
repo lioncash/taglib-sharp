@@ -28,7 +28,6 @@ using TagLib.IFD;
 
 namespace TagLib.Tiff
 {
-
 	/// <summary>
 	///    This class extends <see cref="TagLib.Image.File" /> to provide some basic behavior
 	///    for Tiff based file formats.

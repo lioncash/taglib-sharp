@@ -5,7 +5,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2007 Brian Nickel
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -112,7 +112,7 @@ namespace TagLib.Id3v2
 	///         Dim file As File = File.Create (filename, ReadStyle.None)
 	///         Dim tag As Id3v2.Tag = file.GetTag (TagTypes.Id3v2, False)
 	///         If tag Is Nothing Then Return 0
-	/// 
+	///
 	///         Dim frame As PlayCountFrame = PlayCountFrame.Get (tag, False)
 	///         If frame Is Nothing Then Return 0
 	///
@@ -132,7 +132,7 @@ namespace TagLib.Id3v2
 	///    <code lang="Boo">
 	/// import TagLib
 	/// import TagLib.Id3v2
-	/// 
+	///
 	/// public static class TrackUtil:
 	///     static def GetPlayCount (filename as string) as int:
 	///         file As File = File.Create (filename, ReadStyle.None)
@@ -151,7 +151,7 @@ namespace TagLib.Id3v2
 	///         tag as Id3v2.Tag = file.GetTag (TagTypes.Id3v2, True)
 	///         if tag == null:
 	///             return
-	/// 
+	///
 	///         PlayCountFrame.Get (tag, true).PlayCount ++
 	///         file.Save ()
 	///    </code>
@@ -159,13 +159,13 @@ namespace TagLib.Id3v2
 	public class PlayCountFrame : Frame
 	{
 		#region Private Properties
-		
+
 		/// <summary>
 		///    Contains the total number of times the file has been
 		///    played.
 		/// </summary>
 		private ulong play_count = 0;
-		
+
 		#endregion
 
 

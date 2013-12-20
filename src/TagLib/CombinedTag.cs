@@ -5,7 +5,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2005-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -32,15 +32,15 @@ namespace TagLib
 	public class CombinedTag : Tag
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains tags to be combined.
 		/// </summary>
 		private List<Tag> tags;
-		
+
 		#endregion
-		
-		
+
+
 		#region Constructors
 
 		/// <summary>
@@ -71,8 +71,8 @@ namespace TagLib
 		}
 
 		#endregion
-		
-		
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -88,8 +88,8 @@ namespace TagLib
 		}
 
 		#endregion
-		
-		
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -105,8 +105,8 @@ namespace TagLib
 		}
 
 		#endregion
-		
-		
+
+
 		#region Protected Methods
 
 		/// <summary>
@@ -165,8 +165,8 @@ namespace TagLib
 		}
 
 		#endregion
-		
-		
+
+
 		#region Overrides
 
 		/// <summary>
@@ -462,12 +462,12 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Gets and sets the sort names for the composer of the 
+		///    Gets and sets the sort names for the composer of the
 		///    media described by the current instance.
 		/// </summary>
 		/// <value>
 		///    A <see cref="string[]" /> containing the sort names
-		///    for the composers of the media described by the 
+		///    for the composers of the media described by the
 		///    current instance or an empty array if no value is present.
 		/// </value>
 		/// <remarks>
@@ -505,12 +505,12 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Gets and sets the sort names for the Track Title of the 
+		///    Gets and sets the sort names for the Track Title of the
 		///    media described by the current instance.
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the sort names
-		///    for the Track Title of the media described by the 
+		///    for the Track Title of the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -548,12 +548,12 @@ namespace TagLib
 		}
 
 		/// <summary>
-		///    Gets and sets the sort names for the Album Title of the 
+		///    Gets and sets the sort names for the Album Title of the
 		///    media described by the current instance.
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the sort names
-		///    for the Title of the media described by the 
+		///    for the Title of the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1154,7 +1154,7 @@ namespace TagLib
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ArtistID for the media described by the 
+		///    ArtistID for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1196,7 +1196,7 @@ namespace TagLib
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseID for the media described by the 
+		///    ReleaseID for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1238,7 +1238,7 @@ namespace TagLib
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseArtistID for the media described by the 
+		///    ReleaseArtistID for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1280,7 +1280,7 @@ namespace TagLib
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    TrackID for the media described by the 
+		///    TrackID for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1322,7 +1322,7 @@ namespace TagLib
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    DiscID for the media described by the 
+		///    DiscID for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1364,7 +1364,7 @@ namespace TagLib
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicIP PUID
-		///    for the media described by the 
+		///    for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1406,7 +1406,7 @@ namespace TagLib
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the Amazon Id
-		///    for the media described by the 
+		///    for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1448,7 +1448,7 @@ namespace TagLib
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseStatus for the media described by the 
+		///    ReleaseStatus for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1490,7 +1490,7 @@ namespace TagLib
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseType for the media described by the 
+		///    ReleaseType for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>
@@ -1532,7 +1532,7 @@ namespace TagLib
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> containing the MusicBrainz
-		///    ReleaseCountry for the media described by the 
+		///    ReleaseCountry for the media described by the
 		///    current instance or null if no value is present.
 		/// </value>
 		/// <remarks>

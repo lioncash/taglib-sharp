@@ -5,7 +5,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2007 Brian Nickel
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,22 +35,22 @@ namespace TagLib.Id3v2
 	public class PopularimeterFrame : Frame
 	{
 		#region Private Properties
-		
+
 		/// <summary>
 		///    Contains the email of the user this frame belongs to.
 		/// </summary>
 		private string user = string.Empty;
-		
+
 		/// <summary>
 		///    Contains the rating of the files from 0 to 255.
 		/// </summary>
 		private byte rating;
-		
+
 		/// <summary>
 		///    Contains the number of times this file has been played.
 		/// </summary>
 		private ulong play_count;
-		
+
 		#endregion
 
 

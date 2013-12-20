@@ -6,7 +6,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -37,7 +37,7 @@ namespace TagLib.Mpeg4
 	public class IsoAudioSampleEntry : IsoSampleEntry, IAudioCodec
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the channel count.
 		/// </summary>
@@ -52,16 +52,16 @@ namespace TagLib.Mpeg4
 		///    Contains the sample rate.
 		/// </summary>
 		private uint   sample_rate;
-		
+
 		/// <summary>
 		///    Contains the children of the box.
 		/// </summary>
 		private IEnumerable<Box> children;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -98,9 +98,9 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -129,9 +129,9 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region IAudioCodec Properties
 
 		/// <summary>

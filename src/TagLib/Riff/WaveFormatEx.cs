@@ -57,7 +57,7 @@ namespace TagLib.Riff
 		///    Contains the number of bits per sample.
 		/// </summary>
 		private ushort bits_per_sample;
-		
+
 		#endregion
 
 		#region Constructors
@@ -514,7 +514,7 @@ namespace TagLib.Riff
 					return "Ring Zero TUBGSM Audio";
 				case 0x0160:
 					return "Microsoft WMA1 Audio";
-				case 0x0161:	
+				case 0x0161:
 					return "Microsoft WMA2 Audio";
 				case 0x0162:
 					return "Microsoft Multichannel WMA Audio";
@@ -662,7 +662,7 @@ namespace TagLib.Riff
 				}
 			}
 		}
-		
+
 		#endregion
 
 		#region IEquatable

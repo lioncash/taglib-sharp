@@ -29,7 +29,6 @@ using System;
 
 namespace TagLib.Id3v2
 {
-	
 	/// <summary>
 	///    This structure provides a representation of an ID3v2 tag footer
 	///    which can be read from and written to disk.
@@ -37,37 +36,37 @@ namespace TagLib.Id3v2
 	public struct Footer
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the tag's major version.
 		/// </summary>
 		private byte major_version;
-		
+
 		/// <summary>
 		///    Contains the tag's version revision.
 		/// </summary>
 		private byte revision_number;
-		
+
 		/// <summary>
 		///    Contains tag's flags.
 		/// </summary>
 		private HeaderFlags flags;
-		
+
 		/// <summary>
 		///    Contains the tag size.
 		/// </summary>
 		private uint tag_size;
-		
+
 		#endregion
 
 
 		#region Public Fields
-		
+
 		/// <summary>
 		///    The size of a ID3v2 footer.
 		/// </summary>
 		public const uint Size = 10;
-		
+
 		/// <summary>
 		///    The identifier used to recognize a ID3v2 footer.
 		/// </summary>
@@ -75,7 +74,7 @@ namespace TagLib.Id3v2
 		///    "3DI"
 		/// </value>
 		public static readonly ReadOnlyByteVector FileIdentifier = "3DI";
-		
+
 		#endregion
 
 

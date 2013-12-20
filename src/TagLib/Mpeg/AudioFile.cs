@@ -59,18 +59,18 @@ namespace TagLib.Mpeg
 	public class AudioFile : TagLib.NonContainer.File
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the first audio header.
 		/// </summary>
 		private AudioHeader first_header;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="AudioFile" /> for a specified path in the local
@@ -92,7 +92,7 @@ namespace TagLib.Mpeg
 			: base (path, propertiesStyle)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="AudioFile" /> for a specified path in the local
@@ -108,7 +108,7 @@ namespace TagLib.Mpeg
 		public AudioFile(string path) : base (path)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="AudioFile" /> for a specified file abstraction and
@@ -131,7 +131,7 @@ namespace TagLib.Mpeg
 			: base (abstraction, propertiesStyle)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="AudioFile" /> for a specified file abstraction with
@@ -149,11 +149,11 @@ namespace TagLib.Mpeg
 			: base (abstraction)
 		{
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -205,9 +205,9 @@ namespace TagLib.Mpeg
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Protected Methods
 
 		/// <summary>

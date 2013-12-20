@@ -2,7 +2,7 @@
 // AudioHeader.cs: Provides information about an ADTS AAC audio stream.
 //
 // Copyright (C) 2009 Patrick Dehne
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -97,7 +97,7 @@ namespace TagLib.Aac
 		/// <summary>
 		///    Constructs and initializes a new empty instance of <see
 		///    cref="AudioHeader" />
-		/// </summary>       
+		/// </summary>
 		private AudioHeader()
 		{
 			this.stream_length = 0;
@@ -182,7 +182,7 @@ namespace TagLib.Aac
 		///    media represented by the current instance.
 		/// </value>
 		/// <remarks>
-		///    If <see cref="SetStreamLength" /> has not been called, this 
+		///    If <see cref="SetStreamLength" /> has not been called, this
 		///    value will not be correct.
 		/// </remarks>
 		public TimeSpan Duration
@@ -215,7 +215,7 @@ namespace TagLib.Aac
 		{
 			get { return audiosamplerate; }
 		}
-		
+
 		/// <summary>
 		///    Gets the number of channels in the audio represented by
 		///    the current instance.

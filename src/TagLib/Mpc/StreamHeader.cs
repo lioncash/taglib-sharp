@@ -40,49 +40,49 @@ namespace TagLib.MusePack
 
 		// Sample frequency table
 		private static readonly ushort[] sftable = {44100, 48000, 37800, 32000};
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the number of bytes in the stream.
 		/// </summary>
 		private long stream_length;
-		
+
 		/// <summary>
 		///    Contains the MusePack version.
 		/// </summary>
 		private int version;
-		
+
 		/// <summary>
 		///    Contains additional header information.
 		/// </summary>
 		private uint header_data;
-		
+
 		/// <summary>
 		///    Contains the sample rate of the stream.
 		/// </summary>
 		private int sample_rate;
-		
+
 		/// <summary>
 		///    Contains the number of frames in the stream.
 		/// </summary>
 		private uint frames;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Static Fields
-		
+
 		/// <summary>
 		///    The size of a MusePack header.
 		/// </summary>
 		public const uint Size = 56;
-		
+
 		/// <summary>
 		///    The identifier used to recognize a WavPack file.
 		/// </summary>
@@ -90,11 +90,11 @@ namespace TagLib.MusePack
 		///    "MP+"
 		/// </value>
 		public static readonly ReadOnlyByteVector FileIdentifier = "MP+";
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -151,9 +151,9 @@ namespace TagLib.MusePack
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -264,9 +264,9 @@ namespace TagLib.MusePack
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region IEquatable
 
 		/// <summary>

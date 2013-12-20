@@ -5,7 +5,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2007 Brian Nickel
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -45,12 +45,12 @@ namespace TagLib
 		///    No media is present.
 		/// </summary>
 		None  = 0,
-		
+
 		/// <summary>
 		///    Audio is present.
 		/// </summary>
 		Audio = 1,
-		
+
 		/// <summary>
 		///    Video is present.
 		/// </summary>
@@ -66,7 +66,7 @@ namespace TagLib
 		/// </summary>
 		Text = 8
 	}
-	
+
 	/// <summary>
 	///    This interface provides basic information, common to all media
 	///    codecs.
@@ -82,7 +82,7 @@ namespace TagLib
 		///    media represented by the current instance.
 		/// </value>
 		TimeSpan Duration { get; }
-		
+
 		/// <summary>
 		///    Gets the types of media represented by the current
 		///    instance.
@@ -92,7 +92,7 @@ namespace TagLib
 		///    the types of media represented by the current instance.
 		/// </value>
 		MediaTypes MediaTypes { get; }
-		
+
 		/// <summary>
 		///    Gets a text description of the media represented by the
 		///    current instance.
@@ -103,7 +103,7 @@ namespace TagLib
 		/// </value>
 		string Description { get; }
 	}
-	
+
 	/// <summary>
 	///    This interface inherits <see cref="ICodec" /> to provide
 	///    information about an audio codec.
@@ -125,7 +125,7 @@ namespace TagLib
 		///    audio represented by the current instance.
 		/// </value>
 		int AudioBitrate { get; }
-		
+
 		/// <summary>
 		///    Gets the sample rate of the audio represented by the
 		///    current instance.
@@ -135,7 +135,7 @@ namespace TagLib
 		///    the audio represented by the current instance.
 		/// </value>
 		int AudioSampleRate { get; }
-		
+
 		/// <summary>
 		///    Gets the number of channels in the audio represented by
 		///    the current instance.

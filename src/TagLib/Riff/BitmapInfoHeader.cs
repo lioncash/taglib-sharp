@@ -88,11 +88,11 @@ namespace TagLib.Riff
 		///    Contains the number of important colors.
 		/// </summary>
 		private uint colors_important;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -143,13 +143,13 @@ namespace TagLib.Riff
 		{
 			if (data == null)
 				throw new ArgumentNullException("data");
-			
+
 			if (offset + 40 > data.Count)
 				throw new CorruptFileException("Expected 40 bytes.");
-			
+
 			if (offset < 0)
 				throw new ArgumentOutOfRangeException("offset");
-			
+
 			size               = data.ToUInt(offset + 0, false);
 			width              = data.ToUInt(offset + 4, false);
 			height             = data.ToUInt(offset + 8, false);
@@ -162,11 +162,11 @@ namespace TagLib.Riff
 			colors_used        = data.ToUInt(offset + 32, false);
 			colors_important   = data.ToUInt(offset + 36, false);
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -283,9 +283,9 @@ namespace TagLib.Riff
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region IVideoCodec
 
 		/// <summary>
@@ -746,9 +746,9 @@ namespace TagLib.Riff
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region IEquatable
 
 		/// <summary>

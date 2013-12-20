@@ -97,7 +97,7 @@ namespace TagLib.Id3v2
 		}
 
 		#region ICloneable
-		
+
 		/// <summary>
 		///    Creates a deep copy of the current instance.
 		/// </summary>
@@ -111,12 +111,12 @@ namespace TagLib.Id3v2
 			header.size = size;
 			return header;
 		}
-		
+
 		object ICloneable.Clone ()
 		{
 			return Clone ();
 		}
-		
+
 		#endregion
 	}
 }

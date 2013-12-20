@@ -6,7 +6,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -34,62 +34,62 @@ namespace TagLib.Asf
 	public class FilePropertiesObject : Object
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the GUID for the file.
 		/// </summary>
 		private System.Guid file_id;
-		
+
 		/// <summary>
 		///    Contains the file size.
 		/// </summary>
 		private ulong file_size;
-		
+
 		/// <summary>
 		///    Contains the creation date.
 		/// </summary>
 		private ulong creation_date;
-		
+
 		/// <summary>
 		///    Contains the packet count.
 		/// </summary>
 		private ulong data_packets_count;
-		
+
 		/// <summary>
 		///    Contains the play duration.
 		/// </summary>
 		private ulong play_duration;
-		
+
 		/// <summary>
 		///    Contains the send duration.
 		/// </summary>
 		private ulong send_duration;
-		
+
 		/// <summary>
 		///    Contains the preroll.
 		/// </summary>
 		private ulong preroll;
-		
+
 		/// <summary>
 		///    Contains the file flags.
 		/// </summary>
 		private uint flags;
-		
+
 		/// <summary>
 		///    Contains the minimum packet size.
 		/// </summary>
 		private uint minimum_data_packet_size;
-		
+
 		/// <summary>
 		///    Contains the maxximum packet size.
 		/// </summary>
 		private uint maximum_data_packet_size;
-		
+
 		/// <summary>
 		///    Contains the maximum bitrate of the file.
 		/// </summary>
 		private uint maximum_bitrate;
-		
+
 		#endregion
 
 

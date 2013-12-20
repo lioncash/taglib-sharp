@@ -446,7 +446,7 @@ namespace TagLib
 		#endregion
 
 		#region IEnumerable<T>
-		
+
 		/// <summary>
 		///    Gets an enumerator for enumerating through the elements
 		///    in the current instance.
@@ -459,7 +459,7 @@ namespace TagLib
 		{
 			return data.GetEnumerator();
 		}
-		
+
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return data.GetEnumerator();

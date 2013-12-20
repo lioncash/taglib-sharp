@@ -6,7 +6,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -34,32 +34,32 @@ namespace TagLib.Asf
 	public class ContentDescriptionObject : Object
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the media title.
 		/// </summary>
 		private string title = string.Empty;
-		
+
 		/// <summary>
 		///    Contains the author/performer.
 		/// </summary>
 		private string author = string.Empty;
-		
+
 		/// <summary>
 		///    Contains the copyright information.
 		/// </summary>
 		private string copyright = string.Empty;
-		
+
 		/// <summary>
 		///    Contains the description of the media.
 		/// </summary>
 		private string description = string.Empty;
-		
+
 		/// <summary>
 		///    Contains the rating of the media.
 		/// </summary>
 		private string rating = string.Empty;
-		
+
 		#endregion
 
 
@@ -150,7 +150,7 @@ namespace TagLib.Asf
 			get {return author.Length == 0 ? null : author;}
 			set { author = string.IsNullOrEmpty (value) ? string.Empty : value; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the copyright information for the media
 		///    described by the current instance.
@@ -165,7 +165,7 @@ namespace TagLib.Asf
 			get {return copyright.Length == 0 ? null : copyright;}
 			set { copyright = string.IsNullOrEmpty (value) ? string.Empty : value; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the description of the media described by
 		///    the current instance.

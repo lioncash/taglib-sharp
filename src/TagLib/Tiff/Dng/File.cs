@@ -38,7 +38,6 @@ namespace TagLib.Tiff.Dng
 	[SupportedMimeType("image/x-adobe-dng")]
 	public class File : TagLib.Tiff.File
 	{
-
 		#region Public Properties
 
 		/// <summary>

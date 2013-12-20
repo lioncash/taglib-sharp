@@ -2,7 +2,7 @@
 // BitStream.cs: Helper to read bits from a byte array.
 //
 // Copyright (C) 2009 Patrick Dehne
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -50,11 +50,11 @@ namespace TagLib.Aac
 		public BitStream(byte[] buffer)
 		{
 			Debug.Assert(buffer.Length == 7, "buffer.Length == 7", "buffer size invalid");
-			
+
 			if (buffer.Length != 7)
 				throw new ArgumentException("Buffer size must be 7 bytes");
 
-			// Reverse bits            
+			// Reverse bits
 			bits = new BitArray(buffer.Length * 8);
 			for (int i = 0; i < buffer.Length; i++)
 			{
@@ -63,7 +63,7 @@ namespace TagLib.Aac
 					bits[i * 8 + y] = ((buffer[i] & (1 << (7 - y))) > 0);
 				}
 			}
-			
+
 			bitindex = 0;
 		}
 
@@ -72,7 +72,7 @@ namespace TagLib.Aac
 
 
 		#region Public Methods
-		
+
 		/// <summary>
 		///    Reads an Int32 from the bitstream
 		/// </summary>

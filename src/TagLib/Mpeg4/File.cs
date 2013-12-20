@@ -5,7 +5,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -43,12 +43,12 @@ namespace TagLib.Mpeg4
 	public class File : TagLib.File
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the Apple tag.
 		/// </summary>
 		private AppleTag    apple_tag;
-		
+
 		/// <summary>
 		///    Contains the combined tag.
 		/// </summary>
@@ -56,23 +56,23 @@ namespace TagLib.Mpeg4
 		///    TODO: Add support for ID3v2 tags.
 		/// </remarks>
 		private CombinedTag tag;
-		
+
 		/// <summary>
 		///    Contains the media properties.
 		/// </summary>
 		private Properties  properties;
-		
+
 		/// <summary>
 		///    Contains the ISO user data boxes.
 		/// </summary>
 		private List<IsoUserDataBox> udta_boxes = new List<IsoUserDataBox> ();
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified path in the local file
@@ -95,7 +95,7 @@ namespace TagLib.Mpeg4
 		{
 			Read(propertiesStyle);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified path in the local file
@@ -111,7 +111,7 @@ namespace TagLib.Mpeg4
 		public File(string path) : this(path, ReadStyle.Average)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified file abstraction and
@@ -135,7 +135,7 @@ namespace TagLib.Mpeg4
 		{
 			Read(propertiesStyle);
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified file abstraction with an
@@ -153,11 +153,11 @@ namespace TagLib.Mpeg4
 			: this(abstraction, ReadStyle.Average)
 		{
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -193,9 +193,9 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -361,9 +361,9 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Private Methods
 
 		/// <summary>
@@ -468,7 +468,7 @@ namespace TagLib.Mpeg4
 		{
 			foreach (IsoUserDataBox udtaBox in udta_boxes)
 			{
-				if (udtaBox.GetChild (BoxType.Meta) != null && 
+				if (udtaBox.GetChild (BoxType.Meta) != null &&
 					udtaBox.GetChild (BoxType.Meta).GetChild (BoxType.Ilst) != null)
 					return true;
 			}

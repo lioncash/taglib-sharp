@@ -12,7 +12,7 @@
 // Copyright (C) 2005, 2007 Brian Nickel
 // Copyright (C) 2006 Novell, Inc.
 // Copyright (C) 2002,2003 Scott Wheeler (Original Implementation)
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -46,17 +46,17 @@ namespace TagLib
 		///    The media properties will not be read.
 		/// </summary>
 		None = 0,
-		
+
 		// Fast = 1,
-		
+
 		/// <summary>
 		///    The media properties will be read with average accuracy.
 		/// </summary>
 		Average = 2,
-		
+
 		// Accurate = 3
 	}
-	
+
 	/// <summary>
 	///    This abstract class provides a basic framework for reading from
 	///    and writing to a file, as well as accessing basic tagging and
@@ -78,7 +78,7 @@ namespace TagLib
 	public abstract class File : IDisposable
 	{
 		#region Enums
-		
+
 		/// <summary>
 		///   Specifies the type of file access operations currently
 		///   permitted on an instance of <see cref="File" />.
@@ -89,24 +89,24 @@ namespace TagLib
 			///    Read operations can be performed.
 			/// </summary>
 			Read,
-		
+
 			/// <summary>
 			///    Read and write operations can be performed.
 			/// </summary>
 			Write,
-		
+
 			/// <summary>
 			///    The file is closed for both read and write
 			///    operations.
 			/// </summary>
 			Closed
 		}
-		
+
 		#endregion
-		
-		
+
+
 		#region Delegates
-		
+
 		/// <summary>
 		///    This delegate is used for intervening in <see
 		///    cref="File.Create(string)" /> by resolving the file type
@@ -139,7 +139,7 @@ namespace TagLib
 		///    methods.</para>
 		///    <para>If the resolver returns a new <see cref="File" />,
 		///    it will instantly be returned, by <see
-		///    cref="File.Create(string)" />. If it returns <see 
+		///    cref="File.Create(string)" />. If it returns <see
 		///    langword="null" />, <see cref="File.Create(string)" /> will
 		///    continue to process. If the resolver throws an exception
 		///    it will be uncaught.</para>
@@ -147,50 +147,50 @@ namespace TagLib
 		///    cref="AddFileTypeResolver" />.</para>
 		/// </remarks>
 		public delegate File FileTypeResolver (IFileAbstraction abstraction, string mimetype, ReadStyle style);
-		
+
 		#endregion
-		
-		
+
+
 		#region Private Properties
-		
+
 		/// <summary>
 		///    Contains the current stream used in reading/writing.
 		/// </summary>
 		private System.IO.Stream file_stream;
-		
+
 		/// <summary>
 		///    Contains the internal file abstraction.
 		/// </summary>
 		private IFileAbstraction file_abstraction;
-		
+
 		/// <summary>
 		///    Contains the mime-type of the file as provided by <see
 		///    cref="Create(string)" />.
 		/// </summary>
 		private string mime_type;
-		
+
 		/// <summary>
 		///    Contains the types of tags in the file on disk.
 		/// </summary>
 		private TagTypes tags_on_disk = TagTypes.None;
-		
+
 		/// <summary>
 		///    Contains buffer size to use when reading.
 		/// </summary>
 		private static int buffer_size = 1024;
-		
+
 		/// <summary>
 		///    Contains the file type resolvers to use in <see
 		///    cref="Create(string)" />.
 		/// </summary>
 		private static List<FileTypeResolver> file_type_resolvers = new List<FileTypeResolver> ();
-		
+
 		/// <summary>
 		///    Contains position at which the invariant data portion of
 		///    the file begins.
 		/// </summary>
 		private long invariant_start_position = -1;
-		
+
 		/// <summary>
 		///    Contains position at which the invariant data portion of
 		///    the file ends.
@@ -203,8 +203,8 @@ namespace TagLib
 		private List<string> corruption_reasons = null;
 
 		#endregion
-		
-		
+
+
 		#region Public Static Properties
 
 		/// <summary>
@@ -221,8 +221,8 @@ namespace TagLib
 		}
 
 		#endregion
-		
-		
+
+
 		#region Constructors
 
 		/// <summary>
@@ -266,10 +266,10 @@ namespace TagLib
 		}
 
 		#endregion
-		
-		
+
+
 		#region Public Properties
-		
+
 		/// <summary>
 		///    Gets a abstract representation of all tags stored in the
 		///    current instance.
@@ -285,7 +285,7 @@ namespace TagLib
 		///    cref="GetTag(TagLib.TagTypes,bool)" />.</para>
 		/// </remarks>
 		public abstract Tag Tag {get;}
-		
+
 		/// <summary>
 		///    Gets the media properties of the file represented by the
 		///    current instance.
@@ -492,8 +492,8 @@ namespace TagLib
 		}
 
 		#endregion
-		
-		
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -537,7 +537,7 @@ namespace TagLib
 		///    cref="TagLib.TagTypes.AllTags" /> as <paramref name="types" />.
 		/// </remarks>
 		public abstract void RemoveTags(TagTypes types);
-		
+
 		/// <summary>
 		///    Gets a tag of a specified type from the current instance,
 		///    optionally creating a new tag if possible.
@@ -573,15 +573,15 @@ namespace TagLib
 		///   TagLib.Id3v2.Tag id3 = file.GetTag (TagLib.TagTypes.Id3v2, true);
 		///   if (id3 != null)
 		///      id3.SetTextFrame ("TMOO", moods);
-		///   
+		///
 		///   TagLib.Asf.Tag asf = file.GetTag (TagLib.TagTypes.Asf, true);
 		///   if (asf != null)
 		///      asf.SetDescriptorStrings (moods, "WM/Mood", "Mood");
-		///   
+		///
 		///   TagLib.Ape.Tag ape = file.GetTag (TagLib.TagTypes.Ape);
 		///   if (ape != null)
 		///      ape.SetValue ("MOOD", moods);
-		///      
+		///
 		///   // Whatever tag types you want...
 		///}</code>
 		/// </example>
@@ -620,23 +620,23 @@ namespace TagLib
 		///      if (f != null)
 		///         return f.FieldList.ToArray ();
 		///   }
-		///   
+		///
 		///   TagLib.Asf.Tag asf = file.GetTag (TagLib.TagTypes.Asf);
 		///   if (asf != null) {
 		///      string [] value = asf.GetDescriptorStrings ("WM/Mood", "Mood");
 		///      if (value.Length &gt; 0)
 		///         return value;
 		///   }
-		///   
+		///
 		///   TagLib.Ape.Tag ape = file.GetTag (TagLib.TagTypes.Ape);
 		///   if (ape != null) {
 		///      Item item = ape.GetItem ("MOOD");
 		///      if (item != null)
 		///         return item.ToStringArray ();
 		///   }
-		///      
+		///
 		///   // Whatever tag types you want...
-		///   
+		///
 		///   return new string [] {};
 		///}</code>
 		/// </example>
@@ -887,7 +887,7 @@ namespace TagLib
 			*/
 
 			// Save the location of the current read pointer.  We
-			// will restore the position using Seek() before all 
+			// will restore the position using Seek() before all
 			// returns.
 
 			long original_position = file_stream.Position;
@@ -1054,8 +1054,8 @@ namespace TagLib
 			byte[] buffer;
 			byte[] about_to_overwrite;
 
-			// This is basically a special case of the loop below.  
-			// Here we're just doing the same steps as below, but 
+			// This is basically a special case of the loop below.
+			// Here we're just doing the same steps as below, but
 			// since we aren't using the same buffer size -- instead
 			// we're using the tag size -- this has to be handled as
 			// a special case.  We're also using File::writeBlock()
@@ -1074,13 +1074,13 @@ namespace TagLib
 			Array.Copy(about_to_overwrite, 0, buffer, 0, about_to_overwrite.Length);
 
 			// Ok, here's the main loop.  We want to loop until the
-			// read fails, which means that we hit the end of the 
+			// read fails, which means that we hit the end of the
 			// file.
 
 			while (buffer_length != 0)
 			{
 				// Seek to the current read position and read
-				// the data that we're about to overwrite. 
+				// the data that we're about to overwrite.
 				// Appropriately increment the readPosition.
 
 				file_stream.Position = read_position;
@@ -1210,12 +1210,12 @@ namespace TagLib
 		{
 			Seek (offset, System.IO.SeekOrigin.Begin);
 		}
-		
+
 		#endregion
-		
-		
+
+
 		#region Public Static Methods
-		
+
 		/// <summary>
 		///    Creates a new instance of a <see cref="File" /> subclass
 		///    for a specified path, guessing the mime-type from the
@@ -1299,7 +1299,7 @@ namespace TagLib
 		{
 			return Create(path, null, propertiesStyle);
 		}
-		
+
 		/// <summary>
 		///    Creates a new instance of a <see cref="File" /> subclass
 		///    for a specified file abstraction and read style, guessing
@@ -1453,7 +1453,7 @@ namespace TagLib
 		///    file type recognition stack.
 		/// </param>
 		/// <remarks>
-		///    A <see cref="FileTypeResolver" /> adds support for 
+		///    A <see cref="FileTypeResolver" /> adds support for
 		///    recognizing a file type outside of the standard mime-type
 		///    methods.
 		/// </remarks>
@@ -1464,8 +1464,8 @@ namespace TagLib
 		}
 
 		#endregion
-		
-		
+
+
 		#region Protected Methods
 
 		/// <summary>
@@ -1500,10 +1500,10 @@ namespace TagLib
 		}
 
 		#endregion
-		
-		
+
+
 		#region Classes
-		
+
 		/// <summary>
 		///    This class implements <see cref="IFileAbstraction" />
 		///    to provide support for accessing the local/standard file
@@ -1609,12 +1609,12 @@ namespace TagLib
 				stream.Close();
 			}
 		}
-		
+
 		#endregion
-		
-		
+
+
 		#region Interfaces
-		
+
 		/// <summary>
 		///    This interface provides abstracted access to a file. It
 		//     premits access to non-standard file systems and data
@@ -1639,7 +1639,7 @@ namespace TagLib
 		///         return;
 		///
 		///      Gnome.Vfs.Vfs.Initialize ();
-		///      
+		///
 		///      try
 		///      {
 		///          TagLib.File file = TagLib.File.Create (
@@ -1686,24 +1686,24 @@ namespace TagLib
 		///import Gnome.Vfs from "gnome-vfs-sharp"
 		///
 		///class VfsFileAbstraction (TagLib.File.IFileAbstraction):
-		///        
+		///
 		///        _name as string
-		///        
+		///
 		///        def constructor(file as string):
 		///                _name = file
-		///        
+		///
 		///        Name:
 		///                get:
 		///                        return _name
-		///                
+		///
 		///        ReadStream:
 		///                get:
 		///                        return VfsStream(_name, FileMode.Open)
-		///                
+		///
 		///        WriteStream:
 		///                get:
 		///                        return VfsStream(_name, FileMode.Open)
-		///        
+		///
 		///if len(argv) == 1:
 		///        Vfs.Initialize()
 		///
@@ -1720,7 +1720,7 @@ namespace TagLib
 			///    implementation.
 			/// </summary>
 			/// <value>
-			///    A <see cref="string" /> object containing the 
+			///    A <see cref="string" /> object containing the
 			///    name or identifier used by the implementation.
 			/// </value>
 			/// <remarks>
@@ -1730,7 +1730,7 @@ namespace TagLib
 			///    as appropriate for the implementation.
 			/// </remarks>
 			string Name { get; }
-			
+
 			/// <summary>
 			///    Gets a readable, seekable stream for the file
 			///    referenced by the current instance.
@@ -1749,7 +1749,7 @@ namespace TagLib
 			///    implemented in a way to keep it open.
 			/// </remarks>
 			System.IO.Stream ReadStream { get; }
-			
+
 			/// <summary>
 			///    Gets a writable, seekable stream for the file
 			///    referenced by the current instance.
@@ -1786,7 +1786,7 @@ namespace TagLib
 			/// </remarks>
 			void CloseStream(System.IO.Stream stream);
 		}
-		
+
 		#endregion
 	}
 }

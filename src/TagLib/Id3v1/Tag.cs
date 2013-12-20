@@ -9,7 +9,7 @@
 //
 // Copyright (C) 2005-2007 Brian Nickel
 // Copyright (C) 2002,2003 Scott Wheeler (Original Implementation)
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -37,59 +37,59 @@ namespace TagLib.Id3v1
 	public class Tag : TagLib.Tag
 	{
 		#region Private Static Fields
-		
+
 		private static StringHandler string_handler = new StringHandler ();
-		
+
 		#endregion
 
 
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the title.
 		/// </summary>
 		private string title;
-		
+
 		/// <summary>
 		///    Contains the semicolon separated performers.
 		/// </summary>
 		private string artist;
-		
+
 		/// <summary>
 		///    Contains the album name.
 		/// </summary>
 		private string album;
-		
+
 		/// <summary>
 		///    Contains the 4 digit year.
 		/// </summary>
 		private string year;
-		
+
 		/// <summary>
 		///    Contains a comment on track.
 		/// </summary>
 		private string comment;
-		
+
 		/// <summary>
 		///    Contains the track number in the album.
 		/// </summary>
 		private byte track;
-		
+
 		/// <summary>
 		///    Contains the genre index.
 		/// </summary>
 		private byte genre;
-		
+
 		#endregion
 
 
 		#region Public Static Fields
-		
+
 		/// <summary>
 		///    The size of a ID3v1 tag.
 		/// </summary>
 		public const uint Size = 128;
-		
+
 		/// <summary>
 		///    The identifier used to recognize a ID3v1 tags.
 		/// </summary>
@@ -336,7 +336,7 @@ namespace TagLib.Id3v1
 			get { return string.IsNullOrEmpty (artist) ? new string [0] : artist.Split (';'); }
 			set { artist = value != null ? string.Join (";", value) : string.Empty; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets the album of the media represented by the
 		///    current instance.
@@ -355,7 +355,7 @@ namespace TagLib.Id3v1
 			get { return string.IsNullOrEmpty (album) ? null : album; }
 			set { album = value != null ? value.Trim () : String.Empty; }
 		}
-		
+
 		/// <summary>
 		///    Gets and sets a user comment on the media represented by
 		///    the current instance.
@@ -426,8 +426,8 @@ namespace TagLib.Id3v1
 			get
 			{
 				uint value;
-				return uint.TryParse(year, NumberStyles.Integer, CultureInfo.InvariantCulture, out value) 
-					? value 
+				return uint.TryParse(year, NumberStyles.Integer, CultureInfo.InvariantCulture, out value)
+					? value
 					: 0;
 			}
 

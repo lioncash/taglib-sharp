@@ -5,7 +5,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -31,21 +31,21 @@ namespace TagLib.Flac
 	public class Block
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the block header.
 		/// </summary>
 		private BlockHeader header;
-		
+
 		/// <summary>
 		///    Contains the block data.
 		/// </summary>
 		private ByteVector data;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -107,9 +107,9 @@ namespace TagLib.Flac
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -171,9 +171,9 @@ namespace TagLib.Flac
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>

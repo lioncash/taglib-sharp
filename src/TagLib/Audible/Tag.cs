@@ -35,13 +35,13 @@ namespace TagLib.Audible
 	public class Tag : TagLib.Tag
 	{
 		#region Private Fields
-		
+
 		private List<KeyValuePair<string, string>> tags;
-		
+
 		#endregion
-		
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="Tag" /> with no contents.
@@ -105,9 +105,9 @@ namespace TagLib.Audible
 		}
 
 		#endregion
-		
+
 		#region Private Methods
-		
+
 		/// <summary>
 		///    Populates the current instance by parsing the contents of
 		///    a raw AudibleMetadata tag.
@@ -201,12 +201,12 @@ namespace TagLib.Audible
 				album = strValue;
 				break;
 			}
-			
+
 		}
 		*/
-		
+
 		#endregion
-		
+
 		#region TagLib.Tag
 
 		/// <summary>
@@ -240,7 +240,7 @@ namespace TagLib.Audible
 		{
 			get { return getTag ("narrator"); }
 		}
-		
+
 		/// <summary>
 		///    Gets the title for the media described by the
 		///    current instance.
@@ -279,7 +279,7 @@ namespace TagLib.Audible
 		///    current instance.
 		/// </summary>
 		/// <value>
-		///    	A <see cref="string[]" /> object containing a single 
+		///    	A <see cref="string[]" /> object containing a single
 		/// 	artist described by the current instance or <see
 		///    langword="null" /> if no value is present.
 		/// </value>
@@ -302,9 +302,9 @@ namespace TagLib.Audible
 		{
 			tags = new List<KeyValuePair<string, string>>();
 		}
-		
+
 		#endregion
-		
+
 	}
 }
 

@@ -27,16 +27,16 @@ namespace TagLib
 	public class TextBox : Box
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the box's data.
 		/// </summary>
 		private ByteVector data;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -69,9 +69,9 @@ namespace TagLib
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>

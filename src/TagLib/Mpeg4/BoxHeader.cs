@@ -6,7 +6,7 @@
 //   Brian Nickel (brian.nickel@gmail.com)
 //
 // Copyright (C) 2006-2007 Brian Nickel
-// 
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -33,57 +33,57 @@ namespace TagLib.Mpeg4
 	public struct BoxHeader
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the box type.
 		/// </summary>
 		private ByteVector box_type;
-		
+
 		/// <summary>
 		///    Contains the extended type.
 		/// </summary>
 		private ByteVector extended_type;
-		
+
 		/// <summary>
 		///    Contains the box size.
 		/// </summary>
 		private ulong box_size;
-		
+
 		/// <summary>
 		///    Contains the header size.
 		/// </summary>
 		private uint header_size;
-		
+
 		/// <summary>
 		///    Contains the position of the header.
 		/// </summary>
 		private long position;
-		
+
 		/// <summary>
 		///    Contains the box (temporarily).
 		/// </summary>
 		private Box box;
-		
+
 		/// <summary>
 		///    Indicated that the header was read from a file.
 		/// </summary>
 		private bool from_disk;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Fields
 
 		/// <summary>
 		///    An empty box header.
 		/// </summary>
 		public static readonly BoxHeader Empty = new BoxHeader("xxxx");
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
 
 		/// <summary>
@@ -244,9 +244,9 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
@@ -344,9 +344,9 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Methods
 
 		/// <summary>
@@ -418,9 +418,9 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-		
-		
-		
+
+
+
 		#region Internal Properties
 
 		/// <summary>

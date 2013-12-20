@@ -38,33 +38,33 @@ namespace TagLib.Ape
 		///    The audio is not compressed.
 		/// </summary>
 		None = 0,
-		
+
 		/// <summary>
 		///    The audio is mildly compressed.
 		/// </summary>
 		Fast = 1000,
-		
+
 		/// <summary>
 		///    The audio is compressed at a normal level.
 		/// </summary>
 		Normal = 2000,
-		
+
 		/// <summary>
 		///    The audio is highly compressed.
 		/// </summary>
 		High = 3000,
-		
+
 		/// <summary>
 		///    The audio is extremely highly compressed.
 		/// </summary>
 		ExtraHigh = 4000,
-		
+
 		/// <summary>
 		///    The audio is compressed to an insane level.
 		/// </summary>
 		Insane
 	}
-	
+
 	/// <summary>
 	///    This struct implements <see cref="IAudioCodec" /> to provide
 	///    support for reading Monkey's Audio APE stream properties.
@@ -72,7 +72,7 @@ namespace TagLib.Ape
 	public struct StreamHeader : IAudioCodec, ILosslessAudioCodec
 	{
 		#region Private Fields
-		
+
 		/// <summary>
 		///    Contains the APE version.
 		/// </summary>
@@ -82,7 +82,7 @@ namespace TagLib.Ape
 		///    version 3.81.
 		/// </remarks>
 		private ushort version;
-		
+
 		// Ape Header (24 bytes) starting at Offest 52 into the file
 		/// <summary>
 		///    Contains the compression level.
@@ -91,7 +91,7 @@ namespace TagLib.Ape
 		///    This value is stored in bytes (51,52).
 		/// </remarks>
 		private CompressionLevel compression_level;
-		
+
 		/*
 		/// <summary>
 		///    Contains the format flags.
@@ -101,7 +101,7 @@ namespace TagLib.Ape
 		/// </remarks>
 		private ushort format_flags;
 		*/
-		
+
 		/// <summary>
 		///    Contains the number of audio blocks in one frame.
 		/// </summary>
@@ -109,7 +109,7 @@ namespace TagLib.Ape
 		///    This value is stored in bytes (55-58).
 		/// </remarks>
 		private uint blocks_per_frame;
-		
+
 		/// <summary>
 		///    Contains the number of audio blocks in the final frame.
 		/// </summary>
@@ -117,7 +117,7 @@ namespace TagLib.Ape
 		///    This value is stored in bytes (59-62).
 		/// </remarks>
 		private uint final_frame_blocks;
-		
+
 		/// <summary>
 		///    Contains the total number of frames.
 		/// </summary>
@@ -125,7 +125,7 @@ namespace TagLib.Ape
 		///    This value is stored in bytes (63-66).
 		/// </remarks>
 		private uint total_frames;
-		
+
 		/// <summary>
 		///    Contains the number of bits per sample.
 		/// </summary>
@@ -134,7 +134,7 @@ namespace TagLib.Ape
 		///    16.
 		/// </remarks>
 		private ushort bits_per_sample;
-		
+
 		/// <summary>
 		///    Contains the number of channels.
 		/// </summary>
@@ -143,7 +143,7 @@ namespace TagLib.Ape
 		///    1 or 2.
 		/// </remarks>
 		private ushort channels;
-		
+
 		/// <summary>
 		///    Contains the sample rate.
 		/// </summary>
@@ -152,7 +152,7 @@ namespace TagLib.Ape
 		///    44100.
 		/// </remarks>
 		private uint sample_rate;
-		
+
 		/// <summary>
 		///    Contains the length of the audio stream.
 		/// </summary>
@@ -160,18 +160,18 @@ namespace TagLib.Ape
 		///    This value is provided by the constructor.
 		/// </remarks>
 		private long stream_length;
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Static Fields
-		
+
 		/// <summary>
 		///    The size of a Monkey Audio header.
 		/// </summary>
 		public const uint Size = 76;
-		
+
 		/// <summary>
 		///    The identifier used to recognize a WavPack file.
 		/// </summary>
@@ -179,13 +179,13 @@ namespace TagLib.Ape
 		///    "MAC "
 		/// </value>
 		public static readonly ReadOnlyByteVector FileIdentifier = "MAC ";
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="StreamHeader" /> for a specified header block and
@@ -211,13 +211,13 @@ namespace TagLib.Ape
 		{
 			if (data == null)
 				throw new ArgumentNullException("data");
-			
+
 			if (!data.StartsWith(FileIdentifier))
 				throw new CorruptFileException("Data does not begin with identifier.");
-			
+
 			if (data.Count < Size)
 				throw new CorruptFileException("Insufficient data in stream header");
-			
+
 			stream_length      = streamLength;
 			version            = data.ToUShort(4, false);
 			compression_level  = (CompressionLevel) data.ToUShort(52, false);
@@ -229,11 +229,11 @@ namespace TagLib.Ape
 			channels           = data.ToUShort(70, false);
 			sample_rate        = data.ToUInt(72, false);
 		}
-		
+
 		#endregion
-		
-		
-		
+
+
+
 		#region Public Properties
 
 		/// <summary>
