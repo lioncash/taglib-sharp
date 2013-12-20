@@ -1,5 +1,6 @@
 ﻿using System;
 
+// TODO: Add the ability to modify+save tag information.
 namespace TagLib.TrueAudio
 {
 	/// <summary>
