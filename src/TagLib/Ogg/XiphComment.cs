@@ -1211,14 +1211,11 @@ namespace TagLib.Ogg
 
 			set
 			{
-				// TODO: Implement saving correctly.
-				// Currently just directly saves the image data.
-				// We want to save cover type, etc before this.
 				string[] covers = new string[value.Length];
 				for (int i = 0; i < value.Length; i++)
 				{
-					IPicture old = value[i];
-					covers[i] = Convert.ToBase64String(old.Data.Data);
+					TagLib.Flac.Picture pic = new TagLib.Flac.Picture(value[i]);
+					covers[i] = Convert.ToBase64String(pic.Render().Data);
 				}
 
 				SetField("METADATA_BLOCK_PICTURE", covers);
