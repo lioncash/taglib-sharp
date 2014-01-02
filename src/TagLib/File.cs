@@ -568,22 +568,24 @@ namespace TagLib
 		/// <example>
 		///    <para>The following example sets the mood of a file to
 		///    several tag types.</para>
-		///    <code lang="C#">string [] SetMoods (TagLib.File file, params string[] moods)
-		///{
-		///   TagLib.Id3v2.Tag id3 = file.GetTag (TagLib.TagTypes.Id3v2, true);
-		///   if (id3 != null)
-		///      id3.SetTextFrame ("TMOO", moods);
+		///    <code lang="C#">
+		///    string [] SetMoods (TagLib.File file, params string[] moods)
+		///    {
+		///        TagLib.Id3v2.Tag id3 = file.GetTag (TagLib.TagTypes.Id3v2, true);
+		///        if (id3 != null)
+		///            id3.SetTextFrame ("TMOO", moods);
 		///
-		///   TagLib.Asf.Tag asf = file.GetTag (TagLib.TagTypes.Asf, true);
-		///   if (asf != null)
-		///      asf.SetDescriptorStrings (moods, "WM/Mood", "Mood");
+		///        TagLib.Asf.Tag asf = file.GetTag (TagLib.TagTypes.Asf, true);
+		///        if (asf != null)
+		///            asf.SetDescriptorStrings (moods, "WM/Mood", "Mood");
 		///
-		///   TagLib.Ape.Tag ape = file.GetTag (TagLib.TagTypes.Ape);
-		///   if (ape != null)
-		///      ape.SetValue ("MOOD", moods);
+		///        TagLib.Ape.Tag ape = file.GetTag (TagLib.TagTypes.Ape);
+		///        if (ape != null)
+		///            ape.SetValue ("MOOD", moods);
 		///
-		///   // Whatever tag types you want...
-		///}</code>
+		///        // Whatever tag types you want...
+		///    }
+		///    </code>
 		/// </example>
 		public abstract Tag GetTag (TagTypes type, bool create);
 
@@ -601,11 +603,11 @@ namespace TagLib
 		/// </returns>
 		/// <remarks>
 		///    <para>This class merely accesses the tag if it exists.
-		///    <see cref="GetTag(TagTypes,bool)" /> provides the option
+		///    <see cref="M:GetTag(TagTypes, bool)" /> provides the option
 		///    of adding the tag to the current instance if it does not
 		///    exist.</para>
-		///    <para>It is safe to assume that if <see langword="null"
-		///    /> is not returned, the returned tag can be cast to the
+		///    <para>It is safe to assume that if <see langword="null"/>
+		///    is not returned, the returned tag can be cast to the
 		///    appropriate type.</para>
 		/// </remarks>
 		/// <example>

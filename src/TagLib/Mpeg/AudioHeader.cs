@@ -676,8 +676,8 @@ namespace TagLib.Mpeg
 		#region Public Static Methods
 
 		/// <summary>
-		///    Searches for an audio header in a <see cref="TagLib.File"
-		///    /> starting at a specified position and searching through
+		///    Searches for an audio header in a <see cref="TagLib.File" />
+		///    starting at a specified position and searching through
 		///    a specified number of bytes.
 		/// </summary>
 		/// <param name="header">
@@ -749,8 +749,8 @@ namespace TagLib.Mpeg
 		}
 
 		/// <summary>
-		///    Searches for an audio header in a <see cref="TagLib.File"
-		///    /> starting at a specified position and searching to the
+		///    Searches for an audio header in a <see cref="TagLib.File" />
+		///    starting at a specified position and searching to the
 		///    end of the file.
 		/// </summary>
 		/// <param name="header">
@@ -772,7 +772,7 @@ namespace TagLib.Mpeg
 		///    Searching to the end of the file can be very, very slow
 		///    especially for corrupt or non-MPEG files. It is
 		///    recommended to use <see
-		///    cref="Find(AudioHeader,TagLib.File,long,int)" />
+		///    cref="Find(out AudioHeader, TagLib.File, long, int)" />
 		///    instead.
 		/// </remarks>
 		public static bool Find(out AudioHeader header, TagLib.File file, long position)
