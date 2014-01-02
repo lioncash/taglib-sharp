@@ -500,7 +500,7 @@ namespace TagLib.Asf
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="TagTypes.Asf" />.
+		///    Always <see cref="T:TagTypes.Asf" />.
 		/// </value>
 		public override TagTypes TagTypes
 		{

@@ -35,7 +35,7 @@ namespace TagLib.Ape
 	/// <remarks>
 	///    A <see cref="TagLib.Ape.Tag" /> will be added automatically to
 	///    any file that doesn't contain one. This change does not effect
-	///    the physical file until <see cref="Save" /> is called and can be
+	///    the physical file until <see cref="TagLib.NonContainer.File.Save()" /> is called and can be
 	///    reversed using the following method:
 	///    <code>file.RemoveTags (file.TagTypes &amp; ~file.TagTypesOnDisk);</code>
 	/// </remarks>
