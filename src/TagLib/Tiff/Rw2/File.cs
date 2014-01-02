@@ -109,7 +109,7 @@ namespace TagLib.Tiff.Rw2
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
 		public File(string path, ReadStyle propertiesStyle)
-			: this(new File.LocalFileAbstraction(path), propertiesStyle)
+			: this(new LocalFileAbstraction(path), propertiesStyle)
 		{
 		}
 
@@ -147,7 +147,7 @@ namespace TagLib.Tiff.Rw2
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
+		public File(IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
 		{
 			Magic = 85; // Panasonic uses 0x55
 			Read(propertiesStyle);
@@ -200,7 +200,7 @@ namespace TagLib.Tiff.Rw2
 		///    matching tag was found and none was created, <see
 		///    langword="null" /> is returned.
 		/// </returns>
-		public override TagLib.Tag GetTag(TagLib.TagTypes type, bool create)
+		public override TagLib.Tag GetTag(TagTypes type, bool create)
 		{
 			TagLib.Tag tag = base.GetTag(type, false);
 			if (tag != null)
@@ -295,13 +295,11 @@ namespace TagLib.Tiff.Rw2
 		/// </returns>
 		private Properties ExtractProperties()
 		{
-			int width = 0, height = 0;
-
 			IFDTag tag = GetTag(TagTypes.TiffIFD) as IFDTag;
 			IFDStructure structure = tag.Structure;
 
-			width = (int) (structure.GetLongValue(0, 0x07) ?? 0);
-			height = (int) (structure.GetLongValue(0, 0x06) ?? 0);
+			int width = (int) (structure.GetLongValue(0, 0x07) ?? 0);
+			int height = (int) (structure.GetLongValue(0, 0x06) ?? 0);
 
 			var vendor = ImageTag.Make;
 			if (vendor == "LEICA")

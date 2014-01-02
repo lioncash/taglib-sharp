@@ -113,7 +113,7 @@ namespace TagLib.Riff
 		protected ListTag(TagLib.File file, long position, int length)
 		{
 			if (file == null)
-				throw new System.ArgumentNullException("file");
+				throw new ArgumentNullException("file");
 
 			if (length < 0)
 				throw new ArgumentOutOfRangeException("length");

@@ -21,8 +21,6 @@
 // USA
 //
 
-using System;
-
 namespace TagLib.Tiff
 {
 	/// <summary>

@@ -97,7 +97,7 @@ namespace TagLib.Tiff.Cr2
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
 		public File(string path, ReadStyle propertiesStyle)
-			: this(new File.LocalFileAbstraction(path), propertiesStyle)
+			: this(new LocalFileAbstraction(path), propertiesStyle)
 		{
 		}
 
@@ -135,7 +135,7 @@ namespace TagLib.Tiff.Cr2
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
+		public File(IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
 		{
 			Read(propertiesStyle);
 		}
@@ -263,12 +263,10 @@ namespace TagLib.Tiff.Cr2
 		/// </returns>
 		private Properties ExtractProperties()
 		{
-			int width = 0, height = 0;
-
 			IFDTag tag = GetTag(TagTypes.TiffIFD) as IFDTag;
 
-			width = (int) (tag.ExifIFD.GetLongValue(0, (ushort) ExifEntryTag.PixelXDimension) ?? 0);
-			height = (int) (tag.ExifIFD.GetLongValue(0, (ushort) ExifEntryTag.PixelYDimension) ?? 0);
+			int width = (int) (tag.ExifIFD.GetLongValue(0, (ushort) ExifEntryTag.PixelXDimension) ?? 0);
+			int height = (int) (tag.ExifIFD.GetLongValue(0, (ushort) ExifEntryTag.PixelYDimension) ?? 0);
 
 			if (width > 0 && height > 0)
 			{

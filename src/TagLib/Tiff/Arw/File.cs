@@ -70,7 +70,7 @@ namespace TagLib.Tiff.Arw
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
 		public File(string path, ReadStyle propertiesStyle)
-			: this(new File.LocalFileAbstraction(path), propertiesStyle)
+			: this(new LocalFileAbstraction(path), propertiesStyle)
 		{
 		}
 
@@ -108,7 +108,7 @@ namespace TagLib.Tiff.Arw
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle)
+		public File(IFileAbstraction abstraction, ReadStyle propertiesStyle)
 			: base(abstraction, propertiesStyle)
 		{
 		}

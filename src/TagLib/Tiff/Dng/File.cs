@@ -74,7 +74,7 @@ namespace TagLib.Tiff.Dng
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
 		public File(string path, ReadStyle propertiesStyle)
-			: this(new File.LocalFileAbstraction(path), propertiesStyle)
+			: this(new LocalFileAbstraction(path), propertiesStyle)
 		{
 		}
 
@@ -109,10 +109,9 @@ namespace TagLib.Tiff.Dng
 		///    cref="ReadStyle.None" /> to ignore the properties.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
-		///    <paramref name="abstraction" /> is <see langword="null"
-		///    />.
+		///    <paramref name="abstraction" /> is <see langword="null"/>.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle)
+		public File(IFileAbstraction abstraction, ReadStyle propertiesStyle)
 			: base(abstraction, propertiesStyle)
 		{
 		}
@@ -126,8 +125,7 @@ namespace TagLib.Tiff.Dng
 		///    reading from and writing to the file.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
-		///    <paramref name="abstraction" /> is <see langword="null"
-		///    />.
+		///    <paramref name="abstraction" /> is <see langword="null"/>.
 		/// </exception>
 		protected File(IFileAbstraction abstraction)
 			: this(abstraction, ReadStyle.Average)

@@ -201,7 +201,7 @@ namespace TagLib.Audible
 		///    Currently this does not work as there is not enough
 		///    information about the file format
 		/// </remarks>
-		public override void RemoveTags (TagLib.TagTypes types)
+		public override void RemoveTags(TagTypes types)
 		{
 		}
 

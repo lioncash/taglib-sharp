@@ -454,7 +454,7 @@ namespace TagLib.Id3v2
 			if ((Flags & FrameFlags.GroupingIdentity) != 0)
 			{
 				if (frameData.Count >= data_offset)
-					throw new TagLib.CorruptFileException("Frame data incomplete.");
+					throw new CorruptFileException("Frame data incomplete.");
 
 				group_id = frameData[data_offset++];
 				data_length--;
@@ -463,7 +463,7 @@ namespace TagLib.Id3v2
 			if ((Flags & FrameFlags.Encryption) != 0)
 			{
 				if (frameData.Count >= data_offset)
-					throw new TagLib.CorruptFileException("Frame data incomplete.");
+					throw new CorruptFileException("Frame data incomplete.");
 
 				encryption_id = frameData[data_offset++];
 				data_length--;

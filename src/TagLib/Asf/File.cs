@@ -43,12 +43,12 @@ namespace TagLib.Asf
 		/// <summary>
 		///    Contains the file's tag.
 		/// </summary>
-		private Asf.Tag asf_tag = null;
+		private Asf.Tag asf_tag;
 
 		/// <summary>
 		///    Contains the file's properties.
 		/// </summary>
-		private Properties properties = null;
+		private Properties properties;
 
 		#endregion
 

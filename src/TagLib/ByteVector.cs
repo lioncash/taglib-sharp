@@ -1986,7 +1986,7 @@ namespace TagLib
 		/// </returns>
 		public static implicit operator ByteVector(string value)
 		{
-			return ByteVector.FromString(value, StringType.UTF8);
+			return FromString(value, StringType.UTF8);
 		}
 
 		#endregion

@@ -60,8 +60,7 @@ namespace TagLib.Tiff.Rw2
 		/// 	A <see cref="System.UInt32"/> value with maximal possible offset. This is to limit
 		///     the size of the possible data;
 		/// </param>
-		public IFDReader(BaseTiffFile file, bool is_bigendian, IFDStructure structure, long base_offset, uint ifd_offset,
-			uint max_offset)
+		public IFDReader(BaseTiffFile file, bool is_bigendian, IFDStructure structure, long base_offset, uint ifd_offset, uint max_offset)
 			: base(file, is_bigendian, structure, base_offset, ifd_offset, max_offset)
 		{
 		}

@@ -32,9 +32,9 @@ namespace TagLib.IIM
 		{
 		}
 
-		public override TagLib.TagTypes TagTypes
+		public override TagTypes TagTypes
 		{
-			get { return TagLib.TagTypes.IPTCIIM; }
+			get { return TagTypes.IPTCIIM; }
 		}
 
 		public override void Clear()

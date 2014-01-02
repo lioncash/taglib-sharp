@@ -179,7 +179,7 @@ namespace TagLib
 		/// </returns>
 		public static implicit operator ReadOnlyByteVector(string value)
 		{
-			return new ReadOnlyByteVector(ByteVector.FromString(value, StringType.UTF8));
+			return new ReadOnlyByteVector(FromString(value, StringType.UTF8));
 		}
 
 		#endregion

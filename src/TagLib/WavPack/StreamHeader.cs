@@ -39,9 +39,10 @@ namespace TagLib.WavPack
 	{
 		#region Constants
 
-		private static readonly uint [] sample_rates = new uint [] {
+		private static readonly uint [] sample_rates = {
 			6000, 8000, 9600, 11025, 12000, 16000, 22050, 24000,
-			32000, 44100, 48000, 64000, 88200, 96000, 192000};
+			32000, 44100, 48000, 64000, 88200, 96000, 192000
+		};
 
 		private const int  BYTES_STORED = 3;
 		private const int  MONO_FLAG    = 4;
@@ -119,16 +120,16 @@ namespace TagLib.WavPack
 		///    cref="FileIdentifier" /> or is less than <see cref="Size"
 		///    /> bytes long.
 		/// </exception>
-		public StreamHeader (ByteVector data, long streamLength)
+		public StreamHeader(ByteVector data, long streamLength)
 		{
 			if (data == null)
-				throw new ArgumentNullException ("data");
+				throw new ArgumentNullException("data");
 
-			if (!data.StartsWith (FileIdentifier))
-				throw new CorruptFileException ("Data does not begin with identifier.");
+			if (!data.StartsWith(FileIdentifier))
+				throw new CorruptFileException("Data does not begin with identifier.");
 
 			if (data.Count < Size)
-				throw new CorruptFileException ("Insufficient data in stream header");
+				throw new CorruptFileException("Insufficient data in stream header");
 
 			stream_length = streamLength;
 			version = data.ToUShort(8, false);

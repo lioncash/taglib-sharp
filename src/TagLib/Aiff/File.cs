@@ -301,8 +301,8 @@ namespace TagLib.Aiff
 		/// </remarks>
 		public override void RemoveTags(TagTypes types)
 		{
-			if (types == TagLib.TagTypes.Id3v2 ||
-			    types == TagLib.TagTypes.AllTags)
+			if (types == TagTypes.Id3v2 ||
+			    types == TagTypes.AllTags)
 			{
 				tag = null;
 			}
