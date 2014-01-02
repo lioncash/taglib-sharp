@@ -47,7 +47,7 @@ namespace TagLib.Mpeg4
 		/// <summary>
 		///    Contains the Apple tag.
 		/// </summary>
-		private AppleTag    apple_tag;
+		private AppleTag apple_tag;
 
 		/// <summary>
 		///    Contains the combined tag.
@@ -65,10 +65,9 @@ namespace TagLib.Mpeg4
 		/// <summary>
 		///    Contains the ISO user data boxes.
 		/// </summary>
-		private List<IsoUserDataBox> udta_boxes = new List<IsoUserDataBox> ();
+		private List<IsoUserDataBox> udta_boxes = new List<IsoUserDataBox>();
 
 		#endregion
-
 
 
 		#region Constructors
@@ -90,8 +89,7 @@ namespace TagLib.Mpeg4
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File(string path, ReadStyle propertiesStyle)
-			: base(path)
+		public File(string path, ReadStyle propertiesStyle) : base(path)
 		{
 			Read(propertiesStyle);
 		}
@@ -130,8 +128,7 @@ namespace TagLib.Mpeg4
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File (File.IFileAbstraction abstraction,ReadStyle propertiesStyle)
-			: base(abstraction)
+		public File (IFileAbstraction abstraction,ReadStyle propertiesStyle) : base(abstraction)
 		{
 			Read(propertiesStyle);
 		}
@@ -149,13 +146,11 @@ namespace TagLib.Mpeg4
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction)
-			: this(abstraction, ReadStyle.Average)
+		public File(IFileAbstraction abstraction) : this(abstraction, ReadStyle.Average)
 		{
 		}
 
 		#endregion
-
 
 
 		#region Public Properties
@@ -195,7 +190,6 @@ namespace TagLib.Mpeg4
 		#endregion
 
 
-
 		#region Public Methods
 
 		/// <summary>
@@ -211,7 +205,7 @@ namespace TagLib.Mpeg4
 			}
 
 			// Try to get into write mode.
-			Mode = File.AccessMode.Write;
+			Mode = AccessMode.Write;
 			try
 			{
 				FileParser parser = new FileParser(this);
@@ -292,7 +286,7 @@ namespace TagLib.Mpeg4
 			}
 			finally
 			{
-				Mode = File.AccessMode.Closed;
+				Mode = AccessMode.Closed;
 			}
 		}
 
@@ -361,7 +355,6 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-
 
 
 		#region Private Methods

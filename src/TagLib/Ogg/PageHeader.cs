@@ -109,7 +109,6 @@ namespace TagLib.Ogg
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -265,7 +264,6 @@ namespace TagLib.Ogg
 		#endregion
 
 
-
 		#region Public Properties
 
 		/// <summary>
@@ -364,7 +362,6 @@ namespace TagLib.Ogg
 		#endregion
 
 
-
 		#region Public Methods
 
 		/// <summary>
@@ -393,7 +390,6 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-
 
 
 		#region Private Properties
@@ -438,7 +434,6 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-
 
 
 		#region IEquatable

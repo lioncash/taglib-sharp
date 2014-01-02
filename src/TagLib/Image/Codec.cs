@@ -118,7 +118,7 @@ namespace TagLib.Image
 		/// <returns>
 		///    A new <see cref="Codec" /> instance.
 		/// </returns>
-		protected Codec (int width, int height) : this (width, height, 0)
+		protected Codec(int width, int height) : this (width, height, 0)
 		{
 		}
 
@@ -138,7 +138,7 @@ namespace TagLib.Image
 		/// <returns>
 		///    A new <see cref="Codec" /> instance.
 		/// </returns>
-		protected Codec (int width, int height, int quality)
+		protected Codec(int width, int height, int quality)
 		{
 			PhotoWidth = width;
 			PhotoHeight = height;

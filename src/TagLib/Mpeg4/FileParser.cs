@@ -90,7 +90,6 @@ namespace TagLib.Mpeg4
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -121,7 +120,6 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-
 
 
 		#region Public Properties
@@ -321,7 +319,6 @@ namespace TagLib.Mpeg4
 		#endregion
 
 
-
 		#region Public Methods
 
 		/// <summary>
@@ -394,7 +391,6 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-
 
 
 		#region Private Methods
@@ -656,6 +652,7 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
+
 
 		#region Private Static Methods
 

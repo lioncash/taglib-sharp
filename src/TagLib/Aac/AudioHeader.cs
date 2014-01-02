@@ -48,7 +48,6 @@ namespace TagLib.Aac
 		#endregion
 
 
-
 		#region Private Fields
 
 		/// <summary>
@@ -64,20 +63,19 @@ namespace TagLib.Aac
 		/// <summary>
 		///    Contains the number of channels in the audio
 		/// </summary>
-		private int audiochannels;
+		private int audioChannels;
 
 		/// <summary>
 		///    Contains the bitrate of the audio stream
 		/// </summary>
-		private int audiobitrate;
+		private int audioBitrate;
 
 		/// <summary>
 		///    Contains the samplerate of the audio stream
 		/// </summary>
-		private int audiosamplerate;
+		private int audioSampleRate;
 
 		#endregion
-
 
 
 		#region Public Fields
@@ -85,11 +83,9 @@ namespace TagLib.Aac
 		/// <summary>
 		///    An empty and unset header.
 		/// </summary>
-		public static readonly AudioHeader Unknown =
-			new AudioHeader();
+		public static readonly AudioHeader Unknown = new AudioHeader();
 
 		#endregion
-
 
 
 		#region Constructors
@@ -102,9 +98,9 @@ namespace TagLib.Aac
 		{
 			this.stream_length = 0;
 			this.duration = TimeSpan.Zero;
-			this.audiochannels = 0;
-			this.audiobitrate = 0;
-			this.audiosamplerate = 0;
+			this.audioChannels = 0;
+			this.audioBitrate = 0;
+			this.audioSampleRate = 0;
 		}
 
 		/// <summary>
@@ -120,30 +116,28 @@ namespace TagLib.Aac
 		///    A <see cref="int" /> value indicating the bitrate
 		///    of  the audio stream
 		/// </param>
-		/// <param name="samplerate">
+		/// <param name="sampleRate">
 		///    A <see cref="int" /> value indicating the samplerate
 		///    of  the audio stream
 		/// </param>
-		/// <param name="numberofsamples">
+		/// <param name="numberOfSamples">
 		///    A <see cref="int" /> value indicating the number
 		///    of samples in the audio stream
 		/// </param>
-		/// <param name="numberofframes">
+		/// <param name="numberOfFrames">
 		///    A <see cref="int" /> value indicating the number
 		///    of frames in the audio stream
 		/// </param>
-		private AudioHeader(int channels, int bitrate,
-							int samplerate, int numberofsamples, int numberofframes)
+		private AudioHeader(int channels, int bitrate, int sampleRate, int numberOfSamples, int numberOfFrames)
 		{
 			this.duration = TimeSpan.Zero;
 			this.stream_length = 0;
-			this.audiochannels = channels;
-			this.audiobitrate = bitrate;
-			this.audiosamplerate = samplerate;
+			this.audioChannels = channels;
+			this.audioBitrate = bitrate;
+			this.audioSampleRate = sampleRate;
 		}
 
 		#endregion
-
 
 
 		#region Public Properties
@@ -200,7 +194,7 @@ namespace TagLib.Aac
 		/// </value>
 		public int AudioBitrate
 		{
-			get { return audiobitrate; }
+			get { return audioBitrate; }
 		}
 
 		/// <summary>
@@ -213,7 +207,7 @@ namespace TagLib.Aac
 		/// </value>
 		public int AudioSampleRate
 		{
-			get { return audiosamplerate; }
+			get { return audioSampleRate; }
 		}
 
 		/// <summary>
@@ -227,11 +221,10 @@ namespace TagLib.Aac
 		/// </value>
 		public int AudioChannels
 		{
-			get { return audiochannels; }
+			get { return audioChannels; }
 		}
 
 		#endregion
-
 
 
 		#region Public Methods
@@ -252,11 +245,10 @@ namespace TagLib.Aac
 		public void SetStreamLength(long streamLength)
 		{
 			this.stream_length = streamLength;
-			duration = TimeSpan.FromSeconds(((double)this.stream_length) * 8.0 / ((double)this.audiobitrate));
+			duration = TimeSpan.FromSeconds(((double)stream_length) * 8.0 / ((double)audioBitrate));
 		}
 
 		#endregion
-
 
 
 		#region Public Static Methods

@@ -70,7 +70,6 @@ namespace TagLib.Riff
 		#endregion
 
 
-
 		#region Public Static Fields
 
 		/// <summary>
@@ -89,16 +88,15 @@ namespace TagLib.Riff
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="DivXTag" /> with no contents.
 		/// </summary>
-		public DivXTag ()
+		public DivXTag()
 		{
-			Clear ();
+			Clear();
 		}
 
 		/// <summary>
@@ -182,7 +180,6 @@ namespace TagLib.Riff
 		#endregion
 
 
-
 		#region Public Methods
 
 		/// <summary>
@@ -208,7 +205,6 @@ namespace TagLib.Riff
 		#endregion
 
 
-
 		#region Private Methods
 
 		/// <summary>
@@ -229,7 +225,6 @@ namespace TagLib.Riff
 			extra_data = data.Mid(115,  6);
 		}
 		#endregion
-
 
 
 		#region TagLib.Tag

@@ -45,7 +45,6 @@ namespace TagLib.Flac
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -107,7 +106,6 @@ namespace TagLib.Flac
 		}
 
 		#endregion
-
 
 
 		#region Public Properties
@@ -173,7 +171,6 @@ namespace TagLib.Flac
 		#endregion
 
 
-
 		#region Public Methods
 
 		/// <summary>
@@ -190,12 +187,12 @@ namespace TagLib.Flac
 		/// </returns>
 		public ByteVector Render(bool isLastBlock)
 		{
-			if (this.data == null)
+			if (data == null)
 				throw new InvalidOperationException("Cannot render empty blocks.");
 
-			ByteVector data = header.Render(isLastBlock);
-			data.Add(this.data);
-			return data;
+			ByteVector renderData = header.Render(isLastBlock);
+			renderData.Add(data);
+			return renderData;
 		}
 
 		#endregion

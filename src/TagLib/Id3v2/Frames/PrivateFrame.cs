@@ -360,8 +360,7 @@ namespace TagLib.Id3v2
 
 			ByteVectorCollection l = ByteVectorCollection.Split(
 				data,
-				ByteVector.TextDelimiter(StringType.Latin1),
-				1, 2);
+				ByteVector.TextDelimiter(StringType.Latin1), 1, 2);
 
 			if (l.Count == 2)
 			{
@@ -400,7 +399,7 @@ namespace TagLib.Id3v2
 			return v;
 		}
 
-#endregion
+		#endregion
 
 
 		#region ICloneable

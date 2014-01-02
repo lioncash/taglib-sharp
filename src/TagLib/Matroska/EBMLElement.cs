@@ -229,7 +229,7 @@ namespace TagLib.Matroska
 
 			if (ebml_size == 4)
 			{
-				result = (double) vector.ToFloat();
+				result = vector.ToFloat();
 			}
 			else if (ebml_size == 8)
 			{

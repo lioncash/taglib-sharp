@@ -45,14 +45,14 @@ namespace TagLib.IFD
 		///    pointer in IFD0, ExifIFD tag). This variable should not be used
 		///    directly, use the <see cref="ExifIFD"/> property instead.
 		/// </summary>
-		private IFDStructure exif_ifd = null;
+		private IFDStructure exif_ifd;
 
 		/// <summary>
 		///    A reference to the GPS IFD (which can be found by following the
 		///    pointer in IFD0, GPSIFD tag). This variable should not be used
 		///    directly, use the <see cref="GPSIFD"/> property instead.
 		/// </summary>
-		private IFDStructure gps_ifd = null;
+		private IFDStructure gps_ifd;
 
 		#endregion
 
@@ -125,7 +125,7 @@ namespace TagLib.IFD
 		///    Gets the tag types contained in the current instance.
 		/// </summary>
 		/// <value>
-		///    Always <see cref="TagTypes.TiffIFD" />.
+		///    Always <see cref="T:TagTypes.TiffIFD" />.
 		/// </value>
 		public override TagTypes TagTypes
 		{
@@ -152,9 +152,9 @@ namespace TagLib.IFD
 		/// <summary>
 		///    Clears the values stored in the current instance.
 		/// </summary>
-		public override void Clear ()
+		public override void Clear()
 		{
-			throw new NotImplementedException ();
+			throw new NotImplementedException();
 		}
 
 		#endregion

@@ -92,7 +92,7 @@ namespace TagLib.Id3v2
 		/// <summary>
 		///    Contains the frame identification.
 		/// </summary>
-		private string identification = null;
+		private string identification;
 
 		/// <summary>
 		///    Contains the channel data.
@@ -193,9 +193,11 @@ namespace TagLib.Id3v2
 			get
 			{
 				List<ChannelType> types = new List<ChannelType>();
-				for (int i = 0; i < 9; i ++)
+				for (int i = 0; i < channels.Length; i ++)
+				{
 					if (channels[i].IsSet)
 						types.Add((ChannelType) i);
+				}
 
 				return types.ToArray();
 			}
@@ -451,8 +453,7 @@ namespace TagLib.Id3v2
 		/// </exception>
 		protected override void ParseFields(ByteVector data, byte version)
 		{
-			int pos = data.Find(ByteVector.TextDelimiter(
-				StringType.Latin1));
+			int pos = data.Find(ByteVector.TextDelimiter(StringType.Latin1));
 			if (pos < 0)
 				return;
 
@@ -505,22 +506,22 @@ namespace TagLib.Id3v2
 				data.Add(i);
 				unchecked
 				{
-					data.Add(ByteVector.FromUShort(
-						(ushort) channels[i].VolumeAdjustmentIndex));
+					data.Add(ByteVector.FromUShort((ushort) channels[i].VolumeAdjustmentIndex));
 				}
 
 				byte bits = 0;
 
 				for (byte j = 0; j < 64; j ++)
+				{
 					if ((channels[i].PeakVolumeIndex & (1UL << j)) != 0)
 						bits = (byte) (j + 1);
+				}
 
 				data.Add(bits);
 
 				if (bits > 0)
 					data.Add(ByteVector.FromULong(
-						channels[i].PeakVolumeIndex)
-						.Mid(8 - BitsToBytes(bits)));
+						channels[i].PeakVolumeIndex).Mid(8 - BitsToBytes(bits)));
 			}
 
 			return data;
@@ -541,7 +542,7 @@ namespace TagLib.Id3v2
 		public override Frame Clone()
 		{
 			RelativeVolumeFrame frame = new RelativeVolumeFrame(identification);
-			for (int i = 0; i < 9; i ++)
+			for (int i = 0; i < channels.Length; i ++)
 				frame.channels[i] = channels[i];
 
 			return frame;
@@ -554,7 +555,7 @@ namespace TagLib.Id3v2
 
 		private static int BitsToBytes (int i)
 		{
-			return i % 8 == 0 ? i / 8 : (i - i % 8) / 8 + 1;
+			return (i % 8 == 0) ? i / 8 : (i - i % 8) / 8 + 1;
 		}
 
 		#endregion

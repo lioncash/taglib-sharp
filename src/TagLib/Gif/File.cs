@@ -30,7 +30,6 @@ using TagLib.Xmp;
 
 namespace TagLib.Gif
 {
-
 	/// <summary>
 	///    This class extends <see cref="TagLib.Image.ImageBlockFile" /> to provide tagging
 	///    and property support for Gif files.
@@ -104,6 +103,7 @@ namespace TagLib.Gif
 
 #endregion
 
+
 		#region Private fields
 
 		/// <summary>
@@ -133,6 +133,7 @@ namespace TagLib.Gif
 
 		#endregion
 
+
 		#region Public Properties
 
 		/// <summary>
@@ -150,6 +151,7 @@ namespace TagLib.Gif
 		}
 
 		#endregion
+
 
 		#region Constructors
 
@@ -170,7 +172,7 @@ namespace TagLib.Gif
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File(string path, ReadStyle propertiesStyle) : this(new File.LocalFileAbstraction(path), propertiesStyle)
+		public File(string path, ReadStyle propertiesStyle) : this(new LocalFileAbstraction(path), propertiesStyle)
 		{
 		}
 
@@ -208,7 +210,7 @@ namespace TagLib.Gif
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
+		public File(IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
 		{
 			Read(propertiesStyle);
 		}
@@ -559,7 +561,6 @@ namespace TagLib.Gif
 
 				if (color_table.Count != table_size)
 					throw new CorruptFileException("Unexpected end of Color Table");
-
 			}
 		}
 
@@ -611,7 +612,7 @@ namespace TagLib.Gif
 		/// <returns>
 		///    A <see cref="System.String"/> with the data contained in the sub-blocks.
 		/// </returns>
-		private string ReadSubBlocks ()
+		private string ReadSubBlocks()
 		{
 			// Sub Block
 			// Starts with one byte with the number of data bytes
@@ -648,13 +649,11 @@ namespace TagLib.Gif
 
 			do
 			{
-
 				if (Tell + length >= Length)
 					throw new CorruptFileException("Unexpected end of Sub-Block");
 
 				// Seek to end of sub-block and update the position
 				Seek(Tell + length, SeekOrigin.Begin);
-
 
 				// read new length byte
 				length = ReadByte();

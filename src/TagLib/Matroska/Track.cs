@@ -57,15 +57,15 @@ namespace TagLib.Matroska
 		/// Parsing will be done reading from _file at position references by
 		/// parent element's data section.
 		/// </summary>
-		/// <param name="_file"><see cref="File" /> instance to read from.</param>
+		/// <param name="file"><see cref="File" /> instance to read from.</param>
 		/// <param name="element">Parent <see cref="EBMLElement" />.</param>
-		public Track(File _file, EBMLElement element)
+		public Track(File file, EBMLElement element)
 		{
 			ulong i = 0;
 
 			while (i < element.DataSize)
 			{
-				EBMLElement child = new EBMLElement(_file, element.DataOffset + i);
+				EBMLElement child = new EBMLElement(file, element.DataOffset + i);
 
 				MatroskaID matroska_id = (MatroskaID) child.ID;
 

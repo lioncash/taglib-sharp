@@ -76,7 +76,6 @@ namespace TagLib.Flac
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -172,7 +171,6 @@ namespace TagLib.Flac
 		#endregion
 
 
-
 		#region Public Methods
 
 		/// <summary>
@@ -208,7 +206,6 @@ namespace TagLib.Flac
 		}
 
 		#endregion
-
 
 
 		#region Public Properties

@@ -119,7 +119,6 @@ namespace TagLib.Riff
 			if (data == null)
 				throw new ArgumentNullException("data");
 
-
 			if (!data.StartsWith("strl"))
 				return null;
 

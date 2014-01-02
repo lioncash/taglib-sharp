@@ -74,7 +74,6 @@ namespace TagLib.NonContainer
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -133,7 +132,7 @@ namespace TagLib.NonContainer
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		protected File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
+		protected File(IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
 		{
 			Read(propertiesStyle);
 		}
@@ -151,12 +150,11 @@ namespace TagLib.NonContainer
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		protected File(File.IFileAbstraction abstraction) : this(abstraction, ReadStyle.Average)
+		protected File(IFileAbstraction abstraction) : this(abstraction, ReadStyle.Average)
 		{
 		}
 
 		#endregion
-
 
 
 		#region Public Properties
@@ -189,7 +187,6 @@ namespace TagLib.NonContainer
 		}
 
 		#endregion
-
 
 
 		#region Public Methods
@@ -235,7 +232,6 @@ namespace TagLib.NonContainer
 		#endregion
 
 
-
 		#region Protected Properties
 
 		/// <summary>
@@ -265,7 +261,6 @@ namespace TagLib.NonContainer
 		}
 
 		#endregion
-
 
 
 		#region Protected Methods
@@ -354,7 +349,6 @@ namespace TagLib.NonContainer
 		protected abstract Properties ReadProperties(long start, long end, ReadStyle propertiesStyle);
 
 		#endregion
-
 
 
 		#region Private Methods

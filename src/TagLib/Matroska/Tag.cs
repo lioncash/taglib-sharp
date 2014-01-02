@@ -578,7 +578,8 @@ namespace TagLib.Matroska
 		//    A definition on where to store the ASIN for
 		//    Windows Media is not currently defined
 		// </remarks>
-		//public override string AmazonId {
+		//public override string AmazonId
+		//{
 		//    get { return null; }
 		//    set {}
 		//}

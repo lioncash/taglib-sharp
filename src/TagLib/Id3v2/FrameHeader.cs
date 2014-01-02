@@ -377,8 +377,7 @@ namespace TagLib.Id3v2
 						toVersion ? 1 : 0].Equals(id))
 						continue;
 
-					return version2_frames[i,
-						toVersion ? 0 : 1];
+					return version2_frames[i, toVersion ? 0 : 1];
 				}
 			}
 
@@ -389,8 +388,7 @@ namespace TagLib.Id3v2
 					if (!version3_frames[i, toVersion ? 1 : 0].Equals(id))
 						continue;
 
-					return version3_frames[i,
-						toVersion ? 0 : 1];
+					return version3_frames[i, toVersion ? 0 : 1];
 				}
 			}
 

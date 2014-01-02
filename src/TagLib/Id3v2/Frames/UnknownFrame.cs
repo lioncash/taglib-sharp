@@ -38,7 +38,7 @@ namespace TagLib.Id3v2
 		/// <summary>
 		///    Contains the field data.
 		/// </summary>
-		private ByteVector field_data = null;
+		private ByteVector field_data;
 
 		#endregion
 
@@ -148,9 +148,9 @@ namespace TagLib.Id3v2
 		///    A <see cref="string" /> object describing the current
 		///    instance.
 		/// </returns>
-		public override string ToString ()
+		public override string ToString()
 		{
-			return base.ToString ();
+			return base.ToString();
 		}
 
 		#endregion
@@ -170,7 +170,7 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    field data is encoded in.
 		/// </param>
-		protected override void ParseFields (ByteVector data, byte version)
+		protected override void ParseFields(ByteVector data, byte version)
 		{
 			field_data = data;
 		}

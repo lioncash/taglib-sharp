@@ -108,7 +108,7 @@ namespace TagLib.Id3v2
 	/// </summary>
 	public class SynchronisedLyricsFrame : Frame
 	{
-		#region Private Properties
+		#region Private Fields
 
 		/// <summary>
 		///    Contains the text encoding to use when rendering the
@@ -119,18 +119,17 @@ namespace TagLib.Id3v2
 		/// <summary>
 		///    Contains the ISO-639-2 language code.
 		/// </summary>
-		private string language = null;
+		private string language;
 
 		/// <summary>
 		///    Contains the description.
 		/// </summary>
-		private string description = null;
+		private string description;
 
 		/// <summary>
 		///    Contains the timestamp format.
 		/// </summary>
-		private TimestampFormat timestamp_format =
-			TimestampFormat.Unknown;
+		private TimestampFormat timestamp_format = TimestampFormat.Unknown;
 
 		/// <summary>
 		///    Contains the text type.
@@ -140,10 +139,9 @@ namespace TagLib.Id3v2
 		/// <summary>
 		///    Contains the text.
 		/// </summary>
-		private SynchedText [] text = new SynchedText [0];
+		private SynchedText[] text = new SynchedText[0];
 
 		#endregion
-
 
 
 		#region Constructors
@@ -399,8 +397,7 @@ namespace TagLib.Id3v2
 		///    if a match wasn't found and <paramref name="create" /> is
 		///    <see langword="false" />.
 		/// </returns>
-		public static SynchronisedLyricsFrame Get(Tag tag, string description, string language, SynchedTextType type,
-			bool create)
+		public static SynchronisedLyricsFrame Get(Tag tag, string description, string language, SynchedTextType type, bool create)
 		{
 			foreach (Frame f in tag)
 			{
@@ -524,8 +521,7 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    field data is encoded in.
 		/// </param>
-		protected override void ParseFields(ByteVector data,
-			byte version)
+		protected override void ParseFields(ByteVector data, byte version)
 		{
 			if (data.Count < 6)
 				throw new CorruptFileException("Not enough bytes in field.");

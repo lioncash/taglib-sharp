@@ -194,8 +194,7 @@ namespace TagLib.Id3v2
 			set
 			{
 				if (value < 2 || value > 4)
-					throw new ArgumentException(
-						"Version unsupported");
+					throw new ArgumentException("Version unsupported");
 
 				if (value < 3)
 					flags &= ~(HeaderFlags.ExtendedHeader |
@@ -246,8 +245,7 @@ namespace TagLib.Id3v2
 			get { return flags; }
 			set
 			{
-				if ((value & (HeaderFlags.ExtendedHeader | HeaderFlags.ExperimentalIndicator)) != 0 &&
-				    MajorVersion < 3)
+				if ((value & (HeaderFlags.ExtendedHeader | HeaderFlags.ExperimentalIndicator)) != 0 && MajorVersion < 3)
 					throw new ArgumentException("Feature only supported in version 2.3+", "value");
 
 				if ((value & HeaderFlags.FooterPresent) != 0 && MajorVersion < 3)

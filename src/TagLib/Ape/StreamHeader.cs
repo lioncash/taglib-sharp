@@ -164,7 +164,6 @@ namespace TagLib.Ape
 		#endregion
 
 
-
 		#region Public Static Fields
 
 		/// <summary>
@@ -181,7 +180,6 @@ namespace TagLib.Ape
 		public static readonly ReadOnlyByteVector FileIdentifier = "MAC ";
 
 		#endregion
-
 
 
 		#region Constructors
@@ -231,7 +229,6 @@ namespace TagLib.Ape
 		}
 
 		#endregion
-
 
 
 		#region Public Properties

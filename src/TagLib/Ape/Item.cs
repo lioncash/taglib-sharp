@@ -69,22 +69,22 @@ namespace TagLib.Ape
 		/// <summary>
 		///    Contains the item key.
 		/// </summary>
-		private string key = null;
+		private string key;
 
 		/// <summary>
 		///    Contains the item value.
 		/// </summary>
-		private ReadOnlyByteVector data = null;
+		private ReadOnlyByteVector data;
 
 		/// <summary>
 		///    Contains the item text.
 		/// </summary>
-		private string [] text = null;
+		private string[] text;
 
 		/// <summary>
 		///    Indicates whether or not the item is read only.
 		/// </summary>
-		private bool read_only = false;
+		private bool read_only;
 
 		/// <summary>
 		///    Contains the size of the item on disk.
@@ -92,7 +92,6 @@ namespace TagLib.Ape
 		private int size_on_disk;
 
 		#endregion
-
 
 
 		#region Constructors
@@ -438,7 +437,7 @@ namespace TagLib.Ape
 			output.Add(ByteVector.FromUInt((uint) result.Count, false));
 			output.Add(ByteVector.FromUInt(flags, false));
 			output.Add(ByteVector.FromString(key, StringType.UTF8));
-			output.Add((byte) 0);
+			output.Add(0);
 			output.Add(result);
 
 			size_on_disk = output.Count;

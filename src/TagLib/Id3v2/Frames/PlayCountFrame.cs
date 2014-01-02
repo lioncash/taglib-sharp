@@ -164,7 +164,7 @@ namespace TagLib.Id3v2
 		///    Contains the total number of times the file has been
 		///    played.
 		/// </summary>
-		private ulong play_count = 0;
+		private ulong play_count;
 
 		#endregion
 

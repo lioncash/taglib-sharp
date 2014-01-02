@@ -761,8 +761,10 @@ namespace TagLib.Ogg
 			get
 			{
 				foreach (XiphComment tag in tags)
+				{
 					if (tag != null && tag.TrackCount != 0)
 						return tag.TrackCount;
+				}
 
 				return 0;
 			}
@@ -796,8 +798,10 @@ namespace TagLib.Ogg
 			get
 			{
 				foreach (XiphComment tag in tags)
+				{
 					if (tag != null && tag.Disc != 0)
 						return tag.Disc;
+				}
 
 				return 0;
 			}
@@ -831,8 +835,10 @@ namespace TagLib.Ogg
 			get
 			{
 				foreach (XiphComment tag in tags)
+				{
 					if (tag != null && tag.DiscCount != 0)
 						return tag.DiscCount;
+				}
 
 				return 0;
 			}
@@ -950,8 +956,10 @@ namespace TagLib.Ogg
 			get
 			{
 				foreach (XiphComment tag in tags)
+				{
 					if (tag != null && tag.BeatsPerMinute != 0)
 						return tag.BeatsPerMinute;
+				}
 
 				return 0;
 			}

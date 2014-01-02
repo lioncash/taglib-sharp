@@ -131,7 +131,7 @@ namespace TagLib.Flac
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction, propertiesStyle)
+		public File(IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction, propertiesStyle)
 		{
 		}
 
@@ -148,7 +148,7 @@ namespace TagLib.Flac
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction) : base(abstraction)
+		public File(IFileAbstraction abstraction) : base(abstraction)
 		{
 		}
 
@@ -221,8 +221,7 @@ namespace TagLib.Flac
 					if (picture == null)
 						continue;
 
-					new_blocks.Add(new Block(BlockType.Picture,
-						new Picture(picture).Render()));
+					new_blocks.Add(new Block(BlockType.Picture, new Picture(picture).Render()));
 				}
 
 				// Get the length of the blocks.
@@ -602,8 +601,10 @@ namespace TagLib.Flac
 		public Ogg.XiphComment GetComment(bool create, Tag copy)
 		{
 			foreach (Tag t in Tags)
+			{
 				if (t is Ogg.XiphComment)
 					return t as Ogg.XiphComment;
+			}
 
 			if (!create)
 				return null;

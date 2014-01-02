@@ -235,11 +235,10 @@ namespace TagLib.Ogg
 		///    In order to remove all tags from a file, pass <see
 		///    cref="TagTypes.AllTags" /> as <paramref name="types" />.
 		/// </remarks>
-		public override void RemoveTags (TagLib.TagTypes types)
+		public override void RemoveTags(TagTypes types)
 		{
-			if ((types & TagLib.TagTypes.Xiph)
-				!= TagLib.TagTypes.None)
-				tag.Clear ();
+			if ((types & TagTypes.Xiph) != TagTypes.None)
+				tag.Clear();
 		}
 
 		/// <summary>
@@ -260,9 +259,9 @@ namespace TagLib.Ogg
 		///    matching tag was found and none was created, <see
 		///    langword="null" /> is returned.
 		/// </returns>
-		public override TagLib.Tag GetTag (TagLib.TagTypes type, bool create)
+		public override TagLib.Tag GetTag(TagTypes type, bool create)
 		{
-			if (type == TagLib.TagTypes.Xiph)
+			if (type == TagTypes.Xiph)
 			{
 				foreach (XiphComment comment in tag.Comments)
 					return comment;

@@ -38,7 +38,7 @@ namespace TagLib.Matroska
 		private uint depth;
 #pragma warning restore 414
 
-		private List<EBMLElement> unknown_elems = new List<EBMLElement> ();
+		private List<EBMLElement> unknown_elems = new List<EBMLElement>();
 
 		#endregion
 

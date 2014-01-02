@@ -50,7 +50,6 @@ namespace TagLib.Mpeg4
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -67,22 +66,21 @@ namespace TagLib.Mpeg4
 				throw new ArgumentNullException ("box");
 
 			meta_box = box.GetChild (BoxType.Meta) as IsoMetaBox;
-			if (meta_box == null) {
+			if (meta_box == null)
+			{
 				meta_box = new IsoMetaBox ("mdir", null);
 				box.AddChild (meta_box);
 			}
 
-			ilst_box = meta_box.GetChild (BoxType.Ilst)
-				as AppleItemListBox;
-
-			if (ilst_box == null) {
+			ilst_box = meta_box.GetChild (BoxType.Ilst) as AppleItemListBox;
+			if (ilst_box == null)
+			{
 				ilst_box = new AppleItemListBox ();
 				meta_box.AddChild (ilst_box);
 			}
 		}
 
 		#endregion
-
 
 
 		#region Public Methods
@@ -116,7 +114,6 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-
 
 
 		#region Public Methods
@@ -540,7 +537,6 @@ namespace TagLib.Mpeg4
 		#endregion
 
 
-
 		#region Internal Methods
 
 		/// <summary>
@@ -575,7 +571,6 @@ namespace TagLib.Mpeg4
 		#endregion
 
 
-
 		#region IEnumerable<Box>
 
 		/// <summary>
@@ -597,7 +592,6 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-
 
 
 		#region TagLib.Tag
@@ -1453,16 +1447,16 @@ namespace TagLib.Mpeg4
 		{
 			get
 			{
-				List<Picture> l = new List<Picture>();
+				List<Picture> pics = new List<Picture>();
 
 				foreach (AppleDataBox box in DataBoxes(BoxType.Covr))
 				{
 					Picture p = new Picture(box.Data);
 					p.Type = PictureType.FrontCover;
-					l.Add(p);
+					pics.Add(p);
 				}
 
-				return (Picture[]) l.ToArray();
+				return (Picture[]) pics.ToArray();
 			}
 			set
 			{
@@ -1475,8 +1469,7 @@ namespace TagLib.Mpeg4
 				AppleDataBox[] boxes = new AppleDataBox[value.Length];
 				for (int i = 0; i < value.Length; i ++)
 				{
-					uint type = (uint)
-						AppleDataBox.FlagType.ContainsData;
+					uint type = (uint) AppleDataBox.FlagType.ContainsData;
 
 					if (value[i].MimeType == "image/jpeg")
 						type = (uint) AppleDataBox.FlagType.ContainsJpegData;

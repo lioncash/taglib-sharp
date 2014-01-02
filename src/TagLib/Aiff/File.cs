@@ -112,7 +112,7 @@ namespace TagLib.Aiff
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File(string path, ReadStyle propertiesStyle) : this(new File.LocalFileAbstraction(path), propertiesStyle)
+		public File(string path, ReadStyle propertiesStyle) : this(new LocalFileAbstraction(path), propertiesStyle)
 		{
 		}
 
@@ -150,15 +150,14 @@ namespace TagLib.Aiff
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
+		public File(IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
 		{
 			Mode = AccessMode.Read;
 			try
 			{
 				uint aiff_size;
 				long tag_start, tag_end;
-				Read(true, propertiesStyle, out aiff_size,
-				     out tag_start, out tag_end);
+				Read(true, propertiesStyle, out aiff_size, out tag_start, out tag_end);
 			}
 			finally
 			{
@@ -183,7 +182,7 @@ namespace TagLib.Aiff
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction) : this(abstraction, ReadStyle.Average)
+		public File(IFileAbstraction abstraction) : this(abstraction, ReadStyle.Average)
 		{
 		}
 
@@ -243,9 +242,7 @@ namespace TagLib.Aiff
 							tag_data.Add(0);
 
 						data.Add("ID3 ");
-						data.Add(ByteVector.FromUInt(
-						         	(uint) tag_data.Count,
-						         	true));
+						data.Add(ByteVector.FromUInt((uint) tag_data.Count, true));
 						data.Add(tag_data);
 					}
 				}
@@ -254,8 +251,7 @@ namespace TagLib.Aiff
 				// size and the area tagging is in.
 				uint aiff_size;
 				long tag_start, tag_end;
-				Read(false, ReadStyle.None, out aiff_size,
-				     out tag_start, out tag_end);
+				Read(false, ReadStyle.None, out aiff_size, out tag_start, out tag_end);
 
 				// If tagging info cannot be found, place it at
 				// the end of the file.
@@ -268,8 +264,7 @@ namespace TagLib.Aiff
 				Insert(data, tag_start, length);
 
 				// If the data size changed update the aiff size.
-				if (data.Count - length != 0 &&
-				    tag_start <= aiff_size)
+				if (data.Count - length != 0 && tag_start <= aiff_size)
 				{
 					// Depending, if a Tag has been added or removed,
 					// the length needs to be adjusted
@@ -282,9 +277,7 @@ namespace TagLib.Aiff
 						length -= 8;
 					}
 
-					Insert(ByteVector.FromUInt((uint)
-					                           (aiff_size + data.Count - length),
-					                           true), 4, 4);
+					Insert(ByteVector.FromUInt((uint) (aiff_size + data.Count - length), true), 4, 4);
 				}
 				// Update the tag types.
 				TagTypesOnDisk = TagTypes;
@@ -388,29 +381,24 @@ namespace TagLib.Aiff
 		///    The file does not begin with <see cref="FileIdentifier"
 		///    />.
 		/// </exception>
-		private void Read(bool read_tags, ReadStyle style,
-		                  out uint aiff_size, out long tag_start,
-		                  out long tag_end)
+		private void Read(bool read_tags, ReadStyle style, out uint aiff_size, out long tag_start, out long tag_end)
 		{
 			Seek(0);
 			if (ReadBlock(4) != FileIdentifier)
-				throw new CorruptFileException(
-					"File does not begin with AIFF identifier");
+				throw new CorruptFileException("File does not begin with AIFF identifier");
 
 			aiff_size = ReadBlock(4).ToUInt(true);
 			tag_start = -1;
 			tag_end = -1;
 
 			// Get the properties of the file
-			if (header_block == null &&
-			    style != ReadStyle.None)
+			if (header_block == null && style != ReadStyle.None)
 			{
 				long common_chunk_pos = Find(CommIdentifier, 0);
 
 				if (common_chunk_pos == -1)
 				{
-					throw new CorruptFileException(
-						"No Common chunk available in AIFF file.");
+					throw new CorruptFileException("No Common chunk available in AIFF file.");
 				}
 
 				Seek(common_chunk_pos);
@@ -438,8 +426,7 @@ namespace TagLib.Aiff
 			sound_chunk_pos = Find(SoundIdentifier, 0);
 			if (sound_chunk_pos == -1)
 			{
-				throw new CorruptFileException(
-					"No Sound chunk available in AIFF file.");
+				throw new CorruptFileException("No Sound chunk available in AIFF file.");
 			}
 
 			// Get the length of the Sound chunk and use this as a start value to look for the ID3 chunk
@@ -456,8 +443,7 @@ namespace TagLib.Aiff
 			{
 				if (read_tags && tag == null)
 				{
-					tag = new Id3v2.Tag(this,
-					                    id3_chunk_pos + 8);
+					tag = new Id3v2.Tag(this, id3_chunk_pos + 8);
 				}
 
 				// Get the length of the tag out of the ID3 chunk

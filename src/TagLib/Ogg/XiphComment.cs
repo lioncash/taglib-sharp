@@ -61,7 +61,6 @@ namespace TagLib.Ogg
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -93,7 +92,6 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-
 
 
 		#region Public Methods
@@ -291,7 +289,6 @@ namespace TagLib.Ogg
 		#endregion
 
 
-
 		#region Public Properties
 
 		/// <summary>
@@ -327,7 +324,6 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-
 
 
 		#region Protected Methods
@@ -400,7 +396,6 @@ namespace TagLib.Ogg
 		#endregion
 
 
-
 		#region IEnumerable
 
 		/// <summary>
@@ -422,7 +417,6 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-
 
 
 		#region TagLib.Tag

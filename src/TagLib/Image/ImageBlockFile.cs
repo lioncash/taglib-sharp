@@ -216,7 +216,6 @@ namespace TagLib.Image
 						{
 							return;
 						}
-
 					}
 
 					return;

@@ -56,7 +56,6 @@ namespace TagLib.Mpeg
 		#endregion
 
 
-
 		#region Public Fields
 
 		/// <summary>
@@ -75,13 +74,11 @@ namespace TagLib.Mpeg
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
-		///    cref="VBRIHeader" /> with a specified frame count and
-		///    size.
+		///    cref="VBRIHeader" /> with a specified frame count and size.
 		/// </summary>
 		/// <param name="frame">
 		///    A <see cref="uint" /> value specifying the frame count of
@@ -138,7 +135,6 @@ namespace TagLib.Mpeg
 		#endregion
 
 
-
 		#region Public Properties
 
 		/// <summary>
@@ -181,7 +177,6 @@ namespace TagLib.Mpeg
 		}
 
 		#endregion
-
 
 
 		#region Public Static Methods

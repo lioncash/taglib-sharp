@@ -194,13 +194,14 @@ namespace TagLib.Asf
 		{
 			foreach (DescriptionRecord rec in records)
 			{
-				if (rec.LanguageListIndex != languageListIndex ||
-				    rec.StreamNumber != streamNumber)
+				if (rec.LanguageListIndex != languageListIndex || rec.StreamNumber != streamNumber)
 					continue;
 
 				foreach (string name in names)
+				{
 					if (rec.Name == name)
 						yield return rec;
+				}
 			}
 		}
 

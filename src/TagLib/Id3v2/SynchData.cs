@@ -115,8 +115,10 @@ namespace TagLib.Id3v2
 				throw new ArgumentNullException("data");
 
 			for (int i = data.Count - 2; i >= 0; i --)
+			{
 				if (data[i] == 0xFF && (data[i + 1] == 0 || (data[i + 1] & 0xE0) != 0))
 					data.Insert(i + 1, 0);
+			}
 		}
 
 		/// <summary>
@@ -146,10 +148,12 @@ namespace TagLib.Id3v2
 				i += data[i] == 0xFF && data[i + 1] == 0 ? 2 : 1;
 				j++;
 			}
+
 			if (i < data.Count)
 			{
 				data[j++] = data[i++];
 			}
+
 			data.Resize(j);
 		}
 	}

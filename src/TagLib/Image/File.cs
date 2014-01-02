@@ -135,7 +135,7 @@ namespace TagLib.Image
 		///    In order to remove all tags from a file, pass <see
 		///    cref="TagTypes.AllTags" /> as <paramref name="types" />.
 		/// </remarks>
-		public override void RemoveTags(TagLib.TagTypes types)
+		public override void RemoveTags(TagTypes types)
 		{
 			List<ImageTag> to_delete = new List<ImageTag>();
 
@@ -167,7 +167,7 @@ namespace TagLib.Image
 		///    matching tag was found and none was created, <see
 		///    langword="null" /> is returned.
 		/// </returns>
-		public override TagLib.Tag GetTag(TagLib.TagTypes type, bool create)
+		public override TagLib.Tag GetTag(TagTypes type, bool create)
 		{
 			foreach (ImageTag tag in ImageTag.AllTags)
 			{
@@ -222,7 +222,7 @@ namespace TagLib.Image
 			EnsureAvailableTags();
 			var from_tag = file.ImageTag;
 			var to_tag = ImageTag;
-			foreach (var prop in typeof (TagLib.Image.ImageTag).GetProperties())
+			foreach (var prop in typeof(ImageTag).GetProperties())
 			{
 				if (!prop.CanWrite || prop.Name == "TagTypes")
 					continue;

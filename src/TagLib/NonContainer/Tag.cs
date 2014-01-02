@@ -53,7 +53,6 @@ namespace TagLib.NonContainer
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -78,7 +77,6 @@ namespace TagLib.NonContainer
 		}
 
 		#endregion
-
 
 
 		#region Public Properties
@@ -147,7 +145,6 @@ namespace TagLib.NonContainer
 		#endregion
 
 
-
 		#region Public Methods
 
 		/// <summary>
@@ -167,13 +164,13 @@ namespace TagLib.NonContainer
 		{
 			foreach (TagLib.Tag t in Tags)
 			{
-				if (type == TagTypes.Id3v1 && t is TagLib.Id3v1.Tag)
+				if (type == TagTypes.Id3v1 && t is Id3v1.Tag)
 					return t;
 
-				if (type == TagTypes.Id3v2 && t is TagLib.Id3v2.Tag)
+				if (type == TagTypes.Id3v2 && t is Id3v2.Tag)
 					return t;
 
-				if (type == TagTypes.Ape && t is TagLib.Ape.Tag)
+				if (type == TagTypes.Ape && t is Ape.Tag)
 					return t;
 			}
 

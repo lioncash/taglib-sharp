@@ -44,7 +44,6 @@ namespace TagLib.MusePack
 		#endregion
 
 
-
 		#region Private Fields
 
 		/// <summary>
@@ -75,7 +74,6 @@ namespace TagLib.MusePack
 		#endregion
 
 
-
 		#region Public Static Fields
 
 		/// <summary>
@@ -92,7 +90,6 @@ namespace TagLib.MusePack
 		public static readonly ReadOnlyByteVector FileIdentifier = "MP+";
 
 		#endregion
-
 
 
 		#region Constructors
@@ -153,12 +150,10 @@ namespace TagLib.MusePack
 		#endregion
 
 
-
 		#region Public Properties
 
 		/// <summary>
-		///    Gets the duration of the media represented by the current
-		///    instance.
+		///    Gets the duration of the media represented by the current instance.
 		/// </summary>
 		/// <value>
 		///    A <see cref="TimeSpan" /> containing the duration of the
@@ -171,9 +166,7 @@ namespace TagLib.MusePack
 				if (sample_rate <= 0 && stream_length <= 0)
 					return TimeSpan.Zero;
 
-				return TimeSpan.FromSeconds(
-					(double) (frames*1152 - 576)/
-					(double) sample_rate + 0.5);
+				return TimeSpan.FromSeconds((double) (frames*1152 - 576)/ (double) sample_rate + 0.5);
 			}
 		}
 
@@ -266,7 +259,6 @@ namespace TagLib.MusePack
 		#endregion
 
 
-
 		#region IEquatable
 
 		/// <summary>
@@ -280,8 +272,7 @@ namespace TagLib.MusePack
 		{
 			unchecked
 			{
-				return (int) (header_data ^ sample_rate ^
-				              frames ^ version);
+				return (int) (header_data ^ sample_rate ^ frames ^ version);
 			}
 		}
 

@@ -41,25 +41,25 @@ namespace TagLib.IFD.Makernotes
 		///    A <see cref="File"/> to read from.
 		/// </param>
 		/// <param name="is_bigendian">
-		///     A <see cref="System.Boolean"/>, it must be true, if the data of the IFD should be
-		///     read as bigendian, otherwise false.
+		///    A <see cref="System.Boolean"/>, it must be true, if the data of the IFD should be
+		///    read as bigendian, otherwise false.
 		/// </param>
 		/// <param name="structure">
 		///    A <see cref="IFDStructure"/> that will be populated.
 		/// </param>
 		/// <param name="base_offset">
-		///     A <see cref="System.Int64"/> value describing the base were the IFD offsets
-		///     refer to. E.g. in Jpegs the IFD are located in an Segment and the offsets
-		///     inside the IFD refer from the beginning of this segment. So <paramref
-		///     name="base_offset"/> must contain the beginning of the segment.
+		///    A <see cref="System.Int64"/> value describing the base were the IFD offsets
+		///    refer to. E.g. in Jpegs the IFD are located in an Segment and the offsets
+		///    inside the IFD refer from the beginning of this segment. So <paramref
+		///    name="base_offset"/> must contain the beginning of the segment.
 		/// </param>
 		/// <param name="ifd_offset">
-		///     A <see cref="System.UInt32"/> value with the beginning of the IFD relative to
-		///     <paramref name="base_offset"/>.
+		///    A <see cref="System.UInt32"/> value with the beginning of the IFD relative to
+		///    <paramref name="base_offset"/>.
 		/// </param>
 		/// <param name="max_offset">
-		/// 	A <see cref="System.UInt32"/> value with maximal possible offset. This is to limit
-		///     the size of the possible data;
+		///    A <see cref="System.UInt32"/> value with maximal possible offset. This is to limit
+		///    the size of the possible data;
 		/// </param>
 		public Nikon3MakernoteReader(File file, bool is_bigendian, IFDStructure structure, long base_offset, uint ifd_offset, uint max_offset)
 			: base(file, is_bigendian, structure, base_offset, ifd_offset, max_offset)

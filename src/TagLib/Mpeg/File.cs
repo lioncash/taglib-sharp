@@ -106,7 +106,6 @@ namespace TagLib.Mpeg
 		#endregion
 
 
-
 		#region Private Fields
 
 		/// <summary>
@@ -127,17 +126,17 @@ namespace TagLib.Mpeg
 		/// <summary>
 		///    Indicates whether or not audio was found.
 		/// </summary>
-		private bool video_found = false;
+		private bool video_found;
 
 		/// <summary>
 		///    Indicates whether or not video was found.
 		/// </summary>
-		private bool audio_found = false;
+		private bool audio_found;
 
 		/// <summary>
 		///    Contains the start time of the file.
 		/// </summary>
-		private double? start_time = null;
+		private double? start_time;
 
 		/// <summary>
 		///    Contains the end time of the file.
@@ -145,7 +144,6 @@ namespace TagLib.Mpeg
 		private double end_time;
 
 		#endregion
-
 
 
 		#region Constructors
@@ -206,8 +204,7 @@ namespace TagLib.Mpeg
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File (File.IFileAbstraction abstraction,
-		             ReadStyle propertiesStyle)
+		public File (IFileAbstraction abstraction, ReadStyle propertiesStyle)
 			: base (abstraction, propertiesStyle)
 		{
 		}
@@ -225,13 +222,12 @@ namespace TagLib.Mpeg
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File (File.IFileAbstraction abstraction)
+		public File (IFileAbstraction abstraction)
 			: base (abstraction)
 		{
 		}
 
 		#endregion
-
 
 
 		#region Public Methods
@@ -271,13 +267,13 @@ namespace TagLib.Mpeg
 			switch (type)
 			{
 				case TagTypes.Id3v1:
-					return EndTag.AddTag (type, Tag);
+					return EndTag.AddTag(type, Tag);
 
 				case TagTypes.Id3v2:
-					return EndTag.AddTag (type, Tag);
+					return EndTag.AddTag(type, Tag);
 
 				case TagTypes.Ape:
-					return EndTag.AddTag (type, Tag);
+					return EndTag.AddTag(type, Tag);
 
 				default:
 					return null;
@@ -285,7 +281,6 @@ namespace TagLib.Mpeg
 		}
 
 		#endregion
-
 
 
 		#region Protected Methods
@@ -303,7 +298,7 @@ namespace TagLib.Mpeg
 		///    of accuracy to read the media properties, or <see
 		///    cref="ReadStyle.None" /> to ignore the properties.
 		/// </param>
-		protected override void ReadStart (long start, ReadStyle propertiesStyle)
+		protected override void ReadStart(long start, ReadStyle propertiesStyle)
 		{
 			if (propertiesStyle == ReadStyle.None)
 				return;
@@ -502,7 +497,7 @@ namespace TagLib.Mpeg
 		/// </remarks>
 		protected void ReadSystemFile(long position)
 		{
-			int sanity_limit = 100;
+			const int sanity_limit = 100;
 
 			for (int i = 0; i < sanity_limit && (start_time == null || !audio_found || !video_found); i++)
 			{
@@ -539,7 +534,6 @@ namespace TagLib.Mpeg
 		}
 
 		#endregion
-
 
 
 		#region Private Methods

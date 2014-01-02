@@ -83,9 +83,7 @@ namespace TagLib.Id3v2
 				throw new ArgumentNullException("data");
 
 			if (data.Count < ((version < 3) ? 3 : 4))
-				throw new ArgumentException(
-					"Data contains an incomplete identifier.",
-					"data");
+				throw new ArgumentException("Data contains an incomplete identifier.", "data");
 
 			header = new FrameHeader(data, version);
 		}

@@ -150,9 +150,11 @@ namespace TagLib.Asf
 		/// </param>
 		public void RemoveDescriptors(string name)
 		{
-			for (int i = descriptors.Count - 1; i >= 0; i --)
+			for (int i = descriptors.Count - 1; i >= 0; i--)
+			{
 				if (name == descriptors[i].Name)
 					descriptors.RemoveAt(i);
+			}
 		}
 
 		/// <summary>
@@ -177,9 +179,13 @@ namespace TagLib.Asf
 				throw new ArgumentNullException("names");
 
 			foreach (string name in names)
+			{
 				foreach (ContentDescriptor desc in descriptors)
+				{
 					if (desc.Name == name)
 						yield return desc;
+				}
+			}
 		}
 
 		/// <summary>
@@ -254,14 +260,14 @@ namespace TagLib.Asf
 		///    A <see cref="T:System.Collections.IEnumerator`1" /> for
 		///    enumerating through the content descriptors.
 		/// </returns>
-		public IEnumerator<ContentDescriptor> GetEnumerator ()
+		public IEnumerator<ContentDescriptor> GetEnumerator()
 		{
-			return descriptors.GetEnumerator ();
+			return descriptors.GetEnumerator();
 		}
 
-		IEnumerator IEnumerable.GetEnumerator ()
+		IEnumerator IEnumerable.GetEnumerator()
 		{
-			return descriptors.GetEnumerator ();
+			return descriptors.GetEnumerator();
 		}
 
 		#endregion

@@ -96,8 +96,7 @@ namespace TagLib.Aiff
 		/// <value>
 		///    "COMM"
 		/// </value>
-		public static readonly ReadOnlyByteVector FileIdentifier =
-			"COMM";
+		public static readonly ReadOnlyByteVector FileIdentifier = "COMM";
 
 		#endregion
 
@@ -224,9 +223,7 @@ namespace TagLib.Aiff
 				if (sample_rate <= 0 || total_frames <= 0)
 					return TimeSpan.Zero;
 
-				return TimeSpan.FromSeconds(
-					(double) total_frames/
-					(double) sample_rate);
+				return TimeSpan.FromSeconds((double) total_frames/ (double) sample_rate);
 			}
 		}
 

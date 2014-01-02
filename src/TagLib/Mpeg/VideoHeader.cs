@@ -44,7 +44,6 @@ namespace TagLib.Mpeg
 		#endregion
 
 
-
 		#region Private Fields
 
 		/// <summary>
@@ -69,7 +68,6 @@ namespace TagLib.Mpeg
 		private int bitrate;
 
 		#endregion
-
 
 
 		#region Constructors
@@ -110,7 +108,6 @@ namespace TagLib.Mpeg
 		}
 
 		#endregion
-
 
 
 		#region Public Properties

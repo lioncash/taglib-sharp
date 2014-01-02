@@ -110,8 +110,10 @@ namespace TagLib.Asf
 			get
 			{
 				foreach (Object child in children)
+				{
 					if (child is HeaderExtensionObject)
 						return child as HeaderExtensionObject;
+				}
 
 				return null;
 			}

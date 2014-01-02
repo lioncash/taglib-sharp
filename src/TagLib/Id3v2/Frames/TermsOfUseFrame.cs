@@ -45,12 +45,12 @@ namespace TagLib.Id3v2
 		///    Contains the ISO-639-2 language code of the current
 		///    instance.
 		/// </summary>
-		private string language = null;
+		private string language;
 
 		/// <summary>
 		///    Contains the text in the current instance.
 		/// </summary>
-		private string text = null;
+		private string text;
 
 		#endregion
 
@@ -75,8 +75,7 @@ namespace TagLib.Id3v2
 		///    the tag. Consider using <see cref="Get" /> for more
 		///    integrated frame creation.
 		/// </remarks>
-		public TermsOfUseFrame(string language, StringType encoding)
-			: base(FrameType.USER, 4)
+		public TermsOfUseFrame(string language, StringType encoding) : base(FrameType.USER, 4)
 		{
 			this.encoding = encoding;
 			this.language = language;
@@ -95,8 +94,7 @@ namespace TagLib.Id3v2
 		///    the tag. Consider using <see cref="Get" /> for more
 		///    integrated frame creation.
 		/// </remarks>
-		public TermsOfUseFrame(string language)
-			: base(FrameType.USER, 4)
+		public TermsOfUseFrame(string language) : base(FrameType.USER, 4)
 		{
 			this.language = language;
 		}
@@ -114,8 +112,7 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    raw frame is encoded in.
 		/// </param>
-		public TermsOfUseFrame(ByteVector data, byte version)
-			: base(data, version)
+		public TermsOfUseFrame(ByteVector data, byte version) : base(data, version)
 		{
 			SetData(data, 0, version, true);
 		}
@@ -141,8 +138,7 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    raw frame is encoded in.
 		/// </param>
-		protected internal TermsOfUseFrame(ByteVector data, int offset, FrameHeader header, byte version)
-			: base(header)
+		protected internal TermsOfUseFrame(ByteVector data, int offset, FrameHeader header, byte version) : base(header)
 		{
 			SetData(data, offset, version, false);
 		}

@@ -47,6 +47,7 @@ namespace TagLib.Jpeg
 	[SupportedMimeType("image/jpeg")]
 	public class File : TagLib.Image.ImageBlockFile
 	{
+		#region Private Static Fields
 
 		/// <summary>
 		///    The magic bits used to recognize an Exif segment
@@ -73,6 +74,7 @@ namespace TagLib.Jpeg
 			0x01, 0x00, 0x48, 0x00, 0x48, 0x00, 0x00
 		};
 
+		#endregion
 
 		#region Private Fields
 
@@ -123,7 +125,7 @@ namespace TagLib.Jpeg
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File(string path, ReadStyle propertiesStyle) : this(new File.LocalFileAbstraction(path), propertiesStyle)
+		public File(string path, ReadStyle propertiesStyle) : this(new LocalFileAbstraction(path), propertiesStyle)
 		{
 		}
 
@@ -161,7 +163,7 @@ namespace TagLib.Jpeg
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
+		public File(IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
 		{
 			Read(propertiesStyle);
 		}
@@ -208,7 +210,7 @@ namespace TagLib.Jpeg
 		///  Gets a tag of a specified type from the current instance, optionally creating a
 		/// new tag if possible.
 		/// </summary>
-		public override TagLib.Tag GetTag(TagLib.TagTypes type, bool create)
+		public override TagLib.Tag GetTag(TagTypes type, bool create)
 		{
 			if (type == TagTypes.XMP)
 			{
@@ -475,7 +477,7 @@ namespace TagLib.Jpeg
 			const int exif_header_length = 14;
 
 			// could be an Exif segment
-			if ((ImageTag.TagTypes & TagLib.TagTypes.TiffIFD) == 0x00 && length >= exif_header_length)
+			if ((ImageTag.TagTypes & TagTypes.TiffIFD) == 0x00 && length >= exif_header_length)
 			{
 				data = ReadBlock(exif_header_length);
 
@@ -503,7 +505,7 @@ namespace TagLib.Jpeg
 			int xmp_header_length = XmpTag.XAP_NS.Length + 1;
 
 			// could be an Xmp segment
-			if ((ImageTag.TagTypes & TagLib.TagTypes.XMP) == 0x00 && length >= xmp_header_length)
+			if ((ImageTag.TagTypes & TagTypes.XMP) == 0x00 && length >= xmp_header_length)
 			{
 				// if already data is read for determining the Exif segment,
 				// just read the remaining bytes.
@@ -684,7 +686,7 @@ namespace TagLib.Jpeg
 		/// </param>
 		private void ReadCOMSegment(int length)
 		{
-			if ((ImageTag.TagTypes & TagLib.TagTypes.JpegComment) != 0x00)
+			if ((ImageTag.TagTypes & TagTypes.JpegComment) != 0x00)
 				return;
 
 			long position = Tell;

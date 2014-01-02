@@ -52,22 +52,22 @@ namespace TagLib.Id3v2
 		/// <summary>
 		///    Contains the mime type of <see cref="data" />.
 		/// </summary>
-		private string mime_type = null;
+		private string mime_type;
 
 		/// <summary>
 		///    Contains the original file name.
 		/// </summary>
-		string file_name = null;
+		string file_name;
 
 		/// <summary>
 		///    Contains the description.
 		/// </summary>
-		private string description = null;
+		private string description;
 
 		/// <summary>
 		///    Contains the data.
 		/// </summary>
-		private ByteVector data = null;
+		private ByteVector data;
 
 		#endregion
 
@@ -342,10 +342,7 @@ namespace TagLib.Id3v2
 
 			encoding = (StringType) data[start++];
 
-			int end = data.Find(
-				ByteVector.TextDelimiter(StringType.Latin1),
-				start);
-
+			int end = data.Find(ByteVector.TextDelimiter(StringType.Latin1), start);
 			if (end < start)
 				return;
 
@@ -354,14 +351,12 @@ namespace TagLib.Id3v2
 			ByteVector delim = ByteVector.TextDelimiter(encoding);
 			start = end + 1;
 			end = data.Find(delim, start, delim.Count);
-
 			if (end < start)
 				return;
 
 			file_name = data.ToString(encoding, start, end - start);
 			start = end + delim.Count;
 			end = data.Find(delim, start, delim.Count);
-
 			if (end < start)
 				return;
 
@@ -428,6 +423,7 @@ namespace TagLib.Id3v2
 			frame.description = description;
 			if (data != null)
 				frame.data = new ByteVector(data);
+
 			return frame;
 		}
 

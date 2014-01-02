@@ -59,7 +59,7 @@ namespace TagLib.Id3v2
 		///    Indicates whether or not all tags should be saved in
 		///    <see cref="default_version" />.
 		/// </summary>
-		private static bool force_default_version = false;
+		private static bool force_default_version;
 
 		/// <summary>
 		///    Specifies the default string type to use for new frames.
@@ -70,7 +70,7 @@ namespace TagLib.Id3v2
 		///    Specifies whether or not all frames shoudl be saved in
 		///    <see cref="default_string_type" />.
 		/// </summary>
-		private static bool force_default_string_type = false;
+		private static bool force_default_string_type;
 
 		/// <summary>
 		///    Specifies whether or not numeric genres should be used
@@ -79,7 +79,6 @@ namespace TagLib.Id3v2
 		private static bool use_numeric_genres = true;
 
 		#endregion
-
 
 
 		#region Private Fields
@@ -92,7 +91,7 @@ namespace TagLib.Id3v2
 		/// <summary>
 		///    Contains the tag's extended header.
 		/// </summary>
-		private ExtendedHeader extended_header = null;
+		private ExtendedHeader extended_header;
 
 		/// <summary>
 		///    Contains the tag's frames.
@@ -100,7 +99,6 @@ namespace TagLib.Id3v2
 		private List<Frame> frame_list = new List<Frame>();
 
 		#endregion
-
 
 
 		#region Constructors
@@ -183,7 +181,6 @@ namespace TagLib.Id3v2
 		}
 
 		#endregion
-
 
 
 		#region Public Methods
@@ -412,35 +409,32 @@ namespace TagLib.Id3v2
 		/// <exception cref="ArgumentException">
 		///    <paramref name="ident" /> is not exactly four bytes long.
 		/// </exception>
-		public void SetTextFrame (ByteVector ident,
-		                          params string [] text)
+		public void SetTextFrame (ByteVector ident, params string [] text)
 		{
 			if (ident == null)
-				throw new ArgumentNullException ("ident");
+				throw new ArgumentNullException("ident");
 
 			if (ident.Count != 4)
-				throw new ArgumentException (
-					"Identifier must be four bytes long.",
-					"ident");
+				throw new ArgumentException("Identifier must be four bytes long.", "ident");
 
 			bool empty = true;
 
 			if (text != null)
 			{
-				for (int i = 0; empty && i < text.Length; i ++)
+				for (int i = 0; empty && i < text.Length; i++)
 				{
-					if (!string.IsNullOrEmpty (text [i]))
+					if (!string.IsNullOrEmpty(text [i]))
 						empty = false;
 				}
 			}
 
 			if (empty)
 			{
-				RemoveFrames (ident);
+				RemoveFrames(ident);
 				return;
 			}
 
-			TextInformationFrame frame = TextInformationFrame.Get (this, ident, true);
+			TextInformationFrame frame = TextInformationFrame.Get(this, ident, true);
 
 			frame.Text = text;
 			frame.TextEncoding = DefaultEncoding;
@@ -519,8 +513,7 @@ namespace TagLib.Id3v2
 			else if (count != 0)
 			{
 				SetTextFrame(ident, string.Format(
-					CultureInfo.InvariantCulture, "{0}/{1}",
-					number, count));
+					CultureInfo.InvariantCulture, "{0}/{1}", number, count));
 			}
 			else
 			{
@@ -612,7 +605,6 @@ namespace TagLib.Id3v2
 		#endregion
 
 
-
 		#region Public Properties
 
 		/// <summary>
@@ -656,7 +648,6 @@ namespace TagLib.Id3v2
 		}
 
 		#endregion
-
 
 
 		#region Public Static Properties
@@ -774,7 +765,6 @@ namespace TagLib.Id3v2
 		}
 
 		#endregion
-
 
 
 		#region Protected Methods
@@ -977,7 +967,6 @@ namespace TagLib.Id3v2
 		#endregion
 
 
-
 		#region Private Methods
 
 		// TODO: These should become public some day.
@@ -1146,8 +1135,8 @@ namespace TagLib.Id3v2
 		/// </summary>
 		/// <param name="owner">String containing the Owner field</param>
 		/// <param name="text">String containing the text to set for the frame</param>
-		private void SetUfidText(string owner, string text) {
-
+		private void SetUfidText(string owner, string text)
+		{
 			//Get a UFID frame, create if necessary
 			var frame = UniqueFileIdentifierFrame.Get(this, owner, true);
 
@@ -1201,7 +1190,6 @@ namespace TagLib.Id3v2
 		#endregion
 
 
-
 		#region IEnumerable
 
 		/// <summary>
@@ -1222,7 +1210,6 @@ namespace TagLib.Id3v2
 		}
 
 		#endregion
-
 
 
 		#region TagLib.Tag
@@ -1331,7 +1318,8 @@ namespace TagLib.Id3v2
 		///    This property is implemented using the "TSO2" Text
 		///    Information Frame. http://www.id3.org/iTunes
 		/// </remarks>
-		public override string [] AlbumArtistsSort {
+		public override string [] AlbumArtistsSort
+		{
 			get {return GetTextAsArray (FrameType.TSO2);}
 			set {SetTextFrame (FrameType.TSO2, value);}
 		}
@@ -1390,7 +1378,8 @@ namespace TagLib.Id3v2
 		///    This property is implemented using the "TSOC" Text
 		///    Information Frame. http://www.id3.org/id3v2.4.0-frames
 		/// </remarks>
-		public override string [] ComposersSort {
+		public override string [] ComposersSort
+		{
 			get {return GetTextAsArray (FrameType.TSOC);}
 			set {SetTextFrame (FrameType.TSOC, value);}
 		}
@@ -2164,8 +2153,7 @@ namespace TagLib.Id3v2
 			get
 			{
 				return new List<AttachedPictureFrame>(
-					GetFrames<AttachedPictureFrame>(
-						FrameType.APIC)).ToArray();
+					GetFrames<AttachedPictureFrame>(FrameType.APIC)).ToArray();
 			}
 
 			set
@@ -2305,7 +2293,6 @@ namespace TagLib.Id3v2
 		}
 
 		#endregion
-
 
 
 		#region ICloneable

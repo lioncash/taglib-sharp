@@ -57,7 +57,7 @@ namespace TagLib.Id3v2
 		/// <summary>
 		///    Contains the mime type of <see cref="data" />.
 		/// </summary>
-		private string mime_type = null;
+		private string mime_type;
 
 		/// <summary>
 		///    Contains the type of picture.
@@ -67,12 +67,12 @@ namespace TagLib.Id3v2
 		/// <summary>
 		///    Contains the description.
 		/// </summary>
-		private string description = null;
+		private string description;
 
 		/// <summary>
 		///    Contains the picture data.
 		/// </summary>
-		private ByteVector data = null;
+		private ByteVector data;
 
 		/// <summary>
 		///    Contains the raw field data of the current instance as
@@ -86,13 +86,13 @@ namespace TagLib.Id3v2
 		///    all cases, the raw data is stored here until it is
 		///    needed. This speeds up the file read time significantly.
 		/// </remarks>
-		private ByteVector raw_data = null;
+		private ByteVector raw_data;
 
 		/// <summary>
 		///    Contains the ID3v2 version <see cref="raw_data" /> is
 		///    stored in.
 		/// </summary>
-		private byte raw_version = 0;
+		private byte raw_version;
 
 		#endregion
 
@@ -174,11 +174,10 @@ namespace TagLib.Id3v2
 		/// }
 		///    </code>
 		/// </example>
-		public AttachedPictureFrame (IPicture picture)
-			: base(FrameType.APIC, 4)
+		public AttachedPictureFrame(IPicture picture) : base(FrameType.APIC, 4)
 		{
 			if (picture == null)
-				throw new ArgumentNullException ("picture");
+				throw new ArgumentNullException("picture");
 
 			mime_type   = picture.MimeType;
 			type        = picture.Type;
@@ -225,10 +224,10 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    raw frame is encoded in.
 		/// </param>
-		protected internal AttachedPictureFrame (ByteVector data, int offset, FrameHeader header, byte version)
+		protected internal AttachedPictureFrame(ByteVector data, int offset, FrameHeader header, byte version)
 			: base(header)
 		{
-			SetData (data, offset, version, false);
+			SetData(data, offset, version, false);
 		}
 
 		#endregion
@@ -697,10 +696,13 @@ namespace TagLib.Id3v2
 			frame.mime_type = mime_type;
 			frame.type = type;
 			frame.description = description;
+
 			if (data != null)
 				frame.data = new ByteVector(data);
+
 			if (raw_data != null)
 				frame.data = new ByteVector(raw_data);
+
 			frame.raw_version = raw_version;
 			return frame;
 		}

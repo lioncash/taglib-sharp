@@ -739,8 +739,7 @@ namespace TagLib.Asf
 					int closing = genre.IndexOf(')');
 					if (closing > 0 && genre[0] == '(' &&
 					    byte.TryParse(genre.Substring(1, closing - 1), out genre_id))
-						genre = TagLib.Genres
-							.IndexToAudio(genre_id);
+						genre = TagLib.Genres.IndexToAudio(genre_id);
 
 					result[i] = genre;
 				}
@@ -774,10 +773,7 @@ namespace TagLib.Asf
 					return 0;
 
 				uint value;
-				if (uint.TryParse(text.Substring(0, 4),
-					NumberStyles.Integer,
-					CultureInfo.InvariantCulture,
-					out value))
+				if (uint.TryParse(text.Substring(0, 4), NumberStyles.Integer, CultureInfo.InvariantCulture, out value))
 					return value;
 
 				return 0;
@@ -1341,6 +1337,7 @@ namespace TagLib.Asf
 					DescriptionRecord[] records = new DescriptionRecord[pics.Count];
 					for (int i = 0; i < pics.Count; i ++)
 						records[i] = new DescriptionRecord(0, 0, "WM/Picture", pics[i]);
+
 					RemoveDescriptors("WM/Picture");
 					metadata_library.SetRecords(0, 0, "WM/Picture", records);
 				}
@@ -1349,6 +1346,7 @@ namespace TagLib.Asf
 					ContentDescriptor[] descs = new ContentDescriptor[pics.Count];
 					for (int i = 0; i < pics.Count; i ++)
 						descs[i] = new ContentDescriptor("WM/Picture", pics[i]);
+
 					metadata_library.RemoveRecords(0, 0, "WM/Picture");
 					SetDescriptors("WM/Picture", descs);
 				}

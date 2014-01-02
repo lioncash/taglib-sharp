@@ -92,7 +92,6 @@ namespace TagLib.Riff
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -164,7 +163,6 @@ namespace TagLib.Riff
 		}
 
 		#endregion
-
 
 
 		#region Public Properties
@@ -283,7 +281,6 @@ namespace TagLib.Riff
 		}
 
 		#endregion
-
 
 
 		#region IVideoCodec
@@ -746,7 +743,6 @@ namespace TagLib.Riff
 		}
 
 		#endregion
-
 
 
 		#region IEquatable

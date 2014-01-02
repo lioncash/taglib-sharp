@@ -128,7 +128,7 @@ namespace TagLib.Id3v2
 		/// <summary>
 		///    Contains the identifer data for the current instance.
 		/// </summary>
-		private ByteVector field_data = null;
+		private ByteVector field_data;
 
 		#endregion
 
@@ -191,7 +191,7 @@ namespace TagLib.Id3v2
 		protected internal MusicCdIdentifierFrame (ByteVector data, int offset, FrameHeader header, byte version)
 			: base(header)
 		{
-			SetData (data, offset, version, false);
+			SetData(data, offset, version, false);
 		}
 
 		#endregion
@@ -310,6 +310,7 @@ namespace TagLib.Id3v2
 			MusicCdIdentifierFrame frame = new MusicCdIdentifierFrame();
 			if (field_data != null)
 				frame.field_data = new ByteVector(field_data);
+
 			return frame;
 		}
 

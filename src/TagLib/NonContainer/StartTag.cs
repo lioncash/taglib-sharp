@@ -60,7 +60,6 @@ namespace TagLib.NonContainer
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -85,7 +84,6 @@ namespace TagLib.NonContainer
 		#endregion
 
 
-
 		#region Public Properties
 
 		/// <summary>
@@ -106,7 +104,6 @@ namespace TagLib.NonContainer
 		}
 
 		#endregion
-
 
 
 		#region Public Methods
@@ -149,10 +146,14 @@ namespace TagLib.NonContainer
 			ByteVector data = new ByteVector ();
 			foreach (TagLib.Tag t in Tags)
 			{
-				if (t is TagLib.Ape.Tag)
-					data.Add((t as TagLib.Ape.Tag).Render());
-				else if (t is TagLib.Id3v2.Tag)
-					data.Add((t as TagLib.Id3v2.Tag).Render());
+				if (t is Ape.Tag)
+				{
+					data.Add((t as Ape.Tag).Render());
+				}
+				else if (t is Id3v2.Tag)
+				{
+					data.Add((t as Id3v2.Tag).Render());
+				}
 			}
 
 			return data;
@@ -228,11 +229,11 @@ namespace TagLib.NonContainer
 
 			if (type == TagTypes.Id3v2)
 			{
-				tag = new TagLib.Id3v2.Tag();
+				tag = new Id3v2.Tag();
 			}
 			else if (type == TagTypes.Ape)
 			{
-				tag = new TagLib.Ape.Tag();
+				tag = new Ape.Tag();
 				(tag as Ape.Tag).HeaderPresent = true;
 			}
 
@@ -248,7 +249,6 @@ namespace TagLib.NonContainer
 		}
 
 		#endregion
-
 
 
 		#region Private Methods
@@ -277,11 +277,11 @@ namespace TagLib.NonContainer
 			switch (type)
 			{
 				case TagTypes.Ape:
-					tag = new TagLib.Ape.Tag(file, start);
+					tag = new Ape.Tag(file, start);
 					break;
 
 				case TagTypes.Id3v2:
-					tag = new TagLib.Id3v2.Tag(file, start);
+					tag = new Id3v2.Tag(file, start);
 					break;
 			}
 
@@ -311,17 +311,17 @@ namespace TagLib.NonContainer
 
 			try
 			{
-				if (data.StartsWith(TagLib.Ape.Footer.FileIdentifier))
+				if (data.StartsWith(Ape.Footer.FileIdentifier))
 				{
-					TagLib.Ape.Footer footer = new TagLib.Ape.Footer(data);
+					Ape.Footer footer = new Ape.Footer(data);
 
 					position += footer.CompleteTagSize;
 					return TagTypes.Ape;
 				}
 
-				if (data.StartsWith(TagLib.Id3v2.Header.FileIdentifier))
+				if (data.StartsWith(Id3v2.Header.FileIdentifier))
 				{
-					TagLib.Id3v2.Header header = new TagLib.Id3v2.Header(data);
+					Id3v2.Header header = new Id3v2.Header(data);
 
 					position += header.CompleteTagSize;
 					return TagTypes.Id3v2;

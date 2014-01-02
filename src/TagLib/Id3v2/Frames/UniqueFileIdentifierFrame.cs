@@ -40,12 +40,12 @@ namespace TagLib.Id3v2
 		/// <summary>
 		///    Contains the owner string.
 		/// </summary>
-		private string owner = null;
+		private string owner;
 
 		/// <summary>
 		///    Contains the identifier data.
 		/// </summary>
-		private ByteVector identifier = null;
+		private ByteVector identifier;
 
 		#endregion
 
@@ -74,8 +74,7 @@ namespace TagLib.Id3v2
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="owner" /> is <see langword="null" />.
 		/// </exception>
-		public UniqueFileIdentifierFrame(string owner, ByteVector identifier)
-			: base(FrameType.UFID, 4)
+		public UniqueFileIdentifierFrame(string owner, ByteVector identifier) : base(FrameType.UFID, 4)
 		{
 			if (owner == null)
 				throw new ArgumentNullException("owner");
@@ -102,8 +101,7 @@ namespace TagLib.Id3v2
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="owner" /> is <see langword="null" />.
 		/// </exception>
-		public UniqueFileIdentifierFrame(string owner)
-			: this(owner, null)
+		public UniqueFileIdentifierFrame(string owner) : this(owner, null)
 		{
 		}
 
@@ -120,8 +118,7 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    raw frame is encoded in.
 		/// </param>
-		public UniqueFileIdentifierFrame(ByteVector data, byte version)
-			: base(data, version)
+		public UniqueFileIdentifierFrame(ByteVector data, byte version) : base(data, version)
 		{
 			SetData(data, 0, version, true);
 		}

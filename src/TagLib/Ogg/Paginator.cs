@@ -62,7 +62,6 @@ namespace TagLib.Ogg
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -82,7 +81,6 @@ namespace TagLib.Ogg
 		#endregion
 
 
-
 		#region Public Methods
 
 		/// <summary>
@@ -93,7 +91,7 @@ namespace TagLib.Ogg
 		/// </param>
 		public void AddPage(Page page)
 		{
-			pages_read ++;
+			pages_read++;
 
 			if (first_page_header == null)
 				first_page_header = page.Header;
@@ -103,7 +101,7 @@ namespace TagLib.Ogg
 
 			ByteVector[] page_packets = page.Packets;
 
-			for (int i = 0; i < page_packets.Length; i ++)
+			for (int i = 0; i < page_packets.Length; i++)
 			{
 				if ((page.Header.Flags & PageFlags.FirstPacketContinued) != 0 && i == 0 && packets.Count > 0)
 					packets[packets.Count - 1].Add(page_packets[0]);
@@ -249,7 +247,6 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-
 
 
 		#region Private Methods

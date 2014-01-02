@@ -50,10 +50,9 @@ namespace TagLib.MusePack
 		/// <summary>
 		///    Contains the block with the audio header.
 		/// </summary>
-		private ByteVector header_block = null;
+		private ByteVector header_block;
 
 		#endregion
-
 
 
 		#region Constructors
@@ -110,10 +109,9 @@ namespace TagLib.MusePack
 		///    cref="ReadStyle.None" /> to ignore the properties.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
-		///    <paramref name="abstraction" /> is <see langword="null"
-		///    />.
+		///    <paramref name="abstraction" /> is <see langword="null"/>.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle)
+		public File(IFileAbstraction abstraction, ReadStyle propertiesStyle)
 			: base(abstraction, propertiesStyle)
 		{
 		}
@@ -128,15 +126,13 @@ namespace TagLib.MusePack
 		///    reading from and writing to the file.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
-		///    <paramref name="abstraction" /> is <see langword="null"
-		///    />.
+		///    <paramref name="abstraction" /> is <see langword="null"/>.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction) : base(abstraction)
+		public File(IFileAbstraction abstraction) : base(abstraction)
 		{
 		}
 
 		#endregion
-
 
 
 		#region Public Methods
@@ -192,12 +188,10 @@ namespace TagLib.MusePack
 		#endregion
 
 
-
 		#region Protected Methods
 
 		/// <summary>
-		///    Reads format specific information at the start of the
-		///    file.
+		///    Reads format specific information at the start of the file.
 		/// </summary>
 		/// <param name="start">
 		///    A <see cref="long" /> value containing the seek position

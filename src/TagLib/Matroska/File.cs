@@ -93,10 +93,9 @@ namespace TagLib.Matroska
 		private string title;
 #pragma warning restore 414
 
-		private List<Track> tracks = new List<Track> ();
+		private List<Track> tracks = new List<Track>();
 
 		#endregion
-
 
 
 		#region Constructors
@@ -118,7 +117,7 @@ namespace TagLib.Matroska
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File(string path, ReadStyle propertiesStyle) : this(new File.LocalFileAbstraction(path), propertiesStyle)
+		public File(string path, ReadStyle propertiesStyle) : this(new LocalFileAbstraction(path), propertiesStyle)
 		{
 		}
 
@@ -156,7 +155,7 @@ namespace TagLib.Matroska
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
+		public File(IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
 		{
 			Mode = AccessMode.Read;
 			try
@@ -192,12 +191,11 @@ namespace TagLib.Matroska
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction) : this(abstraction, ReadStyle.Average)
+		public File(IFileAbstraction abstraction) : this(abstraction, ReadStyle.Average)
 		{
 		}
 
 		#endregion
-
 
 
 		#region Public Methods
@@ -206,7 +204,7 @@ namespace TagLib.Matroska
 		///    Saves the changes made in the current instance to the
 		///    file it represents.
 		/// </summary>
-		public override void Save ()
+		public override void Save()
 		{
 			Mode = AccessMode.Write;
 			try
@@ -230,7 +228,7 @@ namespace TagLib.Matroska
 		///    In order to remove all tags from a file, pass <see
 		///    cref="TagTypes.AllTags" /> as <paramref name="types" />.
 		/// </remarks>
-		public override void RemoveTags (TagLib.TagTypes types)
+		public override void RemoveTags(TagTypes types)
 		{
 			// TODO: Not finished.
 		}
@@ -253,14 +251,13 @@ namespace TagLib.Matroska
 		///    matching tag was found and none was created, <see
 		///    langword="null" /> is returned.
 		/// </returns>
-		public override TagLib.Tag GetTag (TagLib.TagTypes type, bool create)
+		public override TagLib.Tag GetTag(TagTypes type, bool create)
 		{
 			// TODO: Not finished
 			return null;
 		}
 
 		#endregion
-
 
 
 		#region Public Properties
@@ -293,6 +290,7 @@ namespace TagLib.Matroska
 		}
 
 		#endregion
+
 
 		#region Private Methods
 
@@ -503,7 +501,7 @@ namespace TagLib.Matroska
 						duration_unscaled = (UInt64) child.ReadDouble();
 						if (time_scale > 0)
 						{
-							duration = TimeSpan.FromSeconds(duration_unscaled*time_scale/1000000000);
+							duration = TimeSpan.FromSeconds(duration_unscaled*time_scale/1000000000d);
 						}
 						break;
 
@@ -511,7 +509,7 @@ namespace TagLib.Matroska
 						time_scale = child.ReadUInt();
 						if (duration_unscaled > 0)
 						{
-							duration = TimeSpan.FromSeconds(duration_unscaled*time_scale/1000000000);
+							duration = TimeSpan.FromSeconds(duration_unscaled*time_scale/1000000000d);
 						}
 						break;
 

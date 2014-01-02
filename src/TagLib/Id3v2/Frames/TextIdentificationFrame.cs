@@ -393,12 +393,12 @@ namespace TagLib.Id3v2
 		///    it is parsed on demand, reducing the ammount of
 		///    unnecessary conversion.
 		/// </remarks>
-		private ByteVector raw_data = null;
+		private ByteVector raw_data;
 
 		/// <summary>
 		///    Contains the ID3v2 version of <see cref="raw_data" />.
 		/// </summary>
-		private byte raw_version = 0;
+		private byte raw_version;
 
 		#endregion
 
@@ -418,8 +418,7 @@ namespace TagLib.Id3v2
 		///    A <see cref="StringType" /> value specifying the encoding
 		///    to use for the new instance.
 		/// </param>
-		public TextInformationFrame(ByteVector ident, StringType encoding)
-			: base(ident, 4)
+		public TextInformationFrame(ByteVector ident, StringType encoding) : base(ident, 4)
 		{
 			this.encoding = encoding;
 		}
@@ -433,8 +432,7 @@ namespace TagLib.Id3v2
 		///    A <see cref="ByteVector" /> object containing an ID3v2.4
 		///    frame identifier.
 		/// </param>
-		public TextInformationFrame(ByteVector ident)
-			: this(ident, Id3v2.Tag.DefaultEncoding)
+		public TextInformationFrame(ByteVector ident) : this(ident, Id3v2.Tag.DefaultEncoding)
 		{
 		}
 
@@ -451,8 +449,7 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> value containing the ID3v2 version
 		///    in which <paramref name="data" /> is encoded.
 		/// </param>
-		public TextInformationFrame(ByteVector data, byte version)
-			: base(data, version)
+		public TextInformationFrame(ByteVector data, byte version) : base(data, version)
 		{
 			SetData(data, 0, version, true);
 		}
@@ -479,8 +476,7 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> value containing the ID3v2 version
 		///    in which <paramref name="data" /> is encoded.
 		/// </param>
-		protected internal TextInformationFrame(ByteVector data, int offset, FrameHeader header, byte version)
-			: base(header)
+		protected internal TextInformationFrame(ByteVector data, int offset, FrameHeader header, byte version) : base(header)
 		{
 			SetData(data, offset, version, false);
 		}
@@ -1050,8 +1046,7 @@ namespace TagLib.Id3v2
 		///    cref="Get(Tag,string,StringType,bool)" /> for more
 		///    integrated frame creation.
 		/// </remarks>
-		public UserTextInformationFrame(string description, StringType encoding)
-			: base(FrameType.TXXX, encoding)
+		public UserTextInformationFrame(string description, StringType encoding) : base(FrameType.TXXX, encoding)
 		{
 			base.Text = new string[] {description};
 		}
@@ -1071,8 +1066,7 @@ namespace TagLib.Id3v2
 		///    cref="Get(Tag,string,bool)" /> for more integrated frame
 		///    creation.
 		/// </remarks>
-		public UserTextInformationFrame(string description)
-			: base(FrameType.TXXX)
+		public UserTextInformationFrame(string description) : base(FrameType.TXXX)
 		{
 			base.Text = new string[] {description};
 		}
@@ -1090,8 +1084,7 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    raw frame is encoded in.
 		/// </param>
-		public UserTextInformationFrame(ByteVector data, byte version)
-			: base(data, version)
+		public UserTextInformationFrame(ByteVector data, byte version) : base(data, version)
 		{
 		}
 
@@ -1211,12 +1204,12 @@ namespace TagLib.Id3v2
 		/// <returns>
 		///    A <see cref="string" /> containing the joined text.
 		/// </returns>
-		public override string ToString ()
+		public override string ToString()
 		{
-			return new StringBuilder ().Append ("[")
-				.Append (Description)
-				.Append ("] ")
-				.Append (base.ToString ()).ToString ();
+			return new StringBuilder().Append("[")
+				.Append(Description)
+				.Append("] ")
+				.Append(base.ToString()).ToString();
 		}
 
 		#endregion
@@ -1271,8 +1264,10 @@ namespace TagLib.Id3v2
 					: StringComparison.InvariantCultureIgnoreCase;
 
 			foreach (UserTextInformationFrame frame in tag.GetFrames<UserTextInformationFrame>(FrameType.TXXX))
+			{
 				if (description.Equals(frame.Description, stringComparison))
 					return frame;
+			}
 
 			if (!create)
 				return null;

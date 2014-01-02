@@ -68,7 +68,6 @@ namespace TagLib.Mpeg
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -127,7 +126,7 @@ namespace TagLib.Mpeg
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public AudioFile(File.IFileAbstraction abstraction, ReadStyle propertiesStyle)
+		public AudioFile(IFileAbstraction abstraction, ReadStyle propertiesStyle)
 			: base (abstraction, propertiesStyle)
 		{
 		}
@@ -145,13 +144,12 @@ namespace TagLib.Mpeg
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public AudioFile (File.IFileAbstraction abstraction)
+		public AudioFile (IFileAbstraction abstraction)
 			: base (abstraction)
 		{
 		}
 
 		#endregion
-
 
 
 		#region Public Methods
@@ -205,7 +203,6 @@ namespace TagLib.Mpeg
 		}
 
 		#endregion
-
 
 
 		#region Protected Methods

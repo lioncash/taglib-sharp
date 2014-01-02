@@ -113,7 +113,7 @@ namespace TagLib.Ape
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction, propertiesStyle)
+		public File(IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction, propertiesStyle)
 		{
 		}
 
@@ -130,7 +130,7 @@ namespace TagLib.Ape
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction) : base(abstraction)
+		public File(IFileAbstraction abstraction) : base(abstraction)
 		{
 		}
 

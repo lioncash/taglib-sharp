@@ -56,17 +56,17 @@ namespace TagLib.Id3v2
 		///    Contains the ISO-639-2 language code of the current
 		///    instance.
 		/// </summary>
-		private string language = null;
+		private string language;
 
 		/// <summary>
 		///    Contains the description of the current instance.
 		/// </summary>
-		private string description = null;
+		private string description;
 
 		/// <summary>
 		///    Contains the comment text of the current instance.
 		/// </summary>
-		private string text = null;
+		private string text;
 
 		#endregion
 
@@ -95,7 +95,7 @@ namespace TagLib.Id3v2
 		///    the tag. Consider using <see cref="Get" /> for more
 		///    integrated frame creation.
 		/// </remarks>
-		public CommentsFrame (string description, string language, StringType encoding)
+		public CommentsFrame(string description, string language, StringType encoding)
 			: base (FrameType.COMM, 4)
 		{
 			this.encoding    = encoding;

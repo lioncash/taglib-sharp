@@ -44,9 +44,9 @@ namespace TagLib.Matroska
 		/// Parsing will be done reading from _file at position references by
 		/// parent element's data section.
 		/// </summary>
-		/// <param name="_file"><see cref="File" /> instance to read from.</param>
+		/// <param name="file"><see cref="File" /> instance to read from.</param>
 		/// <param name="element">Parent <see cref="EBMLElement" />.</param>
-		public SubtitleTrack(File _file, EBMLElement element) : base(_file, element)
+		public SubtitleTrack(File file, EBMLElement element) : base(file, element)
 		{
 			// Here we handle the unknown elements we know, and store the rest
 			foreach (EBMLElement elem in base.UnknownElements)

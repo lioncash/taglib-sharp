@@ -38,7 +38,6 @@ namespace TagLib.Aac
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -68,7 +67,6 @@ namespace TagLib.Aac
 		}
 
 		#endregion
-
 
 
 		#region Public Methods

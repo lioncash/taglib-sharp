@@ -55,7 +55,6 @@ namespace TagLib.Flac
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -91,7 +90,6 @@ namespace TagLib.Flac
 		}
 
 		#endregion
-
 
 
 		#region Public Properties
@@ -140,8 +138,9 @@ namespace TagLib.Flac
 		///    A <see cref="int" /> value containing the sample rate of
 		///    the audio represented by the current instance.
 		/// </value>
-		public int AudioSampleRate {
-			get {return (int) (flags >> 12);}
+		public int AudioSampleRate
+		{
+			get { return (int) (flags >> 12); }
 		}
 
 		/// <summary>
@@ -212,7 +211,6 @@ namespace TagLib.Flac
 		}
 
 		#endregion
-
 
 
 		#region Private Properties

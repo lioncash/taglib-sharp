@@ -73,7 +73,6 @@ namespace TagLib.Ape
 		#endregion
 
 
-
 		#region Private Fields
 
 		/// <summary>
@@ -89,7 +88,6 @@ namespace TagLib.Ape
 		#endregion
 
 
-
 		#region Public Static Properties
 
 		/// <summary>
@@ -103,7 +101,6 @@ namespace TagLib.Ape
 		public static readonly ReadOnlyByteVector FileIdentifier = Footer.FileIdentifier;
 
 		#endregion
-
 
 
 		#region Constructors
@@ -193,7 +190,6 @@ namespace TagLib.Ape
 		#endregion
 
 
-
 		#region Public Properties
 
 		/// <summary>
@@ -221,7 +217,6 @@ namespace TagLib.Ape
 		}
 
 		#endregion
-
 
 
 		#region Public Methods
@@ -565,7 +560,6 @@ namespace TagLib.Ape
 		#endregion
 
 
-
 		#region Protected Methods
 
 		/// <summary>
@@ -649,7 +643,6 @@ namespace TagLib.Ape
 		}
 
 		#endregion
-
 
 
 		#region Private Methods
@@ -755,7 +748,6 @@ namespace TagLib.Ape
 		#endregion
 
 
-
 		#region IEnumerable
 
 		/// <summary>
@@ -784,7 +776,6 @@ namespace TagLib.Ape
 		}
 
 		#endregion
-
 
 
 		#region TagLib.Tag

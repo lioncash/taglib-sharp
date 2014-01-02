@@ -56,7 +56,6 @@ namespace TagLib.Mpeg
 		#endregion
 
 
-
 		#region Public Fields
 
 		/// <summary>
@@ -73,7 +72,6 @@ namespace TagLib.Mpeg
 		public static readonly XingHeader Unknown = new XingHeader(0, 0);
 
 		#endregion
-
 
 
 		#region Constructors
@@ -150,7 +148,6 @@ namespace TagLib.Mpeg
 		#endregion
 
 
-
 		#region Public Properties
 
 		/// <summary>
@@ -193,7 +190,6 @@ namespace TagLib.Mpeg
 		}
 
 		#endregion
-
 
 
 		#region Public Static Methods

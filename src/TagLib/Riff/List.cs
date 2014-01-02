@@ -130,7 +130,6 @@ namespace TagLib.Riff
 		#endregion
 
 
-
 		#region Public Methods
 
 		/// <summary>
@@ -564,7 +563,6 @@ namespace TagLib.Riff
 		}
 
 		#endregion
-
 
 
 		#region Private Methods

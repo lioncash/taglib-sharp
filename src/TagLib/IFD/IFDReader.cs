@@ -111,25 +111,25 @@ namespace TagLib.IFD
 		///    A <see cref="File"/> to read from.
 		/// </param>
 		/// <param name="is_bigendian">
-		///     A <see cref="System.Boolean"/>, it must be true, if the data of the IFD should be
-		///     read as bigendian, otherwise false.
+		///    A <see cref="System.Boolean"/>, it must be true, if the data of the IFD should be
+		///    read as bigendian, otherwise false.
 		/// </param>
 		/// <param name="structure">
 		///    A <see cref="IFDStructure"/> that will be populated.
 		/// </param>
 		/// <param name="base_offset">
-		///     A <see cref="System.Int64"/> value describing the base were the IFD offsets
-		///     refer to. E.g. in Jpegs the IFD are located in an Segment and the offsets
-		///     inside the IFD refer from the beginning of this segment. So <paramref
-		///     name="base_offset"/> must contain the beginning of the segment.
+		///    A <see cref="System.Int64"/> value describing the base were the IFD offsets
+		///    refer to. E.g. in Jpegs the IFD are located in an Segment and the offsets
+		///    inside the IFD refer from the beginning of this segment. So <paramref
+		///    name="base_offset"/> must contain the beginning of the segment.
 		/// </param>
 		/// <param name="ifd_offset">
-		///     A <see cref="System.UInt32"/> value with the beginning of the IFD relative to
-		///     <paramref name="base_offset"/>.
+		///    A <see cref="System.UInt32"/> value with the beginning of the IFD relative to
+		///    <paramref name="base_offset"/>.
 		/// </param>
 		/// <param name="max_offset">
-		/// 	A <see cref="System.UInt32"/> value with maximal possible offset. This is to limit
-		///     the size of the possible data;
+		///    A <see cref="System.UInt32"/> value with maximal possible offset. This is to limit
+		///    the size of the possible data;
 		/// </param>
 		public IFDReader (File file, bool is_bigendian, IFDStructure structure, long base_offset, uint ifd_offset, uint max_offset)
 		{
@@ -166,7 +166,7 @@ namespace TagLib.IFD
 		///     A <see cref="System.Int32"/> with the maximal number of IFDs to read.
 		///     Passing -1 means unlimited.
 		/// </param>
-		public void Read (int count)
+		public void Read(int count)
 		{
 			if (count == 0)
 				return;
@@ -174,17 +174,21 @@ namespace TagLib.IFD
 			uint next_offset = ifd_offset;
 			int i = 0;
 
-			lock (file) {
-				StartIFDLoopDetect ();
-				do {
-					if (DetectIFDLoop (base_offset + next_offset)) {
-						file.MarkAsCorrupt ("IFD loop detected");
+			lock (file)
+			{
+				StartIFDLoopDetect();
+				do
+				{
+					if (DetectIFDLoop(base_offset + next_offset))
+					{
+						file.MarkAsCorrupt("IFD loop detected");
 						break;
 					}
-					next_offset = ReadIFD (base_offset, next_offset, max_offset);
+
+					next_offset = ReadIFD(base_offset, next_offset, max_offset);
 				} while (next_offset > 0 && (count == -1 || ++i < count));
 
-				StopIFDLoopDetect ();
+				StopIFDLoopDetect();
 			}
 		}
 
@@ -222,8 +226,10 @@ namespace TagLib.IFD
 		{
 			if (offset == 0)
 				return false;
+
 			if (ifd_offsets[file].Contains(offset))
 				return true;
+
 			ifd_offsets[file].Add(offset);
 			return false;
 		}
@@ -769,8 +775,8 @@ namespace TagLib.IFD
 			// for writing it back.
 			// We determine the position of the data, read it and store it in an ThumbnailDataIFDEntry
 			// which replaces the offset-entry to thumbnail data.
-			ushort offset_tag = (ushort) IFDEntryTag.JPEGInterchangeFormat;
-			ushort length_tag = (ushort) IFDEntryTag.JPEGInterchangeFormatLength;
+			const ushort offset_tag = (ushort) IFDEntryTag.JPEGInterchangeFormat;
+			const ushort length_tag = (ushort) IFDEntryTag.JPEGInterchangeFormatLength;
 			if (directory.ContainsKey(offset_tag) && directory.ContainsKey(length_tag))
 			{
 				var offset_entry = directory[offset_tag] as LongIFDEntry;
@@ -789,10 +795,9 @@ namespace TagLib.IFD
 				}
 			}
 
-
 			// create a StripOffsetIFDEntry if necessary
-			ushort strip_offsets_tag = (ushort) IFDEntryTag.StripOffsets;
-			ushort strip_byte_counts_tag = (ushort) IFDEntryTag.StripByteCounts;
+			const ushort strip_offsets_tag = (ushort) IFDEntryTag.StripOffsets;
+			const ushort strip_byte_counts_tag = (ushort) IFDEntryTag.StripByteCounts;
 			if (directory.ContainsKey(strip_offsets_tag) && directory.ContainsKey(strip_byte_counts_tag))
 			{
 				uint[] strip_offsets = null;
@@ -835,7 +840,7 @@ namespace TagLib.IFD
 			// = 22 ....
 			// we use this number to read a header which is big used
 			// to identify the makernote types
-			int header_size = 18;
+			const int header_size = 18;
 
 			long length = 0;
 			try

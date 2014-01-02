@@ -50,7 +50,6 @@ namespace TagLib.Ogg
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -95,8 +94,10 @@ namespace TagLib.Ogg
 		{
 			file.Seek(position + header.Size);
 
-			foreach (int packet_size in header.PacketSizes)
-				packets.Add(file.ReadBlock(packet_size));
+			foreach (int packetSize in header.PacketSizes)
+			{
+				packets.Add(file.ReadBlock(packetSize));
+			}
 		}
 
 		/// <summary>
@@ -121,17 +122,16 @@ namespace TagLib.Ogg
 
 			this.packets = new ByteVectorCollection(packets);
 
-			List<int> packet_sizes = new List<int>();
+			List<int> packetSizes = new List<int>();
 
 			// Build a page from the list of packets.
 			foreach (ByteVector v in packets)
-				packet_sizes.Add(v.Count);
+				packetSizes.Add(v.Count);
 
-			header.PacketSizes = packet_sizes.ToArray();
+			header.PacketSizes = packetSizes.ToArray();
 		}
 
 		#endregion
-
 
 
 		#region Public Methods
@@ -165,7 +165,6 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-
 
 
 		#region Public Properties
@@ -208,7 +207,6 @@ namespace TagLib.Ogg
 		}
 
 		#endregion
-
 
 
 		#region Public Static Methods

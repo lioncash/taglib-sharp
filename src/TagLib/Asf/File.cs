@@ -108,10 +108,9 @@ namespace TagLib.Asf
 		///    cref="ReadStyle.None" /> to ignore the properties.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
-		///    <paramref name="abstraction" /> is <see langword="null"
-		///    />.
+		///    <paramref name="abstraction" /> is <see langword="null"/>.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
+		public File(IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
 		{
 			Read(propertiesStyle);
 		}
@@ -126,10 +125,9 @@ namespace TagLib.Asf
 		///    reading from and writing to the file.
 		/// </param>
 		/// <exception cref="ArgumentNullException">
-		///    <paramref name="abstraction" /> is <see langword="null"
-		///    />.
+		///    <paramref name="abstraction" /> is <see langword="null"/>.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction) : this(abstraction, ReadStyle.Average)
+		public File(IFileAbstraction abstraction) : this(abstraction, ReadStyle.Average)
 		{
 		}
 

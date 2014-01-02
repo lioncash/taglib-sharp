@@ -42,7 +42,6 @@ namespace TagLib.Ogg.Codecs
 		#endregion
 
 
-
 		#region Private Fields
 
 		/// <summary>
@@ -58,7 +57,6 @@ namespace TagLib.Ogg.Codecs
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -70,7 +68,6 @@ namespace TagLib.Ogg.Codecs
 		}
 
 		#endregion
-
 
 
 		#region Public Methods
@@ -189,7 +186,6 @@ namespace TagLib.Ogg.Codecs
 		#endregion
 
 
-
 		#region Public Properties
 
 		/// <summary>
@@ -264,7 +260,6 @@ namespace TagLib.Ogg.Codecs
 		#endregion
 
 
-
 		#region Public Static Methods
 
 		/// <summary>
@@ -287,7 +282,6 @@ namespace TagLib.Ogg.Codecs
 		}
 
 		#endregion
-
 
 
 		#region Private Static Methods

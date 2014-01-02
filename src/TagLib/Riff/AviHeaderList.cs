@@ -297,7 +297,8 @@ namespace TagLib.Riff
 		///    A <see cref="uint" /> value specifying how far ahead
 		///    audio is from video.
 		/// </value>
-		public uint InitialFrames {
+		public uint InitialFrames
+		{
 			get {return initial_frames;}
 		}
 

@@ -41,7 +41,6 @@ namespace TagLib.Riff
 		#endregion
 
 
-
 		#region Constructors
 
 		/// <summary>
@@ -128,7 +127,6 @@ namespace TagLib.Riff
 		#endregion
 
 
-
 		#region Public Methods
 
 		/// <summary>
@@ -177,9 +175,9 @@ namespace TagLib.Riff
 		///    A <see cref="ByteVector"/> object containing the rendered
 		///    version of the current instance.
 		/// </returns>
-		public ByteVector Render ()
+		public ByteVector Render()
 		{
-			return fields.Render ();
+			return fields.Render();
 		}
 
 		/// <summary>
@@ -457,7 +455,6 @@ namespace TagLib.Riff
 		}
 
 		#endregion
-
 
 
 		#region TagLib.Tag

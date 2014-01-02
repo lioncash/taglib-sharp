@@ -55,11 +55,9 @@ namespace TagLib.NonContainer
 		///    Contains the number of bytes that must be read to
 		///    hold all applicable indicators.
 		/// </summary>
-		private static int read_size =
-		    (int) Math.Max(Math.Max(Ape.Footer.Size, Id3v2.Footer.Size), Id3v1.Tag.Size);
+		private static int read_size = (int) Math.Max(Math.Max(Ape.Footer.Size, Id3v2.Footer.Size), Id3v1.Tag.Size);
 
 		#endregion
-
 
 
 		#region Constructors
@@ -86,7 +84,6 @@ namespace TagLib.NonContainer
 		#endregion
 
 
-
 		#region Public Properties
 
 		/// <summary>
@@ -107,7 +104,6 @@ namespace TagLib.NonContainer
 		}
 
 		#endregion
-
 
 
 		#region Public Methods
@@ -150,12 +146,18 @@ namespace TagLib.NonContainer
 			ByteVector data = new ByteVector();
 			foreach (TagLib.Tag t in Tags)
 			{
-				if (t is TagLib.Ape.Tag)
-					data.Add((t as TagLib.Ape.Tag).Render());
-				else if (t is TagLib.Id3v2.Tag)
-					data.Add((t as TagLib.Id3v2.Tag).Render());
-				else if (t is TagLib.Id3v1.Tag)
-					data.Add((t as TagLib.Id3v1.Tag).Render());
+				if (t is Ape.Tag)
+				{
+					data.Add((t as Ape.Tag).Render());
+				}
+				else if (t is Id3v2.Tag)
+				{
+					data.Add((t as Id3v2.Tag).Render());
+				}
+				else if (t is Id3v1.Tag)
+				{
+					data.Add((t as Id3v1.Tag).Render());
+				}
 			}
 
 			return data;
@@ -233,7 +235,7 @@ namespace TagLib.NonContainer
 
 			if (type == TagTypes.Id3v1)
 			{
-				tag = new TagLib.Id3v1.Tag();
+				tag = new Id3v1.Tag();
 			}
 			else if (type == TagTypes.Id3v2)
 			{
@@ -244,7 +246,7 @@ namespace TagLib.NonContainer
 			}
 			else if (type == TagTypes.Ape)
 			{
-				tag = new TagLib.Ape.Tag();
+				tag = new Ape.Tag();
 			}
 
 			if (tag != null)
@@ -262,7 +264,6 @@ namespace TagLib.NonContainer
 		}
 
 		#endregion
-
 
 
 		#region Private Methods
@@ -293,15 +294,15 @@ namespace TagLib.NonContainer
 				switch (type)
 				{
 					case TagTypes.Ape:
-						tag = new TagLib.Ape.Tag(file, end - TagLib.Ape.Footer.Size);
+						tag = new Ape.Tag(file, end - Ape.Footer.Size);
 						break;
 
 					case TagTypes.Id3v2:
-						tag = new TagLib.Id3v2.Tag(file, start);
+						tag = new Id3v2.Tag(file, start);
 						break;
 
 					case TagTypes.Id3v1:
-						tag = new TagLib.Id3v1.Tag(file, start);
+						tag = new Id3v1.Tag(file, start);
 						break;
 				}
 
@@ -339,33 +340,33 @@ namespace TagLib.NonContainer
 
 			try
 			{
-				int offset = (int) (data.Count - TagLib.Ape.Footer.Size);
-				if (data.ContainsAt(TagLib.Ape.Footer.FileIdentifier, offset))
+				int offset = (int) (data.Count - Ape.Footer.Size);
+				if (data.ContainsAt(Ape.Footer.FileIdentifier, offset))
 				{
-					TagLib.Ape.Footer footer = new TagLib.Ape.Footer(data.Mid(offset));
+					Ape.Footer footer = new Ape.Footer(data.Mid(offset));
 
 					// If the complete tag size is zero or
 					// the tag is a header, this indicates
 					// some sort of corruption.
-					if (footer.CompleteTagSize == 0 || (footer.Flags & TagLib.Ape.FooterFlags.IsHeader) != 0)
+					if (footer.CompleteTagSize == 0 || (footer.Flags & Ape.FooterFlags.IsHeader) != 0)
 						return TagTypes.None;
 
 					position -= footer.CompleteTagSize;
 					return TagTypes.Ape;
 				}
 
-				offset = (int) (data.Count - TagLib.Id3v2.Footer.Size);
-				if (data.ContainsAt(TagLib.Id3v2.Footer.FileIdentifier, offset))
+				offset = (int) (data.Count - Id3v2.Footer.Size);
+				if (data.ContainsAt(Id3v2.Footer.FileIdentifier, offset))
 				{
-					TagLib.Id3v2.Footer footer = new TagLib.Id3v2.Footer(data.Mid(offset));
+					Id3v2.Footer footer = new Id3v2.Footer(data.Mid(offset));
 
 					position -= footer.CompleteTagSize;
 					return TagTypes.Id3v2;
 				}
 
-				if (data.StartsWith(TagLib.Id3v1.Tag.FileIdentifier))
+				if (data.StartsWith(Id3v1.Tag.FileIdentifier))
 				{
-					position -= TagLib.Id3v1.Tag.Size;
+					position -= Id3v1.Tag.Size;
 					return TagTypes.Id3v1;
 				}
 			}

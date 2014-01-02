@@ -47,17 +47,17 @@ namespace TagLib.Id3v2
 		///    Contains the ISO-639-2 language code of the current
 		///    instance.
 		/// </summary>
-		private string language = null;
+		private string language;
 
 		/// <summary>
 		///    Contains the description of the current instance.
 		/// </summary>
-		private string description = null;
+		private string description;
 
 		/// <summary>
 		///    Contains the lyrics text of the current instance.
 		/// </summary>
-		private string text = null;
+		private string text;
 
 		#endregion
 
@@ -86,8 +86,7 @@ namespace TagLib.Id3v2
 		///    the tag. Consider using <see cref="Get" /> for more
 		///    integrated frame creation.
 		/// </remarks>
-		public UnsynchronisedLyricsFrame(string description, string language, StringType encoding)
-			: base(FrameType.USLT, 4)
+		public UnsynchronisedLyricsFrame(string description, string language, StringType encoding) : base(FrameType.USLT, 4)
 		{
 			this.encoding = encoding;
 			this.language = language;
@@ -113,8 +112,7 @@ namespace TagLib.Id3v2
 		///    integrated frame creation.
 		/// </remarks>
 		public UnsynchronisedLyricsFrame(string description, string language)
-			: this(description, language,
-				TagLib.Id3v2.Tag.DefaultEncoding)
+			: this(description, language, TagLib.Id3v2.Tag.DefaultEncoding)
 		{
 		}
 
@@ -132,8 +130,7 @@ namespace TagLib.Id3v2
 		///    the tag. Consider using <see cref="Get" /> for more
 		///    integrated frame creation.
 		/// </remarks>
-		public UnsynchronisedLyricsFrame(string description)
-			: this(description, null)
+		public UnsynchronisedLyricsFrame(string description) : this(description, null)
 		{
 		}
 
@@ -150,8 +147,7 @@ namespace TagLib.Id3v2
 		///    A <see cref="byte" /> indicating the ID3v2 version the
 		///    raw frame is encoded in.
 		/// </param>
-		public UnsynchronisedLyricsFrame(ByteVector data, byte version)
-			: base(data, version)
+		public UnsynchronisedLyricsFrame(ByteVector data, byte version) : base(data, version)
 		{
 			SetData(data, 0, version, true);
 		}
@@ -290,7 +286,7 @@ namespace TagLib.Id3v2
 		/// <returns>
 		///    A <see cref="string" /> containing the lyrical text.
 		/// </returns>
-		public override string ToString ()
+		public override string ToString()
 		{
 			return Text;
 		}
@@ -347,8 +343,7 @@ namespace TagLib.Id3v2
 			if (!create)
 				return null;
 
-			uslt = new UnsynchronisedLyricsFrame(description,
-				language);
+			uslt = new UnsynchronisedLyricsFrame(description, language);
 			tag.AddFrame(uslt);
 			return uslt;
 		}
@@ -509,9 +504,7 @@ namespace TagLib.Id3v2
 		/// </returns>
 		public override Frame Clone()
 		{
-			UnsynchronisedLyricsFrame frame =
-				new UnsynchronisedLyricsFrame(description,
-					language, encoding);
+			UnsynchronisedLyricsFrame frame = new UnsynchronisedLyricsFrame(description, language, encoding);
 			frame.text = text;
 			return frame;
 		}

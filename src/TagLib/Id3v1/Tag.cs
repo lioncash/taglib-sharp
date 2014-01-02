@@ -143,8 +143,7 @@ namespace TagLib.Id3v1
 
 			file.Mode = TagLib.File.AccessMode.Read;
 
-			if (position < 0 ||
-			    position > file.Length - Size)
+			if (position < 0 || position > file.Length - Size)
 				throw new ArgumentOutOfRangeException("position");
 
 			file.Seek(position);
@@ -212,7 +211,7 @@ namespace TagLib.Id3v1
 			data.Add(string_handler.Render(album).Resize(30));
 			data.Add(string_handler.Render(year).Resize(4));
 			data.Add(string_handler.Render(comment).Resize(28));
-			data.Add((byte) 0);
+			data.Add(0);
 			data.Add(track);
 			data.Add(genre);
 
@@ -332,7 +331,8 @@ namespace TagLib.Id3v1
 		///    have 29 bytes and three performers will only have 28
 		///    bytes).This may result in lost data.
 		/// </remarks>
-		public override string [] Performers {
+		public override string [] Performers
+		{
 			get { return string.IsNullOrEmpty (artist) ? new string [0] : artist.Split (';'); }
 			set { artist = value != null ? string.Join (";", value) : string.Empty; }
 		}
@@ -351,7 +351,8 @@ namespace TagLib.Id3v1
 		///    Latin-1 encoded value will be stored. This may result in
 		///    lost data.
 		/// </remarks>
-		public override string Album {
+		public override string Album
+		{
 			get { return string.IsNullOrEmpty (album) ? null : album; }
 			set { album = value != null ? value.Trim () : String.Empty; }
 		}
@@ -370,7 +371,8 @@ namespace TagLib.Id3v1
 		///    Latin-1 encoded value will be stored. This may result in
 		///    lost data.
 		/// </remarks>
-		public override string Comment {
+		public override string Comment
+		{
 			get { return string.IsNullOrEmpty (comment) ? null : comment; }
 			set { comment = value != null ? value.Trim () : String.Empty; }
 		}

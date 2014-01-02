@@ -122,8 +122,10 @@ namespace TagLib.Id3v2
 				throw new CorruptFileException("Invalid flags set on version 4 tag.");
 
 			for (int i = 6; i < 10; i ++)
+			{
 				if (data[i] >= 128)
 					throw new CorruptFileException("One of the bytes in the header was greater than the allowed 128.");
+			}
 
 			tag_size = SynchData.ToUInt(data.Mid(6, 4));
 		}

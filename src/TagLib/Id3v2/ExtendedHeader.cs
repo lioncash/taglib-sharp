@@ -105,16 +105,16 @@ namespace TagLib.Id3v2
 		///    A new <see cref="ExtendedHeader" /> object identical to
 		///    the current instance.
 		/// </returns>
-		public ExtendedHeader Clone ()
+		public ExtendedHeader Clone()
 		{
-			ExtendedHeader header = new ExtendedHeader ();
+			ExtendedHeader header = new ExtendedHeader();
 			header.size = size;
 			return header;
 		}
 
-		object ICloneable.Clone ()
+		object ICloneable.Clone()
 		{
-			return Clone ();
+			return Clone();
 		}
 
 		#endregion

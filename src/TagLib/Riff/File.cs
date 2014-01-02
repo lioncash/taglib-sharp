@@ -54,30 +54,29 @@ namespace TagLib.Riff
 		/// <summary>
 		///  Contains the INFO tag.
 		/// </summary>
-		private InfoTag info_tag = null;
+		private InfoTag info_tag;
 
 		/// <summary>
 		///  Contains the MovieID tag.
 		/// </summary>
-		private MovieIdTag mid_tag = null;
+		private MovieIdTag mid_tag;
 
 		/// <summary>
 		///  Contains the DivX tag.
 		/// </summary>
-		private DivXTag divx_tag = null;
+		private DivXTag divx_tag;
 
 		/// <summary>
 		///  Contains the Id3v2 tag.
 		/// </summary>
-		private Id3v2.Tag id32_tag = null;
+		private Id3v2.Tag id32_tag;
 
 		/// <summary>
 		///  Contains the media properties.
 		/// </summary>
-		private Properties properties = null;
+		private Properties properties;
 
 		#endregion
-
 
 
 		#region Public Static Fields
@@ -91,7 +90,6 @@ namespace TagLib.Riff
 		public static readonly ReadOnlyByteVector FileIdentifier = "RIFF";
 
 		#endregion
-
 
 
 		#region Public Constructors
@@ -114,7 +112,7 @@ namespace TagLib.Riff
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
 		public File(string path, ReadStyle propertiesStyle)
-			: this(new File.LocalFileAbstraction(path), propertiesStyle)
+			: this(new LocalFileAbstraction(path), propertiesStyle)
 		{
 		}
 
@@ -152,7 +150,7 @@ namespace TagLib.Riff
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
+		public File(IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
 		{
 			Mode = AccessMode.Read;
 			try
@@ -187,12 +185,11 @@ namespace TagLib.Riff
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
-		public File(File.IFileAbstraction abstraction) : this(abstraction, ReadStyle.Average)
+		public File(IFileAbstraction abstraction) : this(abstraction, ReadStyle.Average)
 		{
 		}
 
 		#endregion
-
 
 
 		#region Public Properties
@@ -225,7 +222,6 @@ namespace TagLib.Riff
 		}
 
 		#endregion
-
 
 
 		#region Public Methods
@@ -335,13 +331,13 @@ namespace TagLib.Riff
 		/// </remarks>
 		public override void RemoveTags (TagTypes types)
 		{
-			if ((types & TagLib.TagTypes.Id3v2) != TagLib.TagTypes.None)
+			if ((types & TagTypes.Id3v2) != TagTypes.None)
 				id32_tag = null;
-			if ((types & TagLib.TagTypes.RiffInfo) != TagLib.TagTypes.None)
+			if ((types & TagTypes.RiffInfo) != TagTypes.None)
 				info_tag = null;
-			if ((types & TagLib.TagTypes.MovieId) != TagLib.TagTypes.None)
+			if ((types & TagTypes.MovieId) != TagTypes.None)
 				mid_tag  = null;
-			if ((types & TagLib.TagTypes.DivX) != TagLib.TagTypes.None)
+			if ((types & TagTypes.DivX) != TagTypes.None)
 				divx_tag = null;
 
 			tag.SetTags(id32_tag, info_tag, mid_tag, divx_tag);
@@ -376,8 +372,7 @@ namespace TagLib.Riff
 					{
 						id32_tag = new Id3v2.Tag();
 						id32_tag.Version = 4;
-						id32_tag.Flags |= Id3v2.HeaderFlags
-							.FooterPresent;
+						id32_tag.Flags |= Id3v2.HeaderFlags.FooterPresent;
 						this.tag.CopyTo(id32_tag, true);
 					}
 					tag = id32_tag;
@@ -416,7 +411,6 @@ namespace TagLib.Riff
 		}
 
 		#endregion
-
 
 
 		#region Private Methods
@@ -533,10 +527,7 @@ namespace TagLib.Riff
 							// the InfoTag class.
 							case "INFO":
 								if (read_tags && info_tag == null)
-									info_tag = new InfoTag(
-										this,
-										position + 12,
-										(int) (size - 4));
+									info_tag = new InfoTag(this, position + 12, (int) (size - 4));
 
 								tag_found = true;
 								break;
@@ -545,10 +536,7 @@ namespace TagLib.Riff
 							// the MovieIdTag class.
 							case "MID ":
 								if (read_tags && mid_tag == null)
-									mid_tag = new MovieIdTag(
-										this,
-										position + 12,
-										(int) (size - 4));
+									mid_tag = new MovieIdTag(this, position + 12, (int) (size - 4));
 
 								tag_found = true;
 								break;
@@ -571,8 +559,7 @@ namespace TagLib.Riff
 					// contains an ID3v2 tag.
 					case "ID32":
 						if (read_tags && id32_tag == null)
-							id32_tag = new Id3v2.Tag(this,
-								position + 8);
+							id32_tag = new Id3v2.Tag(this, position + 8);
 						tag_found = true;
 						break;
 
@@ -580,8 +567,7 @@ namespace TagLib.Riff
 					// style tag.
 					case "IDVX":
 						if (read_tags && divx_tag == null)
-							divx_tag = new DivXTag(this,
-								position + 8);
+							divx_tag = new DivXTag(this, position + 8);
 						tag_found = true;
 						break;
 

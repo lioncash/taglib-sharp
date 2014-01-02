@@ -87,7 +87,6 @@ namespace TagLib.Riff
 		#endregion
 
 
-
 		#region Public Methods
 
 		/// <summary>
@@ -97,13 +96,12 @@ namespace TagLib.Riff
 		///    A <see cref="ByteVector"/> object containing the rendered
 		///    version of the current instance.
 		/// </returns>
-		public override ByteVector RenderEnclosed ()
+		public override ByteVector RenderEnclosed()
 		{
-			return RenderEnclosed ("INFO");
+			return RenderEnclosed("INFO");
 		}
 
 		#endregion
-
 
 
 		#region TagLib.Tag

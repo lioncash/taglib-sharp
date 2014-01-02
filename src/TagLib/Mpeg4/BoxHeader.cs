@@ -72,7 +72,6 @@ namespace TagLib.Mpeg4
 		#endregion
 
 
-
 		#region Public Fields
 
 		/// <summary>
@@ -81,7 +80,6 @@ namespace TagLib.Mpeg4
 		public static readonly BoxHeader Empty = new BoxHeader("xxxx");
 
 		#endregion
-
 
 
 		#region Constructors
@@ -246,7 +244,6 @@ namespace TagLib.Mpeg4
 		#endregion
 
 
-
 		#region Public Properties
 
 		/// <summary>
@@ -346,7 +343,6 @@ namespace TagLib.Mpeg4
 		#endregion
 
 
-
 		#region Public Methods
 
 		/// <summary>
@@ -418,7 +414,6 @@ namespace TagLib.Mpeg4
 		}
 
 		#endregion
-
 
 
 		#region Internal Properties
