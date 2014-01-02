@@ -200,10 +200,11 @@ namespace TagLib.NonContainer
 		/// </summary>
 		public override void Save()
 		{
-			long start, end;
 			Mode = AccessMode.Write;
+
 			try
 			{
+				long start, end;
 				tag.Write(out start, out end);
 				InvariantStartPosition = start;
 				InvariantEndPosition = end;

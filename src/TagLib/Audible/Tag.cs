@@ -43,8 +43,8 @@ namespace TagLib.Audible
 		#region Constructors
 
 		/// <summary>
-		///    Constructs and initializes a new instance of <see
-		///    cref="Tag" /> with no contents.
+		///    Constructs and initializes a new instance
+		///    of <see cref="Tag"/> with no contents.
 		/// </summary>
 		public Tag ()
 		{
@@ -52,9 +52,8 @@ namespace TagLib.Audible
 		}
 
 		/// <summary>
-		///    Constructs and initializes a new instance of <see
-		///    cref="Tag" /> by reading the contents from a specified
-		///    position in a specified file.
+		///    Constructs and initializes a new instance of <see cref="Tag"/>
+		///    by reading the contents from a specified position in a specified file.
 		/// </summary>
 		/// <param name="file">
 		///    A <see cref="File" /> object containing the file from
@@ -81,9 +80,8 @@ namespace TagLib.Audible
 		}
 
 		/// <summary>
-		///    Constructs and initializes a new instance of <see
-		///    cref="Tag" /> by reading the contents from a specified
-		///    <see cref="ByteVector" /> object.
+		///    Constructs and initializes a new instance of <see cref="Tag"/>
+		///    by reading the contents from a specified <see cref="ByteVector"/> object.
 		/// </summary>
 		/// <param name="data">
 		///    A <see cref="ByteVector" /> object to read the tag from.
@@ -113,8 +111,7 @@ namespace TagLib.Audible
 		///    a raw AudibleMetadata tag.
 		/// </summary>
 		/// <param name="data">
-		///    	A <see cref="ByteVector" /> object containing the whole tag
-		/// 	object
+		///    A <see cref="ByteVector" /> object containing the whole tag object
 		/// </param>
 		/// <exception cref="CorruptFileException">
 		///    <paramref name="data" /> is less than 128 bytes or does
@@ -122,20 +119,20 @@ namespace TagLib.Audible
 		/// </exception>
 		private void Parse (ByteVector data)
 		{
-			string currentKey, currentValue;
-			int keyLen, valueLen;
-
 			try
 			{
 				do
 				{
-					keyLen = (int) data.ToUInt(true);
+					int keyLen = (int) data.ToUInt(true);
 					data.RemoveRange(0, 4);
-					valueLen = (int) data.ToUInt(true);
+
+					int valueLen = (int) data.ToUInt(true);
 					data.RemoveRange(0, 4);
-					currentKey = data.ToString(TagLib.StringType.UTF8, 0, keyLen);
+
+					string currentKey = data.ToString(StringType.UTF8, 0, keyLen);
 					data.RemoveRange(0, keyLen);
-					currentValue = data.ToString(TagLib.StringType.UTF8, 0, valueLen);
+
+					string currentValue = data.ToString(StringType.UTF8, 0, valueLen);
 					data.RemoveRange(0, valueLen);
 
 					tags.Add(new KeyValuePair<string, string>(currentKey, currentValue));
@@ -178,8 +175,8 @@ namespace TagLib.Audible
 
 		/*
 		/// <summary>
-		///		Given a key and value pair it will update the
-		///		present metadata.
+		///    Given a key and value pair it will update the
+		///    present metadata.
 		/// </summary>
 		/// <param name="key">
 		///    A <see cref="String" /> containing the key.
@@ -191,17 +188,18 @@ namespace TagLib.Audible
 		{
 			switch (key)
 			{
-			case "title":
-				title = strValue;
-				break;
-			case "author":
-				artist = strValue;
-				break;
-			case "provider":
-				album = strValue;
-				break;
-			}
+				case "title":
+					title = strValue;
+					break;
 
+				case "author":
+					artist = strValue;
+					break;
+
+				case "provider":
+					album = strValue;
+					break;
+			}
 		}
 		*/
 
@@ -220,22 +218,58 @@ namespace TagLib.Audible
 			get { return TagTypes.AudibleMetadata; }
 		}
 
+		/// <summary>
+		///    Gets the author for the media described by the
+		///    current instance.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> object containing the author for
+		///    the media described by the current instance or
+		///    <see langword="null" /> if no value is present.
+		/// </value>
 		public string Author
 		{
 			get { return getTag("author"); }
 		}
 
+		/// <summary>
+		///    Gets the copyright for the media described by the
+		///    current instance.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> object containing the copyright for
+		///    the media described by the current instance or
+		///    <see langword="null" /> if no value is present.
+		/// </value>
 		public override string Copyright
 		{
 			get { return getTag("copyright"); }
 			set { setTag("copyright", value); }
 		}
 
+		/// <summary>
+		///    Gets the description for the media described by the
+		///    current instance.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> object containing the description for
+		///    the media described by the current instance or
+		///    <see langword="null" /> if no value is present.
+		/// </value>
 		public string Description
 		{
 			get { return getTag("description"); }
 		}
 
+		/// <summary>
+		///    Gets the narrator for the media described by the
+		///    current instance.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> object containing the narrator for
+		///    the media described by the current instance or
+		///    <see langword="null" /> if no value is present.
+		/// </value>
 		public string Narrator
 		{
 			get { return getTag ("narrator"); }
@@ -247,8 +281,8 @@ namespace TagLib.Audible
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> object containing the title for
-		///    the media described by the current instance or <see
-		///    langword="null" /> if no value is present.
+		///    the media described by the current instance or
+		///    <see langword="null" /> if no value is present.
 		/// </value>
 		public override string Title
 		{
@@ -261,16 +295,15 @@ namespace TagLib.Audible
 		/// </summary>
 		/// <value>
 		///    A <see cref="string" /> object containing the album for
-		///    the media described by the current instance or <see
-		///    langword="null" /> if no value is present.
+		///    the media described by the current instance or
+		///    <see langword="null" /> if no value is present.
 		/// </value>
 		public override string Album
 		{
 			get
 			{
 				return getTag("provider");
-				//return string.IsNullOrEmpty (album) ?
-				//	null : album;
+				//return string.IsNullOrEmpty (album) ? null : album;
 			}
 		}
 
@@ -279,9 +312,9 @@ namespace TagLib.Audible
 		///    current instance.
 		/// </summary>
 		/// <value>
-		///    	A <see cref="string[]" /> object containing a single
-		/// 	artist described by the current instance or <see
-		///    langword="null" /> if no value is present.
+		///    A <see cref="string[]" /> object containing a single
+		///    artist described by the current instance or
+		///    <see langword="null" /> if no value is present.
 		/// </value>
 		public override string[] AlbumArtists
 		{
@@ -304,7 +337,6 @@ namespace TagLib.Audible
 		}
 
 		#endregion
-
 	}
 }
 

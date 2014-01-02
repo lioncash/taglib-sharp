@@ -154,14 +154,12 @@ namespace TagLib.Riff
 		/// </exception>
 		public File(File.IFileAbstraction abstraction, ReadStyle propertiesStyle) : base(abstraction)
 		{
-			uint riff_size;
-			long tag_start, tag_end;
-
 			Mode = AccessMode.Read;
 			try
 			{
-				Read(true, propertiesStyle, out riff_size,
-					out tag_start, out tag_end);
+				uint riff_size;
+				long tag_start, tag_end;
+				Read(true, propertiesStyle, out riff_size, out tag_start, out tag_end);
 			}
 			finally
 			{

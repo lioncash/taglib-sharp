@@ -50,16 +50,14 @@ namespace TagLib.Matroska
 		/// Parsing will be done reading from _file at position references by
 		/// parent element's data section.
 		/// </summary>
-		/// <param name="_file"><see cref="File" /> instance to read from.</param>
+		/// <param name="file"><see cref="File" /> instance to read from.</param>
 		/// <param name="element">Parent <see cref="EBMLElement" />.</param>
-		public AudioTrack(File _file, EBMLElement element) : base(_file, element)
+		public AudioTrack(File file, EBMLElement element) : base(file, element)
 		{
-			MatroskaID matroska_id;
-
 			// Here we handle the unknown elements we know, and store the rest
 			foreach (EBMLElement elem in base.UnknownElements)
 			{
-				matroska_id = (MatroskaID) elem.ID;
+				MatroskaID matroska_id = (MatroskaID) elem.ID;
 
 				if (matroska_id == MatroskaID.MatroskaTrackAudio)
 				{
@@ -67,7 +65,7 @@ namespace TagLib.Matroska
 
 					while (i < elem.DataSize)
 					{
-						EBMLElement child = new EBMLElement(_file, elem.DataOffset + i);
+						EBMLElement child = new EBMLElement(file, elem.DataOffset + i);
 
 						matroska_id = (MatroskaID) child.ID;
 
@@ -76,12 +74,15 @@ namespace TagLib.Matroska
 							case MatroskaID.MatroskaAudioChannels:
 								channels = child.ReadUInt();
 								break;
+
 							case MatroskaID.MatroskaAudioBitDepth:
 								depth = child.ReadUInt();
 								break;
+
 							case MatroskaID.MatroskaAudioSamplingFreq:
 								rate = child.ReadDouble();
 								break;
+
 							default:
 								unknown_elems.Add(child);
 								break;

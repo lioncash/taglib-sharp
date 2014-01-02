@@ -965,9 +965,9 @@ namespace TagLib.Id3v2
 			}
 			else if (FrameId == FrameType.TCON)
 			{
-				byte id;
 				bool prev_value_indexed = true;
 				StringBuilder data = new StringBuilder();
+
 				foreach (string s in text)
 				{
 					if (!prev_value_indexed)
@@ -976,6 +976,7 @@ namespace TagLib.Id3v2
 						continue;
 					}
 
+					byte id;
 					if (prev_value_indexed = byte.TryParse(s, out id))
 						data.AppendFormat(CultureInfo.InvariantCulture, "({0})", id);
 					else
